@@ -1,11 +1,36 @@
 <resources>
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+
+    <item name="android:textViewStyle">@style/TextLatoRegularStyle</item>
+    <item name="android:buttonStyle">@style/ButtonLatoRegularStyle</item>
+    <item name="android:editTextStyle">@style/EditLatoRegularStyle</item>
+  </style>
+
+  <style name="TextLatoRegularStyle" parent="android:Widget.TextView">
+    <item name="fontPath">fonts/Lato-Regular.ttf</item>
+  </style>
+
+  <style name="ButtonLatoRegularStyle" parent="android:Widget.Button">
+    <item name="fontPath">fonts/Lato-Regular.ttf</item>
+  </style>
+
+  <style name="EditLatoRegularStyle" parent="android:Widget.EditText">
+    <item name="fontPath">fonts/Lato-Regular.ttf</item>
+  </style>
+
+  <style name="LoginTheme.Base" parent="Theme.AppCompat.NoActionBar">
+    <item name="android:windowAnimationStyle">@null</item>
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimary</item>
+    <item name="colorAccent">@color/white</item>
+    <item name="android:windowBackground">@color/white</item>
+    <item name="android:colorBackground">@color/white</item>
   </style>
 
 </resources>

@@ -1,3 +1,19 @@
 <resources>
   <string name="app_name">EdwardLynx</string>
+
+  // region Login
+  <string name="username">Username</string>
+  <string name="password">Password</string>
+  <string name="login">Login</string>
+  <string name="loading">Loading. . .</string>
+  <string name="username_required">Username is required</string>
+  <string name="password_required">Password is required</string>
+  <string name="forgot_password">Forgot Password?</string>
+
+  // region forgot password
+  <string name="email">Email</string>
+  <string name="recover">Recover</string>
+  <string name="email_required">Email is required</string>
+  <string name="valid_email_required">Valid email is required</string>
+  <string name="login_now">Login now</string>
 </resources>
