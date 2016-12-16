@@ -16,4 +16,12 @@
   <string name="email_required">Email is required</string>
   <string name="valid_email_required">Valid email is required</string>
   <string name="login_now">Login now</string>
+
+  // region Change password
+
+  <string name="change_password">Change Password</string>
+  <string name="change_password_bold">CHANGE PASSWORD</string>
+  <string name="current_password">Current Password</string>
+  <string name="new_password">New Password</string>
+  <string name="re_new_password">New Password (Again)</string>
 </resources>
