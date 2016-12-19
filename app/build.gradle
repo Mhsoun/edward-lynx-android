@@ -53,6 +53,11 @@ dependencies {
     transitive = true;
   }
 
+  // rxjava with retrofit
+  compile 'io.reactivex:rxjava:1.0.+'
+  compile 'io.reactivex:rxandroid:0.23.+'
+  compile 'com.squareup.retrofit:retrofit:1.9.+'
+
   // tests
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'

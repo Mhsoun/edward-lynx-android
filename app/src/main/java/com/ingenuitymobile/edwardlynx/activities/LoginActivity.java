@@ -9,9 +9,20 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.SessionStore;
+import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
+import com.ingenuitymobile.edwardlynx.utils.NetUtil;
+import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 import com.ingenuitymobile.edwardlynx.views.EditTextGroup;
+
+import retrofit.RetrofitError;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by mEmEnG-sKi on 13/12/2016.
@@ -64,6 +75,38 @@ public class LoginActivity extends BaseActivity {
     }
 
     loginText.setText(getString(R.string.loading));
+
+
+    subscription = Shared.apiClient.postLogin(usernameGroup.getEditTextSting(),
+        passwordGroup.getEditTextSting())
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Subscriber<Authentication>() {
+          @Override
+          public void onCompleted() {}
+
+          @Override
+          public void onError(Throwable e) {
+            if (!NetUtil.hasActiveConnection(LoginActivity.this)) {
+              Toast.makeText(LoginActivity.this, getString(R.string.no_internet_connection),
+                  Toast.LENGTH_SHORT).show();
+            } else {
+              Authentication response = (Authentication) ((RetrofitError) e).getBody();
+              if (response != null) {
+                ViewUtil.showAlert(LoginActivity.this, getString(R.string.error), response.message);
+              }
+            }
+          }
+
+          @Override
+          public void onNext(Authentication authentication) {
+            SessionStore.saveRefreshToken(authentication.refresh_token, LoginActivity.this);
+            SessionStore.saveAccessToken(authentication.accessToken, LoginActivity.this);
+            Intent intent = new Intent(LoginActivity.this, SplashActivity.class);
+            startActivity(intent);
+            finish();
+          }
+        });
   }
 
   public void forgotPassword(View v) {

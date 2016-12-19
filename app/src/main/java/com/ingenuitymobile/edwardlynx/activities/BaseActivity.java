@@ -7,6 +7,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
+import rx.Subscription;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
@@ -14,6 +15,16 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 
 public class BaseActivity extends AppCompatActivity {
+
+  protected Subscription subscription;
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    if (subscription != null) {
+      subscription.unsubscribe();
+    }
+  }
 
   @Override
   protected void attachBaseContext(Context newBase) {
