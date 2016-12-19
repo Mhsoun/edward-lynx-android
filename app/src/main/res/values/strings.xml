@@ -18,10 +18,14 @@
   <string name="login_now">Login now</string>
 
   // region Change password
-
   <string name="change_password">Change Password</string>
   <string name="change_password_bold">CHANGE PASSWORD</string>
   <string name="current_password">Current Password</string>
   <string name="new_password">New Password</string>
   <string name="re_new_password">New Password (Again)</string>
+
+  // Dashboard
+  <string name="dashboard">Dashboard</string>
+  <string name="status">STATUS</string>
+  <string name="shortcuts">SHORTCUTS</string>
 </resources>
