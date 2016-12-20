@@ -1,106 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/bg_color"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.ingenuitymobile.edwardlynx.activities.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-  <RelativeLayout
+  <include
+      layout="@layout/app_bar_main"
       android:layout_width="match_parent"
-      android:layout_height="60dp"
-      android:background="@color/colorPrimaryDark">
+      android:layout_height="match_parent"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/dashboard"
-        android:textColor="@color/white"
-        android:textSize="20sp"/>
-  </RelativeLayout>
-
-  <LinearLayout
-      android:layout_width="match_parent"
+  <android.support.design.widget.NavigationView
+      android:id="@+id/nav_view"
+      android:layout_width="wrap_content"
       android:layout_height="match_parent"
-      android:layout_margin="12dp"
-      android:orientation="vertical">
+      android:layout_gravity="start"
+      android:background="@drawable/bg_login_gradient"
+      android:fitsSystemWindows="true"
+      app:itemIconTint="@color/white"
+      app:itemTextColor="@color/white"
+      app:menu="@menu/activity_main_drawer"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/status"
-        android:textColor="@color/steps_text_color"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
-        android:background="@color/white">
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/white">
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/shortcuts"
-        android:textColor="@color/steps_text_color"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
-
-      <RelativeLayout
-          android:layout_width="0dp"
-          android:layout_height="match_parent"
-          android:layout_marginRight="4dp"
-          android:layout_weight="1"
-          android:background="@color/white">
-      </RelativeLayout>
-
-      <RelativeLayout
-          android:layout_width="0dp"
-          android:layout_height="match_parent"
-          android:layout_marginLeft="4dp"
-          android:layout_weight="1"
-          android:background="@color/white">
-      </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
-
-      <RelativeLayout
-          android:layout_width="0dp"
-          android:layout_height="match_parent"
-          android:layout_marginRight="4dp"
-          android:layout_weight="1"
-          android:background="@color/white">
-      </RelativeLayout>
-
-      <RelativeLayout
-          android:layout_width="0dp"
-          android:layout_height="match_parent"
-          android:layout_marginLeft="4dp"
-          android:layout_weight="1"
-          android:background="@color/white">
-      </RelativeLayout>
-    </LinearLayout>
-  </LinearLayout>
-
-</LinearLayout>
+</android.support.v4.widget.DrawerLayout>

@@ -3,23 +3,26 @@ package com.ingenuitymobile.edwardlynx.activities;
 import android.os.Bundle;
 
 import com.crashlytics.android.Crashlytics;
-import com.ingenuitymobile.edwardlynx.R;
 
 import io.fabric.sdk.android.Fabric;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseMainActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Fabric.with(this, new Crashlytics());
-    setContentView(R.layout.activity_main);
 
-    // TODO: Move this to where you establish a user session
-    logUser();
+    initViews();
+    setUserCrashlytics();
   }
 
-  private void logUser() {
+  private void initViews() {
+
+  }
+
+
+  private void setUserCrashlytics() {
     // TODO: Use the current user's information
     // You can call any combination of these three methods
     Crashlytics.setUserIdentifier("12345");
