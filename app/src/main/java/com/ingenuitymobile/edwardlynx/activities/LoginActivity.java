@@ -15,6 +15,7 @@ import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.SessionStore;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.NetUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 import com.ingenuitymobile.edwardlynx.views.EditTextGroup;
@@ -52,10 +53,15 @@ public class LoginActivity extends BaseActivity {
 
     loginText = (TextView) findViewById(R.id.text_login);
 
+    LogUtil.e("AAA " + SessionStore.restoreUsername(this));
+
     usernameGroup = new EditTextGroup(usernameEdit, usernameImage, usernameErrorText);
     passwordGroup = new EditTextGroup(passwordEdit, passwordImage, passwordErrorText);
 
     passwordEdit.setOnEditorActionListener(editorActionListener);
+
+    usernameEdit.setText(SessionStore.restoreUsername(this));
+    passwordEdit.setText(SessionStore.restorePassword(this));
   }
 
   public void login(View v) {
@@ -87,6 +93,7 @@ public class LoginActivity extends BaseActivity {
 
           @Override
           public void onError(Throwable e) {
+            loginText.setText(getString(R.string.login));
             if (!NetUtil.hasActiveConnection(LoginActivity.this)) {
               Toast.makeText(LoginActivity.this, getString(R.string.no_internet_connection),
                   Toast.LENGTH_SHORT).show();
@@ -100,6 +107,10 @@ public class LoginActivity extends BaseActivity {
 
           @Override
           public void onNext(Authentication authentication) {
+            LogUtil.e("AAA " + usernameGroup.getEditTextSting());
+            LogUtil.e("AAA " + passwordGroup.getEditTextSting());
+            SessionStore.saveUsername(usernameGroup.getEditTextSting(), LoginActivity.this);
+            SessionStore.savePassword(passwordGroup.getEditTextSting(), LoginActivity.this);
             SessionStore.saveRefreshToken(authentication.refresh_token, LoginActivity.this);
             SessionStore.saveAccessToken(authentication.accessToken, LoginActivity.this);
             Intent intent = new Intent(LoginActivity.this, SplashActivity.class);

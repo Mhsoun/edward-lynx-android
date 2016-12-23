@@ -31,6 +31,13 @@
   <string name="current_password">Current Password</string>
   <string name="new_password">New Password</string>
   <string name="re_new_password">New Password (Again)</string>
+  <string name="old_password_required">Old password is required</string>
+  <string name="new_password_required">New password is required</string>
+  <string name="password_not_match">Password does not match</string>
+
+  // region profile
+  <string name="first_name_required">Name is required</string>
+
 
   // Dashboard
   <string name="dashboard">Dashboard</string>
@@ -39,4 +46,10 @@
 
   <string name="navigation_drawer_open">Open navigation drawer</string>
   <string name="navigation_drawer_close">Close navigation drawer</string>
+  <string name="title_activity_profile">Profile</string>
+  <string name="title_activity_change_password">Change Password</string>
+
+  <string name="logout_confirmation_message">Are you sure you want to log out? Your credentials will be required to open the app again.</string>
+  <string name="logout">Logout</string>
+  <string name="cancel">Cancel</string>
 </resources>

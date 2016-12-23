@@ -1,6 +1,9 @@
 package com.ingenuitymobile.edwardlynx.api;
 
+import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
+import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +13,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import rx.Observable;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by mEmEnG-sKi on 19/12/2016.
@@ -54,6 +58,7 @@ public class ApiClient {
           public void intercept(RequestFacade request) {
             if (accessToken != null) {
               request.addHeader("Authorization", "Bearer " + accessToken);
+              request.addHeader("Accept", "application/json");
             }
           }
         })
@@ -68,7 +73,6 @@ public class ApiClient {
     map.put("password", password);
     map.put("client_id", consumerKey);
     map.put("client_secret", consumerSecret);
-
     return service.postLogin(map);
   }
 
@@ -80,6 +84,30 @@ public class ApiClient {
     map.put("client_secret", consumerSecret);
     return service.postRefreshToken(map);
   }
+
+  public void getMe(final Subscriber<User> subscriber) {
+    service.getMe()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getMe(subscriber);
+          }
+        }));
+  }
+
+  public void updateUser(final UserBody body,
+      final Subscriber<User> subscriber) {
+    service.updateProfile(body)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            updateUser(body, subscriber);
+          }
+        }));
+  }
+
 
   private class CustomSubscriber<T> extends Subscriber<T> {
     Subscriber<T>       subscriber;

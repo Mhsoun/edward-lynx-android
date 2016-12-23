@@ -12,5 +12,8 @@ public class Response {
   @SerializedName("message")
   public String message;
 
+  @SerializedName("validation_errors")
+  public ValidationErrors errors;
+
   public boolean isNotAuthenticated;
 }

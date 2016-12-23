@@ -15,6 +15,8 @@ public class SessionStore {
 
   private static final String ACCESS_TOKEN  = "accessToken";
   private static final String REFRESH_TOKEN = "refreshToken";
+  private static final String USERNAME      = "username";
+  private static final String PASSWORD      = "password";
 
 
   static boolean restore(ApiClient apiClient, Context context) {
@@ -51,5 +53,33 @@ public class SessionStore {
     final SharedPreferences savedUserId = context.getSharedPreferences(NAME,
         Context.MODE_PRIVATE);
     return savedUserId.getString(REFRESH_TOKEN, null);
+  }
+
+  public static boolean saveUsername(String username, Context context) {
+    final SharedPreferences.Editor editor = context
+        .getSharedPreferences(NAME, Context.MODE_PRIVATE)
+        .edit()
+        .putString(USERNAME, username);
+    return editor.commit();
+  }
+
+  public static String restoreUsername(Context context) {
+    final SharedPreferences savedUserId = context.getSharedPreferences(NAME,
+        Context.MODE_PRIVATE);
+    return savedUserId.getString(USERNAME, "");
+  }
+
+  public static boolean savePassword(String password, Context context) {
+    final SharedPreferences.Editor editor = context
+        .getSharedPreferences(NAME, Context.MODE_PRIVATE)
+        .edit()
+        .putString(PASSWORD, password);
+    return editor.commit();
+  }
+
+  public static String restorePassword(Context context) {
+    final SharedPreferences savedUserId = context.getSharedPreferences(NAME,
+        Context.MODE_PRIVATE);
+    return savedUserId.getString(PASSWORD, "");
   }
 }
