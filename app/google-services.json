@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "770226922406",
+    "firebase_url": "https://edwardlynx-7019f.firebaseio.com",
+    "project_id": "edwardlynx-7019f",
+    "storage_bucket": "edwardlynx-7019f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770226922406:android:2247c7c2123bc885",
+        "android_client_info": {
+          "package_name": "com.ingenuitymobile.edwardlynx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770226922406-q766ketf40e3r1tasb1l99qt42mvhhu7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTb3mZc1DpGw0whoZmBTuD4Lcz24ROxL4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
