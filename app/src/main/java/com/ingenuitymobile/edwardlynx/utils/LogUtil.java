@@ -11,7 +11,7 @@ import com.ingenuitymobile.edwardlynx.BuildConfig;
 public class LogUtil {
   private static boolean ENABLE_LOG = BuildConfig.DEBUG;
 
-  private static final String TAG = BuildConfig.FLAVOR;
+  private static final String TAG = "EdwardLynx";
 
   public static void d(String msg) {
     if (ENABLE_LOG) {

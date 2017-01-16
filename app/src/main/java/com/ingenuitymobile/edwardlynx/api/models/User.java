@@ -13,7 +13,7 @@ public class User extends Response {
   public static final String SUPER_ADMIN       = "superAdmin";
   public static final String SUPERVISOR        = "supervisor";
   public static final String PARTICIPANT       = "participant";
-  public static final String FEEDBACK_PROVIDER = "eedback-provider";
+  public static final String FEEDBACK_PROVIDER = "feedback-provider";
   public static final String ANALYST           = "analyst";
 
   @SerializedName("id")

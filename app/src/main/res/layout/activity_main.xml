@@ -19,9 +19,9 @@
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       android:layout_gravity="start"
-      android:background="@drawable/bg_login_gradient"
+      android:background="@drawable/bg_nav_menu"
       android:fitsSystemWindows="true"
-      app:itemIconTint="@color/white"
+      app:itemIconTint="@color/nav_item_color"
       app:itemTextColor="@color/white"
       app:menu="@menu/activity_main_drawer"/>
 

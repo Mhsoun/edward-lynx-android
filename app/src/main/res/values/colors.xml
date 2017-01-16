@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="colorPrimary">#663593</color>
-  <color name="colorPrimaryDark">#442060</color>
+  <color name="colorPrimaryDark">#311a4c</color>
   <color name="colorAccent">#67E34f</color>
 
   <color name="black">#000000</color>
   <color name="white">#ffffff</color>
   <color name="red">#ff0000</color>
+  <color name="nav_item_color">#54307d</color>
+  <color name="nav_bg_color">#2a173f</color>
 
   <color name="common_text_color">#3c3c3c</color>
   <color name="steps_text_color">#b0b0b0</color>

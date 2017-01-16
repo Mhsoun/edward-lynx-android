@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#3b205a"
+              android:orientation="vertical"
+              app:layout_behavior="@string/appbar_scrolling_view_behavior"
+              tools:context="com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity"
+              tools:showIn="@layout/activity_create_feedback">
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginTop="12dp"
+      android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question Type"
+        android:textColor="@color/white"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:background="#694f88">
+
+      <android.support.v7.widget.AppCompatSpinner
+          android:id="@+id/spinner_type"
+          style="@style/mySpinnerItemStyle"
+          android:layout_width="match_parent"
+          android:layout_height="40dp"
+          android:entries="@array/answer_type"
+          android:prompt="@string/username">
+      </android.support.v7.widget.AppCompatSpinner>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Question"
+        android:textColor="@color/white"/>
+
+    <EditText
+        android:id="@+id/edit_question"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="4dp"
+        android:background="#694f88"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:textColor="#3b205a"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:text="Is Anonymmous"
+          android:textColor="@color/white"/>
+
+      <android.support.v7.widget.AppCompatCheckBox
+          android:id="@+id/checkbox_is_anonymous"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:buttonTint="@color/white"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:background="#e2994b"
+        android:gravity="center"
+        android:onClick="invite"
+        android:text="Invite"
+        android:textColor="@color/white"
+        android:textSize="18sp"></TextView>
+  </LinearLayout>
+</LinearLayout>

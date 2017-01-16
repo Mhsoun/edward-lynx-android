@@ -2,6 +2,7 @@ package com.ingenuitymobile.edwardlynx.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.inputmethod.InputMethodManager;
 
@@ -17,6 +18,13 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class BaseActivity extends AppCompatActivity {
 
   protected Subscription subscription;
+  protected Context      context;
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    context = getApplicationContext();
+  }
 
   @Override
   protected void onDestroy() {

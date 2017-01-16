@@ -1,9 +1,17 @@
 package com.ingenuitymobile.edwardlynx.api;
 
+import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
+import com.ingenuitymobile.edwardlynx.api.models.Feedback;
+import com.ingenuitymobile.edwardlynx.api.models.Questions;
+import com.ingenuitymobile.edwardlynx.api.models.Survey;
+import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.Response;
+import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -96,6 +104,17 @@ public class ApiClient {
         }));
   }
 
+  public void getUsers(final String type, final Subscriber<UsersResponse> subscriber) {
+    service.getUsers(type)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getUsers(type, subscriber);
+          }
+        }));
+  }
+
   public void updateUser(final UserBody body,
       final Subscriber<User> subscriber) {
     service.updateProfile(body)
@@ -104,6 +123,86 @@ public class ApiClient {
           @Override
           public void onPostAgain() {
             updateUser(body, subscriber);
+          }
+        }));
+  }
+
+  public void getSurveys(final int page, final Subscriber<Surveys> subscriber) {
+    service.getSurveys(page)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getSurveys(page, subscriber);
+          }
+        }));
+  }
+
+  public void getSurvey(final long id, final Subscriber<Survey> subscriber) {
+    service.getSurvey(id)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getSurvey(id, subscriber);
+          }
+        }));
+  }
+
+  public void getSurveyQuestions(final long id, final Subscriber<Questions> subscriber) {
+    service.getSurveyQuestions(id)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getSurveyQuestions(id, subscriber);
+          }
+        }));
+  }
+
+  public void postInstantFeedback(final InstantFeedbackBody body,
+      final Subscriber<Response> subscriber) {
+    service.postInstantFeedback(body)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            postInstantFeedback(body, subscriber);
+          }
+        }));
+  }
+
+  public void getInstantFeedbacks(final String filter,
+      final Subscriber<FeedbacksResponse> subscriber) {
+    service.getInstantFeedbacks(filter)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getInstantFeedbacks(filter, subscriber);
+          }
+        }));
+  }
+
+  public void getInstantFeedback(final long id, final Subscriber<Feedback> subscriber) {
+    service.getInstantFeedback(id)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getInstantFeedback(id, subscriber);
+          }
+        }));
+  }
+
+  public void postInstantFeedbackAnswers(final long id, final AnswerParam param,
+      final Subscriber<Response> subscriber) {
+    service.getInstantFeedback(id)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            postInstantFeedbackAnswers(id, param, subscriber);
           }
         }));
   }
@@ -125,18 +224,26 @@ public class ApiClient {
     }
 
     @Override
-    public void onError(Throwable e) {
+    public void onError(final Throwable e) {
       if (((RetrofitError) e).getResponse().getStatus() == 401) {
-        new Thread(new Runnable() {
-          @Override
-          public void run() {
-            final Authentication authentication = postRefreshToken(refreshToken);
-            if (authentication != null) {
-              refreshListener.onRefreshToken(authentication);
-              listener.onPostAgain();
+        try {
+          new Thread(new Runnable() {
+            @Override
+            public void run() {
+              try {
+                final Authentication authentication = postRefreshToken(refreshToken);
+                if (authentication != null) {
+                  refreshListener.onRefreshToken(authentication);
+                  listener.onPostAgain();
+                }
+              } catch (Exception ex) {
+                subscriber.onError(e);
+              }
             }
-          }
-        }).start();
+          }).start();
+        } catch (Exception exception) {
+          subscriber.onError(e);
+        }
       } else {
         subscriber.onError(e);
       }

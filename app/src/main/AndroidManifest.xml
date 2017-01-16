@@ -29,29 +29,58 @@
         android:label="@string/dashboard"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme.NoActionBar"/>
-
-    <meta-data
-        android:name="io.fabric.ApiKey"
-        android:value="7c67a5365060930052205dfdf95102678ef19047"/>
-
     <activity
         android:name=".activities.ProfileActivity"
         android:label="@string/title_activity_profile"
-        android:parentActivityName=".activities.BaseActivity"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
-      <meta-data
-          android:name="android.support.PARENT_ACTIVITY"
-          android:value="com.ingenuitymobile.edwardlynx.activities.BaseActivity"/>
     </activity>
     <activity
         android:name=".activities.ChangePasswordActivity"
         android:label="@string/title_activity_change_password"
-        android:parentActivityName=".activities.BaseActivity"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
-      <meta-data
-          android:name="android.support.PARENT_ACTIVITY"
-          android:value="com.ingenuitymobile.edwardlynx.activities.BaseActivity"/>
     </activity>
+    <activity
+        android:name=".activities.SurveyQuestionsActivity"
+        android:label="Survey Questions"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+    </activity>
+    <activity
+        android:name=".activities.CreateFeedbackActivity"
+        android:label="Create Feedback"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+    </activity>
+    <activity
+        android:name=".activities.InviteActivity"
+        android:label="Invite"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+    </activity>
+    <activity
+        android:name=".activities.FeedbackRequestsActivity"
+        android:label="Instant Feedback Requests"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+    </activity>
+    <activity
+        android:name=".activities.ReportsActivity"
+        android:label="Reports"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+    </activity>
+    <activity
+        android:name=".activities.AnswerFeedbackActivity"
+        android:label="Instant Feedback Question"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+    </activity>
+
+    <meta-data
+        android:name="io.fabric.ApiKey"
+        android:value="7c67a5365060930052205dfdf95102678ef19047"/>
   </application>
 
 </manifest>
