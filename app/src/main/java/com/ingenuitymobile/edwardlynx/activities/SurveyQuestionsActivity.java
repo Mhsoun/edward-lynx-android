@@ -73,7 +73,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
   private void getData() {
     LogUtil.e("AAA getData questions");
-    Shared.apiClient.getSurveyQuestions(id, new Subscriber<Questions>() {
+    subscription = Shared.apiClient.getSurveyQuestions(id, new Subscriber<Questions>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA onCompleted ");

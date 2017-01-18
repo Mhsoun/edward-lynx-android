@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Question Type"
+        android:text="Answer Type"
         android:textColor="@color/white"/>
 
 
@@ -80,6 +80,27 @@
           android:buttonTint="@color/white"/>
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/layout_isNA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:text="Is N/A"
+          android:textColor="@color/white"/>
+
+      <android.support.v7.widget.AppCompatCheckBox
+          android:id="@+id/checkbox_is_na"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:buttonTint="@color/white"/>
+    </RelativeLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -87,7 +108,7 @@
         android:background="#e2994b"
         android:gravity="center"
         android:onClick="invite"
-        android:text="Invite"
+        android:text="Select Participants"
         android:textColor="@color/white"
         android:textSize="18sp"></TextView>
   </LinearLayout>

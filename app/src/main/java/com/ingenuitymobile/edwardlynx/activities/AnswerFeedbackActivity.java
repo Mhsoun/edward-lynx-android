@@ -30,6 +30,7 @@ import rx.Subscriber;
 public class AnswerFeedbackActivity extends BaseActivity {
 
   private long                  id;
+  private String                key;
   private QuestionsAdapter      adapter;
   private ArrayList<Question>   data;
   private ArrayList<AnswerBody> bodies;
@@ -51,6 +52,7 @@ public class AnswerFeedbackActivity extends BaseActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     id = getIntent().getLongExtra("id", 0L);
+    key = getIntent().getStringExtra("key");
 
     initViews();
     getData();
@@ -80,7 +82,7 @@ public class AnswerFeedbackActivity extends BaseActivity {
 
   private void getData() {
     LogUtil.e("AAA getData questions");
-    Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
+    subscription = Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA onCompleted ");
@@ -104,8 +106,11 @@ public class AnswerFeedbackActivity extends BaseActivity {
   public void submit(View v) {
     AnswerParam param = new AnswerParam();
     param.answers = bodies;
+    param.key = key;
 
-    Shared.apiClient.postInstantFeedbackAnswers(id, param, new Subscriber<Response>() {
+    LogUtil.e("AAA " + param.toString());
+    LogUtil.e("AAA id + " + id);
+    subscription = Shared.apiClient.postInstantFeedbackAnswers(id, param, new Subscriber<Response>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA onCompleted");
@@ -131,6 +136,7 @@ public class AnswerFeedbackActivity extends BaseActivity {
       .OnAnswerItemListener() {
     @Override
     public void onAnswer(long id, String value) {
+      LogUtil.e("AAA " + value);
       for (int x = 0; x < bodies.size(); x++) {
         AnswerBody body = bodies.get(x);
         if (id == body.question) {

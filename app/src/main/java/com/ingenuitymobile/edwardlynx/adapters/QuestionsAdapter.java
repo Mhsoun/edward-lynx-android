@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,6 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Option;
 import com.ingenuitymobile.edwardlynx.api.models.Question;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.List;
 
@@ -65,27 +66,38 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     holder.editText.setVisibility(View.GONE);
     if (question.answer.options != null) {
       for (Option option : question.answer.options) {
-        createRadioButton(holder.radioGroup, context, option.description);
+        createRadioButton(holder.radioGroup, context, option.description, option.value);
       }
 
-      createRadioButton(holder.radioGroup, context, "N/A");
+      if (question.isNA == 1) {
+        createRadioButton(holder.radioGroup, context, "N/A", -1);
+      }
 
       holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int i) {
-          LogUtil.e("AAA " + i);
-
-          int value = -1;
-          if (i <= question.answer.options.size()) {
-            value = i - 1;
-          }
-          listener.onAnswer(question.id, String.valueOf(value));
+          RadioButton radioButton = (RadioButton) radioGroup.findViewById(i);
+          listener.onAnswer(question.id, (String) radioButton.getTag());
         }
       });
     } else if (question.answer.decscription.equals("Text")) {
       holder.editText.setVisibility(View.VISIBLE);
+      holder.editText.addTextChangedListener(new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-      listener.onAnswer(question.id, holder.editText.getText().toString());
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+          listener.onAnswer(question.id, holder.editText.getText().toString());
+        }
+      });
     }
   }
 
@@ -95,12 +107,13 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
   }
 
   private void createRadioButton(final RadioGroup radioGroup, final Context context,
-      final String description) {
+      final String description, int value) {
     final RadioButton radioButton = new RadioButton(context);
     final LayoutParams lparam = new LayoutParams(LayoutParams.WRAP_CONTENT,
         LayoutParams.WRAP_CONTENT);
     radioButton.setLayoutParams(lparam);
     radioButton.setTextColor(context.getResources().getColor(R.color.white));
+    radioButton.setTag(String.valueOf(value));
     int textColor = Color.parseColor("#ffffff");
     radioButton.setButtonTintList(ColorStateList.valueOf(textColor));
     radioButton.setText(description);

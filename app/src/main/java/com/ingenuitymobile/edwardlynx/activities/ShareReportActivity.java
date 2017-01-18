@@ -12,10 +12,8 @@ import android.widget.Toast;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.UsersAdapter;
-import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.Id;
-import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
-import com.ingenuitymobile.edwardlynx.api.bodyparams.QuestionBody;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
@@ -27,18 +25,17 @@ import java.util.List;
 import rx.Subscriber;
 
 /**
- * Created by mEmEnG-sKi on 10/01/2017.
+ * Created by mEmEnG-sKi on 17/01/2017.
  */
 
-public class InviteActivity extends BaseActivity {
+public class ShareReportActivity extends BaseActivity {
 
+  private long            id;
   private ArrayList<User> data;
   private ArrayList<Long> ids;
   private UsersAdapter    adapter;
 
-  private InstantFeedbackBody body;
-
-  public InviteActivity() {
+  public ShareReportActivity() {
     data = new ArrayList<>();
     ids = new ArrayList<>();
   }
@@ -46,26 +43,17 @@ public class InviteActivity extends BaseActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_invite);
+    setContentView(R.layout.activity_share_report);
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    id = getIntent().getLongExtra("id", 0L);
+
     initViews();
     getData();
-
-    body = new InstantFeedbackBody();
-    body.lang = Shared.user.lang;
-    body.isAnonymous = getIntent().getBooleanExtra("is_anonymous", false);
-    QuestionBody question = new QuestionBody();
-    question.text = getIntent().getStringExtra("question");
-    question.isNA = getIntent().getBooleanExtra("is_na", false);
-    AnswerBody answerBody = new AnswerBody();
-    answerBody.type = Integer.parseInt(getIntent().getStringExtra("question_type"));
-    body.questionBodies.add(question);
-    question.answerBody = answerBody;
   }
 
   @Override
@@ -112,38 +100,41 @@ public class InviteActivity extends BaseActivity {
     });
   }
 
-  public void invite(View v) {
+  public void share(View v) {
     if (ids.isEmpty()) {
-      Toast.makeText(InviteActivity.this, "Please select atleast one", Toast.LENGTH_SHORT)
+      Toast.makeText(ShareReportActivity.this, "Please select atleast one", Toast.LENGTH_SHORT)
           .show();
     } else {
       List<Id> recipients = new ArrayList<>();
       for (Long id : ids) {
         recipients.add(new Id(id));
       }
-      body.recipients = recipients;
-      LogUtil.e("AAA " + body.toString());
 
-      subscription = Shared.apiClient.postInstantFeedback(body, new Subscriber<Response>() {
-        @Override
-        public void onCompleted() {
-          LogUtil.e("AAA onCompleted");
-          setResult(RESULT_OK);
-          finish();
-        }
+      ShareParam param = new ShareParam();
+      param.users = ids;
+      LogUtil.e("AAA " + param.toString());
 
-        @Override
-        public void onError(Throwable e) {
-          LogUtil.e("AAA onError");
-        }
+      subscription = Shared.apiClient.postShareInstantFeedback(id, param,
+          new Subscriber<Response>() {
+            @Override
+            public void onCompleted() {
+              LogUtil.e("AAA onCompleted");
+              setResult(RESULT_OK);
+              finish();
+            }
 
-        @Override
-        public void onNext(Response response) {
-          LogUtil.e("AAA onNext");
-          Toast.makeText(InviteActivity.this, "Instant Feedback created", Toast.LENGTH_SHORT)
-              .show();
-        }
-      });
+            @Override
+            public void onError(Throwable e) {
+              LogUtil.e("AAA onError");
+            }
+
+            @Override
+            public void onNext(Response response) {
+              LogUtil.e("AAA onNext");
+              Toast.makeText(ShareReportActivity.this, "Shared to other people", Toast.LENGTH_SHORT)
+                  .show();
+            }
+          });
     }
   }
 
@@ -162,4 +153,3 @@ public class InviteActivity extends BaseActivity {
     }
   };
 }
-

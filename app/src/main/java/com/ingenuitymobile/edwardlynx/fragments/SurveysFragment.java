@@ -84,7 +84,7 @@ public class SurveysFragment extends BaseFragment {
 
   private void getData() {
     LogUtil.e("AAA getData survey");
-    Shared.apiClient.getSurveys(1, new Subscriber<Surveys>() {
+    subscription = Shared.apiClient.getSurveys(1, new Subscriber<Surveys>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA onCompleted ");

@@ -6,12 +6,16 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.api.models.Answer;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 /**
  * Created by mEmEnG-sKi on 10/01/2017.
@@ -21,9 +25,11 @@ public class CreateFeedbackActivity extends BaseActivity {
 
   private final int REQUEST_CODE = 100;
 
-  private EditText questionText;
-  private Spinner  typeSpinner;
-  private CheckBox isAnonymousCheckbox;
+  private EditText       questionText;
+  private Spinner        typeSpinner;
+  private CheckBox       isAnonymousCheckbox;
+  private CheckBox       isNA;
+  private RelativeLayout isNALayout;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +63,20 @@ public class CreateFeedbackActivity extends BaseActivity {
     questionText = (EditText) findViewById(R.id.edit_question);
     typeSpinner = (Spinner) findViewById(R.id.spinner_type);
     isAnonymousCheckbox = (CheckBox) findViewById(R.id.checkbox_is_anonymous);
+    isNA = (CheckBox) findViewById(R.id.checkbox_is_na);
+    isNALayout = (RelativeLayout) findViewById(R.id.layout_isNA);
+
+    typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      @Override
+      public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        isNALayout.setVisibility(i == Answer.CUSTOM_TEXT ? View.GONE : View.VISIBLE);
+      }
+
+      @Override
+      public void onNothingSelected(AdapterView<?> adapterView) {
+
+      }
+    });
   }
 
   public void invite(View v) {
@@ -70,6 +90,9 @@ public class CreateFeedbackActivity extends BaseActivity {
 
       intent.putExtra("question", question);
       intent.putExtra("question_type", String.valueOf(typeSpinner.getSelectedItemPosition()));
+      intent.putExtra("is_anonymous", isAnonymousCheckbox.isChecked());
+      intent.putExtra("is_na", isNA.isChecked());
+      LogUtil.e("AAA " + isNA.isChecked());
       startActivityForResult(intent, REQUEST_CODE);
     }
   }

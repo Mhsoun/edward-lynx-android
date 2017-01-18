@@ -2,6 +2,7 @@ package com.ingenuitymobile.edwardlynx.api;
 
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.Questions;
@@ -9,6 +10,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
+import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
@@ -21,6 +23,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
 /**
@@ -93,8 +96,8 @@ public class ApiClient {
     return service.postRefreshToken(map);
   }
 
-  public void getMe(final Subscriber<User> subscriber) {
-    service.getMe()
+  public Subscription getMe(final Subscriber<User> subscriber) {
+    return service.getMe()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
@@ -104,8 +107,8 @@ public class ApiClient {
         }));
   }
 
-  public void getUsers(final String type, final Subscriber<UsersResponse> subscriber) {
-    service.getUsers(type)
+  public Subscription getUsers(final String type, final Subscriber<UsersResponse> subscriber) {
+    return service.getUsers(type)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
@@ -115,9 +118,9 @@ public class ApiClient {
         }));
   }
 
-  public void updateUser(final UserBody body,
+  public Subscription updateUser(final UserBody body,
       final Subscriber<User> subscriber) {
-    service.updateProfile(body)
+    return service.updateProfile(body)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
@@ -127,8 +130,8 @@ public class ApiClient {
         }));
   }
 
-  public void getSurveys(final int page, final Subscriber<Surveys> subscriber) {
-    service.getSurveys(page)
+  public Subscription getSurveys(final int page, final Subscriber<Surveys> subscriber) {
+    return service.getSurveys(page)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
@@ -138,8 +141,8 @@ public class ApiClient {
         }));
   }
 
-  public void getSurvey(final long id, final Subscriber<Survey> subscriber) {
-    service.getSurvey(id)
+  public Subscription getSurvey(final long id, final Subscriber<Survey> subscriber) {
+    return service.getSurvey(id)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
@@ -149,8 +152,8 @@ public class ApiClient {
         }));
   }
 
-  public void getSurveyQuestions(final long id, final Subscriber<Questions> subscriber) {
-    service.getSurveyQuestions(id)
+  public Subscription getSurveyQuestions(final long id, final Subscriber<Questions> subscriber) {
+    return service.getSurveyQuestions(id)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
@@ -160,9 +163,9 @@ public class ApiClient {
         }));
   }
 
-  public void postInstantFeedback(final InstantFeedbackBody body,
+  public Subscription postInstantFeedback(final InstantFeedbackBody body,
       final Subscriber<Response> subscriber) {
-    service.postInstantFeedback(body)
+    return service.postInstantFeedback(body)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
@@ -172,9 +175,9 @@ public class ApiClient {
         }));
   }
 
-  public void getInstantFeedbacks(final String filter,
+  public Subscription getInstantFeedbacks(final String filter,
       final Subscriber<FeedbacksResponse> subscriber) {
-    service.getInstantFeedbacks(filter)
+    return service.getInstantFeedbacks(filter)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
@@ -184,8 +187,8 @@ public class ApiClient {
         }));
   }
 
-  public void getInstantFeedback(final long id, final Subscriber<Feedback> subscriber) {
-    service.getInstantFeedback(id)
+  public Subscription getInstantFeedback(final long id, final Subscriber<Feedback> subscriber) {
+    return service.getInstantFeedback(id)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
@@ -195,14 +198,38 @@ public class ApiClient {
         }));
   }
 
-  public void postInstantFeedbackAnswers(final long id, final AnswerParam param,
+  public Subscription postInstantFeedbackAnswers(final long id, final AnswerParam param,
       final Subscriber<Response> subscriber) {
-    service.getInstantFeedback(id)
+    return service.postInstantFeedbackAnswers(id, param)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
           public void onPostAgain() {
             postInstantFeedbackAnswers(id, param, subscriber);
+          }
+        }));
+  }
+
+  public Subscription getInstantFeedbackAnswers(final long id,
+      final Subscriber<FeedbackAnswerResponse> subscriber) {
+    return service.getInstantFeedbackAnswers(id)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getInstantFeedbackAnswers(id, subscriber);
+          }
+        }));
+  }
+
+  public Subscription postShareInstantFeedback(final long id, final ShareParam param,
+      final Subscriber<Response> subscriber) {
+    return service.postShareInstantFeedback(id, param)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            postShareInstantFeedback(id, param, subscriber);
           }
         }));
   }

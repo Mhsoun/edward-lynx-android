@@ -56,7 +56,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
       holder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-          listener.onSelect(feedback.id);
+          listener.onSelect(feedback.id, feedback.key);
         }
       });
     }
@@ -68,6 +68,6 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
   }
 
   public interface OnSelectFeedbackListener {
-    void onSelect(long id);
+    void onSelect(long id, String key);
   }
 }

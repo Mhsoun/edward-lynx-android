@@ -27,8 +27,13 @@ public class Feedback extends Response {
   public String         createdAt;
   @SerializedName("questions")
   public List<Question> questions;
+  @SerializedName("shares")
+  public List<Long>     shares;
+  @SerializedName("key")
+  public String         key;
 
   public Feedback() {
     questions = new ArrayList<>();
+    shares = new ArrayList<>();
   }
 }

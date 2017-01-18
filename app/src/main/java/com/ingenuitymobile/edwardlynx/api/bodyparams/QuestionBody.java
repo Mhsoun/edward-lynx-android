@@ -11,7 +11,7 @@ public class QuestionBody {
   @SerializedName("text")
   public String     text;
   @SerializedName("isNA")
-  public int        isNA;
+  public boolean    isNA;
   @SerializedName("answer")
   public AnswerBody answerBody;
 }

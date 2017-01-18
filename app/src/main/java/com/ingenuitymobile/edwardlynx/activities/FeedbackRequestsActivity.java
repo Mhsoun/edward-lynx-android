@@ -74,7 +74,7 @@ public class FeedbackRequestsActivity extends BaseActivity {
 
   private void getData() {
     LogUtil.e("AAA getData FeedbackRequestsActivity");
-    Shared.apiClient.getInstantFeedbacks("to_answer", new Subscriber<FeedbacksResponse>() {
+    subscription = Shared.apiClient.getInstantFeedbacks("to_answer", new Subscriber<FeedbacksResponse>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA onCompleted ");
@@ -98,9 +98,10 @@ public class FeedbackRequestsActivity extends BaseActivity {
   private FeedbackAdapter.OnSelectFeedbackListener listener = new FeedbackAdapter
       .OnSelectFeedbackListener() {
     @Override
-    public void onSelect(long id) {
+    public void onSelect(long id, String key) {
       Intent intent = new Intent(context, AnswerFeedbackActivity.class);
       intent.putExtra("id", id);
+      intent.putExtra("key", key);
       startActivity(intent);
     }
   };

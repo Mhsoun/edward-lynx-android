@@ -90,7 +90,7 @@ public class ChangePasswordActivity extends BaseActivity {
     body.password = newPassword;
 
 
-    Shared.apiClient.updateUser(body, new Subscriber<User>() {
+    subscription = Shared.apiClient.updateUser(body, new Subscriber<User>() {
       @Override
       public void onCompleted() {}
 

@@ -3,19 +3,21 @@ package com.ingenuitymobile.edwardlynx.api.bodyparams;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by mEmEnG-sKi on 16/01/2017.
+ * Created by mEmEnG-sKi on 17/01/2017.
  */
 
-public class AnswerParam {
+public class ShareParam {
 
-  @SerializedName("key")
-  public String           key;
-  @SerializedName("answers")
-  public List<AnswerBody> answers;
+  @SerializedName("users")
+  public List<Long> users;
 
+  public ShareParam() {
+    users = new ArrayList<>();
+  }
 
   @Override
   public String toString() {

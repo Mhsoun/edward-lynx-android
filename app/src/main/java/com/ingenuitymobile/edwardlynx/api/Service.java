@@ -2,6 +2,7 @@ package com.ingenuitymobile.edwardlynx.api;
 
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.Questions;
@@ -9,6 +10,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
+import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
@@ -72,4 +74,11 @@ public interface Service {
   @Headers("Content-Type: application/json")
   @POST("/api/v1/instant-feedbacks/{id}/answers")
   Observable<Response> postInstantFeedbackAnswers(@Path("id") long id, @Body AnswerParam param);
+
+  @GET("/api/v1/instant-feedbacks/{id}/answers")
+  Observable<FeedbackAnswerResponse> getInstantFeedbackAnswers(@Path("id") long id);
+
+  @Headers("Content-Type: application/json")
+  @POST("/api/v1/instant-feedbacks/{id}/shares")
+  Observable<Response> postShareInstantFeedback(@Path("id") long id, @Body ShareParam param);
 }

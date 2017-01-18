@@ -34,6 +34,7 @@ public class ProfileActivity extends BaseActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_profile);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
@@ -42,7 +43,7 @@ public class ProfileActivity extends BaseActivity {
     initViews();
 
     editText.setText(getString(R.string.loading));
-    Shared.apiClient.getMe(new Subscriber<User>() {
+    subscription = Shared.apiClient.getMe(new Subscriber<User>() {
       @Override
       public void onCompleted() {
         editText.setText("Edit");
@@ -116,7 +117,7 @@ public class ProfileActivity extends BaseActivity {
       body.info = info;
     }
 
-    Shared.apiClient.updateUser(body, new Subscriber<User>() {
+    subscription = Shared.apiClient.updateUser(body, new Subscriber<User>() {
       @Override
       public void onCompleted() {
         setEditable(false);

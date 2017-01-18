@@ -15,7 +15,7 @@ public class InstantFeedbackBody {
   @SerializedName("lang")
   public String             lang;
   @SerializedName("anonymous")
-  public boolean            isAnonymous;
+  public boolean                isAnonymous;
   @SerializedName("questions")
   public List<QuestionBody> questionBodies;
   @SerializedName("recipients")

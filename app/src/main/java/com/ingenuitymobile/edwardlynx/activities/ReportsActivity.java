@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -69,7 +70,7 @@ public class ReportsActivity extends BaseActivity {
 
   private void getData() {
     LogUtil.e("AAA getData instant feedbaks");
-    Shared.apiClient.getInstantFeedbacks("mine", new Subscriber<FeedbacksResponse>() {
+    subscription = Shared.apiClient.getInstantFeedbacks("mine", new Subscriber<FeedbacksResponse>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA onCompleted ");
@@ -93,8 +94,10 @@ public class ReportsActivity extends BaseActivity {
   private FeedbackAdapter.OnSelectFeedbackListener listener = new FeedbackAdapter
       .OnSelectFeedbackListener() {
     @Override
-    public void onSelect(long id) {
-
+    public void onSelect(long id, String key) {
+      Intent intent = new Intent(ReportsActivity.this, InstantFeedbackReportActivity.class);
+      intent.putExtra("id", id);
+      startActivity(intent);
     }
   };
 }
