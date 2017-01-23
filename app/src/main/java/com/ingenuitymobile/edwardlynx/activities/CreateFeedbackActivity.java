@@ -2,20 +2,29 @@ package com.ingenuitymobile.edwardlynx.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.adapters.CustomScaleAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.Answer;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+
+import java.util.ArrayList;
 
 /**
  * Created by mEmEnG-sKi on 10/01/2017.
@@ -30,6 +39,18 @@ public class CreateFeedbackActivity extends BaseActivity {
   private CheckBox       isAnonymousCheckbox;
   private CheckBox       isNA;
   private RelativeLayout isNALayout;
+
+  private LinearLayout customScaleLayout;
+  private RecyclerView optionsList;
+  private EditText     addOptionEdit;
+
+  private ArrayList<String> options;
+
+  private CustomScaleAdapter adapter;
+
+  public CreateFeedbackActivity() {
+    options = new ArrayList<>();
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +91,7 @@ public class CreateFeedbackActivity extends BaseActivity {
       @Override
       public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         isNALayout.setVisibility(i == Answer.CUSTOM_TEXT ? View.GONE : View.VISIBLE);
+        customScaleLayout.setVisibility(i == Answer.CUSTOM_SCALE ? View.VISIBLE : View.GONE);
       }
 
       @Override
@@ -77,6 +99,17 @@ public class CreateFeedbackActivity extends BaseActivity {
 
       }
     });
+
+    customScaleLayout = (LinearLayout) findViewById(R.id.layout_custom_scale);
+    addOptionEdit = (EditText) findViewById(R.id.edit_add_option);
+    addOptionEdit.setOnEditorActionListener(editorActionListener);
+
+    final RecyclerView optionList = (RecyclerView) findViewById(R.id.list_options);
+    optionList.setHasFixedSize(true);
+    optionList.setLayoutManager(new LinearLayoutManager(this));
+
+    adapter = new CustomScaleAdapter(options, listener);
+    optionList.setAdapter(adapter);
   }
 
   public void invite(View v) {
@@ -96,4 +129,38 @@ public class CreateFeedbackActivity extends BaseActivity {
       startActivityForResult(intent, REQUEST_CODE);
     }
   }
+
+  private TextView.OnEditorActionListener editorActionListener = new TextView
+      .OnEditorActionListener() {
+    @Override
+    public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+      if (actionId == EditorInfo.IME_ACTION_DONE) {
+        hideKeyboard();
+
+        final String string = addOptionEdit.getText().toString();
+        if (!TextUtils.isEmpty(string)) {
+          if (options.contains(string)) {
+            Toast.makeText(CreateFeedbackActivity.this, "There is an existing option",
+                Toast.LENGTH_SHORT).show();
+            return true;
+          }
+
+          options.add(string);
+          adapter.notifyDataSetChanged();
+          addOptionEdit.setText("");
+        }
+        return true;
+      }
+      return false;
+    }
+  };
+
+  private CustomScaleAdapter.OnDeleteListener listener = new CustomScaleAdapter.OnDeleteListener
+      () {
+    @Override
+    public void onDelete(int position) {
+      options.remove(position);
+      adapter.notifyDataSetChanged();
+    }
+  };
 }
