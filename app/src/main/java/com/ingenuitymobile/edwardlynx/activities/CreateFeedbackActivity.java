@@ -10,19 +10,24 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.CustomScaleAdapter;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerBody;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.QuestionBody;
 import com.ingenuitymobile.edwardlynx.api.models.Answer;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
 import java.util.ArrayList;
 
@@ -35,20 +40,21 @@ public class CreateFeedbackActivity extends BaseActivity {
   private final int REQUEST_CODE = 100;
 
   private EditText       questionText;
-  private Spinner        typeSpinner;
   private CheckBox       isAnonymousCheckbox;
   private CheckBox       isNA;
   private RelativeLayout isNALayout;
 
   private LinearLayout customScaleLayout;
-  private RecyclerView optionsList;
   private EditText     addOptionEdit;
 
   private ArrayList<String> options;
 
   private CustomScaleAdapter adapter;
 
+  private int type;
+
   public CreateFeedbackActivity() {
+    type = -1;
     options = new ArrayList<>();
   }
 
@@ -82,21 +88,55 @@ public class CreateFeedbackActivity extends BaseActivity {
 
   private void initViews() {
     questionText = (EditText) findViewById(R.id.edit_question);
-    typeSpinner = (Spinner) findViewById(R.id.spinner_type);
     isAnonymousCheckbox = (CheckBox) findViewById(R.id.checkbox_is_anonymous);
     isNA = (CheckBox) findViewById(R.id.checkbox_is_na);
     isNALayout = (RelativeLayout) findViewById(R.id.layout_isNA);
 
-    typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-      @Override
-      public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        isNALayout.setVisibility(i == Answer.CUSTOM_TEXT ? View.GONE : View.VISIBLE);
-        customScaleLayout.setVisibility(i == Answer.CUSTOM_SCALE ? View.VISIBLE : View.GONE);
-      }
+    final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radiogroup_answer_type);
 
-      @Override
-      public void onNothingSelected(AdapterView<?> adapterView) {
+    for (int i = 0; i < radioGroup.getChildCount(); i++) {
+      final int index = i;
+      radioGroup.getChildAt(i).setOnLongClickListener(new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View view) {
 
+          String title = "";
+          String description = "";
+          switch (Integer.parseInt((String) radioGroup.getChildAt(index).getTag())) {
+          case Answer.YES_OR_NO:
+            title = "Yes/No scale";
+            description = "Yes or no answer.";
+            break;
+          case Answer.CUSTOM_TEXT:
+            title = "Text";
+            description = "The question is answered with text.";
+            break;
+          case Answer.NUMERIC_1_10_SCALE:
+            title = "Numeric 1-10 scale";
+            description =
+                "A numeric scale from 1-10 where 1 means the lowest and 10 is the highest.";
+            break;
+          case Answer.CUSTOM_SCALE:
+            title = "Custom scale";
+            description = "Custom scale.";
+            break;
+          }
+
+          ViewUtil.showAlert(CreateFeedbackActivity.this, title, description);
+          return true;
+        }
+      });
+    }
+
+    radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        RadioButton radioButton = (RadioButton) radioGroup.findViewById(i);
+        type = Integer.parseInt((String) radioButton.getTag());
+        LogUtil.e("AAA " + type);
+
+        isNALayout.setVisibility(type == Answer.CUSTOM_TEXT ? View.GONE : View.VISIBLE);
+        customScaleLayout.setVisibility(type == Answer.CUSTOM_SCALE ? View.VISIBLE : View.GONE);
       }
     });
 
@@ -116,16 +156,34 @@ public class CreateFeedbackActivity extends BaseActivity {
     final String question = questionText.getText().toString();
 
     if (TextUtils.isEmpty(question)) {
-      Toast.makeText(CreateFeedbackActivity.this, "Question is required", Toast.LENGTH_SHORT)
-          .show();
+      Toast.makeText(CreateFeedbackActivity.this, getString(R.string.question_required_label),
+          Toast.LENGTH_SHORT).show();
+    } else if (type == -1) {
+      Toast.makeText(CreateFeedbackActivity.this, getString(R.string.answer_required_label),
+          Toast.LENGTH_SHORT).show();
     } else {
       Intent intent = new Intent(this, InviteActivity.class);
 
-      intent.putExtra("question", question);
-      intent.putExtra("question_type", String.valueOf(typeSpinner.getSelectedItemPosition()));
-      intent.putExtra("is_anonymous", isAnonymousCheckbox.isChecked());
-      intent.putExtra("is_na", isNA.isChecked());
-      LogUtil.e("AAA " + isNA.isChecked());
+      InstantFeedbackBody body = new InstantFeedbackBody();
+      body.lang = Shared.user.lang;
+      body.isAnonymous = isAnonymousCheckbox.isChecked();
+      QuestionBody questionBody = new QuestionBody();
+      questionBody.text = question;
+      questionBody.isNA = isNA.isChecked();
+      AnswerBody answerBody = new AnswerBody();
+      answerBody.type = type;
+      if (type == 8 && options.isEmpty()) {
+        Toast.makeText(CreateFeedbackActivity.this, getString(R.string.custom_scale_required_label),
+            Toast.LENGTH_SHORT).show();
+        return;
+      }
+
+      answerBody.options = options;
+      body.questionBodies.add(questionBody);
+      questionBody.answerBody = answerBody;
+
+      intent.putExtra("body", body.toString());
+
       startActivityForResult(intent, REQUEST_CODE);
     }
   }

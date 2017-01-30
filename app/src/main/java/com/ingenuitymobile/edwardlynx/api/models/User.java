@@ -33,6 +33,18 @@ public class User extends Response {
   @SerializedName("registeredOn")
   public String registeredOn;
 
+  @SerializedName("department")
+  public String department;
+  @SerializedName("role")
+  public String role;
+  @SerializedName("gender")
+  public String gender;
+
+  @SerializedName("country")
+  public String country;
+  @SerializedName("city")
+  public String city;
+
   @Override
   public String toString() {
     return new Gson().toJson(this);

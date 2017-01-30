@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="colorPrimary">#663593</color>
-  <color name="colorPrimaryDark">#311a4c</color>
-  <color name="colorAccent">#67E34f</color>
+  <color name="colorPrimaryDark">#331548</color>
+  <color name="colorAccent">#f79646</color>
 
   <color name="black">#000000</color>
   <color name="white">#ffffff</color>
@@ -10,8 +10,16 @@
   <color name="nav_item_color">#54307d</color>
   <color name="nav_bg_color">#2a173f</color>
 
-  <color name="common_text_color">#3c3c3c</color>
+  <color name="common_text_color">#2b133d</color>
   <color name="steps_text_color">#b0b0b0</color>
   <color name="inactive_color">#b0b0b0</color>
   <color name="bg_color">#f3f3f3</color>
+  <color name="survey_selected">#e09444</color>
+
+  <color name="dashboard_container">#462063</color>
+  <color name="text_input_field">#72508a</color>
+  <color name="orange_button">#f79646</color>
+  <color name="dashboard_green">#38b386</color>
+  <color name="dashboard_blue">#3bb0c1</color>
+  <color name="dashboard_pink">#c845dc</color>
 </resources>

@@ -18,7 +18,9 @@ import com.crashlytics.android.Crashlytics;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.SessionStore;
 import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.fragments.ChangePasswordFragment;
 import com.ingenuitymobile.edwardlynx.fragments.DashboardFragment;
+import com.ingenuitymobile.edwardlynx.fragments.ProfileFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveysFragment;
 
 import io.fabric.sdk.android.Fabric;
@@ -26,9 +28,11 @@ import io.fabric.sdk.android.Fabric;
 public class MainActivity extends BaseActivity implements
     NavigationView.OnNavigationItemSelectedListener {
 
-  private Toolbar           toolbar;
-  private SurveysFragment   surveysFragment;
-  private DashboardFragment dashboardFragment;
+  private Toolbar                toolbar;
+  private SurveysFragment        surveysFragment;
+  private DashboardFragment      dashboardFragment;
+  private ProfileFragment        profileFragment;
+  private ChangePasswordFragment changePasswordFragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +70,10 @@ public class MainActivity extends BaseActivity implements
       }
       changeFragment(dashboardFragment);
     } else if (id == R.id.profile) {
-      startActivity(new Intent(context, ProfileActivity.class));
+      if (profileFragment == null) {
+        profileFragment = ProfileFragment.newInstance();
+      }
+      changeFragment(profileFragment);
     } else if (id == R.id.survey) {
       if (surveysFragment == null) {
         surveysFragment = SurveysFragment.newInstance();
@@ -75,7 +82,10 @@ public class MainActivity extends BaseActivity implements
     } else if (id == R.id.development_plans) {
 
     } else if (id == R.id.settings) {
-      startActivity(new Intent(context, ChangePasswordActivity.class));
+      if (changePasswordFragment == null) {
+        changePasswordFragment = ChangePasswordFragment.newInstance();
+      }
+      changeFragment(changePasswordFragment);
     } else if (id == R.id.logout) {
       logout();
     }

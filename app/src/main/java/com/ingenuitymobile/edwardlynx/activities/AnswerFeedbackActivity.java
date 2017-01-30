@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
-import com.ingenuitymobile.edwardlynx.adapters.QuestionsAdapter;
+import com.ingenuitymobile.edwardlynx.adapters.FeedbackQuestionsAdapter;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
@@ -29,11 +29,11 @@ import rx.Subscriber;
 
 public class AnswerFeedbackActivity extends BaseActivity {
 
-  private long                  id;
-  private String                key;
-  private QuestionsAdapter      adapter;
-  private ArrayList<Question>   data;
-  private ArrayList<AnswerBody> bodies;
+  private long                     id;
+  private String                   key;
+  private FeedbackQuestionsAdapter adapter;
+  private ArrayList<Question>      data;
+  private ArrayList<AnswerBody>    bodies;
 
 
   public AnswerFeedbackActivity() {
@@ -76,13 +76,13 @@ public class AnswerFeedbackActivity extends BaseActivity {
     questionsList.setHasFixedSize(true);
     questionsList.setLayoutManager(new LinearLayoutManager(this));
 
-    adapter = new QuestionsAdapter(data, listener);
+    adapter = new FeedbackQuestionsAdapter(data, listener);
     questionsList.setAdapter(adapter);
   }
 
   private void getData() {
     LogUtil.e("AAA getData questions");
-    subscription = Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
+    subscription.add(Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA onCompleted ");
@@ -100,7 +100,7 @@ public class AnswerFeedbackActivity extends BaseActivity {
         data.clear();
         data.addAll(feedback.questions);
       }
-    });
+    }));
   }
 
   public void submit(View v) {
@@ -110,33 +110,32 @@ public class AnswerFeedbackActivity extends BaseActivity {
 
     LogUtil.e("AAA " + param.toString());
     LogUtil.e("AAA id + " + id);
-    subscription = Shared.apiClient.postInstantFeedbackAnswers(id, param, new Subscriber<Response>() {
-      @Override
-      public void onCompleted() {
-        LogUtil.e("AAA onCompleted");
-        finish();
-      }
+    subscription.add(
+        Shared.apiClient.postInstantFeedbackAnswers(id, param, new Subscriber<Response>() {
+          @Override
+          public void onCompleted() {
+            LogUtil.e("AAA onCompleted");
+            finish();
+          }
 
-      @Override
-      public void onError(Throwable e) {
-        LogUtil.e("AAA onError");
-      }
+          @Override
+          public void onError(Throwable e) {
+            LogUtil.e("AAA onError");
+          }
 
-      @Override
-      public void onNext(Response response) {
-        LogUtil.e("AAA onNext");
-        Toast.makeText(AnswerFeedbackActivity.this, "Instant Feedback submitted",
-            Toast.LENGTH_SHORT).show();
-      }
-    });
-
+          @Override
+          public void onNext(Response response) {
+            LogUtil.e("AAA onNext");
+            Toast.makeText(AnswerFeedbackActivity.this, "Instant Feedback submitted",
+                Toast.LENGTH_SHORT).show();
+          }
+        }));
   }
 
-  private QuestionsAdapter.OnAnswerItemListener listener = new QuestionsAdapter
+  private FeedbackQuestionsAdapter.OnAnswerItemListener listener = new FeedbackQuestionsAdapter
       .OnAnswerItemListener() {
     @Override
     public void onAnswer(long id, String value) {
-      LogUtil.e("AAA " + value);
       for (int x = 0; x < bodies.size(); x++) {
         AnswerBody body = bodies.get(x);
         if (id == body.question) {

@@ -8,7 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
-import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
@@ -17,8 +17,12 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class BaseActivity extends AppCompatActivity {
 
-  protected Subscription subscription;
-  protected Context      context;
+  protected CompositeSubscription subscription;
+  protected Context               context;
+
+  public BaseActivity() {
+    subscription = new CompositeSubscription();
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,8 @@ public class BaseActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    if (subscription != null) {
-      subscription.unsubscribe();
+    if (subscription.hasSubscriptions()) {
+      subscription.clear();
     }
   }
 

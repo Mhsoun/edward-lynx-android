@@ -22,4 +22,9 @@ public class Question {
   public Answer answer;
   @SerializedName("order")
   public int    order;
+  @SerializedName("value")
+  public Object value;
+
+  public boolean isSectionHeader;
+  public String  description;
 }

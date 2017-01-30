@@ -1,52 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#3b205a"
-              android:orientation="vertical"
-              app:layout_behavior="@string/appbar_scrolling_view_behavior"
-              tools:context="com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity"
-              tools:showIn="@layout/activity_survey_questions">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:context="com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity"
+                tools:showIn="@layout/activity_survey_questions">
 
-  <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="16dp"
-      android:layout_marginRight="16dp"
-      android:layout_marginTop="8dp"
-      android:orientation="vertical">
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="centerCrop"
+      android:src="@drawable/bg"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Category Title:"
-        android:textColor="@color/white"
-        android:textSize="12sp"/>
-
-    <TextView
-        android:id="@+id/text_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="18sp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="8dp"
-        android:text="Questions:"
-        android:textColor="@color/white"
-        android:textSize="12sp"/>
-  </LinearLayout>
+  <TextView
+      android:id="@+id/text_submit"
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:layout_alignParentBottom="true"
+      android:layout_margin="12dp"
+      android:background="@drawable/bg_rounded_login_button"
+      android:gravity="center"
+      android:onClick="submit"
+      android:text="Submit"
+      android:textColor="@color/white"
+      android:textSize="20sp"
+      android:visibility="gone"/>
 
   <android.support.v7.widget.RecyclerView
       android:id="@+id/list_questions"
       android:layout_width="match_parent"
+      android:layout_above="@id/text_submit"
       android:layout_height="match_parent">
   </android.support.v7.widget.RecyclerView>
 
-
-</LinearLayout>
+</RelativeLayout>

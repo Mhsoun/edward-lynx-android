@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="4dp"
+              android:layout_marginLeft="36dp"
+              android:layout_marginRight="16dp"
+              android:layout_marginTop="4dp"
+              android:orientation="vertical">
+
+  <TextView
+      android:id="@+id/text_question"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Important survey sample"
+      android:textColor="@color/white"
+      android:textSize="13sp"/>
+
+  <RadioGroup
+      android:id="@+id/group_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+  </RadioGroup>
+
+  <EditText
+      android:id="@+id/edit_text"
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:background="@color/text_input_field"
+      android:gravity="top"
+      android:inputType="textMultiLine"
+      android:textColor="@color/white"
+      android:textSize="14sp"/>
+</LinearLayout>

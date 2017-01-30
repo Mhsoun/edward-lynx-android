@@ -90,7 +90,7 @@ public class ChangePasswordActivity extends BaseActivity {
     body.password = newPassword;
 
 
-    subscription = Shared.apiClient.updateUser(body, new Subscriber<User>() {
+    subscription.add(Shared.apiClient.updateUser(body, new Subscriber<User>() {
       @Override
       public void onCompleted() {}
 
@@ -121,7 +121,7 @@ public class ChangePasswordActivity extends BaseActivity {
         Toast.makeText(ChangePasswordActivity.this, "Password updated", Toast.LENGTH_SHORT).show();
         finish();
       }
-    });
+    }));
   }
 
   private TextView.OnEditorActionListener editorActionListener = new TextView

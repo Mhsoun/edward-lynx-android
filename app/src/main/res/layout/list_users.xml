@@ -29,12 +29,12 @@
         android:textSize="13sp"/>
   </LinearLayout>
 
-  <ImageView
-      android:id="@+id/image_selected"
-      android:layout_width="20dp"
-      android:layout_height="20dp"
+  <android.support.v7.widget.AppCompatCheckBox
+      android:id="@+id/checkbox_selected"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
       android:layout_centerVertical="true"
-      android:layout_marginRight="16dp"
-      android:background="@color/white"/>
+      android:layout_marginRight="12dp"
+      android:buttonTint="@color/white"/>
 </RelativeLayout>

@@ -163,6 +163,30 @@ public class ApiClient {
         }));
   }
 
+  public Subscription postAnswerSurvey(final long id, final AnswerParam param,
+      final Subscriber<Response> subscriber) {
+    return service.postAnswerSurvey(id, param)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            postAnswerSurvey(id, param, subscriber);
+          }
+        }));
+  }
+
+  public Subscription updateAnswerSurvey(final long id, final AnswerParam param,
+      final Subscriber<Response> subscriber) {
+    return service.updateAnswerSurvey(id, param)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            updateAnswerSurvey(id, param, subscriber);
+          }
+        }));
+  }
+
   public Subscription postInstantFeedback(final InstantFeedbackBody body,
       final Subscriber<Response> subscriber) {
     return service.postInstantFeedback(body)

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#3b205a"
-              android:orientation="vertical"
-              app:layout_behavior="@string/appbar_scrolling_view_behavior"
-              tools:context="com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity"
-              tools:showIn="@layout/activity_create_feedback">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:context="com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity"
+                tools:showIn="@layout/activity_create_feedback">
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="centerCrop"
+      android:src="@drawable/bg"/>
 
   <ScrollView
       android:layout_width="match_parent"
@@ -26,43 +30,67 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Answer Type"
-        android:textColor="@color/white"/>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="4dp"
-        android:background="#694f88">
-
-      <android.support.v7.widget.AppCompatSpinner
-          android:id="@+id/spinner_type"
-          style="@style/mySpinnerItemStyle"
-          android:layout_width="match_parent"
-          android:layout_height="40dp"
-          android:entries="@array/answer_type"
-          android:prompt="@string/username">
-      </android.support.v7.widget.AppCompatSpinner>
-
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Question"
+        android:text="@string/question"
         android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/edit_question"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_marginTop="4dp"
-        android:background="#694f88"
+        android:background="@color/text_input_field"
         android:gravity="top"
+        android:hint="@string/content"
         android:inputType="textMultiLine"
-        android:textColor="#3b205a"/>
+        android:padding="4dp"
+        android:textColor="@color/common_text_color"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/answer_type_label"
+        android:textColor="@color/white"/>
+
+    <RadioGroup
+        android:id="@+id/radiogroup_answer_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <android.support.v7.widget.AppCompatRadioButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:buttonTint="@color/white"
+          android:tag="3"
+          android:text="@string/yes_or_no"
+          android:textColor="@color/white"/>
+
+      <android.support.v7.widget.AppCompatRadioButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:buttonTint="@color/white"
+          android:tag="5"
+          android:text="@string/free_text"
+          android:textColor="@color/white"/>
+
+      <android.support.v7.widget.AppCompatRadioButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:buttonTint="@color/white"
+          android:tag="1"
+          android:text="@string/numeric_1_to_10"
+          android:textColor="@color/white"/>
+
+      <android.support.v7.widget.AppCompatRadioButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:buttonTint="@color/white"
+          android:tag="8"
+          android:text="@string/custom_scale"
+          android:textColor="@color/white"/>
+    </RadioGroup>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -73,7 +101,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_centerVertical="true"
-          android:text="Is Anonymmous"
+          android:text="@string/is_anonymous"
           android:textColor="@color/white"/>
 
       <android.support.v7.widget.AppCompatCheckBox
@@ -87,14 +115,13 @@
     <RelativeLayout
         android:id="@+id/layout_isNA"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
+        android:layout_height="wrap_content">
 
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_centerVertical="true"
-          android:text="Is N/A"
+          android:text="@string/add_na_option"
           android:textColor="@color/white"/>
 
       <android.support.v7.widget.AppCompatCheckBox
@@ -122,7 +149,9 @@
           android:id="@+id/edit_add_option"
           android:layout_width="match_parent"
           android:layout_height="40dp"
-          android:background="@color/white"
+          android:background="@color/text_input_field"
+          android:hint="@string/custom_scale_hit"
+          android:textColor="@color/common_text_color"
           android:imeOptions="actionDone"
           android:maxLines="1"
           android:singleLine="true"/>
@@ -132,12 +161,12 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
-        android:background="#e2994b"
+        android:background="@drawable/bg_rounded_login_button"
         android:gravity="center"
         android:onClick="invite"
-        android:text="Select Participants"
+        android:text="@string/select_participants"
         android:textColor="@color/white"
-        android:textSize="18sp"></TextView>
+        android:textSize="18sp"/>
   </LinearLayout>
   </ScrollView>
-</LinearLayout>
+</RelativeLayout>

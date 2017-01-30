@@ -13,7 +13,7 @@ public class Id {
 
   public Id() {}
 
-  public Id(long id) {
-    this.id = id;
+  public Id(String id) {
+    this.id = Long.parseLong(id);
   }
 }

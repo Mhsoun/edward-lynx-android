@@ -6,7 +6,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
-import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by mEmEnG-sKi on 04/01/2017.
@@ -14,16 +14,19 @@ import rx.Subscription;
 
 public class BaseFragment extends Fragment {
 
-  protected Subscription subscription;
+  protected CompositeSubscription subscription;
 
-  @Override
-  public void onDestroy() {
-    super.onDestroy();
-    if (subscription != null) {
-      subscription.unsubscribe();
-    }
+  public BaseFragment() {
+    subscription = new CompositeSubscription();
   }
 
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    if (subscription.hasSubscriptions()) {
+      subscription.clear();
+    }
+  }
 
   protected void hideKeyboard() {
     try {

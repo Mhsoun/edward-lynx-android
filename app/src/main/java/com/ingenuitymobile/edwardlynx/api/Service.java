@@ -55,8 +55,16 @@ public interface Service {
   @GET("/api/v1/surveys")
   Observable<Surveys> getSurveys(@Query("page") int page);
 
-  @GET("/surveys/{id}")
+  @GET("/api/v1/surveys/{id}")
   Observable<Survey> getSurvey(@Path("id") long id);
+
+  @Headers("Content-Type: application/json")
+  @POST("/api/v1/surveys/{id}/answers")
+  Observable<Response> postAnswerSurvey(@Path("id") long id, @Body AnswerParam param);
+
+  @Headers("Content-Type: application/json")
+  @PATCH("/api/v1/surveys/{id}/answers")
+  Observable<Response> updateAnswerSurvey(@Path("id") long id, @Body AnswerParam param);
 
   @GET("/api/v1/surveys/{id}/questions")
   Observable<Questions> getSurveyQuestions(@Path("id") long id);

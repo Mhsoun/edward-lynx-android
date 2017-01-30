@@ -12,6 +12,8 @@ import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +21,9 @@ import java.util.List;
  */
 
 public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder> {
+
+  private SimpleDateFormat format        = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
+  private SimpleDateFormat displayFormat = new SimpleDateFormat("MMMM dd, yyyy hh:mm a");
 
   private List<Survey> data;
 
@@ -30,11 +35,15 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
   class ViewHolder extends RecyclerView.ViewHolder {
     TextView dateText;
     TextView nameText;
+    TextView descriptionText;
+    TextView statusText;
 
     ViewHolder(View itemView) {
       super(itemView);
       dateText = (TextView) itemView.findViewById(R.id.text_date);
       nameText = (TextView) itemView.findViewById(R.id.text_name);
+      descriptionText = (TextView) itemView.findViewById(R.id.text_description);
+      statusText = (TextView) itemView.findViewById(R.id.text_status);
     }
   }
 
@@ -49,6 +58,15 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
     final Context context = holder.itemView.getContext();
     final Survey survey = data.get(position);
     holder.nameText.setText(survey.name);
+    holder.descriptionText.setText(survey.description);
+
+    try {
+      Date date = format.parse(survey.endDate);
+      holder.dateText.setText("End date: " + displayFormat.format(date));
+    } catch (Exception e) {
+      holder.dateText.setText("");
+    }
+
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -57,6 +75,21 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
         context.startActivity(intent);
       }
     });
+
+    switch (survey.status) {
+    case Survey.OPEN:
+      holder.statusText.setText("OPEN");
+      break;
+    case Survey.UNFINISHED:
+      holder.statusText.setText("UNFINISHED");
+      break;
+    case Survey.COMPLETED:
+      holder.statusText.setText("COMPLETED");
+      break;
+    case Survey.NOT_INVITED:
+      holder.statusText.setText("NOT INVITED");
+      break;
+    }
   }
 
   @Override

@@ -1,6 +1,7 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -83,7 +84,7 @@ public class LoginActivity extends BaseActivity {
     loginText.setText(getString(R.string.loading));
 
 
-    subscription = Shared.apiClient.postLogin(usernameGroup.getEditTextSting(),
+    subscription.add(Shared.apiClient.postLogin(usernameGroup.getEditTextSting(),
         passwordGroup.getEditTextSting())
         .subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
@@ -117,11 +118,17 @@ public class LoginActivity extends BaseActivity {
             startActivity(intent);
             finish();
           }
-        });
+        }));
   }
 
   public void forgotPassword(View v) {
     startActivity(new Intent(this, ForgotPasswordActivity.class));
+  }
+
+  public void contactUs(View v) {
+    Intent i = new Intent(Intent.ACTION_VIEW);
+    i.setData(Uri.parse("http://www.edwardlynx.com/contact/"));
+    startActivity(i);
   }
 
   private TextView.OnEditorActionListener editorActionListener = new TextView

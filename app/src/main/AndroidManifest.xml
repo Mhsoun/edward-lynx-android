@@ -30,12 +30,6 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme.NoActionBar"/>
     <activity
-        android:name=".activities.ProfileActivity"
-        android:label="@string/title_activity_profile"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
         android:name=".activities.ChangePasswordActivity"
         android:label="@string/title_activity_change_password"
         android:screenOrientation="portrait"
@@ -73,7 +67,7 @@
     </activity>
     <activity
         android:name=".activities.AnswerFeedbackActivity"
-        android:label="Instant Feedback Question"
+        android:label="Instant Feedback"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>

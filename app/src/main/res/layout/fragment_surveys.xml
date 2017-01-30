@@ -17,36 +17,36 @@
       android:weightSum="3">
 
     <TextView
+        android:id="@+id/text_all"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:text="ALL"
-        android:textColor="#e09444"/>
+        android:textColor="@color/survey_selector"/>
 
     <TextView
+        android:id="@+id/text_unfinished"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:text="UNFINISHED"
-        android:textColor="@color/white"/>
+        android:textColor="@color/survey_selector"/>
 
     <TextView
+        android:id="@+id/text_completed"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:text="COMPLETED"
-        android:textColor="@color/white"/>
+        android:textColor="@color/survey_selector"/>
   </LinearLayout>
 
-  <android.support.v7.widget.RecyclerView
-      android:id="@+id/list_survey"
+  <android.support.v4.view.ViewPager
+      android:id="@+id/viewpager"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="#3b205a">
-
-  </android.support.v7.widget.RecyclerView>
+      android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 
 </LinearLayout>

@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_margin="4dp"
-                android:background="#694f88"
+                android:background="@color/text_input_field"
                 android:orientation="vertical">
 
 
@@ -20,6 +20,7 @@
       android:id="@+id/image_delete"
       android:layout_width="30dp"
       android:layout_height="match_parent"
+      android:src="@drawable/ic_close"
       android:layout_alignParentRight="true"
-      android:background="@color/black"/>
+      android:tint="@color/white"/>
 </RelativeLayout>

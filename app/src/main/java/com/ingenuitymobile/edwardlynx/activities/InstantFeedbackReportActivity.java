@@ -88,7 +88,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
 
   private void getData() {
     LogUtil.e("AAA getData instant feedbaks detail");
-    subscription = Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
+    subscription.add(Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
       @Override
       public void onCompleted() {
       }
@@ -108,30 +108,31 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         }
         shareCountText.setText("Total count shared to other people: " + count);
       }
-    });
+    }));
 
     LogUtil.e("AAA getData instant feedbaks answers");
-    subscription = Shared.apiClient.getInstantFeedbackAnswers(id, new Subscriber<FeedbackAnswerResponse>() {
-      @Override
-      public void onCompleted() {
-        LogUtil.e("AAA onCompleted ");
-        adapter.notifyDataSetChanged();
-      }
+    subscription.add(
+        Shared.apiClient.getInstantFeedbackAnswers(id, new Subscriber<FeedbackAnswerResponse>() {
+          @Override
+          public void onCompleted() {
+            LogUtil.e("AAA onCompleted ");
+            adapter.notifyDataSetChanged();
+          }
 
-      @Override
-      public void onError(Throwable e) {
-        LogUtil.e("AAA onError " + e);
-      }
+          @Override
+          public void onError(Throwable e) {
+            LogUtil.e("AAA onError " + e);
+          }
 
-      @Override
-      public void onNext(final FeedbackAnswerResponse response) {
-        LogUtil.e("AAA onNext ");
-        data.clear();
-        data.addAll(response.frequencies);
-        adapter.setTotalAnswers(response.totalAnswers);
-        answerCountText.setText("Total answers: " + response.totalAnswers);
-      }
-    });
+          @Override
+          public void onNext(final FeedbackAnswerResponse response) {
+            LogUtil.e("AAA onNext ");
+            data.clear();
+            data.addAll(response.frequencies);
+            adapter.setTotalAnswers(response.totalAnswers);
+            answerCountText.setText("Total answers: " + response.totalAnswers);
+          }
+        }));
   }
 
   public void share(View v) {

@@ -13,6 +13,8 @@ public class AnswerParam {
 
   @SerializedName("key")
   public String           key;
+  @SerializedName("final")
+  public boolean          isFinal;
   @SerializedName("answers")
   public List<AnswerBody> answers;
 

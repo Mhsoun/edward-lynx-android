@@ -1,16 +1,16 @@
 package com.ingenuitymobile.edwardlynx.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.User;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.List;
 
@@ -20,12 +20,12 @@ import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
 
-  private List<User> data;
-  private List<Long> ids;
+  private List<User>   data;
+  private List<String> ids;
 
   private OnSelectUserListener listener;
 
-  public UsersAdapter(List<User> data, List<Long> ids, OnSelectUserListener listener) {
+  public UsersAdapter(List<User> data, List<String> ids, OnSelectUserListener listener) {
     super();
     this.data = data;
     this.ids = ids;
@@ -34,15 +34,15 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
 
   class ViewHolder extends RecyclerView.ViewHolder {
-    TextView  emailText;
-    TextView  nameText;
-    ImageView selectedImage;
+    TextView          emailText;
+    TextView          nameText;
+    AppCompatCheckBox selectedCheckbox;
 
     ViewHolder(View itemView) {
       super(itemView);
       emailText = (TextView) itemView.findViewById(R.id.text_email);
       nameText = (TextView) itemView.findViewById(R.id.text_name);
-      selectedImage = (ImageView) itemView.findViewById(R.id.image_selected);
+      selectedCheckbox = (AppCompatCheckBox) itemView.findViewById(R.id.checkbox_selected);
     }
   }
 
@@ -61,19 +61,16 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     holder.nameText.setText(user.name);
     holder.emailText.setText(user.email);
 
-    if (ids.contains(user.id)) {
-      holder.selectedImage.setVisibility(View.VISIBLE);
-    } else {
-      holder.selectedImage.setVisibility(View.GONE);
-    }
+    holder.selectedCheckbox.setOnCheckedChangeListener(null);
+    holder.selectedCheckbox.setChecked(ids.contains(String.valueOf(user.id)));
 
-    holder.itemView.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        LogUtil.e("AAA onClick");
-        listener.onSelect(user.id, holder.selectedImage.getVisibility() != View.VISIBLE);
-      }
-    });
+    holder.selectedCheckbox.setOnCheckedChangeListener(
+        new CompoundButton.OnCheckedChangeListener() {
+          @Override
+          public void onCheckedChanged(CompoundButton compoundButton, boolean selected) {
+            listener.onSelect(String.valueOf(user.id), selected);
+          }
+        });
   }
 
   @Override
@@ -82,6 +79,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
   }
 
   public interface OnSelectUserListener {
-    void onSelect(long id, boolean isSelected);
+    void onSelect(String id, boolean isSelected);
   }
 }

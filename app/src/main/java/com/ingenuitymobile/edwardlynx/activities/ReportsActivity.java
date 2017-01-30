@@ -70,25 +70,26 @@ public class ReportsActivity extends BaseActivity {
 
   private void getData() {
     LogUtil.e("AAA getData instant feedbaks");
-    subscription = Shared.apiClient.getInstantFeedbacks("mine", new Subscriber<FeedbacksResponse>() {
-      @Override
-      public void onCompleted() {
-        LogUtil.e("AAA onCompleted ");
-        adapter.notifyDataSetChanged();
-      }
+    subscription.add(
+        Shared.apiClient.getInstantFeedbacks("mine", new Subscriber<FeedbacksResponse>() {
+          @Override
+          public void onCompleted() {
+            LogUtil.e("AAA onCompleted ");
+            adapter.notifyDataSetChanged();
+          }
 
-      @Override
-      public void onError(Throwable e) {
-        LogUtil.e("AAA onError " + e);
-      }
+          @Override
+          public void onError(Throwable e) {
+            LogUtil.e("AAA onError " + e);
+          }
 
-      @Override
-      public void onNext(final FeedbacksResponse response) {
-        LogUtil.e("AAA onNext ");
-        data.clear();
-        data.addAll(response.items);
-      }
-    });
+          @Override
+          public void onNext(final FeedbacksResponse response) {
+            LogUtil.e("AAA onNext ");
+            data.clear();
+            data.addAll(response.items);
+          }
+        }));
   }
 
   private FeedbackAdapter.OnSelectFeedbackListener listener = new FeedbackAdapter

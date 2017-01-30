@@ -63,6 +63,7 @@ public class FeedbackAnswersAdapter extends
     holder.answerCountText.setText("Total answers: " + frequency.count);
     holder.progressBar.setProgress(
         (int) (((float) (frequency.count) / (float) totalAnswers) * 100));
+    holder.progressBar.setScaleY(3f);
   }
 
   @Override

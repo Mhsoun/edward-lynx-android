@@ -25,15 +25,17 @@ import java.util.List;
  * Created by mEmEnG-sKi on 10/01/2017.
  */
 
-public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder> {
+public class FeedbackQuestionsAdapter extends RecyclerView.Adapter<FeedbackQuestionsAdapter.ViewHolder> {
 
   private List<Question>       data;
+  private boolean              isEnabled;
   private OnAnswerItemListener listener;
 
-  public QuestionsAdapter(List<Question> data, OnAnswerItemListener listener) {
+  public FeedbackQuestionsAdapter(List<Question> data, OnAnswerItemListener listener) {
     super();
     this.data = data;
     this.listener = listener;
+    isEnabled = true;
   }
 
   class ViewHolder extends RecyclerView.ViewHolder {
@@ -53,8 +55,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    return new QuestionsAdapter.ViewHolder(LayoutInflater.from(parent.getContext())
-        .inflate(R.layout.list_questions, parent, false));
+    return new FeedbackQuestionsAdapter.ViewHolder(LayoutInflater.from(parent.getContext())
+        .inflate(R.layout.list_feedback_questions, parent, false));
   }
 
   @Override
@@ -65,12 +67,25 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     holder.helpText.setText(question.answer.help);
     holder.editText.setVisibility(View.GONE);
     if (question.answer.options != null) {
+      holder.radioGroup.removeAllViews();
       for (Option option : question.answer.options) {
         createRadioButton(holder.radioGroup, context, option.description, option.value);
       }
 
       if (question.isNA == 1) {
         createRadioButton(holder.radioGroup, context, "N/A", -1);
+      }
+
+      if (question.value != null) {
+        listener.onAnswer(question.id, String.valueOf((double) question.value));
+        for (int i = 0; i < holder.radioGroup.getChildCount(); i++) {
+          holder.radioGroup.getChildAt(i).setEnabled(isEnabled);
+
+          if (holder.radioGroup.getChildAt(i).getTag().equals(
+              String.valueOf((int) (double) question.value))) {
+            ((RadioButton) holder.radioGroup.getChildAt(i)).setChecked(true);
+          }
+        }
       }
 
       holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -80,8 +95,16 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
           listener.onAnswer(question.id, (String) radioButton.getTag());
         }
       });
+
+
     } else if (question.answer.decscription.equals("Text")) {
       holder.editText.setVisibility(View.VISIBLE);
+      holder.editText.setEnabled(isEnabled);
+      if (question.value != null) {
+        holder.editText.setText((String) question.value);
+        holder.editText.setSelection(holder.editText.getText().length());
+        listener.onAnswer(question.id, (String) question.value);
+      }
       holder.editText.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -106,6 +129,11 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     return data.size();
   }
 
+  @Override
+  public int getItemViewType(int position) {
+    return super.getItemViewType(position);
+  }
+
   private void createRadioButton(final RadioGroup radioGroup, final Context context,
       final String description, int value) {
     final RadioButton radioButton = new RadioButton(context);
@@ -118,6 +146,11 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     radioButton.setButtonTintList(ColorStateList.valueOf(textColor));
     radioButton.setText(description);
     radioGroup.addView(radioButton);
+  }
+
+  public void isEnabled(boolean isEnabled) {
+    this.isEnabled = isEnabled;
+    notifyDataSetChanged();
   }
 
   public interface OnAnswerItemListener {

@@ -2,18 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="#3b205a"
+              android:layout_marginBottom="16dp"
+              android:layout_marginLeft="16dp"
+              android:layout_marginRight="16dp"
+              android:layout_marginTop="16dp"
               android:orientation="vertical">
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_centerVertical="true"
-      android:layout_marginBottom="4dp"
-      android:layout_marginLeft="16dp"
-      android:layout_marginRight="16dp"
-      android:layout_marginTop="4dp"
-      android:orientation="vertical">
 
     <TextView
         android:id="@+id/text_question"
@@ -36,17 +29,15 @@
         android:id="@+id/group_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+    </RadioGroup>
 
       <EditText
           android:id="@+id/edit_text"
           android:layout_width="match_parent"
           android:layout_height="60dp"
-          android:background="#3f245e"
+          android:background="@color/text_input_field"
           android:gravity="top"
           android:inputType="textMultiLine"
           android:textColor="@color/white"
           android:textSize="14sp"/>
-    </RadioGroup>
-  </LinearLayout>
-
 </LinearLayout>
