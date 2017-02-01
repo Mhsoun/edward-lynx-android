@@ -28,14 +28,11 @@
       <EditText
           android:id="@+id/edit_name"
           android:layout_width="match_parent"
-          android:layout_height="48dp"
+          style="@style/edit_text"
           android:layout_marginTop="4dp"
-          android:background="@drawable/bg_rounded_input_field"
           android:enabled="false"
           android:imeOptions="actionNext"
-          android:inputType="textPersonName"
-          android:textColor="@color/common_text_color"
-          android:textSize="20sp"/>
+          android:inputType="textPersonName"/>
 
       <TextView
           android:layout_width="wrap_content"
@@ -47,14 +44,11 @@
       <EditText
           android:id="@+id/edit_info"
           android:layout_width="match_parent"
-          android:layout_height="48dp"
+          style="@style/edit_text"
           android:layout_marginTop="4dp"
-          android:background="@drawable/bg_rounded_input_field"
           android:enabled="false"
           android:imeOptions="actionDone"
-          android:inputType="textPersonName"
-          android:textColor="@color/common_text_color"
-          android:textSize="20sp"/>
+          android:inputType="textPersonName"/>
 
       <TextView
           android:layout_width="wrap_content"
@@ -66,14 +60,11 @@
       <EditText
           android:id="@+id/edit_department"
           android:layout_width="match_parent"
-          android:layout_height="48dp"
           android:layout_marginTop="4dp"
-          android:background="@drawable/bg_rounded_input_field"
           android:enabled="false"
+          style="@style/edit_text"
           android:imeOptions="actionNext"
-          android:inputType="textPersonName"
-          android:textColor="@color/common_text_color"
-          android:textSize="20sp"/>
+          android:inputType="textPersonName"/>
 
       <TextView
           android:layout_width="wrap_content"
@@ -85,14 +76,11 @@
       <EditText
           android:id="@+id/edit_role"
           android:layout_width="match_parent"
-          android:layout_height="48dp"
           android:layout_marginTop="4dp"
-          android:background="@drawable/bg_rounded_input_field"
+          style="@style/edit_text"
           android:enabled="false"
           android:imeOptions="actionDone"
-          android:inputType="textPersonName"
-          android:textColor="@color/common_text_color"
-          android:textSize="20sp"/>
+          android:inputType="textPersonName"/>
 
       <TextView
           android:layout_width="wrap_content"
@@ -142,15 +130,12 @@
       <EditText
           android:id="@+id/edit_gender"
           android:layout_width="match_parent"
-          android:layout_height="48dp"
           android:layout_marginTop="4dp"
-          android:background="@drawable/bg_rounded_input_field"
+          style="@style/edit_text"
           android:enabled="false"
           android:hint="Input gender"
           android:imeOptions="actionNext"
           android:inputType="textPersonName"
-          android:textColor="@color/common_text_color"
-          android:textSize="20sp"
           android:visibility="gone"/>
 
       <LinearLayout
@@ -175,15 +160,12 @@
           <EditText
               android:id="@+id/edit_country"
               android:layout_width="match_parent"
-              android:layout_height="48dp"
               android:layout_marginRight="4dp"
+              style="@style/edit_text"
               android:layout_marginTop="4dp"
-              android:background="@drawable/bg_rounded_input_field"
               android:enabled="false"
               android:imeOptions="actionNext"
-              android:inputType="textPersonName"
-              android:textColor="@color/common_text_color"
-              android:textSize="20sp"/>
+              android:inputType="textPersonName"/>
         </LinearLayout>
 
         <LinearLayout
@@ -202,15 +184,12 @@
           <EditText
               android:id="@+id/edit_city"
               android:layout_width="match_parent"
-              android:layout_height="48dp"
               android:layout_marginRight="4dp"
               android:layout_marginTop="4dp"
-              android:background="@drawable/bg_rounded_input_field"
               android:enabled="false"
+              style="@style/edit_text"
               android:imeOptions="actionDone"
-              android:inputType="textPersonName"
-              android:textColor="@color/common_text_color"
-              android:textSize="20sp"/>
+              android:inputType="textPersonName"/>
         </LinearLayout>
       </LinearLayout>
     </LinearLayout>
@@ -218,27 +197,20 @@
     <TextView
         android:id="@+id/text_edit"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginBottom="21dp"
-        android:layout_marginTop="21dp"
-        android:background="@drawable/bg_rounded_login_button"
-        android:gravity="center"
+        style="@style/orange_button"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
         android:onClick="save"
-        android:text="Save"
-        android:textColor="@color/white"
-        android:textSize="20sp"/>
+        android:text="Save"/>
 
     <TextView
         android:id="@+id/text_cancel"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginBottom="21dp"
-        android:background="@drawable/bg_rounded_login_button"
+        style="@style/orange_button"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:onClick="cancel"
         android:text="Cancel"
-        android:textColor="@color/white"
-        android:textSize="20sp"
         android:visibility="gone"/>
   </LinearLayout>
 

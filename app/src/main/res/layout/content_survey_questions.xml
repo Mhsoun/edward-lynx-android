@@ -18,15 +18,11 @@
   <TextView
       android:id="@+id/text_submit"
       android:layout_width="match_parent"
-      android:layout_height="48dp"
       android:layout_alignParentBottom="true"
       android:layout_margin="12dp"
-      android:background="@drawable/bg_rounded_login_button"
-      android:gravity="center"
+      style="@style/orange_button"
       android:onClick="submit"
       android:text="Submit"
-      android:textColor="@color/white"
-      android:textSize="20sp"
       android:visibility="gone"/>
 
   <android.support.v7.widget.RecyclerView

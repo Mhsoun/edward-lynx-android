@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ingenuitymobile.edwardlynx.activities.CreateDevelopmentPlanActivity"
+    tools:showIn="@layout/activity_create_development_plan">
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="centerCrop"
+      android:src="@drawable/bg"/>
+
+  <TextView
+      android:id="@+id/text_done"
+      style="@style/orange_button"
+      android:layout_width="match_parent"
+      android:layout_alignParentBottom="true"
+      android:layout_marginBottom="16dp"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:onClick="done"
+      android:text="@string/done"/>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@id/text_done"
+      android:layout_margin="16dp"
+      android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_development_plan_name"
+        android:textColor="@color/white"/>
+
+    <EditText
+        android:id="@+id/edit_text"
+        style="@style/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:imeOptions="actionDone"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/list"
+        android:textColor="@color/white"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="100dp">
+
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/list_development_plan"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+
+      <TextView
+          android:id="@+id/text_empty_state"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:text="No goals Added"
+          android:textColor="@color/white"
+          android:visibility="gone"/>
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="addGoal"
+        android:padding="4dp"
+        android:src="@drawable/ic_add_goal"
+        android:tint="@color/white"/>
+  </LinearLayout>
+</RelativeLayout>

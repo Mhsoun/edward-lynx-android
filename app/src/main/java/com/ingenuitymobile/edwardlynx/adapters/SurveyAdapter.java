@@ -79,15 +79,23 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
     switch (survey.status) {
     case Survey.OPEN:
       holder.statusText.setText("OPEN");
+      holder.statusText.setBackgroundColor(
+          context.getResources().getColor(R.color.unfinished_status));
       break;
     case Survey.UNFINISHED:
       holder.statusText.setText("UNFINISHED");
+      holder.statusText.setBackgroundColor(
+          context.getResources().getColor(R.color.unfinished_status));
       break;
     case Survey.COMPLETED:
       holder.statusText.setText("COMPLETED");
+      holder.statusText.setBackgroundColor(
+          context.getResources().getColor(R.color.dashboard_green));
       break;
     case Survey.NOT_INVITED:
       holder.statusText.setText("NOT INVITED");
+      holder.statusText.setBackgroundColor(
+          context.getResources().getColor(R.color.unfinished_status));
       break;
     }
   }

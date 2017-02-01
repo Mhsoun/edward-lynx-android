@@ -27,14 +27,11 @@
     <TextView
         android:id="@+id/text_submit"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
+        style="@style/orange_button"
         android:layout_margin="12dp"
-        android:background="@drawable/bg_rounded_login_button"
         android:gravity="center"
         android:onClick="submit"
-        android:text="Submit"
-        android:textColor="@color/white"
-        android:textSize="20sp"/>
+        android:text="Submit"/>
   </LinearLayout>
 </RelativeLayout>

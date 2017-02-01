@@ -37,49 +37,67 @@
     </activity>
     <activity
         android:name=".activities.SurveyQuestionsActivity"
-        android:label="Survey Questions"
+        android:label="SURVEY QUESTIONS"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.CreateFeedbackActivity"
-        android:label="Create Instant Feedback"
+        android:label="CREATE INSTANT FEEDBACK"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.InviteActivity"
-        android:label="Invite"
+        android:label="INVITE"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.FeedbackRequestsActivity"
-        android:label="Instant Feedback Requests"
+        android:label="INSTANT FEEDBACK REQUESTS"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.ReportsActivity"
-        android:label="Reports"
+        android:label="REPORTS"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.AnswerFeedbackActivity"
-        android:label="Instant Feedback"
+        android:label="INSTANT FEEDBACK"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.InstantFeedbackReportActivity"
-        android:label="Instant Feedback Answers"
+        android:label="INSTANT FEEDBACK ANSWERS"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.ShareReportActivity"
-        android:label="Share Report"
+        android:label="SHARE REPORT"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+    </activity>
+    <activity
+        android:name=".activities.CreateDevelopmentPlanActivity"
+        android:label="CREATE DEVELOPMENT PLAN"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+    </activity>
+    <activity
+        android:name=".activities.CreateDetailedDevelopmentPlanActivity"
+        android:label="DETAILS"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+    </activity>
+    <activity
+        android:name=".activities.DevelopmentPlanDetailedActivity"
+        android:label="DEVELOPMENT PLAN"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>

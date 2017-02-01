@@ -9,9 +9,9 @@ public class Model {
 
   @SerializedName("id")
   public long    id;
-  @SerializedName("created_at")
+  @SerializedName("createdAt")
   public String  createdAt;
-  @SerializedName("updated_at")
+  @SerializedName("updatedAt")
   public String  updatedAt;
   @SerializedName("registeredOn")
   public boolean registeredOn;

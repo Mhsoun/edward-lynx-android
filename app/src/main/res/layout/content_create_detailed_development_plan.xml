@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ingenuitymobile.edwardlynx.activities.CreateDetailedDevelopmentPlanActivity"
+    tools:showIn="@layout/activity_create_detailed_development_plan">
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="centerCrop"
+      android:src="@drawable/bg"/>
+
+  <TextView
+      android:id="@+id/text_done"
+      style="@style/orange_button"
+      android:layout_width="match_parent"
+      android:layout_alignParentBottom="true"
+      android:layout_marginBottom="16dp"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:onClick="save"
+      android:text="@string/save"/>
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@id/text_done"
+      android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/name"
+          android:textColor="@color/white"/>
+
+      <EditText
+          android:id="@+id/edit_development_name"
+          style="@style/edit_text"
+          android:layout_width="match_parent"
+          android:layout_height="40dp"
+          android:layout_marginTop="4dp"
+          android:imeOptions="actionNext"
+          android:inputType="textPersonName"
+          android:textColor="@color/white"/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:text="@string/description"
+          android:textColor="@color/white"/>
+
+      <EditText
+          android:id="@+id/edit_development_description"
+          style="@style/edit_text"
+          android:layout_width="match_parent"
+          android:layout_height="40dp"
+          android:layout_marginTop="4dp"
+          android:imeOptions="actionDone"
+          android:inputType="textPersonName"
+          android:textColor="@color/white"/>
+
+      <RelativeLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/remind_me_on_day"
+            android:textColor="@color/white"/>
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/checkbox_remind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:buttonTint="@color/white"/>
+      </RelativeLayout>
+
+      <com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker
+          android:id="@+id/date_picker"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/bg_rounded_input_field"
+          app:picker_selectedTextColor="@color/orange_button"
+          app:picker_selectorColor="@color/white"
+          app:picker_textColor="@color/white"
+          app:picker_textSize="15sp"
+          tools:picker_canBeOnPast="true"
+          tools:picker_curved="true"
+          tools:picker_cyclic="true"
+          tools:picker_visibleItemCount="7"/>
+
+      <RelativeLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/link_to_categroy"
+            android:textColor="@color/white"/>
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/checkbox_link_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:buttonTint="@color/white"/>
+      </RelativeLayout>
+
+      <EditText
+          style="@style/edit_text"
+          android:layout_width="match_parent"
+          android:layout_height="40dp"
+          android:layout_marginTop="4dp"
+          android:editable="false"
+          android:enabled="false"
+          android:imeOptions="actionDone"
+          android:inputType="textPersonName"
+          android:text="Category"/>
+    </LinearLayout>
+  </ScrollView>
+</RelativeLayout>

@@ -9,26 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ingenuitymobile.edwardlynx.R;
-import com.ingenuitymobile.edwardlynx.adapters.SurveyAdapter;
-import com.ingenuitymobile.edwardlynx.api.models.Survey;
+import com.ingenuitymobile.edwardlynx.adapters.DevelopmentPlanAdapter;
+import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by mEmEnG-sKi on 23/01/2017.
+ * Created by mEmEnG-sKi on 31/01/2017.
  */
 
-public class SurveyListFragment extends BaseFragment {
+public class DevelopmentPlanListFragment extends BaseFragment {
 
-  private View          mainView;
-  private List<Survey>  data;
-  private SurveyAdapter adapter;
+  private View                   mainView;
+  private List<DevelopmentPlan>  data;
+  private DevelopmentPlanAdapter adapter;
 
-  public SurveyListFragment() {
-    data = new ArrayList<>();
-  }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,12 +55,12 @@ public class SurveyListFragment extends BaseFragment {
     surveyList.setHasFixedSize(true);
     surveyList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    adapter = new SurveyAdapter(data);
+    adapter = new DevelopmentPlanAdapter(data);
     surveyList.setAdapter(adapter);
     adapter.notifyDataSetChanged();
   }
 
-  public void setData(List<Survey> data) {
+  public void setData(List<DevelopmentPlan> data) {
     if (data != null) {
       this.data = data;
       if (adapter != null) {

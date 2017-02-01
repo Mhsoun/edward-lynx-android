@@ -17,18 +17,14 @@
   <TextView
       android:id="@+id/text_button_bottom"
       android:layout_width="match_parent"
-      android:layout_height="48dp"
       android:layout_marginLeft="16dp"
+      style="@style/orange_button"
       android:layout_alignParentBottom="true"
       android:layout_marginBottom="8dp"
       android:layout_marginTop="8dp"
       android:layout_marginRight="16dp"
-      android:background="@drawable/bg_rounded_login_button"
-      android:gravity="center"
       android:onClick="invite"
-      android:text="Create Instant Feedback"
-      android:textColor="@color/white"
-      android:textSize="18sp"></TextView>
+      android:text="Create Instant Feedback"/>
 
   <android.support.v7.widget.SearchView
       android:id="@+id/searchview"

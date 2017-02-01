@@ -22,8 +22,8 @@
   <string name="cant_connect">Can\'t connect to server. Try again later</string>
 
   <string name="title_key">title</string>
-  <string name="dashboard">Dashboard</string>
-  <string name="surveys">Surveys</string>
+  <string name="dashboard">DASHBOARD</string>
+  <string name="surveys">SURVEYS</string>
 
   // region Answer type label
   <string name="yes_or_no">Yes or No</string>
@@ -55,7 +55,6 @@
   <string name="forgot_password">Forgot Password?</string>
   <string name="contact_us">Contact Us</string>
 
-
   // region forgot password
   <string name="email">Email</string>
   <string name="recover">Recover</string>
@@ -73,9 +72,20 @@
   <string name="new_password_required">New password is required</string>
   <string name="password_not_match">Password does not match</string>
 
+  // region Create Development plan
+  <string name="create_development_plan_name">Development Plan Name</string>
+  <string name="list">List</string>
+  <string name="done">Done</string>
+
+  // region Create Development plan Detailed
+  <string name="name">Name</string>
+  <string name="description">Description</string>
+  <string name="remind_me_on_day">Remind me on day</string>
+  <string name="link_to_categroy">Link to a category</string>
+  <string name="save">Save</string>
+
   // region profile
   <string name="first_name_required">Name is required</string>
-
 
   // Dashboard
   <string name="status">STATUS</string>
@@ -84,7 +94,7 @@
   <string name="navigation_drawer_open">Open navigation drawer</string>
   <string name="navigation_drawer_close">Close navigation drawer</string>
   <string name="title_activity_profile">Profile</string>
-  <string name="title_activity_change_password">Change Password</string>
+  <string name="title_activity_change_password">CHANGE PASSWORD</string>
 
   <string name="logout_confirmation_message">Are you sure you want to log out? Your credentials will be required to open the app again.</string>
   <string name="logout">Logout</string>

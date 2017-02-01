@@ -20,6 +20,7 @@ import com.ingenuitymobile.edwardlynx.SessionStore;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.fragments.ChangePasswordFragment;
 import com.ingenuitymobile.edwardlynx.fragments.DashboardFragment;
+import com.ingenuitymobile.edwardlynx.fragments.DevelopmenPlansFragment;
 import com.ingenuitymobile.edwardlynx.fragments.ProfileFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveysFragment;
 
@@ -28,11 +29,12 @@ import io.fabric.sdk.android.Fabric;
 public class MainActivity extends BaseActivity implements
     NavigationView.OnNavigationItemSelectedListener {
 
-  private Toolbar                toolbar;
-  private SurveysFragment        surveysFragment;
-  private DashboardFragment      dashboardFragment;
-  private ProfileFragment        profileFragment;
-  private ChangePasswordFragment changePasswordFragment;
+  private Toolbar                 toolbar;
+  private SurveysFragment         surveysFragment;
+  private DevelopmenPlansFragment developmenPlansFragment;
+  private DashboardFragment       dashboardFragment;
+  private ProfileFragment         profileFragment;
+  private ChangePasswordFragment  changePasswordFragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,10 @@ public class MainActivity extends BaseActivity implements
       }
       changeFragment(surveysFragment);
     } else if (id == R.id.development_plans) {
-
+      if (developmenPlansFragment == null) {
+        developmenPlansFragment = DevelopmenPlansFragment.newInstance();
+      }
+      changeFragment(developmenPlansFragment);
     } else if (id == R.id.settings) {
       if (changePasswordFragment == null) {
         changePasswordFragment = ChangePasswordFragment.newInstance();

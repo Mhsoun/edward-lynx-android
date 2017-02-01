@@ -39,7 +39,7 @@ public class ChangePasswordFragment extends BaseFragment {
   public static ChangePasswordFragment newInstance() {
     ChangePasswordFragment fragment = new ChangePasswordFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", "Change Password");
+    bundle.putString("title", "CHANGE PASSWORD");
     fragment.setArguments(bundle);
     return fragment;
   }

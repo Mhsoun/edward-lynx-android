@@ -1,15 +1,18 @@
 package com.ingenuitymobile.edwardlynx.api;
 
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
+import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.Questions;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
+import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
@@ -254,6 +257,41 @@ public class ApiClient {
           @Override
           public void onPostAgain() {
             postShareInstantFeedback(id, param, subscriber);
+          }
+        }));
+  }
+
+  public Subscription getDevelopmentPlans(final Subscriber<DevelopmentPlansResponse> subscriber) {
+    return service.getDevelopmentPlans()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getDevelopmentPlans(subscriber);
+          }
+        }));
+  }
+
+  public Subscription getDevelopmentPlan(final long id,
+      final Subscriber<DevelopmentPlan> subscriber) {
+    return service.getDevelopmentPlan(id)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getDevelopmentPlan(id, subscriber);
+          }
+        }));
+  }
+
+  public Subscription postDevelopmentPlans(final CreateDevelopmentPlanParam param,
+      final Subscriber<Response> subscriber) {
+    return service.posttDevelopmentPlans(param)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            postDevelopmentPlans(param, subscriber);
           }
         }));
   }

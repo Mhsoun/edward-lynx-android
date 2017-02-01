@@ -12,8 +12,9 @@ import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
-import com.ingenuitymobile.edwardlynx.api.models.Survey;
-import com.ingenuitymobile.edwardlynx.api.models.Surveys;
+import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
+import com.ingenuitymobile.edwardlynx.api.models.Goal;
+import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.ArrayList;
@@ -21,10 +22,10 @@ import java.util.ArrayList;
 import rx.Subscriber;
 
 /**
- * Created by mEmEnG-sKi on 04/01/2017.
+ * Created by mEmEnG-sKi on 31/01/2017.
  */
 
-public class SurveysFragment extends BaseFragment {
+public class DevelopmenPlansFragment extends BaseFragment {
 
   private static final int ALL        = 0;
   private static final int UNFINISHED = 1;
@@ -32,10 +33,10 @@ public class SurveysFragment extends BaseFragment {
 
   private View mainView;
 
-  private ArrayList<Survey> data;
-  private ArrayList<Survey> unfinishedData;
-  private ArrayList<Survey> completedData;
-  private int               type;
+  private ArrayList<DevelopmentPlan> data;
+  private ArrayList<DevelopmentPlan> unfinishedData;
+  private ArrayList<DevelopmentPlan> completedData;
+  private int                        type;
 
   private TextView allText;
   private TextView unfinishedText;
@@ -43,19 +44,19 @@ public class SurveysFragment extends BaseFragment {
 
   private ViewPager viewPager;
 
-  protected SurveyListFragment allFragment;
-  protected SurveyListFragment unfinishedFragment;
-  protected SurveyListFragment completedFragment;
+  protected DevelopmentPlanListFragment allFragment;
+  protected DevelopmentPlanListFragment unfinishedFragment;
+  protected DevelopmentPlanListFragment completedFragment;
 
-  public static SurveysFragment newInstance() {
-    SurveysFragment fragment = new SurveysFragment();
+  public static DevelopmenPlansFragment newInstance() {
+    DevelopmenPlansFragment fragment = new DevelopmenPlansFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", "SURVEYS");
+    bundle.putString("title", "DEVELOPMENT PLANS");
     fragment.setArguments(bundle);
     return fragment;
   }
 
-  public SurveysFragment() {
+  public DevelopmenPlansFragment() {
     data = new ArrayList<>();
     unfinishedData = new ArrayList<>();
     completedData = new ArrayList<>();
@@ -105,21 +106,21 @@ public class SurveysFragment extends BaseFragment {
     case ALL:
       allText.setSelected(true);
       if (allFragment == null) {
-        allFragment = new SurveyListFragment();
+        allFragment = new DevelopmentPlanListFragment();
       }
       allFragment.setData(data);
       break;
     case UNFINISHED:
       unfinishedText.setSelected(true);
       if (unfinishedFragment == null) {
-        unfinishedFragment = new SurveyListFragment();
+        unfinishedFragment = new DevelopmentPlanListFragment();
       }
       unfinishedFragment.setData(unfinishedData);
       break;
     case COMPLETED:
       completedText.setSelected(true);
       if (completedFragment == null) {
-        completedFragment = new SurveyListFragment();
+        completedFragment = new DevelopmentPlanListFragment();
       }
       completedFragment.setData(completedData);
       break;
@@ -127,37 +128,46 @@ public class SurveysFragment extends BaseFragment {
   }
 
   private void getData() {
-    LogUtil.e("AAA getData survey");
-    subscription.add(Shared.apiClient.getSurveys(1, new Subscriber<Surveys>() {
-      @Override
-      public void onCompleted() {
-        LogUtil.e("AAA onCompleted ");
-        unfinishedData.clear();
-        completedData.clear();
+    LogUtil.e("AAA getData Development plans");
+    subscription.add(
+        Shared.apiClient.getDevelopmentPlans(new Subscriber<DevelopmentPlansResponse>() {
+          @Override
+          public void onCompleted() {
+            LogUtil.e("AAA onCompleted ");
+            unfinishedData.clear();
+            completedData.clear();
 
-        for (Survey survey : data) {
-          if (survey.status == Survey.UNFINISHED) {
-            unfinishedData.add(survey);
-          } else if (survey.status == Survey.COMPLETED) {
-            completedData.add(survey);
+            for (DevelopmentPlan plan : data) {
+              final int size = plan.goals.size();
+              int count = 0;
+              if (plan.goals != null) {
+                for (Goal goal : plan.goals) {
+                  if (goal.checked == 1) {
+                    count++;
+                  }
+                }
+              }
+              if (count == size) {
+                completedData.add(plan);
+              } else {
+                unfinishedData.add(plan);
+              }
+            }
+            setSelection();
           }
-        }
 
-        setSelection();
-      }
+          @Override
+          public void onError(Throwable e) {
+            LogUtil.e("AAA onError " + e);
+          }
 
-      @Override
-      public void onError(Throwable e) {
-        LogUtil.e("AAA onError " + e);
-      }
-
-      @Override
-      public void onNext(final Surveys surveys) {
-        LogUtil.e("AAA onNext ");
-        data.clear();
-        data.addAll(surveys.items);
-      }
-    }));
+          @Override
+          public void onNext(final DevelopmentPlansResponse response) {
+            LogUtil.e("AAA onNext ");
+            data.clear();
+            data.addAll(response.items);
+          }
+        }));
   }
 
   private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager
@@ -218,19 +228,19 @@ public class SurveysFragment extends BaseFragment {
       switch (position) {
       case 0:
         if (allFragment == null) {
-          allFragment = new SurveyListFragment();
+          allFragment = new DevelopmentPlanListFragment();
           allFragment.setData(data);
         }
         return allFragment;
       case 1:
         if (unfinishedFragment == null) {
-          unfinishedFragment = new SurveyListFragment();
+          unfinishedFragment = new DevelopmentPlanListFragment();
           unfinishedFragment.setData(unfinishedData);
         }
         return unfinishedFragment;
       case 2: // Fragment # 1 - This will show SecondFragment
         if (completedFragment == null) {
-          completedFragment = new SurveyListFragment();
+          completedFragment = new DevelopmentPlanListFragment();
           completedFragment.setData(completedData);
         }
         return completedFragment;

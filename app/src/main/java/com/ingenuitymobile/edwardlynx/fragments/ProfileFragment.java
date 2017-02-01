@@ -49,7 +49,7 @@ public class ProfileFragment extends BaseFragment {
   public static ProfileFragment newInstance() {
     ProfileFragment fragment = new ProfileFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", "Profile");
+    bundle.putString("title", "PROFILE");
     fragment.setArguments(bundle);
     return fragment;
   }

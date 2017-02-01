@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:background="#636363"
+        android:background="@color/unfinished_status"
         android:padding="2dp"
         android:text="UNFINISHED"
         android:textColor="@color/white"

@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.activities.CreateDevelopmentPlanActivity;
 import com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity;
 import com.ingenuitymobile.edwardlynx.activities.FeedbackRequestsActivity;
 import com.ingenuitymobile.edwardlynx.activities.ReportsActivity;
@@ -34,7 +35,7 @@ public class DashboardFragment extends BaseFragment {
   public static DashboardFragment newInstance() {
     DashboardFragment fragment = new DashboardFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", "Dashboard");
+    bundle.putString("title", "DASHBOARD");
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -79,6 +80,7 @@ public class DashboardFragment extends BaseFragment {
     createFeedbackLayout.setOnClickListener(onClickListener);
     instantFeedbackLayout.setOnClickListener(onClickListener);
     viewReportsLayout.setOnClickListener(onClickListener);
+    createDevelopmenPlanLayout.setOnClickListener(onClickListener);
   }
 
   private void setupViews() {
@@ -103,6 +105,9 @@ public class DashboardFragment extends BaseFragment {
         break;
       case R.id.layout_view_report:
         startActivity(new Intent(getActivity(), ReportsActivity.class));
+        break;
+      case R.id.layout_create_development_plan:
+        startActivity(new Intent(getActivity(), CreateDevelopmentPlanActivity.class));
         break;
       }
     }
