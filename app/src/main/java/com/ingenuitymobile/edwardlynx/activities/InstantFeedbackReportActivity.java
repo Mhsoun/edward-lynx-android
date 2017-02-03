@@ -36,6 +36,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
   private TextView questionText;
   private TextView answerCountText;
   private TextView shareCountText;
+  private TextView emptyText;
 
   public InstantFeedbackReportActivity() {
     data = new ArrayList<>();
@@ -74,6 +75,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     questionText = (TextView) findViewById(R.id.text_question);
     answerCountText = (TextView) findViewById(R.id.text_answer_count);
     shareCountText = (TextView) findViewById(R.id.text_share_count);
+    emptyText = (TextView) findViewById(R.id.text_empty_state);
     final RecyclerView feedbackList = (RecyclerView) findViewById(R.id.list_answers);
 
     final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
@@ -131,6 +133,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
             data.addAll(response.frequencies);
             adapter.setTotalAnswers(response.totalAnswers);
             answerCountText.setText("Total answers: " + response.totalAnswers);
+            emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
           }
         }));
   }

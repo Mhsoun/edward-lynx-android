@@ -12,6 +12,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
+import com.ingenuitymobile.edwardlynx.api.responses.CategoriesResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
@@ -57,6 +58,9 @@ public interface Service {
 
   @GET("/api/v1/surveys")
   Observable<Surveys> getSurveys(@Query("page") int page);
+
+  @GET("/api/v1/categories")
+  Observable<CategoriesResponse> getCategories();
 
   @GET("/api/v1/surveys/{id}")
   Observable<Survey> getSurvey(@Path("id") long id);

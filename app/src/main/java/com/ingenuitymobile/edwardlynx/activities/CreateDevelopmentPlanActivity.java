@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.CreateDevelopmentPlanAdapter;
@@ -76,10 +77,8 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
 
     if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
       final int index = data.getIntExtra("index", -1);
-      GoalParam param = new GoalParam();
-      param.title = data.getStringExtra("development_plan");
-      param.description = data.getStringExtra("description");
-      param.dueDate = data.getStringExtra("dueDate");
+      final GoalParam param = new Gson().fromJson(data.getStringExtra("goal_param_body"),
+          GoalParam.class);
       LogUtil.e("AAA " + param.toString());
       if (index == -1) {
         this.data.add(param);
@@ -129,10 +128,8 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
     }
 
     hideKeyboard();
-
     if (data.isEmpty()) {
-      Toast.makeText(context, "Goal is required", Toast.LENGTH_SHORT)
-          .show();
+      Toast.makeText(context, "Goal is required", Toast.LENGTH_SHORT).show();
       return;
     }
 
@@ -140,6 +137,10 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
     CreateDevelopmentPlanParam planParam = new CreateDevelopmentPlanParam();
     planParam.name = name;
     planParam.goals = data;
+
+    for (int x = 0; x < planParam.goals.size(); x++) {
+      planParam.goals.get(x).position = x;
+    }
 
     LogUtil.e("AAA " + planParam.toString());
     subscription.add(Shared.apiClient.postDevelopmentPlans(planParam, new Subscriber<Response>() {
@@ -171,8 +172,6 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
 
     private void init() {
       background = new ColorDrawable(Color.RED);
-//      xMark = ContextCompat.getDrawable(context, R.drawable.ic_delete);
-//      xMark.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
       xMarkMargin = (int) getResources().getDimension(R.dimen.ic_clear_margin);
       initiated = true;
     }
@@ -215,19 +214,6 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
       background.setBounds(itemView.getRight() + (int) dX, itemView.getTop(), itemView.getRight(),
           itemView.getBottom());
       background.draw(c);
-
-      int itemHeight = itemView.getBottom() - itemView.getTop();
-//      int intrinsicWidth = xMark.getIntrinsicWidth();
-//      int intrinsicHeight = xMark.getIntrinsicWidth();
-//
-//      int xMarkLeft = itemView.getRight() - xMarkMargin - intrinsicWidth;
-//      int xMarkRight = itemView.getRight() - xMarkMargin;
-//      int xMarkTop = itemView.getTop() + (itemHeight - intrinsicHeight) / 2;
-//      int xMarkBottom = xMarkTop + intrinsicHeight;
-//      xMark.setBounds(xMarkLeft, xMarkTop, xMarkRight, xMarkBottom);
-//
-//      xMark.draw(c);
-
       super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
     }
   };

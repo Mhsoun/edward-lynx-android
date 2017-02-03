@@ -58,9 +58,7 @@ public class CreateDevelopmentPlanAdapter extends
       @Override
       public void onClick(View view) {
         Intent intent = new Intent(activity, CreateDetailedDevelopmentPlanActivity.class);
-        intent.putExtra("development_plan", param.title);
-        intent.putExtra("description", param.description);
-        intent.putExtra("dueDate", param.dueDate);
+        intent.putExtra("goal_param_body", param.toString());
         intent.putExtra("index", position);
         activity.startActivityForResult(intent, activity.REQUEST_CODE);
       }

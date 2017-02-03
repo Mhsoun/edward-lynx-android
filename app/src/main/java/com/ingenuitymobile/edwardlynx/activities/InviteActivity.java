@@ -32,6 +32,8 @@ public class InviteActivity extends InviteBaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_invite);
 
+    context = this;
+
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
@@ -43,11 +45,11 @@ public class InviteActivity extends InviteBaseActivity {
     body = new Gson().fromJson(getIntent().getStringExtra("body"), InstantFeedbackBody.class);
   }
 
-  public void invite(View v) {
+  public void create(View v) {
     final TextView textView = (TextView) v;
     if (ids.isEmpty()) {
-      Toast.makeText(InviteActivity.this, "Please select atleast one", Toast.LENGTH_SHORT)
-          .show();
+      Toast.makeText(InviteActivity.this, getString(R.string.select_atleast_one),
+          Toast.LENGTH_SHORT).show();
     } else {
       List<Id> recipients = new ArrayList<>();
       for (String id : ids) {
@@ -56,7 +58,7 @@ public class InviteActivity extends InviteBaseActivity {
       body.recipients = recipients;
       LogUtil.e("AAA " + body.toString());
 
-      textView.setText("Loading. . .");
+      textView.setText(getString(R.string.loading));
       subscription.add(Shared.apiClient.postInstantFeedback(body, new Subscriber<Response>() {
         @Override
         public void onCompleted() {
@@ -67,15 +69,15 @@ public class InviteActivity extends InviteBaseActivity {
 
         @Override
         public void onError(Throwable e) {
-          textView.setText("Create Instant Feedback");
+          textView.setText(getString(R.string.create_instant_feedback));
           LogUtil.e("AAA onError");
         }
 
         @Override
         public void onNext(Response response) {
           LogUtil.e("AAA onNext");
-          Toast.makeText(InviteActivity.this, "Instant Feedback created", Toast.LENGTH_SHORT)
-              .show();
+          Toast.makeText(InviteActivity.this, getString(R.string.instant_feedback_created),
+              Toast.LENGTH_SHORT).show();
         }
       }));
     }

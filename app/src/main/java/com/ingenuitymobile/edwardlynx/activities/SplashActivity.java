@@ -9,6 +9,7 @@ import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.SessionStore;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.api.models.User;
+import com.ingenuitymobile.edwardlynx.api.responses.CategoriesResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
@@ -42,6 +43,25 @@ public class SplashActivity extends AppCompatActivity {
     Shared.apiClient.getMe(new Subscriber<User>() {
       @Override
       public void onCompleted() {
+        getCategories();
+      }
+
+      @Override
+      public void onError(Throwable e) {
+        showError(e);
+      }
+
+      @Override
+      public void onNext(User userResponse) {
+        Shared.user = userResponse;
+      }
+    });
+  }
+
+  private void getCategories() {
+    Shared.apiClient.getCategories(new Subscriber<CategoriesResponse>() {
+      @Override
+      public void onCompleted() {
         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent);
         SplashActivity.this.finish();
@@ -49,28 +69,32 @@ public class SplashActivity extends AppCompatActivity {
 
       @Override
       public void onError(Throwable e) {
-        if (((RetrofitError) e).getResponse().getStatus() == 401) {
-          SessionStore.saveRefreshToken(null, SplashActivity.this);
-          SessionStore.saveAccessToken(null, SplashActivity.this);
-        }
-
-        runOnUiThread(new Runnable() {
-          @Override
-          public void run() {
-            ViewUtil.showAlert(SplashActivity.this, "", getString(R.string.cant_connect),
-                new DialogInterface.OnClickListener() {
-                  @Override
-                  public void onClick(DialogInterface dialogInterface, int i) {
-                    SplashActivity.this.finish();
-                  }
-                });
-          }
-        });
+        showError(e);
       }
 
       @Override
-      public void onNext(User userResponse) {
-        Shared.user = userResponse;
+      public void onNext(CategoriesResponse categoriesResponse) {
+        Shared.categories = categoriesResponse.items;
+      }
+    });
+  }
+
+  private void showError(Throwable e) {
+    if (((RetrofitError) e).getResponse().getStatus() == 401) {
+      SessionStore.saveRefreshToken(null, SplashActivity.this);
+      SessionStore.saveAccessToken(null, SplashActivity.this);
+    }
+
+    runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        ViewUtil.showAlert(SplashActivity.this, "", getString(R.string.cant_connect),
+            new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialogInterface, int i) {
+                SplashActivity.this.finish();
+              }
+            });
       }
     });
   }

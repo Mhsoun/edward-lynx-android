@@ -35,8 +35,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:layout_margin="16dp"
+        android:padding="16dp"
         android:orientation="vertical">
 
       <TextView
@@ -64,13 +63,84 @@
 
       <EditText
           android:id="@+id/edit_development_description"
-          style="@style/edit_text"
           android:layout_width="match_parent"
-          android:layout_height="40dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="top"
+          android:background="@drawable/bg_rounded_input_field"
+          android:gravity="top"
+          android:maxLines="2"
+          android:minLines="2"
+          android:padding="4dp"
+          android:textColor="@color/white"
           android:layout_marginTop="4dp"
           android:imeOptions="actionDone"
-          android:inputType="textPersonName"
+          android:textSize="20sp"/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:text="@string/actions"
           android:textColor="@color/white"/>
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:minHeight="60dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_action_plan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/text_empty_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="No Actions added"
+            android:textColor="@color/white"
+            android:visibility="gone"/>
+      </RelativeLayout>
+
+      <RelativeLayout
+          android:id="@+id/layout_add"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingBottom="8dp"
+          android:paddingTop="8dp"
+          android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/image_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_circle"
+            android:tint="@color/white"/>
+
+        <EditText
+            android:id="@+id/edit_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/image_circle"
+            android:background="@drawable/bg_rounded_input_field"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:padding="4dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+      </RelativeLayout>
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:onClick="addPlan"
+          android:padding="4dp"
+          android:src="@drawable/ic_add_goal"
+          android:tint="@color/white"/>
 
       <RelativeLayout
           android:layout_width="wrap_content"
@@ -103,6 +173,7 @@
           app:picker_textSize="15sp"
           tools:picker_canBeOnPast="true"
           tools:picker_curved="true"
+          android:visibility="gone"
           tools:picker_cyclic="true"
           tools:picker_visibleItemCount="7"/>
 
@@ -126,16 +197,18 @@
             android:buttonTint="@color/white"/>
       </RelativeLayout>
 
-      <EditText
-          style="@style/edit_text"
+      <RelativeLayout
           android:layout_width="match_parent"
-          android:layout_height="40dp"
-          android:layout_marginTop="4dp"
-          android:editable="false"
-          android:enabled="false"
-          android:imeOptions="actionDone"
-          android:inputType="textPersonName"
-          android:text="Category"/>
+          android:layout_height="wrap_content"
+          android:background="@drawable/bg_rounded_input_field">
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:prompt="@array/answer_type"
+            android:visibility="gone"/>
+      </RelativeLayout>
     </LinearLayout>
   </ScrollView>
 </RelativeLayout>

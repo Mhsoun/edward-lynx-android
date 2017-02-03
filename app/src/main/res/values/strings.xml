@@ -80,9 +80,26 @@
   // region Create Development plan Detailed
   <string name="name">Name</string>
   <string name="description">Description</string>
+  <string name="actions">Actions</string>
   <string name="remind_me_on_day">Remind me on day</string>
   <string name="link_to_categroy">Link to a category</string>
   <string name="save">Save</string>
+
+  // region Invite to answer
+  <string name="create_instant_feedback">Create Instant Feedback</string>
+  <string name="number_people_selected">No. of people selected: </string>
+  <string name="select_all">Select all</string>
+  <string name="deselect_all">Deselect all</string>
+  <string name="invite_by_email">Invite people by email</string>
+  <string name="add_user">Add user</string>
+  <string name="enter_email">Enter email address</string>
+  <string name="email_address">Email address</string>
+  <string name="add_email">Add email</string>
+  <string name="select_atleast_one">Please select atleast one</string>
+  <string name="instant_feedback_created">Instant Feedback created</string>
+
+  <string name="share">Share</string>
+
 
   // region profile
   <string name="first_name_required">Name is required</string>

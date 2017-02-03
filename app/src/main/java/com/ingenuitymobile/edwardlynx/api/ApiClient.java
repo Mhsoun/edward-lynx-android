@@ -12,6 +12,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
+import com.ingenuitymobile.edwardlynx.api.responses.CategoriesResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
@@ -143,6 +144,18 @@ public class ApiClient {
           }
         }));
   }
+
+  public Subscription getCategories(final Subscriber<CategoriesResponse> subscriber) {
+    return service.getCategories()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getCategories(subscriber);
+          }
+        }));
+  }
+
 
   public Subscription getSurvey(final long id, final Subscriber<Survey> subscriber) {
     return service.getSurvey(id)

@@ -3,8 +3,12 @@ package com.ingenuitymobile.edwardlynx;
 import android.content.Context;
 
 import com.ingenuitymobile.edwardlynx.api.ApiClient;
+import com.ingenuitymobile.edwardlynx.api.models.Category;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mEmEnG-sKi on 19/12/2016.
@@ -14,9 +18,11 @@ public class Shared {
 
   public static ApiClient apiClient;
 
-  public static User user;
+  public static User           user;
+  public static List<Category> categories;
 
   public static void init(final Context context) {
+    categories = new ArrayList<>();
     final String consumerKey = context.getResources().getString(R.string.client_id);
     final String consumerSecret = context.getResources().getString(R.string.client_secret);
     final String basUrl = context.getResources()

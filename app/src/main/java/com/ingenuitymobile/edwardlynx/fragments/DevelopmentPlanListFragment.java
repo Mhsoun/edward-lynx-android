@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.adapters.DevelopmentPlanAdapter;
@@ -24,6 +25,7 @@ public class DevelopmentPlanListFragment extends BaseFragment {
   private View                   mainView;
   private List<DevelopmentPlan>  data;
   private DevelopmentPlanAdapter adapter;
+  private TextView               emptyText;
 
 
   @Override
@@ -48,6 +50,7 @@ public class DevelopmentPlanListFragment extends BaseFragment {
 
   private void initViews() {
     final RecyclerView surveyList = (RecyclerView) mainView.findViewById(R.id.list_survey);
+    emptyText = (TextView) mainView.findViewById(R.id.text_empty_state);
 
     final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
         LinearLayoutManager.VERTICAL);
@@ -57,6 +60,7 @@ public class DevelopmentPlanListFragment extends BaseFragment {
 
     adapter = new DevelopmentPlanAdapter(data);
     surveyList.setAdapter(adapter);
+    emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
     adapter.notifyDataSetChanged();
   }
 
@@ -64,6 +68,9 @@ public class DevelopmentPlanListFragment extends BaseFragment {
     if (data != null) {
       this.data = data;
       if (adapter != null) {
+        if (emptyText != null) {
+          emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
+        }
         adapter.notifyDataSetChanged();
       }
     }
