@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.api;
 
+import com.ingenuitymobile.edwardlynx.api.bodyparams.ActionParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
@@ -106,4 +107,9 @@ public interface Service {
   @Headers("Content-Type: application/json")
   @POST("/api/v1/dev-plans")
   Observable<Response> posttDevelopmentPlans(@Body CreateDevelopmentPlanParam body);
+
+  @Headers("Content-Type: application/json")
+  @PATCH("/api/v1/dev-plans/{planId}/goals/{goalId}/actions/{actionId}")
+  Observable<Response> updateActionPlan(@Path("planId") long planId, @Path("goalId") long goalId,
+      @Path("actionId") long actionId, @Body ActionParam body);
 }

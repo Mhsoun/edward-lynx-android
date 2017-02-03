@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.api.bodyparams;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -12,4 +13,11 @@ public class ActionParam {
   public String title;
   @SerializedName("position")
   public int    position;
+  @SerializedName("checked")
+  public int   checked;
+
+  @Override
+  public String toString() {
+    return new Gson().toJson(this);
+  }
 }

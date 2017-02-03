@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.api;
 
+import com.ingenuitymobile.edwardlynx.api.bodyparams.ActionParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
@@ -305,6 +306,18 @@ public class ApiClient {
           @Override
           public void onPostAgain() {
             postDevelopmentPlans(param, subscriber);
+          }
+        }));
+  }
+
+  public Subscription updateActionPlan(final long planId, final long goalId, final long actionId,
+      final ActionParam param, final Subscriber<Response> subscriber) {
+    return service.updateActionPlan(planId, goalId, actionId, param)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            updateActionPlan(planId, goalId, actionId, param, subscriber);
           }
         }));
   }

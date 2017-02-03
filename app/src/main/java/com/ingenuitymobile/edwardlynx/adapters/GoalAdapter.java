@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,8 +32,11 @@ public class GoalAdapter extends
   private SimpleDateFormat format        = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
   private SimpleDateFormat displayFormat = new SimpleDateFormat("MMMM dd, yyyy hh:mm a");
 
-  public GoalAdapter(List<ParentListItem> data) {
+  private OnSelectActionListener listener;
+
+  public GoalAdapter(List<ParentListItem> data, OnSelectActionListener listener) {
     super(data);
+    this.listener = listener;
   }
 
   class ParentView extends ParentViewHolder {
@@ -64,11 +68,13 @@ public class GoalAdapter extends
   class ChildView extends ChildViewHolder {
     LinearLayout bodyLayout;
     TextView     nameText;
+    ImageView    imageView;
 
     ChildView(View itemView) {
       super(itemView);
       bodyLayout = (LinearLayout) itemView.findViewById(R.id.layout_body);
       nameText = (TextView) itemView.findViewById(R.id.text_name);
+      imageView = (ImageView) itemView.findViewById(R.id.image_circle);
     }
   }
 
@@ -118,6 +124,19 @@ public class GoalAdapter extends
       Object childListItem) {
     final Action action = (Action) childListItem;
     holder.nameText.setText(action.title);
+    holder.imageView.setImageDrawable(holder.imageView.getContext().getResources()
+        .getDrawable(action.checked == 1 ? R.drawable.ic_check : R.drawable.ic_circle));
+    holder.bodyLayout.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if (action.checked == 0) {
+          listener.onSelectedAction(action);
+        }
+      }
+    });
+  }
 
+  public interface OnSelectActionListener {
+    void onSelectedAction(Action action);
   }
 }
