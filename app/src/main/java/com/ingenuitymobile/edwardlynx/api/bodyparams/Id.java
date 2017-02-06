@@ -9,11 +9,20 @@ import com.google.gson.annotations.SerializedName;
 public class Id {
 
   @SerializedName("id")
-  public long id;
+  public Integer id;
+  @SerializedName("email")
+  public String  email;
+  @SerializedName("name")
+  public String  name;
 
-  public Id() {}
+  public Id(String name, String email) {
+    this.name = name;
+    this.email = email;
+  }
 
   public Id(String id) {
-    this.id = Long.parseLong(id);
+    this.id = Integer.parseInt(id);
   }
+
+  public Id() {}
 }

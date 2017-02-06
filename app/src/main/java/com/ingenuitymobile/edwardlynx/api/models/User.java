@@ -1,6 +1,7 @@
 package com.ingenuitymobile.edwardlynx.api.models;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 
@@ -44,6 +45,10 @@ public class User extends Response {
   public String country;
   @SerializedName("city")
   public String city;
+
+  @Expose(serialize = false, deserialize = false)
+  public boolean isAddedbyEmail;
+
 
   @Override
   public String toString() {

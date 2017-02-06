@@ -92,7 +92,7 @@
   <string name="deselect_all">Deselect all</string>
   <string name="invite_by_email">Invite people by email</string>
   <string name="add_user">Add user</string>
-  <string name="enter_email">Enter email address</string>
+  <string name="enter_email">Enter Name and Email address</string>
   <string name="email_address">Email address</string>
   <string name="add_email">Add email</string>
   <string name="select_atleast_one">Please select atleast one</string>

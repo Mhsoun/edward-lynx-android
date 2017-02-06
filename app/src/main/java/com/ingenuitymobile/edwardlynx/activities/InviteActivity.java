@@ -11,6 +11,7 @@ import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.Id;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
+import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
@@ -52,9 +53,17 @@ public class InviteActivity extends InviteBaseActivity {
           Toast.LENGTH_SHORT).show();
     } else {
       List<Id> recipients = new ArrayList<>();
+      for (User user : data) {
+        if (user.isAddedbyEmail) {
+          ids.remove(String.valueOf(user.id));
+          recipients.add(new Id(user.name, user.email));
+        }
+      }
+
       for (String id : ids) {
         recipients.add(new Id(id));
       }
+
       body.recipients = recipients;
       LogUtil.e("AAA " + body.toString());
 

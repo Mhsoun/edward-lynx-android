@@ -45,8 +45,8 @@ public class InviteBaseActivity extends BaseActivity {
   private SearchView searchView;
 
   protected ArrayList<String> ids;
+  protected ArrayList<User>   data;
 
-  private ArrayList<User> data;
   private UsersAdapter    adapter;
 
   public InviteBaseActivity() {
@@ -219,24 +219,37 @@ public class InviteBaseActivity extends BaseActivity {
 
 
   public void invite(View v) {
-    final EditText input = new EditText(context);
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-    input.setLayoutParams(lp);
-    input.setHint(getString(R.string.email_address));
-    input.setTextColor(getResources().getColor(R.color.black));
-    input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-    input.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+    LinearLayout layout = new LinearLayout(context);
+    layout.setOrientation(LinearLayout.VERTICAL);
+
+    final EditText nameEdit = new EditText(context);
+    nameEdit.setHint(getString(R.string.name));
+    nameEdit.setTextColor(getResources().getColor(R.color.black));
+    nameEdit.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+    nameEdit.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+    layout.addView(nameEdit);
+
+    final EditText emailEdit = new EditText(context);
+    emailEdit.setLayoutParams(lp);
+    emailEdit.setHint(getString(R.string.email_address));
+    emailEdit.setTextColor(getResources().getColor(R.color.black));
+    emailEdit.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+    emailEdit.setImeOptions(EditorInfo.IME_ACTION_DONE);
+    layout.addView(emailEdit);
 
     final AlertDialog alertDialog = new AlertDialog.Builder(this)
         .setTitle(getString(R.string.add_user))
         .setMessage(getString(R.string.enter_email))
         .setPositiveButton(getString(R.string.add_email), null)
         .setNegativeButton(getString(R.string.cancel), null)
-        .setView(input,
+        .setView(layout,
             ViewUtil.dpToPx(16, getResources()), 0, ViewUtil.dpToPx(16, getResources()), 0)
         .create();
 
+    alertDialog.setCanceledOnTouchOutside(false);
     alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
       @Override
       public void onShow(final DialogInterface dialogInterface) {
@@ -244,14 +257,16 @@ public class InviteBaseActivity extends BaseActivity {
             new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-                final String email = input.getText().toString();
+                final String name = nameEdit.getText().toString();
+                final String email = emailEdit.getText().toString();
 
-                if (TextUtils.isEmpty(email)) {
-                  input.setError(getString(R.string.email_required));
+                if (TextUtils.isEmpty(name)) {
+                  nameEdit.setError(getString(R.string.first_name_required));
+                } else if (TextUtils.isEmpty(email)) {
+                  emailEdit.setError(getString(R.string.email_required));
                 } else if (!StringUtil.isValidEmail(email)) {
-                  input.setError(getString(R.string.valid_email_required));
+                  emailEdit.setError(getString(R.string.valid_email_required));
                 } else {
-                  LogUtil.e("AAA " + email);
                   dialogInterface.dismiss();
 
                   long LOWER_RANGE = 10000; //assign lower range value
@@ -263,8 +278,9 @@ public class InviteBaseActivity extends BaseActivity {
 
                   User user = new User();
                   user.id = randomValue;
-                  user.name = "Invited by email";
+                  user.name = name;
                   user.email = email;
+                  user.isAddedbyEmail = true;
                   data.add(user);
                   ids.add(String.valueOf(user.id));
                   search(searchView.getQuery().toString());
