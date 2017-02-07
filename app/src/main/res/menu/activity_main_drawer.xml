@@ -5,25 +5,25 @@
   <item
       android:id="@+id/dashboard"
       android:icon="@drawable/ic_menu_manage"
-      android:title="Dashboard"/>
+      android:title="@string/drawer_dashboard"/>
   <item
       android:id="@+id/profile"
       android:icon="@drawable/ic_menu_manage"
-      android:title="Profile"/>
+      android:title="@string/drawer_profile"/>
   <item
       android:id="@+id/survey"
       android:icon="@drawable/ic_menu_manage"
-      android:title="Surveys"/>
+      android:title="@string/drawer_surveys"/>
   <item
       android:id="@+id/development_plans"
       android:icon="@drawable/ic_menu_manage"
-      android:title="Development Plans"/>
+      android:title="@string/drawer_development_plans"/>
   <item
       android:id="@+id/settings"
       android:icon="@drawable/ic_menu_manage"
-      android:title="Settings"/>
+      android:title="@string/drawer_settings"/>
   <item
       android:id="@+id/logout"
       android:icon="@drawable/ic_menu_manage"
-      android:title="Logout"/>
+      android:title="@string/drawer_logout"/>
 </menu>

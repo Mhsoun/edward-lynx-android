@@ -214,7 +214,7 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     final String description = descriptionEdit.getText().toString();
 
     if (TextUtils.isEmpty(developmentPlan)) {
-      Toast.makeText(context, "Name is required", Toast.LENGTH_SHORT)
+      Toast.makeText(context, getString(R.string.name_required), Toast.LENGTH_SHORT)
           .show();
       return;
     }
@@ -250,7 +250,7 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
       if (actionId == EditorInfo.IME_ACTION_DONE) {
         final String name = addPlanEdit.getText().toString();
         if (TextUtils.isEmpty(name)) {
-          Toast.makeText(context, "Action plan name is required", Toast.LENGTH_SHORT)
+          Toast.makeText(context, getString(R.string.action_plan_required), Toast.LENGTH_SHORT)
               .show();
           return false;
         }

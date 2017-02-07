@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,7 @@ public class FeedbackAnswersAdapter extends
 
   @Override
   public void onBindViewHolder(ViewHolder holder, int position) {
+    final Context context = holder.itemView.getContext();
     final FeedbackFrequency frequency = data.get(position);
 
 
@@ -60,7 +62,7 @@ public class FeedbackAnswersAdapter extends
       holder.descriptionText.setText(frequency.description);
     }
 
-    holder.answerCountText.setText("Total answers: " + frequency.count);
+    holder.answerCountText.setText(context.getString(R.string.total_answers, frequency.count));
     holder.progressBar.setProgress(
         (int) (((float) (frequency.count) / (float) totalAnswers) * 100));
     holder.progressBar.setScaleY(3f);

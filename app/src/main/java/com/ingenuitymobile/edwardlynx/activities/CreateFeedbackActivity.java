@@ -99,26 +99,24 @@ public class CreateFeedbackActivity extends BaseActivity {
       radioGroup.getChildAt(i).setOnLongClickListener(new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View view) {
-
           String title = "";
           String description = "";
           switch (Integer.parseInt((String) radioGroup.getChildAt(index).getTag())) {
           case Answer.YES_OR_NO:
-            title = "Yes/No scale";
-            description = "Yes or no answer.";
+            title = getString(R.string.yes_or_no);
+            description = getString(R.string.yes_or_no_description);
             break;
           case Answer.CUSTOM_TEXT:
-            title = "Text";
-            description = "The question is answered with text.";
+            title = getString(R.string.free_text);
+            description = getString(R.string.text_description);
             break;
           case Answer.NUMERIC_1_10_SCALE:
-            title = "Numeric 1-10 scale";
-            description =
-                "A numeric scale from 1-10 where 1 means the lowest and 10 is the highest.";
+            title = getString(R.string.numeric_1_to_10);
+            description = getString(R.string.numeric_1_10_description);
             break;
           case Answer.CUSTOM_SCALE:
-            title = "Custom scale";
-            description = "Custom scale.";
+            title = getString(R.string.custom_scale);
+            description = getString(R.string.custom_scale_description);
             break;
           }
 
@@ -198,7 +196,7 @@ public class CreateFeedbackActivity extends BaseActivity {
         final String string = addOptionEdit.getText().toString();
         if (!TextUtils.isEmpty(string)) {
           if (options.contains(string)) {
-            Toast.makeText(CreateFeedbackActivity.this, "There is an existing option",
+            Toast.makeText(CreateFeedbackActivity.this, getString(R.string.existing_option),
                 Toast.LENGTH_SHORT).show();
             return true;
           }

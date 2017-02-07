@@ -122,14 +122,14 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
     final String name = ((EditText) findViewById(R.id.edit_text)).getText().toString();
 
     if (TextUtils.isEmpty(name)) {
-      Toast.makeText(context, "Name is required", Toast.LENGTH_SHORT)
+      Toast.makeText(context, getString(R.string.name_required), Toast.LENGTH_SHORT)
           .show();
       return;
     }
 
     hideKeyboard();
     if (data.isEmpty()) {
-      Toast.makeText(context, "Goal is required", Toast.LENGTH_SHORT).show();
+      Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
       return;
     }
 
@@ -157,7 +157,7 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
 
       @Override
       public void onNext(Response response) {
-        Toast.makeText(context, "Development plan created", Toast.LENGTH_SHORT)
+        Toast.makeText(context, getString(R.string.development_plan_created), Toast.LENGTH_SHORT)
             .show();
       }
     }));

@@ -62,7 +62,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
 
     try {
       Date date = format.parse(survey.endDate);
-      holder.dateText.setText("End date: " + displayFormat.format(date));
+      holder.dateText.setText(context.getString(R.string.end_date, displayFormat.format(date)));
     } catch (Exception e) {
       holder.dateText.setText("");
     }

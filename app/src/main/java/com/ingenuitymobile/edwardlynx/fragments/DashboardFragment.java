@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -32,10 +33,10 @@ public class DashboardFragment extends BaseFragment {
   private RelativeLayout newReportsLayout;
   private RelativeLayout instantFeedbackLayout;
 
-  public static DashboardFragment newInstance() {
+  public static DashboardFragment newInstance(Context ctx) {
     DashboardFragment fragment = new DashboardFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", "DASHBOARD");
+    bundle.putString("title", ctx.getString(R.string.dashboard_bold));
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -59,48 +60,6 @@ public class DashboardFragment extends BaseFragment {
     initViews();
     setupViews();
     return mainView;
-  }
-
-  @Override
-  public void onResume() {
-    super.onResume();
-    LogUtil.e("AAA onResume dashboard");
-  }
-
-  @Override
-  public void onPause() {
-    super.onPause();
-    LogUtil.e("AAA  onPause dashboard");
-  }
-
-  @Override
-  public void onDestroyView() {
-    super.onDestroyView();
-    LogUtil.e("AAA  onDestroyView dashboard");
-  }
-
-  @Override
-  public void onDestroy() {
-    super.onDestroy();
-    LogUtil.e("AAA  onDestroy dashboard");
-  }
-
-  @Override
-  public void onDetach() {
-    super.onDetach();
-    LogUtil.e("AAA  onDetach dashboard");
-  }
-
-  @Override
-  public void onStart() {
-    super.onStart();
-    LogUtil.e("AAA  onStart dashboard");
-  }
-
-  @Override
-  public void onStop() {
-    super.onStop();
-    LogUtil.e("AAA  onStop dashboard ");
   }
 
   private void initViews() {

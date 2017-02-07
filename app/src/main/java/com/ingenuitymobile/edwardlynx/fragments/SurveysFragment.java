@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -47,10 +48,10 @@ public class SurveysFragment extends BaseFragment {
   protected SurveyListFragment unfinishedFragment;
   protected SurveyListFragment completedFragment;
 
-  public static SurveysFragment newInstance() {
+  public static SurveysFragment newInstance(Context ctx) {
     SurveysFragment fragment = new SurveysFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", "SURVEYS");
+    bundle.putString("title", ctx.getString(R.string.surveys_bold));
     fragment.setArguments(bundle);
     return fragment;
   }

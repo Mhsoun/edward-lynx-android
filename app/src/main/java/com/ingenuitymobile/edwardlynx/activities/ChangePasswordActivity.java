@@ -96,7 +96,7 @@ public class ChangePasswordActivity extends BaseActivity {
 
       @Override
       public void onError(Throwable e) {
-        saveText.setText("Save");
+        saveText.setText(getString(R.string.save));
         if (!NetUtil.hasActiveConnection(ChangePasswordActivity.this)) {
           Toast.makeText(ChangePasswordActivity.this, getString(R.string.no_internet_connection),
               Toast.LENGTH_SHORT).show();
@@ -118,7 +118,8 @@ public class ChangePasswordActivity extends BaseActivity {
 
       @Override
       public void onNext(User userResponse) {
-        Toast.makeText(ChangePasswordActivity.this, "Password updated", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ChangePasswordActivity.this, getString(R.string.password_updated),
+            Toast.LENGTH_SHORT).show();
         finish();
       }
     }));

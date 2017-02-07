@@ -42,11 +42,13 @@ public class MainActivity extends BaseActivity implements
     setContentView(R.layout.activity_main);
     Fabric.with(this, new Crashlytics());
 
+    context = this;
+
     initViews();
     setUserCrashlytics();
 
     if (savedInstanceState == null) {
-      DashboardFragment fragment = DashboardFragment.newInstance();
+      DashboardFragment fragment = DashboardFragment.newInstance(context);
       changeFragment(fragment);
     }
     checkIntent();
@@ -69,27 +71,27 @@ public class MainActivity extends BaseActivity implements
 
     if (id == R.id.dashboard) {
       if (dashboardFragment == null) {
-        dashboardFragment = DashboardFragment.newInstance();
+        dashboardFragment = DashboardFragment.newInstance(context);
       }
       changeFragment(dashboardFragment);
     } else if (id == R.id.profile) {
       if (profileFragment == null) {
-        profileFragment = ProfileFragment.newInstance();
+        profileFragment = ProfileFragment.newInstance(context);
       }
       changeFragment(profileFragment);
     } else if (id == R.id.survey) {
       if (surveysFragment == null) {
-        surveysFragment = SurveysFragment.newInstance();
+        surveysFragment = SurveysFragment.newInstance(context);
       }
       changeFragment(surveysFragment);
     } else if (id == R.id.development_plans) {
       if (developmenPlansFragment == null) {
-        developmenPlansFragment = DevelopmenPlansFragment.newInstance();
+        developmenPlansFragment = DevelopmenPlansFragment.newInstance(context);
       }
       changeFragment(developmenPlansFragment);
     } else if (id == R.id.settings) {
       if (changePasswordFragment == null) {
-        changePasswordFragment = ChangePasswordFragment.newInstance();
+        changePasswordFragment = ChangePasswordFragment.newInstance(context);
       }
       changeFragment(changePasswordFragment);
     } else if (id == R.id.logout) {
@@ -155,17 +157,19 @@ public class MainActivity extends BaseActivity implements
       final Bundle bundle = getIntent().getExtras();
       final String type = bundle.getString("type");
       Intent intent = null;
-      if (type.equals(Shared.DEV_PLAN)) {
-        intent = new Intent(context, DevelopmentPlanDetailedActivity.class);
-      } else if (type.equals(Shared.INSTANT_FEEDBACK_REQUEST)) {
-        intent = new Intent(context, AnswerFeedbackActivity.class);
-      } else if (type.equals(Shared.SURVEY)) {
-        intent = new Intent(context, SurveyQuestionsActivity.class);
-      }
-      if (intent != null) {
-        intent.putExtra("id", Long.parseLong(bundle.getString("id")
-        ));
-        startActivity(intent);
+      if (type != null) {
+        if (type.equals(Shared.DEV_PLAN)) {
+          intent = new Intent(context, DevelopmentPlanDetailedActivity.class);
+        } else if (type.equals(Shared.INSTANT_FEEDBACK_REQUEST)) {
+          intent = new Intent(context, AnswerFeedbackActivity.class);
+        } else if (type.equals(Shared.SURVEY)) {
+          intent = new Intent(context, SurveyQuestionsActivity.class);
+        }
+        if (intent != null) {
+          intent.putExtra("id", Long.parseLong(bundle.getString("id")
+          ));
+          startActivity(intent);
+        }
       }
     }
   }

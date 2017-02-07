@@ -93,6 +93,7 @@ public class InviteBaseActivity extends BaseActivity {
     searchView.setOnQueryTextListener(onQueryTextListener);
     searchView.setOnCloseListener(onCloseListener);
     selectText.setOnClickListener(onClickListener);
+    updateUI();
   }
 
   protected void getData() {
@@ -122,13 +123,12 @@ public class InviteBaseActivity extends BaseActivity {
 
   private void updateUI() {
     if (ids.size() >= adapter.getItemCount()) {
-      selectText.setText("Deselect all");
+      selectText.setText(getString(R.string.deselect_all));
     } else {
-      selectText.setText("Select all");
+      selectText.setText(getString(R.string.select_all));
     }
 
-    countText.setText("No. of people selected: " + ids.size());
-
+    countText.setText(getString(R.string.number_people_selected, ids.size()));
     notifyAdapter();
   }
 
@@ -160,7 +160,8 @@ public class InviteBaseActivity extends BaseActivity {
   private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-      final boolean isSelected = selectText.getText().toString().equals("Select all");
+      final boolean isSelected = selectText.getText().toString().equals(
+          getString(R.string.select_all));
       for (User user : displayData) {
         if (isSelected) {
           if (!ids.contains(String.valueOf(user.id))) {
@@ -261,7 +262,7 @@ public class InviteBaseActivity extends BaseActivity {
                 final String email = emailEdit.getText().toString();
 
                 if (TextUtils.isEmpty(name)) {
-                  nameEdit.setError(getString(R.string.first_name_required));
+                  nameEdit.setError(getString(R.string.name_required));
                 } else if (TextUtils.isEmpty(email)) {
                   emailEdit.setError(getString(R.string.email_required));
                 } else if (!StringUtil.isValidEmail(email)) {

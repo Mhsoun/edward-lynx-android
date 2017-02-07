@@ -22,7 +22,7 @@
       android:layout_margin="12dp"
       style="@style/orange_button"
       android:onClick="submit"
-      android:text="Submit"
+      android:text="@string/submit"
       android:visibility="gone"/>
 
   <android.support.v7.widget.RecyclerView

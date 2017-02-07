@@ -128,7 +128,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
           @Override
           public void onError(Throwable e) {
-            LogUtil.e("AAA onError patchAction");
+            LogUtil.e("AAA onError patchAction " + e);
             if (dialog != null) {
               dialog.show();
             }
@@ -148,9 +148,9 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         for (Action acn : goal.actions) {
           if (acn.id == action.id) {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
-            alertBuilder.setTitle("Confirmation");
-            alertBuilder.setMessage("Complete the action, " + action.title + "?");
-            alertBuilder.setPositiveButton("Complete",
+            alertBuilder.setTitle(getString(R.string.confirmation));
+            alertBuilder.setMessage(getString(R.string.complete_action_message, action.title));
+            alertBuilder.setPositiveButton(getString(R.string.complete),
                 new DialogInterface.OnClickListener() {
                   public void onClick(DialogInterface dialog, int which) {
                     ActionParam param = new ActionParam();

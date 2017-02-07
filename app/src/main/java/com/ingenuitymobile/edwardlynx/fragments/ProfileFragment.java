@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -46,10 +47,10 @@ public class ProfileFragment extends BaseFragment {
   private User   user;
   private String gender;
 
-  public static ProfileFragment newInstance() {
+  public static ProfileFragment newInstance(Context ctx) {
     ProfileFragment fragment = new ProfileFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", "PROFILE");
+    bundle.putString("title", ctx.getString(R.string.profile_bold));
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -78,7 +79,7 @@ public class ProfileFragment extends BaseFragment {
       @Override
       public void onCompleted() {
         editText.setOnClickListener(onClickListener);
-        editText.setText("Edit");
+        editText.setText(getString(R.string.edit));
       }
 
       @Override
@@ -125,7 +126,8 @@ public class ProfileFragment extends BaseFragment {
         RadioButton radioButton = (RadioButton) radioGroup.findViewById(i);
         gender = (String) radioButton.getTag();
 
-        genderEdit.setVisibility(gender.equals("other") ? View.VISIBLE : View.GONE);
+        genderEdit.setVisibility(
+            gender.equals(getString(R.string.other)) ? View.VISIBLE : View.GONE);
       }
     });
   }
@@ -142,9 +144,9 @@ public class ProfileFragment extends BaseFragment {
 
     genderEdit.setVisibility(View.GONE);
 
-    if (user.gender.toLowerCase().equals("male")) {
+    if (user.gender.toLowerCase().equals(getString(R.string.male))) {
       genderRadiogroup.check(R.id.radiobutton_male);
-    } else if (user.gender.toLowerCase().equals("female")) {
+    } else if (user.gender.toLowerCase().equals(getString(R.string.female))) {
       genderRadiogroup.check(R.id.radiobutton_female);
     } else {
       genderRadiogroup.check(R.id.radiobutton_other);
@@ -167,7 +169,7 @@ public class ProfileFragment extends BaseFragment {
     final String city = cityEdit.getText().toString();
 
     if (TextUtils.isEmpty(name)) {
-      nameEdit.setError(getString(R.string.first_name_required));
+      nameEdit.setError(getString(R.string.name_required));
       nameEdit.requestFocus();
       return;
     }
@@ -195,11 +197,12 @@ public class ProfileFragment extends BaseFragment {
       body.city = city;
     }
 
-    if (!gender.toLowerCase().equals("male") && !gender.toLowerCase().equals("female")) {
+    if (!gender.toLowerCase().equals(getString(R.string.male)) &&
+        !gender.toLowerCase().equals(getString(R.string.female))) {
       final String genderFromEdit = genderEdit.getText().toString();
 
       if (TextUtils.isEmpty(genderFromEdit)) {
-        genderEdit.setError("Gender is required");
+        genderEdit.setError(getString(R.string.gender_required));
         genderEdit.requestFocus();
         return;
       }
@@ -215,13 +218,13 @@ public class ProfileFragment extends BaseFragment {
     subscription.add(Shared.apiClient.updateUser(body, new Subscriber<User>() {
       @Override
       public void onCompleted() {
-        Toast.makeText(getActivity(), "User updated", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), getString(R.string.user_updated), Toast.LENGTH_SHORT).show();
         setEditable(false);
       }
 
       @Override
       public void onError(Throwable e) {
-        editText.setText("Save");
+        editText.setText(getString(R.string.save));
         if (!NetUtil.hasActiveConnection(getActivity())) {
           Toast.makeText(getActivity(), getString(R.string.no_internet_connection),
               Toast.LENGTH_SHORT).show();
@@ -238,14 +241,13 @@ public class ProfileFragment extends BaseFragment {
       @Override
       public void onNext(User userResponse) {
         Shared.user = userResponse;
-        Toast.makeText(getActivity(), "User updated", Toast.LENGTH_SHORT).show();
       }
     }));
   }
 
   private void setEditable(boolean isEdit) {
     setUserData();
-    editText.setText(isEdit ? "Save" : "Edit");
+    editText.setText(isEdit ? getString(R.string.save) : getString(R.string.edit));
     cancelText.setVisibility(isEdit ? View.VISIBLE : View.GONE);
     nameEdit.setEnabled(isEdit);
     nameEdit.setSelection(nameEdit.getText().length());
@@ -284,9 +286,9 @@ public class ProfileFragment extends BaseFragment {
     public void onClick(View view) {
       switch (view.getId()) {
       case R.id.text_edit:
-        if (editText.getText().toString().equals("Save")) {
+        if (editText.getText().toString().equals(getString(R.string.save))) {
           updateProfile();
-        } else if (editText.getText().toString().equals("Edit")) {
+        } else if (editText.getText().toString().equals(R.string.edit)) {
           setEditable(true);
         }
         break;

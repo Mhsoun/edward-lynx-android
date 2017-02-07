@@ -98,7 +98,8 @@ public class SurveyQuestionsAdapter extends
         }
 
         if (question.isNA == 1) {
-          createRadioButton(holder.radioGroup, context, "N/A", -1);
+          createRadioButton(holder.radioGroup, context, context.getString(R.string.not_available),
+              -1);
         }
 
         if (question.value != null) {

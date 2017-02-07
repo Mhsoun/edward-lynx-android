@@ -15,7 +15,6 @@
         android:id="@+id/text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edward"
         android:textColor="@color/white"
         android:textSize="17sp"
         android:textStyle="bold"/>
@@ -24,7 +23,6 @@
         android:id="@+id/text_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="asdasdasd"
         android:textColor="@color/white"
         android:textSize="13sp"/>
   </LinearLayout>

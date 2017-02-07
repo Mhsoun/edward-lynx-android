@@ -130,7 +130,7 @@ public class AnswerFeedbackActivity extends BaseActivity {
           @Override
           public void onNext(Response response) {
             LogUtil.e("AAA onNext");
-            Toast.makeText(AnswerFeedbackActivity.this, "Instant Feedback submitted",
+            Toast.makeText(AnswerFeedbackActivity.this, getString(R.string.instant_feed_submitted),
                 Toast.LENGTH_SHORT).show();
           }
         }));

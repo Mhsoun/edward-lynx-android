@@ -137,7 +137,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
     LogUtil.e("AAA id " + id);
     LogUtil.e("AAA " + param.toString());
-    submitText.setText("Loading. . .");
+    submitText.setText(getString(R.string.loading));
     subscription.add(Shared.apiClient.postAnswerSurvey(id, param,
         new Subscriber<Response>() {
           @Override
@@ -148,17 +148,17 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
           @Override
           public void onError(Throwable e) {
-            submitText.setText("Submit");
+            submitText.setText(R.string.submit);
             LogUtil.e("AAA onError" + e);
-            Toast.makeText(SurveyQuestionsActivity.this, "An error occured. Try again later.",
+            Toast.makeText(SurveyQuestionsActivity.this, getString(R.string.cant_connect),
                 Toast.LENGTH_SHORT).show();
           }
 
           @Override
           public void onNext(Response response) {
             LogUtil.e("AAA onNext");
-            Toast.makeText(SurveyQuestionsActivity.this, "Survey answers submitted",
-                Toast.LENGTH_SHORT).show();
+            Toast.makeText(SurveyQuestionsActivity.this,
+                getString(R.string.survey_answers_submitted), Toast.LENGTH_SHORT).show();
           }
         }));
 

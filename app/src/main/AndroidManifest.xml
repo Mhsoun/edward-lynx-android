@@ -26,78 +26,78 @@
         android:screenOrientation="portrait"/>
     <activity
         android:name=".activities.MainActivity"
-        android:label="@string/dashboard"
+        android:label="@string/dashboard_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme.NoActionBar"/>
     <activity
         android:name=".activities.ChangePasswordActivity"
-        android:label="@string/title_activity_change_password"
+        android:label="@string/change_password_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.SurveyQuestionsActivity"
-        android:label="SURVEY QUESTIONS"
+        android:label="@string/survey_questions_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.CreateFeedbackActivity"
-        android:label="CREATE INSTANT FEEDBACK"
+        android:label="@string/create_instant_feedback_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.InviteActivity"
-        android:label="INVITE"
+        android:label="@string/invite_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.FeedbackRequestsActivity"
-        android:label="INSTANT FEEDBACK REQUESTS"
+        android:label="@string/instant_feedback_requests_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.ReportsActivity"
-        android:label="REPORTS"
+        android:label="@string/reports_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.AnswerFeedbackActivity"
-        android:label="INSTANT FEEDBACK"
+        android:label="@string/instant_feedback_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.InstantFeedbackReportActivity"
-        android:label="INSTANT FEEDBACK ANSWERS"
+        android:label="@string/instant_feedback_answers_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.ShareReportActivity"
-        android:label="SHARE REPORT"
+        android:label="@string/share_report_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.CreateDevelopmentPlanActivity"
-        android:label="CREATE DEVELOPMENT PLAN"
+        android:label="@string/create_development_plan_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.CreateDetailedDevelopmentPlanActivity"
-        android:label="DETAILS"
+        android:label="@string/reports_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.DevelopmentPlanDetailedActivity"
-        android:label="DEVELOPMENT PLAN"
+        android:label="@string/development_plan_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>

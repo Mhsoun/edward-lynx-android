@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -48,10 +49,10 @@ public class DevelopmenPlansFragment extends BaseFragment {
   protected DevelopmentPlanListFragment unfinishedFragment;
   protected DevelopmentPlanListFragment completedFragment;
 
-  public static DevelopmenPlansFragment newInstance() {
+  public static DevelopmenPlansFragment newInstance(Context ctx) {
     DevelopmenPlansFragment fragment = new DevelopmenPlansFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", "DEVELOPMENT PLANS");
+    bundle.putString("title", ctx.getString(R.string.development_plans_bold));
     fragment.setArguments(bundle);
     return fragment;
   }

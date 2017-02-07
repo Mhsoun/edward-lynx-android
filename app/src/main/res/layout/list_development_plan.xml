@@ -13,7 +13,6 @@
       android:id="@+id/text_name"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Edward"
       android:textColor="@color/white"
       android:textSize="17sp"
       android:textStyle="bold"/>
@@ -27,7 +26,6 @@
         android:id="@+id/text_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edward"
         android:textColor="@color/white"
         android:textSize="10sp"
         android:textStyle="bold"/>
@@ -38,7 +36,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:text="2 days ago"
         android:textColor="@color/unfinished_status"
         android:textSize="10sp"
         android:textStyle="bold"

@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -36,10 +37,10 @@ public class ChangePasswordFragment extends BaseFragment {
   private EditText rePasswordEdit;
   private TextView saveText;
 
-  public static ChangePasswordFragment newInstance() {
+  public static ChangePasswordFragment newInstance(Context ctx) {
     ChangePasswordFragment fragment = new ChangePasswordFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", "CHANGE PASSWORD");
+    bundle.putString("title", ctx.getString(R.string.change_password_bold));
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -101,7 +102,7 @@ public class ChangePasswordFragment extends BaseFragment {
       subscription.add(Shared.apiClient.updateUser(body, new Subscriber<User>() {
         @Override
         public void onCompleted() {
-          saveText.setText("Save");
+          saveText.setText(getString(R.string.save));
           oldPasswordEdit.setText("");
           newPasswordEdit.setText("");
           rePasswordEdit.setText("");
@@ -110,7 +111,7 @@ public class ChangePasswordFragment extends BaseFragment {
 
         @Override
         public void onError(Throwable e) {
-          saveText.setText("Save");
+          saveText.setText(getString(R.string.save));
           if (!NetUtil.hasActiveConnection(getActivity())) {
             Toast.makeText(getActivity(), getString(R.string.no_internet_connection),
                 Toast.LENGTH_SHORT).show();
@@ -132,9 +133,8 @@ public class ChangePasswordFragment extends BaseFragment {
 
         @Override
         public void onNext(User userResponse) {
-
-          Toast.makeText(getActivity(), "Password updated", Toast.LENGTH_SHORT).show();
-
+          Toast.makeText(getActivity(), getString(R.string.password_updated), Toast.LENGTH_SHORT)
+              .show();
         }
       }));
     }

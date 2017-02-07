@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Survey name"
         android:textColor="@color/white"
         android:textSize="15sp"/>
 
@@ -26,7 +25,6 @@
         android:id="@+id/text_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description"
         android:textColor="@color/white"
         android:textSize="12sp"/>
   </LinearLayout>

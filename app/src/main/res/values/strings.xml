@@ -5,32 +5,50 @@
   <string name="client_id">2</string>
   <string name="client_secret">jNl8Akpv79hORetW7jCMCQnKQjwiB6XerZxIxcsy</string>
 
-  <string-array name="answer_type">
-    <item>Numeric 1&#8211;5 scale</item>
-    <item>Numeric 1&#8211;10 scale</item>
-    <item>Agreement scale</item>
-    <item>Yes or No</item>
-    <item>Strong Agreement scale</item>
-    <item>Custom text</item>
-    <item>Reverse Agreement scale</item>
-    <item>Numeric 1&#8211;10 scale with Explanation</item>
-    <item>Custom scale</item>
-  </string-array>
-
   <string name="error">Error</string>
   <string name="no_internet_connection">No Internet Connection</string>
   <string name="cant_connect">Can\'t connect to server. Try again later</string>
 
+  <string name="drawer_dashboard">Dashboard</string>
+  <string name="drawer_profile">Profile</string>
+  <string name="drawer_surveys">Surveys</string>
+  <string name="drawer_development_plans">Development Plans</string>
+  <string name="drawer_settings">Settings</string>
+  <string name="drawer_logout">Logout</string>
+
   <string name="title_key">title</string>
-  <string name="dashboard">DASHBOARD</string>
-  <string name="surveys">SURVEYS</string>
+  <string name="dashboard_bold">DASHBOARD</string>
+  <string name="surveys_bold">SURVEYS</string>
+  <string name="change_password_bold">CHANGE PASSWORD</string>
+  <string name="development_plans_bold">DEVELOPMENT PLANS</string>
+  <string name="profile_bold">PROFILE</string>
+  <string name="survey_questions_bold">SURVEY QUESTIONS</string>
+  <string name="create_instant_feedback_bold">CREATE INSTANT FEEDBACK</string>
+  <string name="invite_bold">INVITE</string>
+  <string name="instant_feedback_requests_bold">INSTANT FEEDBACK REQUESTS</string>
+  <string name="reports_bold">REPORTS</string>
+  <string name="instant_feedback_bold">INSTANT FEEDBACK</string>
+  <string name="instant_feedback_answers_bold">INSTANT FEEDBACK ANSWERS</string>
+  <string name="share_report_bold">SHARE REPORT</string>
+  <string name="create_development_plan_bold">CREATE DEVELOPMENT PLAN</string>
+  <string name="details_bold">DETAILS</string>
+  <string name="development_plan_bold">DEVELOPMENT PLAN</string>
 
   // region Answer type label
   <string name="yes_or_no">Yes or No</string>
   <string name="free_text">Free text</string>
   <string name="numeric_1_to_10">Numeric 1&#8211;10 scale</string>
   <string name="custom_scale">Custom Scale</string>
+  <string name="not_available">N/A</string>
 
+  <string name="yes_or_no_description">Yes or no answer.</string>
+  <string name="text_description">The question is answered with text.</string>
+  <string name="custom_scale_description">Custom scale.</string>
+  <string name="numeric_1_10_description">A numeric scale from 1-10 where 1 means the lowest and 10 is the highest.</string>
+
+  // region answer feedback
+  <string name="instant_feed_submitted">Instant Feedback submitted</string>
+  <string name="total_answers">Total answers: %1$d</string>
 
   // region Create instant feedback
   <string name="question">Question</string>
@@ -43,6 +61,7 @@
   <string name="question_required_label">Question is required</string>
   <string name="answer_required_label">Answer type is required</string>
   <string name="custom_scale_required_label">Custom scale input is required</string>
+  <string name="survey_answers_submitted">Survey answers submitted</string>
 
   <string name="loading">Loading. . .</string>
 
@@ -64,18 +83,23 @@
 
   // region Change password
   <string name="change_password">Change Password</string>
-  <string name="change_password_bold">CHANGE PASSWORD</string>
   <string name="current_password">Current Password</string>
   <string name="new_password">New Password</string>
   <string name="re_new_password">New Password (Again)</string>
   <string name="old_password_required">Old password is required</string>
   <string name="new_password_required">New password is required</string>
   <string name="password_not_match">Password does not match</string>
+  <string name="password_updated">Password updated</string>
 
   // region Create Development plan
   <string name="create_development_plan_name">Development Plan Name</string>
+  <string name="action_plan_required">Action plan name is required</string>
+  <string name="development_plan_created">Development plan created</string>
   <string name="list">List</string>
   <string name="done">Done</string>
+  <string name="no_actions_added">No Actions added</string>
+  <string name="no_goals_added">No Goals added</string>
+
 
   // region Create Development plan Detailed
   <string name="name">Name</string>
@@ -84,11 +108,15 @@
   <string name="remind_me_on_day">Remind me on day</string>
   <string name="link_to_categroy">Link to a category</string>
   <string name="save">Save</string>
+  <string name="edit">Edit</string>
   <string name="submit">Submit</string>
+
+  // region Development plan details
+  <string name="completed_details">%1$d / %2$d completed</string>
 
   // region Invite to answer
   <string name="create_instant_feedback">Create Instant Feedback</string>
-  <string name="number_people_selected">No. of people selected: </string>
+  <string name="number_people_selected">No. of people selected: %1$d</string>
   <string name="select_all">Select all</string>
   <string name="deselect_all">Deselect all</string>
   <string name="invite_by_email">Invite people by email</string>
@@ -98,12 +126,26 @@
   <string name="add_email">Add email</string>
   <string name="select_atleast_one">Please select atleast one</string>
   <string name="instant_feedback_created">Instant Feedback created</string>
+  <string name="existing_option">There is an existing option</string>
 
   <string name="share">Share</string>
-
+  <string name="please_select_one">Please select atleast one</string>
+  <string name="shared_to_other_people">Shared to other people</string>
 
   // region profile
-  <string name="first_name_required">Name is required</string>
+  <string name="name_required">Name is required</string>
+  <string name="other">other</string>
+  <string name="gender_required">Gender is required</string>
+  <string name="user_updated">User updated</string>
+  <string name="male">male</string>
+  <string name="female">female</string>
+  <string name="position">Position</string>
+  <string name="department">Department</string>
+  <string name="role">Role</string>
+  <string name="gender">Gender</string>
+  <string name="input_gender">Input gender</string>
+  <string name="country">Country</string>
+  <string name="city">City</string>
 
   // Dashboard
   <string name="status">STATUS</string>
@@ -111,10 +153,18 @@
 
   <string name="navigation_drawer_open">Open navigation drawer</string>
   <string name="navigation_drawer_close">Close navigation drawer</string>
-  <string name="title_activity_profile">Profile</string>
-  <string name="title_activity_change_password">CHANGE PASSWORD</string>
 
   <string name="logout_confirmation_message">Are you sure you want to log out? Your credentials will be required to open the app again.</string>
   <string name="logout">Logout</string>
   <string name="cancel">Cancel</string>
+
+  <string name="confirmation">Confirmation</string>
+  <string name="complete_action_message">Complete the action, %1$s?</string>
+  <string name="complete">Complete</string>
+
+  // region survey
+  <string name="end_date">End date: %1$s</string>
+
+  <string name="no_data_found">No data found</string>
+  <string name="question_label">Question: </string>
 </resources>

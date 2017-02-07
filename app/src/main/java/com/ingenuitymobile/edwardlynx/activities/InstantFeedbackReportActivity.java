@@ -132,7 +132,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
             data.clear();
             data.addAll(response.frequencies);
             adapter.setTotalAnswers(response.totalAnswers);
-            answerCountText.setText("Total answers: " + response.totalAnswers);
+            answerCountText.setText(getString(R.string.total_answers, response.totalAnswers));
             emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
           }
         }));

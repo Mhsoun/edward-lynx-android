@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="No Actions added"
+            android:text="@string/no_actions_added"
             android:textColor="@color/white"
             android:visibility="gone"/>
       </RelativeLayout>
@@ -206,7 +206,6 @@
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:prompt="@array/answer_type"
             android:visibility="gone"/>
       </RelativeLayout>
     </LinearLayout>

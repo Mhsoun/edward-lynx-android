@@ -12,7 +12,6 @@
         android:id="@+id/text_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Important survey sample"
         android:textColor="@color/white"
         android:textSize="16sp"/>
 

@@ -82,7 +82,7 @@ public class DevelopmentPlanAdapter extends
       }
     }
 
-    holder.countText.setText(count + " / " + size + " completed");
+    holder.countText.setText(context.getString(R.string.completed_details, count, size));
     holder.progressBar.setProgress(
         (int) (((float) (count) / (float) size) * 100));
     holder.progressBar.setScaleY(3f);
