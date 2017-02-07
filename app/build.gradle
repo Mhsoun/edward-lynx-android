@@ -63,6 +63,9 @@ dependencies {
   // https://github.com/florent37/SingleDateAndTimePicker
   compile 'com.github.florent37:singledateandtimepicker:1.0.4'
 
+  // Firabase messaging
+  compile 'com.google.firebase:firebase-messaging:9.4.0'
+
   // Expandable recycler adapter
   // https://bignerdranch.github.io/expandable-recycler-view/
   compile 'com.bignerdranch.android:expandablerecyclerview:2.1.1'

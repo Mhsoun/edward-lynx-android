@@ -49,6 +49,7 @@ public class MainActivity extends BaseActivity implements
       DashboardFragment fragment = DashboardFragment.newInstance();
       changeFragment(fragment);
     }
+    checkIntent();
   }
 
   @Override
@@ -147,6 +148,26 @@ public class MainActivity extends BaseActivity implements
     Crashlytics.setUserIdentifier(String.valueOf(Shared.user.id));
     Crashlytics.setUserEmail(Shared.user.email);
     Crashlytics.setUserName(Shared.user.name);
+  }
+
+  private void checkIntent() {
+    if (getIntent().getExtras() != null) {
+      final Bundle bundle = getIntent().getExtras();
+      final String type = bundle.getString("type");
+      Intent intent = null;
+      if (type.equals(Shared.DEV_PLAN)) {
+        intent = new Intent(context, DevelopmentPlanDetailedActivity.class);
+      } else if (type.equals(Shared.INSTANT_FEEDBACK_REQUEST)) {
+        intent = new Intent(context, AnswerFeedbackActivity.class);
+      } else if (type.equals(Shared.SURVEY)) {
+        intent = new Intent(context, SurveyQuestionsActivity.class);
+      }
+      if (intent != null) {
+        intent.putExtra("id", Long.parseLong(bundle.getString("id")
+        ));
+        startActivity(intent);
+      }
+    }
   }
 }
 

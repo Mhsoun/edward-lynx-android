@@ -64,7 +64,43 @@ public class DashboardFragment extends BaseFragment {
   @Override
   public void onResume() {
     super.onResume();
-    LogUtil.e("AAA onResume srvy");
+    LogUtil.e("AAA onResume dashboard");
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    LogUtil.e("AAA  onPause dashboard");
+  }
+
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    LogUtil.e("AAA  onDestroyView dashboard");
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    LogUtil.e("AAA  onDestroy dashboard");
+  }
+
+  @Override
+  public void onDetach() {
+    super.onDetach();
+    LogUtil.e("AAA  onDetach dashboard");
+  }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+    LogUtil.e("AAA  onStart dashboard");
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    LogUtil.e("AAA  onStop dashboard ");
   }
 
   private void initViews() {

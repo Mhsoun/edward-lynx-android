@@ -84,6 +84,7 @@
   <string name="remind_me_on_day">Remind me on day</string>
   <string name="link_to_categroy">Link to a category</string>
   <string name="save">Save</string>
+  <string name="submit">Submit</string>
 
   // region Invite to answer
   <string name="create_instant_feedback">Create Instant Feedback</string>

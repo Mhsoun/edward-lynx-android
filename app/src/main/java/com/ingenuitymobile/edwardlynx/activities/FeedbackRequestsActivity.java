@@ -102,7 +102,6 @@ public class FeedbackRequestsActivity extends BaseActivity {
     public void onSelect(long id, String key) {
       Intent intent = new Intent(context, AnswerFeedbackActivity.class);
       intent.putExtra("id", id);
-      intent.putExtra("key", key);
       startActivity(intent);
     }
   };

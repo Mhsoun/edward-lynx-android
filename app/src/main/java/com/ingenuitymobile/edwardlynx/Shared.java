@@ -15,6 +15,11 @@ import java.util.List;
  */
 
 public class Shared {
+  public static final String UPDATE_DASHBOARD = "update-dashboard";
+
+  public static final String DEV_PLAN                 = "dev-plan";
+  public static final String INSTANT_FEEDBACK_REQUEST = "instant-feedback-request";
+  public static final String SURVEY                   = "survey";
 
   public static ApiClient apiClient;
 

@@ -1,11 +1,17 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.inputmethod.InputMethodManager;
 
+import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import rx.subscriptions.CompositeSubscription;
@@ -31,6 +37,19 @@ public class BaseActivity extends AppCompatActivity {
   }
 
   @Override
+  protected void onResume() {
+    super.onResume();
+    LocalBroadcastManager.getInstance(this).registerReceiver(notiffMain,
+        new IntentFilter(Shared.UPDATE_DASHBOARD));
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    LocalBroadcastManager.getInstance(this).unregisterReceiver(notiffMain);
+  }
+
+  @Override
   protected void onDestroy() {
     super.onDestroy();
     if (subscription.hasSubscriptions()) {
@@ -52,4 +71,16 @@ public class BaseActivity extends AppCompatActivity {
       LogUtil.e("Error in hiding keyboard", e);
     }
   }
+
+  private BroadcastReceiver notiffMain = new BroadcastReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+      LogUtil.e("AAA Receive from main");
+      AlertDialog.Builder alertBuilder = new AlertDialog.Builder(BaseActivity.this);
+      alertBuilder.setTitle(intent.getExtras().getString("title"));
+      alertBuilder.setMessage(intent.getExtras().getString("message"));
+      alertBuilder.setPositiveButton(getString(android.R.string.ok), null);
+      alertBuilder.create().show();
+    }
+  };
 }

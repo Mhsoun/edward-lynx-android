@@ -5,6 +5,7 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.TokenParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
@@ -131,6 +132,18 @@ public class ApiClient {
           @Override
           public void onPostAgain() {
             updateUser(body, subscriber);
+          }
+        }));
+  }
+
+  public Subscription postTokenDevice(final TokenParam param,
+      final Subscriber<Response> subscriber) {
+    return service.postTokenDevice(param)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            postTokenDevice(param, subscriber);
           }
         }));
   }

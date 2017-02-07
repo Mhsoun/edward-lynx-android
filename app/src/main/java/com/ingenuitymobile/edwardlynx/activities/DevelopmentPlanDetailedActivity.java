@@ -55,6 +55,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     id = getIntent().getLongExtra("id", 0L);
+    LogUtil.e("AAA id" + id);
     initViews();
   }
 
@@ -97,7 +98,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
       @Override
       public void onError(Throwable e) {
-        LogUtil.e("AAA onError getData");
+        LogUtil.e("AAA onError getData " + e);
       }
 
       @Override

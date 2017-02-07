@@ -5,6 +5,7 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.TokenParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
@@ -56,6 +57,10 @@ public interface Service {
   @Headers("Content-Type: application/json")
   @PATCH("/api/v1/user")
   Observable<User> updateProfile(@Body UserBody body);
+
+  @Headers("Content-Type: application/json")
+  @POST("/api/v1/user/devices")
+  Observable<Response> postTokenDevice(@Body TokenParam param);
 
   @GET("/api/v1/surveys")
   Observable<Surveys> getSurveys(@Query("page") int page);

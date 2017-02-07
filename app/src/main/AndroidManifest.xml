@@ -102,9 +102,25 @@
         android:theme="@style/AppTheme">
     </activity>
 
+    <service
+        android:name=".services.MyGcmListenerService">
+      <intent-filter>
+        <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+      </intent-filter>
+    </service>
+
+    <service
+        android:name=".services.MyInstanceIDListenerService">
+      <intent-filter>
+        <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+      </intent-filter>
+    </service>
+    <service
+        android:name=".services.DeleteTokenService">
+    </service>
+
     <meta-data
         android:name="io.fabric.ApiKey"
         android:value="7c67a5365060930052205dfdf95102678ef19047"/>
   </application>
-
 </manifest>

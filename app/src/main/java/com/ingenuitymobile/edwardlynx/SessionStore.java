@@ -13,10 +13,11 @@ public class SessionStore {
 
   private static final String NAME = "edwardlynx-session";
 
-  private static final String ACCESS_TOKEN  = "accessToken";
-  private static final String REFRESH_TOKEN = "refreshToken";
-  private static final String USERNAME      = "username";
-  private static final String PASSWORD      = "password";
+  private static final String ACCESS_TOKEN   = "accessToken";
+  private static final String REFRESH_TOKEN  = "refreshToken";
+  private static final String FIREBASE_TOKEN = "firebaseToken";
+  private static final String USERNAME       = "username";
+  private static final String PASSWORD       = "password";
 
 
   static boolean restore(ApiClient apiClient, Context context) {
@@ -81,5 +82,19 @@ public class SessionStore {
     final SharedPreferences savedUserId = context.getSharedPreferences(NAME,
         Context.MODE_PRIVATE);
     return savedUserId.getString(PASSWORD, "");
+  }
+
+  public static boolean saveFirebaseToken(String accessToken, Context context) {
+    final SharedPreferences.Editor editor = context
+        .getSharedPreferences(NAME, Context.MODE_PRIVATE)
+        .edit()
+        .putString(FIREBASE_TOKEN, accessToken);
+    return editor.commit();
+  }
+
+  public static String restoreFirebaseToken(Context context) {
+    final SharedPreferences savedUserId = context.getSharedPreferences(NAME,
+        Context.MODE_PRIVATE);
+    return savedUserId.getString(FIREBASE_TOKEN, null);
   }
 }

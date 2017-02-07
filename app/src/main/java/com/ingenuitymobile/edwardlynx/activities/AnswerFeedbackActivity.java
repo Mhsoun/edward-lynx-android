@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
@@ -52,7 +53,6 @@ public class AnswerFeedbackActivity extends BaseActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     id = getIntent().getLongExtra("id", 0L);
-    key = getIntent().getStringExtra("key");
 
     initViews();
     getData();
@@ -99,17 +99,20 @@ public class AnswerFeedbackActivity extends BaseActivity {
         LogUtil.e("AAA onNext ");
         data.clear();
         data.addAll(feedback.questions);
+        key = feedback.key;
       }
     }));
   }
 
   public void submit(View v) {
+    final TextView textView = (TextView) v;
     AnswerParam param = new AnswerParam();
     param.answers = bodies;
     param.key = key;
 
     LogUtil.e("AAA " + param.toString());
     LogUtil.e("AAA id + " + id);
+    textView.setText(getString(R.string.loading));
     subscription.add(
         Shared.apiClient.postInstantFeedbackAnswers(id, param, new Subscriber<Response>() {
           @Override
@@ -120,6 +123,7 @@ public class AnswerFeedbackActivity extends BaseActivity {
 
           @Override
           public void onError(Throwable e) {
+            textView.setText(getString(R.string.submit));
             LogUtil.e("AAA onError");
           }
 
