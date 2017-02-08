@@ -124,7 +124,7 @@ public class AnswerFeedbackActivity extends BaseActivity {
           @Override
           public void onError(Throwable e) {
             textView.setText(getString(R.string.submit));
-            LogUtil.e("AAA onError");
+            LogUtil.e("AAA onError " + e);
           }
 
           @Override

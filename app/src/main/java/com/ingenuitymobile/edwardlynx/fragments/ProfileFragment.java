@@ -288,7 +288,7 @@ public class ProfileFragment extends BaseFragment {
       case R.id.text_edit:
         if (editText.getText().toString().equals(getString(R.string.save))) {
           updateProfile();
-        } else if (editText.getText().toString().equals(R.string.edit)) {
+        } else if (editText.getText().toString().equals(getString(R.string.edit))) {
           setEditable(true);
         }
         break;

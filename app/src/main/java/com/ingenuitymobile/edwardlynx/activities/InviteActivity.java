@@ -79,7 +79,7 @@ public class InviteActivity extends InviteBaseActivity {
         @Override
         public void onError(Throwable e) {
           textView.setText(getString(R.string.create_instant_feedback));
-          LogUtil.e("AAA onError");
+          LogUtil.e("AAA onError " + e);
         }
 
         @Override

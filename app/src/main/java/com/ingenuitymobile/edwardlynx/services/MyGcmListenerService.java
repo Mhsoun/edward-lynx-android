@@ -26,6 +26,9 @@ public class MyGcmListenerService extends FirebaseMessagingService {
     // Check if message contains a data payload.
     LogUtil.e("AAA Receive notification");
     if (remoteMessage.getData().size() > 0) {
+      // delay
+      try { Thread.sleep(3000);} catch (InterruptedException e) {}
+
       LogUtil.e("AAA id " + remoteMessage.getData().get("id"));
       LogUtil.e("AAA type " + remoteMessage.getData().get("type"));
 
