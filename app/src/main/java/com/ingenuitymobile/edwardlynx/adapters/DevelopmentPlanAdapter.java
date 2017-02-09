@@ -2,6 +2,7 @@ package com.ingenuitymobile.edwardlynx.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,6 +87,16 @@ public class DevelopmentPlanAdapter extends
     holder.progressBar.setProgress(
         (int) (((float) (count) / (float) size) * 100));
     holder.progressBar.setScaleY(3f);
+
+    if (holder.progressBar.getProgress() == 100) {
+      holder.progressBar
+          .getProgressDrawable()
+          .setColorFilter(context.getResources().getColor(R.color.dashboard_green),
+              PorterDuff.Mode.SRC_OUT);
+    } else {
+      holder.progressBar.getProgressDrawable().clearColorFilter();
+    }
+
 
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override

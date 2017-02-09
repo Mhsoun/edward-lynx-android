@@ -18,6 +18,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
+import com.ingenuitymobile.edwardlynx.fragments.PopupDialogFragment;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import rx.Subscriber;
 public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
   private long id;
+  private long goalId;
 
   private RecyclerView    recyclerView;
   private GoalAdapter     adapter;
@@ -40,6 +42,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
   public DevelopmentPlanDetailedActivity() {
     data = new ArrayList<>();
+    goalId = 0L;
   }
 
   @Override
@@ -94,6 +97,18 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         if (dialog != null) {
           dialog.dismiss();
         }
+
+        if (goalId != 0L) {
+          for (final Goal goal : data) {
+            LogUtil.e("AAA loop");
+            if (goal.id == goalId && goal.checked == 1) {
+              PopupDialogFragment dialogFragment = PopupDialogFragment.newInstance(goal.title,
+                  getString(R.string.goal_completed), getString(R.string.label_popup));
+              dialogFragment.show(getSupportFragmentManager(), "Popup");
+              return;
+            }
+          }
+        }
       }
 
       @Override
@@ -115,6 +130,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
   }
 
   private void patchAction(long goalId, long actionId, ActionParam param) {
+    this.goalId = goalId;
     dialog = ProgressDialog.show(context, "", getString(R.string.loading));
 
     LogUtil.e("AAA " + param.toString());

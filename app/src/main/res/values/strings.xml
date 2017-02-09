@@ -167,4 +167,9 @@
 
   <string name="no_data_found">No data found</string>
   <string name="question_label">Question: </string>
+
+  // popup
+  <string name="goal_completed">Goal Completed</string>
+  <string name="label_popup">You\'ve got the right mix of dedication and\nenthusiasm. Keep it up</string>
+  <string name="thanks">Thanks</string>
 </resources>
