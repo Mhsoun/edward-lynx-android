@@ -129,7 +129,7 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
 
     hideKeyboard();
     if (data.isEmpty()) {
-      Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+      Toast.makeText(context, getString(R.string.goals_added), Toast.LENGTH_SHORT).show();
       return;
     }
 

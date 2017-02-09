@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -109,9 +108,6 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     emptyText = (TextView) findViewById(R.id.text_empty_state);
     final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_action_plan);
 
-    final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
-        LinearLayoutManager.VERTICAL);
-    recyclerView.addItemDecoration(dividerItemDecoration);
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -226,6 +222,12 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
       param.description = description;
     }
 
+    if (param.actions.isEmpty()) {
+      Toast.makeText(context, getString(R.string.goal_action_added), Toast.LENGTH_SHORT)
+          .show();
+      return;
+    }
+
     for (int x = 0; x < param.actions.size(); x++) {
       param.actions.get(x).position = x;
     }
@@ -249,19 +251,15 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
       if (actionId == EditorInfo.IME_ACTION_DONE) {
         final String name = addPlanEdit.getText().toString();
-        if (TextUtils.isEmpty(name)) {
-          Toast.makeText(context, getString(R.string.action_plan_required), Toast.LENGTH_SHORT)
-              .show();
-          return false;
+        if (!TextUtils.isEmpty(name)) {
+          ActionParam actionParam = new ActionParam();
+          actionParam.title = name;
+          param.actions.add(actionParam);
+          hideKeyboard();
+          notifyAdapter();
+          addPlanEdit.setText("");
+          addPlanLayout.setVisibility(View.GONE);
         }
-
-        ActionParam actionParam = new ActionParam();
-        actionParam.title = name;
-        param.actions.add(actionParam);
-        hideKeyboard();
-        notifyAdapter();
-        addPlanEdit.setText("");
-        addPlanLayout.setVisibility(View.GONE);
         return true;
       }
       return false;
