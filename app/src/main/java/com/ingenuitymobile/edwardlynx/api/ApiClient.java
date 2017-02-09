@@ -20,6 +20,7 @@ import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
+import com.squareup.okhttp.OkHttpClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +28,7 @@ import java.util.Map;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
+import retrofit.client.OkClient;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -68,7 +70,9 @@ public class ApiClient {
   }
 
   private Service createRetrofitService(final String accessToken) {
+    OkHttpClient okHttpClient = new OkHttpClient();
     return new RestAdapter.Builder()
+        .setClient(new OkClient(okHttpClient))
         .setEndpoint(baseUrl)
         .setRequestInterceptor(new RequestInterceptor() {
           @Override
@@ -313,7 +317,7 @@ public class ApiClient {
 
   public Subscription postDevelopmentPlans(final CreateDevelopmentPlanParam param,
       final Subscriber<Response> subscriber) {
-    return service.posttDevelopmentPlans(param)
+    return service.postDevelopmentPlans(param)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override

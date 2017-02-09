@@ -58,6 +58,9 @@ dependencies {
   compile 'io.reactivex:rxjava:1.0.+'
   compile 'io.reactivex:rxandroid:0.23.+'
   compile 'com.squareup.retrofit:retrofit:1.9.+'
+  compile 'com.squareup.okhttp:okhttp:+'
+  compile 'com.squareup.okhttp:okhttp-urlconnection:+'
+  compile 'com.squareup.okio:okio:+'
 
   // single date picker
   // https://github.com/florent37/SingleDateAndTimePicker

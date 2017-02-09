@@ -40,6 +40,7 @@ import rx.Observable;
 
 public interface Service {
 
+  // region Authentication
   @FormUrlEncoded
   @POST("/oauth/token")
   Observable<Authentication> postLogin(@FieldMap Map<String, String> map);
@@ -47,7 +48,9 @@ public interface Service {
   @FormUrlEncoded
   @POST("/oauth/token")
   Authentication postRefreshToken(@FieldMap Map<String, String> names);
+  // endregion
 
+  // region Users
   @GET("/api/v1/user")
   Observable<User> getMe();
 
@@ -61,7 +64,9 @@ public interface Service {
   @Headers("Content-Type: application/json")
   @POST("/api/v1/user/devices")
   Observable<Response> postTokenDevice(@Body TokenParam param);
+  // endregion
 
+  // region Surveys
   @GET("/api/v1/surveys")
   Observable<Surveys> getSurveys(@Query("page") int page);
 
@@ -81,7 +86,9 @@ public interface Service {
 
   @GET("/api/v1/surveys/{id}/questions")
   Observable<Questions> getSurveyQuestions(@Path("id") long id);
+  // endregion
 
+  // region InstantFeedback
   @Headers("Content-Type: application/json")
   @POST("/api/v1/instant-feedbacks")
   Observable<Response> postInstantFeedback(@Body InstantFeedbackBody body);
@@ -102,7 +109,9 @@ public interface Service {
   @Headers("Content-Type: application/json")
   @POST("/api/v1/instant-feedbacks/{id}/shares")
   Observable<Response> postShareInstantFeedback(@Path("id") long id, @Body ShareParam param);
+  // endregion
 
+  // region Development Plan
   @GET("/api/v1/dev-plans")
   Observable<DevelopmentPlansResponse> getDevelopmentPlans();
 
@@ -111,10 +120,11 @@ public interface Service {
 
   @Headers("Content-Type: application/json")
   @POST("/api/v1/dev-plans")
-  Observable<Response> posttDevelopmentPlans(@Body CreateDevelopmentPlanParam body);
+  Observable<Response> postDevelopmentPlans(@Body CreateDevelopmentPlanParam body);
 
   @Headers("Content-Type: application/json")
   @PATCH("/api/v1/dev-plans/{planId}/goals/{goalId}/actions/{actionId}")
   Observable<Response> updateActionPlan(@Path("planId") long planId, @Path("goalId") long goalId,
       @Path("actionId") long actionId, @Body ActionParam body);
+  // endregion
 }
