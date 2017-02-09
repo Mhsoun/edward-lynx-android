@@ -12,8 +12,13 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.activities.AnswerFeedbackActivity;
+import com.ingenuitymobile.edwardlynx.activities.DevelopmentPlanDetailedActivity;
 import com.ingenuitymobile.edwardlynx.activities.SplashActivity;
+import com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+
+import static android.app.Notification.PRIORITY_MAX;
 
 /**
  * Created by mEmEnG-sKi on 06/02/2017.
@@ -26,9 +31,6 @@ public class MyGcmListenerService extends FirebaseMessagingService {
     // Check if message contains a data payload.
     LogUtil.e("AAA Receive notification");
     if (remoteMessage.getData().size() > 0) {
-      // delay
-      try { Thread.sleep(3000);} catch (InterruptedException e) {}
-
       LogUtil.e("AAA id " + remoteMessage.getData().get("id"));
       LogUtil.e("AAA type " + remoteMessage.getData().get("type"));
 
@@ -42,33 +44,63 @@ public class MyGcmListenerService extends FirebaseMessagingService {
 
       Intent intent = new Intent(Shared.UPDATE_DASHBOARD);
 
-
       Bundle bundle = new Bundle();
       bundle.putString("title", title);
       bundle.putString("message", message);
       bundle.putString("type", type);
       bundle.putString("id", id);
 
-      intent.putExtras(bundle);
-      if (!LocalBroadcastManager.getInstance(this).sendBroadcast(intent)) {
+      final boolean isActive = LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+
+      switch (type) {
+      case Shared.DEV_PLAN:
+        intent = new Intent(this, DevelopmentPlanDetailedActivity.class);
+        break;
+      case Shared.INSTANT_FEEDBACK_REQUEST:
+        intent = new Intent(this, AnswerFeedbackActivity.class);
+        break;
+      case Shared.SURVEY:
+        intent = new Intent(this, SurveyQuestionsActivity.class);
+        break;
+      default:
         intent = new Intent(this, SplashActivity.class);
-        intent.putExtras(bundle);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */,
-            intent, PendingIntent.FLAG_ONE_SHOT);
-
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle(title)
-            .setContentText(message)
-            .setAutoCancel(true)
-            .setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager =
-            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
       }
+
+      intent.putExtras(bundle);
+      intent.putExtra("id", Long.parseLong(id));
+
+      final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+          isActive ? PendingIntent.FLAG_CANCEL_CURRENT : PendingIntent.FLAG_ONE_SHOT);
+
+      final NotificationManager notificationManager =
+          (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+      final NotificationCompat.Builder notificationBuilder = getNotificationBuilder(isActive,
+          pendingIntent, title, message);
+
+      notificationManager.notify(0, notificationBuilder.build());
+    }
+  }
+
+  public NotificationCompat.Builder getNotificationBuilder(boolean isActive,
+      PendingIntent pendingIntent, String title, String message) {
+    if (isActive) {
+      return new NotificationCompat.Builder(this)
+          .setPriority(PRIORITY_MAX)
+          .setVibrate(new long[]{100, 100, 100, 100, 100})
+          .setSmallIcon(R.mipmap.ic_launcher)
+          .setWhen(System.currentTimeMillis())
+          .setAutoCancel(true)
+          .setContentTitle(title)
+          .setContentText(message)
+          .setContentIntent(pendingIntent);
+    } else {
+      return new NotificationCompat.Builder(this)
+          .setSmallIcon(R.mipmap.ic_launcher)
+          .setContentTitle(title)
+          .setContentText(message)
+          .setAutoCancel(false)
+          .setContentIntent(pendingIntent);
     }
   }
 }

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.inputmethod.InputMethodManager;
 
@@ -75,12 +74,6 @@ public class BaseActivity extends AppCompatActivity {
   private BroadcastReceiver notiffMain = new BroadcastReceiver() {
     @Override
     public void onReceive(Context context, Intent intent) {
-      LogUtil.e("AAA Receive from main");
-      AlertDialog.Builder alertBuilder = new AlertDialog.Builder(BaseActivity.this);
-      alertBuilder.setTitle(intent.getExtras().getString("title"));
-      alertBuilder.setMessage(intent.getExtras().getString("message"));
-      alertBuilder.setPositiveButton(getString(android.R.string.ok), null);
-      alertBuilder.create().show();
     }
   };
 }
