@@ -1,24 +1,29 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.adapters.DevelopmentPlanAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
-import com.ingenuitymobile.edwardlynx.api.models.Goal;
 import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import rx.Subscriber;
 
@@ -28,26 +33,13 @@ import rx.Subscriber;
 
 public class DevelopmenPlansFragment extends BaseFragment {
 
-  private static final int ALL        = 0;
-  private static final int UNFINISHED = 1;
-  private static final int COMPLETED  = 2;
 
-  private View mainView;
+  private View                   mainView;
+  private SwipeRefreshLayout     refreshLayout;
+  private DevelopmentPlanAdapter adapter;
+  private TextView               emptyText;
+  private List<DevelopmentPlan>  data;
 
-  private ArrayList<DevelopmentPlan> data;
-  private ArrayList<DevelopmentPlan> unfinishedData;
-  private ArrayList<DevelopmentPlan> completedData;
-  private int                        type;
-
-  private TextView allText;
-  private TextView unfinishedText;
-  private TextView completedText;
-
-  private ViewPager viewPager;
-
-  protected DevelopmentPlanListFragment allFragment;
-  protected DevelopmentPlanListFragment unfinishedFragment;
-  protected DevelopmentPlanListFragment completedFragment;
 
   public static DevelopmenPlansFragment newInstance(Context ctx) {
     DevelopmenPlansFragment fragment = new DevelopmenPlansFragment();
@@ -59,9 +51,6 @@ public class DevelopmenPlansFragment extends BaseFragment {
 
   public DevelopmenPlansFragment() {
     data = new ArrayList<>();
-    unfinishedData = new ArrayList<>();
-    completedData = new ArrayList<>();
-    type = 0;
   }
 
   @Override
@@ -82,50 +71,35 @@ public class DevelopmenPlansFragment extends BaseFragment {
   }
 
   private void initViews() {
-    allText = (TextView) mainView.findViewById(R.id.text_all);
-    unfinishedText = (TextView) mainView.findViewById(R.id.text_unfinished);
-    completedText = (TextView) mainView.findViewById(R.id.text_completed);
+    final RecyclerView surveyList = (RecyclerView) mainView.findViewById(R.id.list_survey);
+    final RelativeLayout filterLayout = (RelativeLayout) mainView.findViewById(R.id.layout_filter);
+    final RelativeLayout sortLayout = (RelativeLayout) mainView.findViewById(R.id.layout_sort);
 
-    allText.setOnClickListener(listener);
-    unfinishedText.setOnClickListener(listener);
-    completedText.setOnClickListener(listener);
-    allText.setSelected(true);
+    final SearchView searchView = (SearchView) mainView.findViewById(R.id.searchview);
+    searchView.setQueryHint("Search Development Plan");
 
-    viewPager = (ViewPager) mainView.findViewById(R.id.viewpager);
-    MyPagerAdapter adapter = new MyPagerAdapter(getChildFragmentManager());
-    viewPager.setAdapter(adapter);
-    viewPager.addOnPageChangeListener(onPageChangeListener);
+    emptyText = (TextView) mainView.findViewById(R.id.text_empty_state);
+    refreshLayout = (SwipeRefreshLayout) mainView.findViewById(R.id.swipe_refresh_layout);
+
+    final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
+        LinearLayoutManager.VERTICAL);
+    surveyList.addItemDecoration(dividerItemDecoration);
+    surveyList.setHasFixedSize(true);
+    surveyList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+    adapter = new DevelopmentPlanAdapter(data);
+    surveyList.setAdapter(adapter);
+    refreshLayout.setOnRefreshListener(refreshListener);
+    refreshLayout.setRefreshing(true);
+    mainView.findViewById(R.id.text_all).setSelected(true);
+
+    filterLayout.setOnClickListener(onClickListener);
+    sortLayout.setOnClickListener(onClickListener);
   }
 
-
-  private void setSelection() {
-    allText.setSelected(false);
-    unfinishedText.setSelected(false);
-    completedText.setSelected(false);
-
-    switch (type) {
-    case ALL:
-      allText.setSelected(true);
-      if (allFragment == null) {
-        allFragment = new DevelopmentPlanListFragment();
-      }
-      allFragment.setData(data);
-      break;
-    case UNFINISHED:
-      unfinishedText.setSelected(true);
-      if (unfinishedFragment == null) {
-        unfinishedFragment = new DevelopmentPlanListFragment();
-      }
-      unfinishedFragment.setData(unfinishedData);
-      break;
-    case COMPLETED:
-      completedText.setSelected(true);
-      if (completedFragment == null) {
-        completedFragment = new DevelopmentPlanListFragment();
-      }
-      completedFragment.setData(completedData);
-      break;
-    }
+  private void notifyAdapter() {
+    emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
+    adapter.notifyDataSetChanged();
   }
 
   private void getData() {
@@ -135,31 +109,14 @@ public class DevelopmenPlansFragment extends BaseFragment {
           @Override
           public void onCompleted() {
             LogUtil.e("AAA onCompleted ");
-            unfinishedData.clear();
-            completedData.clear();
-
-            for (DevelopmentPlan plan : data) {
-              final int size = plan.goals.size();
-              int count = 0;
-              if (plan.goals != null) {
-                for (Goal goal : plan.goals) {
-                  if (goal.checked == 1) {
-                    count++;
-                  }
-                }
-              }
-              if (count == size) {
-                completedData.add(plan);
-              } else {
-                unfinishedData.add(plan);
-              }
-            }
-            setSelection();
+            refreshLayout.setRefreshing(false);
+            notifyAdapter();
           }
 
           @Override
           public void onError(Throwable e) {
             LogUtil.e("AAA onError " + e);
+            refreshLayout.setRefreshing(false);
           }
 
           @Override
@@ -171,90 +128,76 @@ public class DevelopmenPlansFragment extends BaseFragment {
         }));
   }
 
-  private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager
-      .OnPageChangeListener() {
+  private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout
+      .OnRefreshListener() {
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-      type = position;
-      setSelection();
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
+    public void onRefresh() {
+      getData();
     }
   };
 
-  private View.OnClickListener listener = new View.OnClickListener() {
+  private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
     public void onClick(View view) {
       switch (view.getId()) {
-      case R.id.text_all:
-        type = ALL;
+      case R.id.layout_filter:
+        final CharSequence[] filterItems =
+            {"Open", "Unfinished", "Completed", "Not Invited"};
+        final ArrayList seletedItems = new ArrayList();
+
+        AlertDialog FilterDialog = new AlertDialog.Builder(getActivity())
+            .setTitle("FILTER BY:")
+            .setMultiChoiceItems(filterItems, null,
+                new DialogInterface.OnMultiChoiceClickListener() {
+                  @Override
+                  public void onClick(DialogInterface dialogInterface, int i, boolean isChecked) {
+                    if (isChecked) {
+                      seletedItems.add(i);
+                    } else if (seletedItems.contains(i)) {
+                      seletedItems.remove(Integer.valueOf(i));
+                    }
+                  }
+                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int id) {
+                //  Your code when user clicked on OK
+                //  You can write the code  to save the selected item here
+              }
+            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int id) {
+                //  Your code when user clicked on Cancel
+              }
+            }).create();
+        FilterDialog.show();
         break;
-      case R.id.text_unfinished:
-        type = UNFINISHED;
-        break;
-      case R.id.text_completed:
-        type = COMPLETED;
+      case R.id.layout_sort:
+        final CharSequence[] sortItems =
+            {"Date Modified", "Date Posted", "Date Expiry", "Name A to Z"};
+
+        AlertDialog sortDialog = new AlertDialog.Builder(getActivity())
+            .setTitle("SORT BY:")
+            .setSingleChoiceItems(sortItems, 0, new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialogInterface, int i) {
+                LogUtil.e("AAA " + sortItems[i]);
+              }
+            }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int id) {
+                //  Your code when user clicked on OK
+                //  You can write the code  to save the selected item here
+              }
+            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int id) {
+                //  Your code when user clicked on Cancel
+              }
+            }).create();
+        sortDialog.show();
         break;
       }
 
-      setSelection();
-      viewPager.setCurrentItem(type);
     }
   };
-
-  class MyPagerAdapter extends FragmentPagerAdapter {
-    private int NUM_ITEMS = 3;
-
-    MyPagerAdapter(FragmentManager fragmentManager) {
-      super(fragmentManager);
-    }
-
-    // Returns total number of pages
-    @Override
-    public int getCount() {
-      return NUM_ITEMS;
-    }
-
-    // Returns the fragment to display for that page
-    @Override
-    public Fragment getItem(int position) {
-      switch (position) {
-      case 0:
-        if (allFragment == null) {
-          allFragment = new DevelopmentPlanListFragment();
-          allFragment.setData(data);
-        }
-        return allFragment;
-      case 1:
-        if (unfinishedFragment == null) {
-          unfinishedFragment = new DevelopmentPlanListFragment();
-          unfinishedFragment.setData(unfinishedData);
-        }
-        return unfinishedFragment;
-      case 2: // Fragment # 1 - This will show SecondFragment
-        if (completedFragment == null) {
-          completedFragment = new DevelopmentPlanListFragment();
-          completedFragment.setData(completedData);
-        }
-        return completedFragment;
-      default:
-        return null;
-      }
-    }
-
-    // Returns the page title for the top indicator
-    @Override
-    public CharSequence getPageTitle(int position) {
-      return "Page " + position;
-    }
-
-  }
 }

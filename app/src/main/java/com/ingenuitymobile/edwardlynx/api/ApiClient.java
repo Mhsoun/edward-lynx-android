@@ -152,13 +152,14 @@ public class ApiClient {
         }));
   }
 
-  public Subscription getSurveys(final int page, final Subscriber<Surveys> subscriber) {
-    return service.getSurveys(page)
+  public Subscription getSurveys(final int page, final int num,
+      final Subscriber<Surveys> subscriber) {
+    return service.getSurveys(page, num)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
           public void onPostAgain() {
-            getSurveys(page, subscriber);
+            getSurveys(page, num, subscriber);
           }
         }));
   }
@@ -217,6 +218,18 @@ public class ApiClient {
           @Override
           public void onPostAgain() {
             updateAnswerSurvey(id, param, subscriber);
+          }
+        }));
+  }
+
+  public Subscription postInstantFeedbackParticipants(final long id, final InstantFeedbackBody body,
+      final Subscriber<Response> subscriber) {
+    return service.postInstantFeedbackParticipants(id, body)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            postInstantFeedbackParticipants(id, body, subscriber);
           }
         }));
   }

@@ -44,6 +44,7 @@
   <string name="create_development_plan_bold">CREATE DEVELOPMENT PLAN</string>
   <string name="details_bold">DETAILS</string>
   <string name="development_plan_bold">DEVELOPMENT PLAN</string>
+  <string name="add_more_participants_bold">ADD MORE PARTICIPANTS</string>
 
   // region Answer type label
   <string name="yes_or_no">Yes or No</string>
@@ -60,6 +61,7 @@
   // region answer feedback
   <string name="instant_feed_submitted">Instant Feedback submitted</string>
   <string name="total_answers">Total answers: %1$d</string>
+  <string name="total_shared">Total count shared to other people: %1$d</string>
 
   // region Create instant feedback
   <string name="question">Question</string>
@@ -96,11 +98,10 @@
   <string name="action_plan_required">Action plan name can\'t be blank</string>
   <string name="goal_action_added">No goal action added</string>
   <string name="development_plan_created">Development plan created</string>
-  <string name="list">List</string>
+  <string name="goals">Goals</string>
   <string name="done">Done</string>
   <string name="no_actions_added">No Actions added</string>
   <string name="no_goals_added">No Goals added</string>
-
 
   // region Create Development plan Detailed
   <string name="name">Name</string>
@@ -117,6 +118,7 @@
 
   // region Invite to answer
   <string name="create_instant_feedback">Create Instant Feedback</string>
+  <string name="add_participants_button">Add more participants</string>
   <string name="number_people_selected">No. of people selected: %1$d</string>
   <string name="select_all">Select all</string>
   <string name="deselect_all">Deselect all</string>
@@ -127,6 +129,7 @@
   <string name="add_email">Add email</string>
   <string name="select_atleast_one">No users selected</string>
   <string name="instant_feedback_created">Instant Feedback created</string>
+  <string name="added_more_particpants">Added Participants</string>
   <string name="existing_option">There is an existing option</string>
 
   <string name="share">Share</string>
@@ -166,9 +169,12 @@
 
   // region survey
   <string name="end_date">End date: %1$s</string>
+  <string name="contact_to_reactivate">Contact to reactivate</string>
+
 
   <string name="no_data_found">No data found</string>
   <string name="question_label">Question: </string>
+  <string name="add_more_participants">Add more participants</string>
 
   // popup
   <string name="goal_completed">Goal Completed</string>

@@ -108,7 +108,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         if (feedback.shares != null) {
           count = feedback.shares.size();
         }
-        shareCountText.setText("Total count shared to other people: " + count);
+        shareCountText.setText(getString(R.string.total_shared, count));
       }
     }));
 
@@ -140,6 +140,12 @@ public class InstantFeedbackReportActivity extends BaseActivity {
 
   public void share(View v) {
     Intent intent = new Intent(InstantFeedbackReportActivity.this, ShareReportActivity.class);
+    intent.putExtra("id", id);
+    startActivity(intent);
+  }
+
+  public void addMore(View v) {
+    Intent intent = new Intent(InstantFeedbackReportActivity.this, AddMoreParticipantsActivity.class);
     intent.putExtra("id", id);
     startActivity(intent);
   }

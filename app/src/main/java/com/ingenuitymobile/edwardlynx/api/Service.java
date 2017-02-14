@@ -68,7 +68,7 @@ public interface Service {
 
   // region Surveys
   @GET("/api/v1/surveys")
-  Observable<Surveys> getSurveys(@Query("page") int page);
+  Observable<Surveys> getSurveys(@Query("page") int page, @Query("num") int num);
 
   @GET("/api/v1/categories")
   Observable<CategoriesResponse> getCategories();
@@ -92,6 +92,11 @@ public interface Service {
   @Headers("Content-Type: application/json")
   @POST("/api/v1/instant-feedbacks")
   Observable<Response> postInstantFeedback(@Body InstantFeedbackBody body);
+
+  @Headers("Content-Type: application/json")
+  @POST("/api/v1/instant-feedbacks/{id}/recipients")
+  Observable<Response> postInstantFeedbackParticipants(@Path("id") long id,
+      @Body InstantFeedbackBody body);
 
   @GET("/api/v1/instant-feedbacks")
   Observable<FeedbacksResponse> getInstantFeedbacks(@Query("filter") String type);

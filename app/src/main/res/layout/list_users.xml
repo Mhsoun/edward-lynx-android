@@ -27,12 +27,14 @@
         android:textSize="13sp"/>
   </LinearLayout>
 
-  <android.support.v7.widget.AppCompatCheckBox
-      android:id="@+id/checkbox_selected"
+  <ImageView
+      android:id="@+id/image_check"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
       android:layout_centerVertical="true"
       android:layout_marginRight="12dp"
-      android:buttonTint="@color/white"/>
+      android:src="@drawable/ic_check"
+      android:tint="@color/dashboard_green"
+      android:visibility="gone"/>
 </RelativeLayout>

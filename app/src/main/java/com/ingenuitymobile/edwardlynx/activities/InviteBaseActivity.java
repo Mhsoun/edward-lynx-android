@@ -1,14 +1,12 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -53,17 +51,6 @@ public class InviteBaseActivity extends BaseActivity {
     data = new ArrayList<>();
     displayData = new ArrayList<>();
     ids = new ArrayList<>();
-  }
-
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_share_report);
-
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
   }
 
   @Override

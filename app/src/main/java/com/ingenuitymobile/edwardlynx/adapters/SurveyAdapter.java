@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +24,7 @@ import java.util.List;
 public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder> {
 
   private SimpleDateFormat format        = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
-  private SimpleDateFormat displayFormat = new SimpleDateFormat("MMMM dd, yyyy hh:mm a");
+  private SimpleDateFormat displayFormat = new SimpleDateFormat("MMMM dd, yyyy");
 
   private List<Survey> data;
 
@@ -37,6 +38,8 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
     TextView nameText;
     TextView descriptionText;
     TextView statusText;
+    TextView reactivateText;
+    boolean  isExpired;
 
     ViewHolder(View itemView) {
       super(itemView);
@@ -44,6 +47,8 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
       nameText = (TextView) itemView.findViewById(R.id.text_name);
       descriptionText = (TextView) itemView.findViewById(R.id.text_description);
       statusText = (TextView) itemView.findViewById(R.id.text_status);
+      reactivateText = (TextView) itemView.findViewById(R.id.text_reactivate);
+      isExpired = false;
     }
   }
 
@@ -58,23 +63,32 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
     final Context context = holder.itemView.getContext();
     final Survey survey = data.get(position);
     holder.nameText.setText(survey.name);
-    holder.descriptionText.setText(survey.description);
+    holder.descriptionText.setText(survey.personsEvaluatedText);
 
     try {
       Date date = format.parse(survey.endDate);
       holder.dateText.setText(context.getString(R.string.end_date, displayFormat.format(date)));
+
+      holder.isExpired = new Date().compareTo(date) == 1;
     } catch (Exception e) {
       holder.dateText.setText("");
     }
 
+    holder.reactivateText.setVisibility(holder.isExpired ? View.VISIBLE : View.GONE);
+
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Intent intent = new Intent(context, SurveyQuestionsActivity.class);
-        intent.putExtra("id", survey.id);
-        context.startActivity(intent);
+        if (holder.isExpired) {
+          LogUtil.e("AAA Expired");
+        } else {
+          Intent intent = new Intent(context, SurveyQuestionsActivity.class);
+          intent.putExtra("id", survey.id);
+          context.startActivity(intent);
+        }
       }
     });
+
 
     switch (survey.status) {
     case Survey.OPEN:

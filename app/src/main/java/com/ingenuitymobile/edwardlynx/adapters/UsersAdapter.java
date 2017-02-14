@@ -1,12 +1,11 @@
 package com.ingenuitymobile.edwardlynx.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
@@ -32,17 +31,16 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     this.listener = listener;
   }
 
-
   class ViewHolder extends RecyclerView.ViewHolder {
-    TextView          emailText;
-    TextView          nameText;
-    AppCompatCheckBox selectedCheckbox;
+    TextView  emailText;
+    TextView  nameText;
+    ImageView checkImage;
 
     ViewHolder(View itemView) {
       super(itemView);
       emailText = (TextView) itemView.findViewById(R.id.text_email);
       nameText = (TextView) itemView.findViewById(R.id.text_name);
-      selectedCheckbox = (AppCompatCheckBox) itemView.findViewById(R.id.checkbox_selected);
+      checkImage = (ImageView) itemView.findViewById(R.id.image_check);
     }
   }
 
@@ -61,16 +59,17 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     holder.nameText.setText(user.name);
     holder.emailText.setText(user.email);
 
-    holder.selectedCheckbox.setOnCheckedChangeListener(null);
-    holder.selectedCheckbox.setChecked(ids.contains(String.valueOf(user.id)));
+    holder.checkImage.setVisibility(
+        ids.contains(String.valueOf(user.id)) ? View.VISIBLE : View.GONE);
 
-    holder.selectedCheckbox.setOnCheckedChangeListener(
-        new CompoundButton.OnCheckedChangeListener() {
-          @Override
-          public void onCheckedChanged(CompoundButton compoundButton, boolean selected) {
-            listener.onSelect(String.valueOf(user.id), selected);
-          }
-        });
+    holder.itemView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        final boolean selected = holder.checkImage.getVisibility() == View.VISIBLE;
+        holder.checkImage.setVisibility(!selected ? View.VISIBLE : View.GONE);
+        listener.onSelect(String.valueOf(user.id), !selected);
+      }
+    });
   }
 
   @Override
