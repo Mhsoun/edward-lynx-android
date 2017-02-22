@@ -46,8 +46,13 @@ public class User extends Response {
   @SerializedName("city")
   public String city;
 
+  @SerializedName("isUser")
+  public boolean isUser;
+
   @Expose(serialize = false, deserialize = false)
   public boolean isAddedbyEmail;
+  @Expose(serialize = false, deserialize = false)
+  public boolean isDisabled;
 
 
   @Override

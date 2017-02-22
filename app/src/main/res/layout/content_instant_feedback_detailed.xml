@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:context="com.ingenuitymobile.edwardlynx.activities.InstantFeedbackDetailedActivity"
+                tools:showIn="@layout/activity_instant_feedback_detailed">
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="centerCrop"
+      android:src="@drawable/bg"/>
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:text="@string/question"
+          android:textColor="@color/white"/>
+
+      <EditText
+          android:id="@+id/edit_question"
+          android:layout_width="match_parent"
+          android:layout_height="80dp"
+          android:layout_marginTop="4dp"
+          android:background="@color/text_input_field"
+          android:enabled="false"
+          android:gravity="top"
+          android:hint="@string/content"
+          android:inputType="textMultiLine"
+          android:padding="4dp"
+          android:textColor="@color/common_text_color"/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="12dp"
+          android:text="@string/answer_type_label"
+          android:textColor="@color/white"/>
+
+      <RadioGroup
+          android:id="@+id/radiogroup_answer_type"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
+            android:tag="3"
+            android:text="@string/yes_or_no"
+            android:textColor="@color/white"/>
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
+            android:tag="5"
+            android:text="@string/free_text"
+            android:textColor="@color/white"/>
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
+            android:tag="1"
+            android:text="@string/numeric_1_to_10"
+            android:textColor="@color/white"/>
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
+            android:tag="8"
+            android:text="@string/custom_scale"
+            android:textColor="@color/white"/>
+      </RadioGroup>
+
+      <RelativeLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/is_anonymous"
+            android:textColor="@color/white"/>
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/checkbox_is_anonymous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:buttonTint="@color/white"
+            android:enabled="false"/>
+      </RelativeLayout>
+
+      <RelativeLayout
+          android:id="@+id/layout_isNA"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/add_na_option"
+            android:textColor="@color/white"/>
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/checkbox_is_na"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:buttonTint="@color/white"
+            android:enabled="false"/>
+      </RelativeLayout>
+
+      <LinearLayout
+          android:id="@+id/layout_custom_scale"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:visibility="gone">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_options"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+      </LinearLayout>
+
+      <TextView
+          style="@style/orange_button"
+          android:layout_width="match_parent"
+          android:layout_marginTop="12dp"
+          android:onClick="add"
+          android:text="@string/add_participants"/>
+    </LinearLayout>
+  </ScrollView>
+</RelativeLayout>

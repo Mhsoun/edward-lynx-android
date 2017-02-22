@@ -50,6 +50,8 @@ public class CustomScaleAdapter extends RecyclerView.Adapter<CustomScaleAdapter.
 
     holder.nameText.setText(string);
 
+    holder.deleteImage.setVisibility(listener != null ? View.VISIBLE : View.GONE);
+
     holder.deleteImage.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {

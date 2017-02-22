@@ -54,7 +54,7 @@ public class InviteActivity extends InviteBaseActivity {
     } else {
       List<Id> recipients = new ArrayList<>();
       for (User user : data) {
-        if (user.isAddedbyEmail) {
+        if (!user.isAddedbyEmail) {
           ids.remove(String.valueOf(user.id));
           recipients.add(new Id(user.name, user.email));
         }

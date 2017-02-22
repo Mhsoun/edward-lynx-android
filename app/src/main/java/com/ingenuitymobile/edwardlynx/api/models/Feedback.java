@@ -32,6 +32,9 @@ public class Feedback extends Response {
   @SerializedName("key")
   public String         key;
 
+  @SerializedName("recipients")
+  public List<User> recipients;
+
   public Feedback() {
     questions = new ArrayList<>();
     shares = new ArrayList<>();

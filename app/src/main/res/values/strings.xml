@@ -71,6 +71,7 @@
   <string name="add_na_option">Add a N/A option</string>
   <string name="custom_scale_hit">Input option, and press Done</string>
   <string name="select_participants">Select Participants</string>
+  <string name="add_participants">Add Participants</string>
   <string name="question_required_label">Question can\t be blank</string>
   <string name="answer_required_label">Answer type should be selected</string>
   <string name="custom_scale_required_label">Custom scale input is required</string>

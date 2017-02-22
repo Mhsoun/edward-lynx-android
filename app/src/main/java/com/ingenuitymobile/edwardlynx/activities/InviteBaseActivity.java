@@ -44,12 +44,14 @@ public class InviteBaseActivity extends BaseActivity {
 
   protected ArrayList<String> ids;
   protected ArrayList<User>   data;
+  protected ArrayList<User>   recipients;
 
   private UsersAdapter    adapter;
 
   public InviteBaseActivity() {
     data = new ArrayList<>();
     displayData = new ArrayList<>();
+    recipients = new ArrayList<>();
     ids = new ArrayList<>();
   }
 
@@ -89,6 +91,8 @@ public class InviteBaseActivity extends BaseActivity {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA onCompleted ");
+        displayData.clear();
+        displayData.addAll(data);
         adapter.notifyDataSetChanged();
       }
 
@@ -102,8 +106,22 @@ public class InviteBaseActivity extends BaseActivity {
         LogUtil.e("AAA onNext ");
         data.clear();
         data.addAll(response.users);
-        displayData.clear();
-        displayData.addAll(data);
+
+        if (!recipients.isEmpty()) {
+          for (User recipientUser : recipients) {
+            if (recipientUser.isUser) {
+              for (int x = 0; x < data.size(); x++) {
+                if (data.get(x).id == recipientUser.id) {
+                  data.get(x).isDisabled = true;
+                  break;
+                }
+              }
+            } else {
+              recipientUser.isDisabled = true;
+              data.add(recipientUser);
+            }
+          }
+        }
       }
     }));
   }

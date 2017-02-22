@@ -58,16 +58,22 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
     holder.nameText.setText(user.name);
     holder.emailText.setText(user.email);
+    holder.nameText.setTextColor(context.getResources()
+        .getColor(user.isDisabled ? R.color.unfinished_status : R.color.white));
+    holder.emailText.setTextColor(context.getResources()
+        .getColor(user.isDisabled ? R.color.unfinished_status : R.color.white));
 
     holder.checkImage.setVisibility(
-        ids.contains(String.valueOf(user.id)) ? View.VISIBLE : View.GONE);
+        ids.contains(String.valueOf(user.id)) || user.isDisabled ? View.VISIBLE : View.GONE);
 
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        final boolean selected = holder.checkImage.getVisibility() == View.VISIBLE;
-        holder.checkImage.setVisibility(!selected ? View.VISIBLE : View.GONE);
-        listener.onSelect(String.valueOf(user.id), !selected);
+        if (!user.isDisabled) {
+          final boolean selected = holder.checkImage.getVisibility() == View.VISIBLE;
+          holder.checkImage.setVisibility(!selected ? View.VISIBLE : View.GONE);
+          listener.onSelect(String.valueOf(user.id), !selected);
+        }
       }
     });
   }

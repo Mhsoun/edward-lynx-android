@@ -10,6 +10,7 @@ import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.Id;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
+import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
@@ -39,9 +40,35 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     initViews();
-    getData();
 
     id = getIntent().getLongExtra("id", 0L);
+    LogUtil.e("AAA " + id);
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    getInstantFeedbackDetailed();
+  }
+
+  private void getInstantFeedbackDetailed() {
+    subscription.add(Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
+      @Override
+      public void onCompleted() {
+        getData();
+      }
+
+      @Override
+      public void onError(Throwable e) {
+        LogUtil.e("AAA onError " + e);
+      }
+
+      @Override
+      public void onNext(Feedback feedback) {
+        recipients.clear();
+        recipients.addAll(feedback.recipients);
+      }
+    }));
   }
 
   public void addMore(View v) {
