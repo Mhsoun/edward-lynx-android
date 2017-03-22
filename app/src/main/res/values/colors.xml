@@ -16,6 +16,8 @@
   <color name="inactive_color">#b0b0b0</color>
   <color name="bg_color">#f3f3f3</color>
   <color name="survey_selected">#e09444</color>
+  <color name="text_number_color">#663593</color>
+
 
   <color name="dashboard_container">#462063</color>
   <color name="text_input_field">#72508a</color>

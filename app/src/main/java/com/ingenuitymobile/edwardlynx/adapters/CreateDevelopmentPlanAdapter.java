@@ -33,12 +33,12 @@ public class CreateDevelopmentPlanAdapter extends
 
   class ViewHolder extends RecyclerView.ViewHolder {
     TextView nameText;
-    TextView descriptionText;
+    TextView numberText;
 
     ViewHolder(View itemView) {
       super(itemView);
       nameText = (TextView) itemView.findViewById(R.id.text_name);
-      descriptionText = (TextView) itemView.findViewById(R.id.text_description);
+      numberText = (TextView) itemView.findViewById(R.id.text_number);
     }
   }
 
@@ -52,7 +52,7 @@ public class CreateDevelopmentPlanAdapter extends
   public void onBindViewHolder(final ViewHolder holder, final int position) {
     final GoalParam param = data.get(position);
     holder.nameText.setText(param.title);
-    holder.descriptionText.setText(param.description);
+    holder.numberText.setText(position + 1 + ". ");
 
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override

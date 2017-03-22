@@ -8,35 +8,34 @@
               android:layout_marginTop="16dp"
               android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="16sp"/>
+  <TextView
+      android:id="@+id/text_question"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="32dp"
+      android:gravity="center"
+      android:textColor="@color/white"
+      android:textSize="22sp"/>
 
-    <TextView
-        android:id="@+id/text_help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-4dp"
-        android:textColor="@color/white"
-        android:textSize="10sp"
-        android:textStyle="italic"/>
+  <RadioGroup
+      android:id="@+id/group_button"
+      style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp">
+  </RadioGroup>
 
-    <RadioGroup
-        android:id="@+id/group_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </RadioGroup>
-
-      <EditText
-          android:id="@+id/edit_text"
-          android:layout_width="match_parent"
-          android:layout_height="60dp"
-          android:background="@color/text_input_field"
-          android:gravity="top"
-          android:inputType="textMultiLine"
-          android:textColor="@color/white"
-          android:textSize="14sp"/>
+  <EditText
+      android:id="@+id/edit_text"
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      android:background="@drawable/bg_rounded_input_field"
+      android:gravity="top"
+      android:hint="@string/type_here"
+      android:inputType="textMultiLine"
+      android:padding="8dp"
+      android:textColor="@color/white"
+      android:textColorHint="@color/white"
+      android:textSize="18sp"/>
 </LinearLayout>

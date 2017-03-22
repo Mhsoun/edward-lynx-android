@@ -37,7 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_development_plan_name"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="15sp"/>
 
     <EditText
         android:id="@+id/edit_text"
@@ -54,7 +55,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/goals"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="15sp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -76,13 +78,15 @@
           android:visibility="gone"/>
     </RelativeLayout>
 
-
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_round_accent"
         android:onClick="addGoal"
-        android:padding="4dp"
+        android:padding="12dp"
         android:src="@drawable/ic_add_goal"
-        android:tint="@color/white"/>
+        android:tint="@android:color/transparent"/>
   </LinearLayout>
 </RelativeLayout>

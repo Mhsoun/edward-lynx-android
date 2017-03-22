@@ -35,8 +35,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
       <TextView
           android:layout_width="wrap_content"
@@ -66,22 +66,36 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="top"
+          android:layout_marginTop="4dp"
           android:background="@drawable/bg_rounded_input_field"
           android:gravity="top"
+          android:imeOptions="actionDone"
           android:maxLines="2"
           android:minLines="2"
           android:padding="4dp"
           android:textColor="@color/white"
-          android:layout_marginTop="4dp"
-          android:imeOptions="actionDone"
           android:textSize="20sp"/>
 
-      <TextView
+      <LinearLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
-          android:text="@string/actions"
-          android:textColor="@color/white"/>
+          android:layout_marginTop="16dp"
+          android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/actions"
+            android:textColor="@color/white"/>
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_help"
+            android:tint="@color/white"/>
+      </LinearLayout>
 
       <RelativeLayout
           android:layout_width="match_parent"
@@ -111,21 +125,12 @@
           android:paddingTop="8dp"
           android:visibility="gone">
 
-        <ImageView
-            android:id="@+id/image_circle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_circle"
-            android:tint="@color/white"/>
-
         <EditText
             android:id="@+id/edit_name"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@id/image_circle"
             android:background="@drawable/bg_rounded_input_field"
             android:imeOptions="actionDone"
             android:inputType="textPersonName"
@@ -134,32 +139,36 @@
             android:textSize="18sp"/>
       </RelativeLayout>
 
+
       <ImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:layout_gravity="right"
+          android:layout_marginTop="8dp"
+          android:background="@drawable/bg_round_accent"
           android:onClick="addPlan"
-          android:padding="4dp"
+          android:padding="12dp"
           android:src="@drawable/ic_add_goal"
-          android:tint="@color/white"/>
+          android:tint="@android:color/transparent"/>
 
       <RelativeLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="16dp">
+          android:layout_marginTop="32dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="@string/remind_me_on_day"
+            android:text="@string/due_date"
             android:textColor="@color/white"/>
 
         <android.support.v7.widget.AppCompatCheckBox
             android:id="@+id/checkbox_remind"
+            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:buttonTint="@color/white"/>
+            android:layout_alignParentRight="true"/>
       </RelativeLayout>
 
       <com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker
@@ -167,13 +176,13 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:background="@drawable/bg_rounded_input_field"
+          android:visibility="gone"
           app:picker_selectedTextColor="@color/orange_button"
           app:picker_selectorColor="@color/white"
           app:picker_textColor="@color/white"
           app:picker_textSize="15sp"
           tools:picker_canBeOnPast="true"
           tools:picker_curved="true"
-          android:visibility="gone"
           tools:picker_cyclic="true"
           tools:picker_visibleItemCount="7"/>
 
@@ -191,22 +200,40 @@
 
         <android.support.v7.widget.AppCompatCheckBox
             android:id="@+id/checkbox_link_category"
+            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:buttonTint="@color/white"/>
+            android:layout_alignParentRight="true"/>
       </RelativeLayout>
 
       <RelativeLayout
+          android:id="@+id/layout_spinner"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@drawable/bg_rounded_input_field">
+          android:layout_height="40dp"
+          android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/layout_right"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_rounded_input_field"
+            android:src="@drawable/ic_arrow_down"
+            android:tint="@color/colorPrimaryDark">
+        </ImageView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginRight="4dp"
+            android:layout_toLeftOf="@id/layout_right"
+            android:background="@drawable/bg_rounded_input_field"/>
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:visibility="gone"/>
+            android:background="@null"/>
       </RelativeLayout>
     </LinearLayout>
   </ScrollView>

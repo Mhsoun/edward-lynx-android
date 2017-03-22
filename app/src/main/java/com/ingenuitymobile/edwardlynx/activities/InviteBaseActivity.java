@@ -1,6 +1,7 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
@@ -46,7 +47,7 @@ public class InviteBaseActivity extends BaseActivity {
   protected ArrayList<User>   data;
   protected ArrayList<User>   recipients;
 
-  private UsersAdapter    adapter;
+  private UsersAdapter adapter;
 
   public InviteBaseActivity() {
     data = new ArrayList<>();

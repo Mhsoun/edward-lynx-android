@@ -35,9 +35,10 @@
   <string name="profile_bold">PROFILE</string>
   <string name="survey_questions_bold">SURVEY QUESTIONS</string>
   <string name="create_instant_feedback_bold">CREATE INSTANT FEEDBACK</string>
-  <string name="invite_bold">INVITE</string>
+  <string name="invite_people_bold">INVITE PEOPLE</string>
   <string name="instant_feedback_requests_bold">INSTANT FEEDBACK REQUESTS</string>
   <string name="reports_bold">REPORTS</string>
+  <string name="goals_details_bold">GOALS DETAILS</string>
   <string name="instant_feedback_bold">INSTANT FEEDBACK</string>
   <string name="instant_feedback_answers_bold">INSTANT FEEDBACK ANSWERS</string>
   <string name="share_report_bold">SHARE REPORT</string>
@@ -47,10 +48,16 @@
   <string name="add_more_participants_bold">ADD MORE PARTICIPANTS</string>
 
   // region Answer type label
-  <string name="yes_or_no">Yes or No</string>
-  <string name="free_text">Free text</string>
+  <string name="numeric_1_to_5">Numeric 1&#8211;5 scale</string>
   <string name="numeric_1_to_10">Numeric 1&#8211;10 scale</string>
+  <string name="agreement_scale">Agreement scale</string>
+  <string name="yes_or_no">Yes or No</string>
+  <string name="strong_agreement_scale">Strong Agreement scale</string>
+  <string name="free_text">Free text</string>
+  <string name="reverse_agreement_scale">Reverse Agreement scale</string>
+  <string name="numeric_1_to_10_explanation">Numeric 1&#8211;10 scale with explanation</string>
   <string name="custom_scale">Custom Scale</string>
+
   <string name="not_available">N/A</string>
 
   <string name="yes_or_no_description">Yes or no answer.</string>
@@ -62,20 +69,25 @@
   <string name="instant_feed_submitted">Instant Feedback submitted</string>
   <string name="total_answers">Total answers: %1$d</string>
   <string name="total_shared">Total count shared to other people: %1$d</string>
+  <string name="type_here">Type here. . .</string>
 
   // region Create instant feedback
   <string name="question">Question</string>
   <string name="content">Content</string>
   <string name="answer_type_label">Answer Type</string>
+  <string name="options">Options</string>
+  <string name="question_type_preview">Question Type Preview</string>
   <string name="is_anonymous">Is Anonymmous</string>
   <string name="add_na_option">Add a N/A option</string>
   <string name="custom_scale_hit">Input option, and press Done</string>
-  <string name="select_participants">Select Participants</string>
+  <string name="invite">Invite</string>
+  <string name="search">Search</string>
   <string name="add_participants">Add Participants</string>
   <string name="question_required_label">Question can\t be blank</string>
   <string name="answer_required_label">Answer type should be selected</string>
   <string name="custom_scale_required_label">Custom scale input is required</string>
   <string name="survey_answers_submitted">Survey answers submitted</string>
+  <string name="invite_info">You have to invite more than 3 people and more than 3 people have to answer before result can be viewed.</string>
 
   // region forgot password
   <string name="email">Email</string>
@@ -95,7 +107,7 @@
   <string name="password_updated">Password updated</string>
 
   // region Create Development plan
-  <string name="create_development_plan_name">Development Plan Name</string>
+  <string name="create_development_plan_name">Enter Development Plan Name</string>
   <string name="action_plan_required">Action plan name can\'t be blank</string>
   <string name="goal_action_added">No goal action added</string>
   <string name="development_plan_created">Development plan created</string>
@@ -108,7 +120,7 @@
   <string name="name">Name</string>
   <string name="description">Description</string>
   <string name="actions">Actions</string>
-  <string name="remind_me_on_day">Remind me on day</string>
+  <string name="due_date">Due Date</string>
   <string name="link_to_categroy">Link to a category</string>
   <string name="save">Save</string>
   <string name="edit">Edit</string>
@@ -118,12 +130,12 @@
   <string name="completed_details">%1$d / %2$d completed</string>
 
   // region Invite to answer
-  <string name="create_instant_feedback">Create Instant Feedback</string>
+  <string name="send_invites">Send Invites</string>
   <string name="add_participants_button">Add more participants</string>
   <string name="number_people_selected">No. of people selected: %1$d</string>
   <string name="select_all">Select all</string>
   <string name="deselect_all">Deselect all</string>
-  <string name="invite_by_email">Invite people by email</string>
+  <string name="invite_by_email">Invite people by email address</string>
   <string name="add_user">Add user</string>
   <string name="enter_email">Enter Name and Email address</string>
   <string name="email_address">Email address</string>
@@ -181,4 +193,5 @@
   <string name="goal_completed">Goal Completed</string>
   <string name="label_popup">You\'ve got the right mix of dedication and\nenthusiasm. Keep it up</string>
   <string name="thanks">Thanks</string>
+  <string name="close">Close</string>
 </resources>

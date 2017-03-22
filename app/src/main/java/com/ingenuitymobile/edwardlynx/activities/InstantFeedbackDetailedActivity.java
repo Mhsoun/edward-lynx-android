@@ -63,7 +63,6 @@ public class InstantFeedbackDetailedActivity extends BaseActivity {
 
     id = getIntent().getLongExtra("id", 0L);
     context = this;
-
     initViews();
   }
 

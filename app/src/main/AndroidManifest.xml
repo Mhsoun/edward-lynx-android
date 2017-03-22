@@ -62,7 +62,7 @@
     </activity>
     <activity
         android:name=".activities.InviteActivity"
-        android:label="@string/invite_bold"
+        android:label="@string/invite_people_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
@@ -110,7 +110,7 @@
     </activity>
     <activity
         android:name=".activities.CreateDetailedDevelopmentPlanActivity"
-        android:label="@string/reports_bold"
+        android:label="@string/goals_details_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>

@@ -41,6 +41,9 @@ public class InviteActivity extends InviteBaseActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     initViews();
+
+    final TextView textView = (TextView) findViewById(R.id.text_button_bottom);
+    textView.setText(getString(R.string.send_invites));
     getData();
 
     body = new Gson().fromJson(getIntent().getStringExtra("body"), InstantFeedbackBody.class);
@@ -78,7 +81,7 @@ public class InviteActivity extends InviteBaseActivity {
 
         @Override
         public void onError(Throwable e) {
-          textView.setText(getString(R.string.create_instant_feedback));
+          textView.setText(getString(R.string.send_invites));
           LogUtil.e("AAA onError " + e);
         }
 

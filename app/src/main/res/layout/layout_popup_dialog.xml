@@ -32,11 +32,11 @@
 
     <ImageView
         android:id="@+id/imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="16dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:background="@drawable/survey_completed"/>
 
     <TextView
         android:id="@+id/text_label"
@@ -54,7 +54,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="32dp"
-        android:text="@string/thanks"
+        android:text="@string/close"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"/>

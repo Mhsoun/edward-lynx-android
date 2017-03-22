@@ -1,21 +1,29 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +34,7 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.QuestionBody;
 import com.ingenuitymobile.edwardlynx.api.models.Answer;
+import com.ingenuitymobile.edwardlynx.utils.AnswerTypeUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
@@ -39,6 +48,7 @@ public class CreateFeedbackActivity extends BaseActivity {
 
   private final int REQUEST_CODE = 100;
 
+  private Spinner        spinner;
   private EditText       questionText;
   private CheckBox       isAnonymousCheckbox;
   private CheckBox       isNA;
@@ -53,6 +63,12 @@ public class CreateFeedbackActivity extends BaseActivity {
 
   private int type;
 
+  private String[] answerTypes;
+
+  private TextView   questionPreviewText;
+  private RadioGroup previewRadiogroup;
+  private EditText   freeTextEdit;
+
   public CreateFeedbackActivity() {
     type = -1;
     options = new ArrayList<>();
@@ -63,11 +79,22 @@ public class CreateFeedbackActivity extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_create_feedback);
 
+    context = this;
+
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    answerTypes = new String[]{
+        getString(R.string.yes_or_no),
+        getString(R.string.free_text),
+        getString(R.string.numeric_1_to_10),
+        getString(R.string.custom_scale)
+    };
+
     initViews();
+    setPreview();
   }
 
   @Override
@@ -91,56 +118,44 @@ public class CreateFeedbackActivity extends BaseActivity {
     isAnonymousCheckbox = (CheckBox) findViewById(R.id.checkbox_is_anonymous);
     isNA = (CheckBox) findViewById(R.id.checkbox_is_na);
     isNALayout = (RelativeLayout) findViewById(R.id.layout_isNA);
+    spinner = (Spinner) findViewById(R.id.spinner);
 
-    final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radiogroup_answer_type);
+    questionPreviewText = (TextView) findViewById(R.id.text_question);
+    previewRadiogroup = (RadioGroup) findViewById(R.id.radiogroup);
+    freeTextEdit = (EditText) findViewById(R.id.free_text_edit);
 
-    for (int i = 0; i < radioGroup.getChildCount(); i++) {
-      final int index = i;
-      radioGroup.getChildAt(i).setOnLongClickListener(new View.OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View view) {
-          String title = "";
-          String description = "";
-          switch (Integer.parseInt((String) radioGroup.getChildAt(index).getTag())) {
-          case Answer.YES_OR_NO:
-            title = getString(R.string.yes_or_no);
-            description = getString(R.string.yes_or_no_description);
-            break;
-          case Answer.CUSTOM_TEXT:
-            title = getString(R.string.free_text);
-            description = getString(R.string.text_description);
-            break;
-          case Answer.NUMERIC_1_10_SCALE:
-            title = getString(R.string.numeric_1_to_10);
-            description = getString(R.string.numeric_1_10_description);
-            break;
-          case Answer.CUSTOM_SCALE:
-            title = getString(R.string.custom_scale);
-            description = getString(R.string.custom_scale_description);
-            break;
-          }
+    final ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
+        this,
+        R.layout.spinner_style,
+        answerTypes
+    );
 
-          ViewUtil.showAlert(CreateFeedbackActivity.this, title, description);
-          return true;
-        }
-      });
-    }
+    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    spinner.setAdapter(dataAdapter);
 
-    radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
       @Override
-      public void onCheckedChanged(RadioGroup radioGroup, int i) {
-        RadioButton radioButton = (RadioButton) radioGroup.findViewById(i);
-        type = Integer.parseInt((String) radioButton.getTag());
-        LogUtil.e("AAA " + type);
+      public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        type = AnswerTypeUtil.getIntType(context, answerTypes[i]);
 
         isNALayout.setVisibility(type == Answer.CUSTOM_TEXT ? View.GONE : View.VISIBLE);
         customScaleLayout.setVisibility(type == Answer.CUSTOM_SCALE ? View.VISIBLE : View.GONE);
+        setPreview();
+      }
+
+      @Override
+      public void onNothingSelected(AdapterView<?> adapterView) {
+
       }
     });
+
+    questionText.addTextChangedListener(textWatcher);
 
     customScaleLayout = (LinearLayout) findViewById(R.id.layout_custom_scale);
     addOptionEdit = (EditText) findViewById(R.id.edit_add_option);
     addOptionEdit.setOnEditorActionListener(editorActionListener);
+
+    isNA.setOnCheckedChangeListener(onCheckedChangeListener);
 
     final RecyclerView optionList = (RecyclerView) findViewById(R.id.list_options);
     optionList.setHasFixedSize(true);
@@ -186,6 +201,85 @@ public class CreateFeedbackActivity extends BaseActivity {
     }
   }
 
+  private void setPreview() {
+    if (type == Answer.CUSTOM_TEXT) {
+      previewRadiogroup.setVisibility(View.GONE);
+      freeTextEdit.setVisibility(View.VISIBLE);
+      freeTextEdit.setEnabled(false);
+    } else {
+      previewRadiogroup.setVisibility(View.VISIBLE);
+      freeTextEdit.setVisibility(View.GONE);
+
+      previewRadiogroup.removeAllViews();
+
+      ArrayList<String> strings = new ArrayList<>();
+
+      if (type == Answer.CUSTOM_SCALE) {
+        strings = options;
+      } else if (type == Answer.YES_OR_NO) {
+        strings.add("Yes");
+        strings.add("No");
+      } else if (type == Answer.NUMERIC_1_10_SCALE) {
+        strings.add("1");
+        strings.add("2");
+        strings.add("3");
+        strings.add("4");
+        strings.add("5");
+        strings.add("6");
+        strings.add("7");
+        strings.add("8");
+        strings.add("9");
+        strings.add("10");
+      }
+
+      for (String string : strings) {
+        createRadioButton(previewRadiogroup, this, string);
+      }
+
+      if (isNA.isChecked()) {
+        createRadioButton(previewRadiogroup, this, context.getString(R.string.not_available));
+      }
+    }
+  }
+
+  private void createRadioButton(final RadioGroup radioGroup, final Context context,
+      final String description) {
+    final RadioButton radioButton = new RadioButton(context);
+    final ViewGroup.LayoutParams lparam = new ViewGroup.LayoutParams(
+        ViewGroup.LayoutParams.WRAP_CONTENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT);
+    radioButton.setLayoutParams(lparam);
+    radioButton.setEnabled(false);
+    radioButton.setTextColor(context.getResources().getColor(R.color.white));
+    radioButton.setText(description);
+    radioGroup.addView(radioButton);
+  }
+
+  private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton
+      .OnCheckedChangeListener() {
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+      setPreview();
+    }
+  };
+
+  private TextWatcher textWatcher = new TextWatcher() {
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+      questionPreviewText.setText(s.toString());
+    }
+  };
+
   private TextView.OnEditorActionListener editorActionListener = new TextView
       .OnEditorActionListener() {
     @Override
@@ -204,6 +298,7 @@ public class CreateFeedbackActivity extends BaseActivity {
           options.add(string);
           adapter.notifyDataSetChanged();
           addOptionEdit.setText("");
+          setPreview();
         }
         return true;
       }

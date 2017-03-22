@@ -7,13 +7,14 @@
                 android:paddingTop="8dp">
 
 
-  <ImageView
-      android:id="@+id/image_circle"
+  <TextView
+      android:id="@+id/text_number"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerVertical="true"
-      android:src="@drawable/ic_circle"
-      android:tint="@color/white"/>
+      android:text="1. "
+      android:textSize="18sp"
+      android:tint="@color/text_number_color"/>
 
   <ImageView
       android:id="@+id/image_info"
@@ -21,8 +22,8 @@
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
       android:layout_centerVertical="true"
-      android:src="@drawable/ic_info"
-      android:tint="@color/white"/>
+      android:src="@drawable/ic_next"
+      android:tint="@color/colorAccent"/>
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -31,20 +32,14 @@
       android:layout_marginLeft="8dp"
       android:layout_marginRight="8dp"
       android:layout_toLeftOf="@id/image_info"
-      android:layout_toRightOf="@id/image_circle"
+      android:layout_toRightOf="@id/text_number"
       android:orientation="vertical">
 
     <TextView
         android:id="@+id/text_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"/>
-
-    <TextView
-        android:id="@+id/text_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="12sp"/>
+        android:textSize="18sp"/>
   </LinearLayout>
 </RelativeLayout>

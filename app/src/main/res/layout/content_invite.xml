@@ -5,7 +5,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                tools:context="com.ingenuitymobile.edwardlynx.activities.InviteActivity"
                 tools:showIn="@layout/activity_invite">
 
   <ImageView
@@ -27,29 +26,65 @@
 
   <TextView
       android:id="@+id/text_button_bottom"
-      android:layout_width="match_parent"
-      android:layout_marginLeft="16dp"
       style="@style/orange_button"
+      android:layout_width="match_parent"
       android:layout_above="@id/text_invite"
       android:layout_marginBottom="8dp"
-      android:layout_marginTop="8dp"
+      android:layout_marginLeft="16dp"
       android:layout_marginRight="16dp"
+      android:layout_marginTop="8dp"
       android:onClick="create"
-      android:text="@string/create_instant_feedback"/>
+      android:text="@string/send_invites"/>
 
-  <android.support.v7.widget.SearchView
-      android:id="@+id/searchview"
+  <LinearLayout
+      android:id="@+id/layout_searchview"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_margin="8dp"
-      android:background="@drawable/bg_rounded_input_field">
-  </android.support.v7.widget.SearchView>
+      android:background="@color/colorPrimaryDark"
+      android:orientation="vertical">
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/searchview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:defaultQueryHint="@string/search"
+        android:background="@drawable/bg_rounded_input_field">
+    </android.support.v7.widget.SearchView>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="4dp">
+
+      <ImageView
+          android:id="@+id/image_info"
+          android:layout_width="14dp"
+          android:layout_height="14dp"
+          android:layout_marginLeft="8dp"
+          android:layout_marginTop="4dp"
+          android:src="@drawable/ic_info_circle"
+          android:tint="@color/text_input_field"/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="8dp"
+          android:layout_marginRight="8dp"
+          android:layout_toRightOf="@id/image_info"
+          android:text="@string/invite_info"
+          android:textColor="@color/text_input_field"
+          android:textSize="13sp"/>
+    </RelativeLayout>
+  </LinearLayout>
 
   <RelativeLayout
       android:id="@+id/layout_header"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_below="@id/searchview"
+      android:layout_below="@id/layout_searchview"
       android:padding="8dp">
 
     <TextView
@@ -75,7 +110,7 @@
       android:id="@+id/list_users"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_below="@id/layout_header"
       android:layout_above="@id/text_button_bottom"
+      android:layout_below="@id/layout_header"
       android:layout_marginTop="4dp"/>
 </RelativeLayout>

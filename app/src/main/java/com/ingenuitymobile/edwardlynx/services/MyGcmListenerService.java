@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.widget.RemoteViews;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -84,8 +85,18 @@ public class MyGcmListenerService extends FirebaseMessagingService {
 
   public NotificationCompat.Builder getNotificationBuilder(boolean isActive,
       PendingIntent pendingIntent, String title, String message) {
+    RemoteViews notificationView = new RemoteViews(
+        getPackageName(),
+        R.layout.view_custom_notiff
+    );
+
+    notificationView.setImageViewResource(R.id.imagenotileft, R.mipmap.ic_launcher);
+
+    notificationView.setTextViewText(R.id.title, title);
+    notificationView.setTextViewText(R.id.text, message);
     if (isActive) {
       return new NotificationCompat.Builder(this)
+          .setContent(notificationView)
           .setPriority(PRIORITY_MAX)
           .setVibrate(new long[]{100, 100, 100, 100, 100})
           .setSmallIcon(R.mipmap.ic_launcher)

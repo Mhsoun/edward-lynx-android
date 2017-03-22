@@ -101,6 +101,7 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
 
     final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
         LinearLayoutManager.VERTICAL);
+    dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.bg_divider));
     recyclerView.addItemDecoration(dividerItemDecoration);
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -31,7 +31,7 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_add_more_particpants);
+    setContentView(R.layout.activity_invite);
 
     context = this;
 
@@ -40,6 +40,9 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     initViews();
+
+    final TextView textView = (TextView) findViewById(R.id.text_button_bottom);
+    textView.setText(getString(R.string.add_participants_button));
 
     id = getIntent().getLongExtra("id", 0L);
     LogUtil.e("AAA " + id);
@@ -103,7 +106,7 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
 
             @Override
             public void onError(Throwable e) {
-              textView.setText(getString(R.string.create_instant_feedback));
+              textView.setText(getString(R.string.add_participants_button));
               LogUtil.e("AAA onError " + e);
             }
 

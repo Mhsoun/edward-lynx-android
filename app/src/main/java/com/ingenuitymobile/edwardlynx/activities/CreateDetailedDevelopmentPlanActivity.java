@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -52,6 +53,7 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
   private EditText                descriptionEdit;
   private AppCompatCheckBox       remindCheckbox;
   private AppCompatCheckBox       linkCategoryCheckbox;
+  private RelativeLayout          spinnerLayout;
   private Spinner                 spinner;
   private SingleDateAndTimePicker datePicker;
   private int                     index;
@@ -63,7 +65,6 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
   private CreateActionPlanAdapter adapter;
 
   public TextView emptyText;
-
 
 
   @Override
@@ -102,6 +103,7 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     linkCategoryCheckbox = (AppCompatCheckBox) findViewById(R.id.checkbox_link_category);
     addPlanEdit = (EditText) findViewById(R.id.edit_name);
     addPlanLayout = (RelativeLayout) findViewById(R.id.layout_add);
+    spinnerLayout = (RelativeLayout) findViewById(R.id.layout_spinner);
     spinner = (Spinner) findViewById(R.id.spinner);
 
     addPlanEdit.setOnEditorActionListener(editorActionListener);
@@ -111,10 +113,15 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+    final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
+        LinearLayoutManager.VERTICAL);
+    dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.bg_divider));
+    recyclerView.addItemDecoration(dividerItemDecoration);
+
     final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
     itemTouchHelper.attachToRecyclerView(recyclerView);
 
-    adapter = new CreateActionPlanAdapter(param.actions);
+    adapter = new CreateActionPlanAdapter(param.actions, listener);
     recyclerView.setAdapter(adapter);
     notifyAdapter();
 
@@ -134,7 +141,7 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
 
     final boolean isLinkCategory = param.categoryId != 0L;
     linkCategoryCheckbox.setChecked(isLinkCategory);
-    spinner.setVisibility(isLinkCategory ? View.VISIBLE : View.GONE);
+    spinnerLayout.setVisibility(isLinkCategory ? View.VISIBLE : View.GONE);
 
     ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
         android.R.layout.simple_spinner_item, categories);
@@ -178,7 +185,7 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     linkCategoryCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
       @Override
       public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        spinner.setVisibility(b ? View.VISIBLE : View.GONE);
+        spinnerLayout.setVisibility(b ? View.VISIBLE : View.GONE);
       }
     });
 
@@ -201,8 +208,12 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
   }
 
   public void addPlan(View v) {
-    addPlanLayout.setVisibility(View.VISIBLE);
-    addPlanEdit.requestFocus();
+    if (addPlanLayout.getVisibility() == View.GONE) {
+      addPlanLayout.setVisibility(View.VISIBLE);
+      addPlanEdit.requestFocus();
+    } else {
+      addPlanEdit.onEditorAction(EditorInfo.IME_ACTION_DONE);
+    }
   }
 
   public void save(View v) {
@@ -244,6 +255,15 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     setResult(RESULT_OK, intent);
     finish();
   }
+
+  private CreateActionPlanAdapter.OnDeleteListener listener = new CreateActionPlanAdapter
+      .OnDeleteListener() {
+    @Override
+    public void onDelete(int position) {
+      param.actions.remove(position);
+      notifyAdapter();
+    }
+  };
 
   private TextView.OnEditorActionListener editorActionListener = new TextView
       .OnEditorActionListener() {

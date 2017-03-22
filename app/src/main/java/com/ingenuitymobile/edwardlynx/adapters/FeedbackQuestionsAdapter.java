@@ -1,15 +1,13 @@
 package com.ingenuitymobile.edwardlynx.adapters;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -25,7 +23,8 @@ import java.util.List;
  * Created by mEmEnG-sKi on 10/01/2017.
  */
 
-public class FeedbackQuestionsAdapter extends RecyclerView.Adapter<FeedbackQuestionsAdapter.ViewHolder> {
+public class FeedbackQuestionsAdapter extends
+    RecyclerView.Adapter<FeedbackQuestionsAdapter.ViewHolder> {
 
   private List<Question>       data;
   private boolean              isEnabled;
@@ -39,7 +38,6 @@ public class FeedbackQuestionsAdapter extends RecyclerView.Adapter<FeedbackQuest
   }
 
   class ViewHolder extends RecyclerView.ViewHolder {
-    TextView   helpText;
     TextView   questionText;
     RadioGroup radioGroup;
     EditText   editText;
@@ -47,7 +45,6 @@ public class FeedbackQuestionsAdapter extends RecyclerView.Adapter<FeedbackQuest
     ViewHolder(View itemView) {
       super(itemView);
       questionText = (TextView) itemView.findViewById(R.id.text_question);
-      helpText = (TextView) itemView.findViewById(R.id.text_help);
       radioGroup = (RadioGroup) itemView.findViewById(R.id.group_button);
       editText = (EditText) itemView.findViewById(R.id.edit_text);
     }
@@ -64,7 +61,6 @@ public class FeedbackQuestionsAdapter extends RecyclerView.Adapter<FeedbackQuest
     final Context context = holder.itemView.getContext();
     final Question question = data.get(position);
     holder.questionText.setText(question.text);
-    holder.helpText.setText(question.answer.help);
     holder.editText.setVisibility(View.GONE);
     if (question.answer.options != null) {
       holder.radioGroup.removeAllViews();
@@ -140,21 +136,16 @@ public class FeedbackQuestionsAdapter extends RecyclerView.Adapter<FeedbackQuest
     final RadioButton radioButton = new RadioButton(context);
     final LayoutParams lparam = new LayoutParams(LayoutParams.WRAP_CONTENT,
         LayoutParams.WRAP_CONTENT);
+    lparam.setMargins(0, 24, 0, 0);
     radioButton.setLayoutParams(lparam);
     radioButton.setTextColor(context.getResources().getColor(R.color.white));
     radioButton.setTag(String.valueOf(value));
-    int textColor = Color.parseColor("#ffffff");
-    radioButton.setButtonTintList(ColorStateList.valueOf(textColor));
     radioButton.setText(description);
+    radioButton.setTextSize(20);
     radioGroup.addView(radioButton);
   }
 
-  public void isEnabled(boolean isEnabled) {
-    this.isEnabled = isEnabled;
-    notifyDataSetChanged();
-  }
-
   public interface OnAnswerItemListener {
-    public void onAnswer(long id, String value);
+    void onAnswer(long id, String value);
   }
 }
