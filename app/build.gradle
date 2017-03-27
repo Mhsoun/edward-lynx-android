@@ -72,6 +72,11 @@ dependencies {
   // https://bignerdranch.github.io/expandable-recycler-view/
   compile 'com.bignerdranch.android:expandablerecyclerview:2.1.1'
 
+  // https://github.com/txusballesteros/fit-chart
+  compile 'com.txusballesteros:FitChart:1.0'
+  // https://github.com/PhilJay/MPAndroidChart
+  compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+
   // tests
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -14,7 +15,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:textColor="@color/white"
-      android:textSize="17sp"
+      android:textSize="18sp"
       android:textStyle="bold"/>
 
   <LinearLayout
@@ -27,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:textStyle="bold"/>
 
     <TextView
@@ -37,18 +38,75 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:textColor="@color/unfinished_status"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         tools:ignore="MissingPrefix"/>
   </LinearLayout>
 
-  <ProgressBar
-      android:id="@+id/progress_development"
-      style="?android:attr/progressBarStyleHorizontal"
+  <RelativeLayout
       android:layout_width="match_parent"
-      android:layout_height="20dp"
-      android:layout_marginTop="4dp"
-      android:max="100"
-      android:progress="45"/>
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+      <TextView
+          android:id="@+id/text_overall"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:text="@string/overall_progress"
+          android:textColor="@color/white"
+          android:textSize="12sp"
+          android:textStyle="bold"/>
+
+      <RelativeLayout
+          android:layout_width="100dp"
+          android:layout_height="100dp"
+          android:layout_below="@id/text_overall"
+          android:layout_marginTop="12dp">
+
+        <com.txusballesteros.widgets.FitChart
+            android:id="@+id/fitchart_progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:animationMode="overdraw"
+            app:backStrokeColor="@color/black"
+            app:strokeSize="12dp"
+            app:valueStrokeColor="@color/colorAccent"/>
+
+        <TextView
+            android:id="@+id/text_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+      </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="132dp">
+
+      <TextView
+          android:id="@+id/text_goal_progress"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/goal_prgress"
+          android:textColor="@color/white"
+          android:textSize="12sp"
+          android:textStyle="bold"/>
+
+      <com.github.mikephil.charting.charts.BarChart
+          android:id="@+id/barchart_goal"
+          android:layout_width="match_parent"
+          android:layout_height="100dp"
+          android:layout_below="@+id/text_goal_progress"
+          android:layout_marginTop="12dp"/>
+    </RelativeLayout>
+  </RelativeLayout>
 </LinearLayout>
