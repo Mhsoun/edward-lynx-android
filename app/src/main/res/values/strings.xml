@@ -126,10 +126,16 @@
   <string name="edit">Edit</string>
   <string name="submit">Submit</string>
 
-  // region Development plan details
-  <string name="completed_details">%1$d / %2$d completed</string>
+  // region Development plan
+  <string name="all_bold">ALL</string>
+  <string name="in_progress_bold">IN PROGRESS</string>
+  <string name="completed_bold">COMPLETED</string>
+  <string name="expired_bold">EXPIRED</string>
   <string name="overall_progress">Overall Progress</string>
   <string name="goal_prgress">Goals Progress Bar</string>
+
+  // region Development plan details
+  <string name="completed_details">%1$d / %2$d completed</string>
 
 
   // region Invite to answer
