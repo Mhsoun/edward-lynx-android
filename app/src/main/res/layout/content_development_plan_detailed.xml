@@ -14,23 +14,82 @@
       android:scaleType="centerCrop"
       android:src="@drawable/bg"/>
 
-  <RelativeLayout
+  <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="match_parent"
+      android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_empty_state"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/no_data_found"
-        android:textColor="@color/white"
-        android:visibility="gone"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_development_plan"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-  </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:orientation="vertical">
 
+      <RelativeLayout
+          android:layout_width="100dp"
+          android:layout_height="100dp"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginTop="8dp">
+
+        <com.txusballesteros.widgets.FitChart
+            android:id="@+id/fitchart_progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:animationMode="overdraw"
+            app:backStrokeColor="@color/black"
+            app:strokeSize="12dp"
+            app:valueStrokeColor="@color/colorAccent"/>
+
+        <TextView
+            android:id="@+id/text_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+      </RelativeLayout>
+
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginBottom="8dp"
+          android:layout_marginTop="8dp"
+          android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text_goals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goals_details"
+            android:textColor="@color/colorAccent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="@string/completed"
+            android:textColor="@color/white"/>
+      </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <TextView
+          android:id="@+id/text_empty_state"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:text="@string/no_data_found"
+          android:textColor="@color/white"
+          android:visibility="gone"/>
+
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/list_development_plan"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"/>
+    </RelativeLayout>
+  </LinearLayout>
 </RelativeLayout>

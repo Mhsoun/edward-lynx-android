@@ -1,11 +1,14 @@
 package com.ingenuitymobile.edwardlynx.adapters;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -45,6 +48,7 @@ public class GoalAdapter extends
     TextView       descriptionText;
     TextView       countText;
     TextView       dateText;
+    ProgressBar    progressBar;
 
 
     ParentView(View itemView) {
@@ -54,6 +58,7 @@ public class GoalAdapter extends
       descriptionText = (TextView) itemView.findViewById(R.id.text_description);
       countText = (TextView) itemView.findViewById(R.id.text_count);
       dateText = (TextView) itemView.findViewById(R.id.text_date);
+      progressBar = (ProgressBar) itemView.findViewById(R.id.progress_development);
     }
 
     @Override
@@ -61,18 +66,18 @@ public class GoalAdapter extends
       super.setExpanded(expanded);
       final Context ctx = bodyLayout.getContext();
       bodyLayout.setBackground(ctx.getResources().getDrawable(
-          expanded ? R.drawable.bg_round_top_dashboard : R.drawable.bg_round_dashboard));
+          expanded ? R.drawable.bg_round_top_dashboard : R.drawable.bg_round_dev_plan));
     }
   }
 
   class ChildView extends ChildViewHolder {
-    LinearLayout bodyLayout;
-    TextView     nameText;
-    ImageView    imageView;
+    RelativeLayout bodyLayout;
+    TextView       nameText;
+    ImageView      imageView;
 
     ChildView(View itemView) {
       super(itemView);
-      bodyLayout = (LinearLayout) itemView.findViewById(R.id.layout_body);
+      bodyLayout = (RelativeLayout) itemView.findViewById(R.id.layout_body);
       nameText = (TextView) itemView.findViewById(R.id.text_name);
       imageView = (ImageView) itemView.findViewById(R.id.image_circle);
     }
@@ -94,6 +99,7 @@ public class GoalAdapter extends
   public void onBindParentViewHolder(ParentView holder, int position,
       ParentListItem parentListItem) {
     final Goal goal = (Goal) parentListItem;
+    final Context context = holder.itemView.getContext();
 
     holder.nameText.setText(goal.title);
     holder.descriptionText.setText(goal.description);
@@ -116,16 +122,41 @@ public class GoalAdapter extends
       }
     }
 
-    holder.countText.setText(count + " / " + size + " completed");
+    holder.countText.setText(context.getString(R.string.completed_details, count, size));
+    holder.bodyLayout.setSelected(count == size);
+
+    holder.progressBar.setProgress((int) (((float) (count) / (float) size) * 100));
+    holder.progressBar.setScaleY(3f);
+    holder.progressBar
+        .getProgressDrawable()
+        .setColorFilter(context.getResources()
+                .getColor(count == size ? R.color.colorAccent : R.color.dev_plan_color),
+            PorterDuff.Mode.SRC_IN);
   }
 
   @Override
   public void onBindChildViewHolder(ChildView holder, int position,
       Object childListItem) {
     final Action action = (Action) childListItem;
+    final Context context = holder.itemView.getContext();
     holder.nameText.setText(action.title);
     holder.imageView.setImageDrawable(holder.imageView.getContext().getResources()
         .getDrawable(action.checked == 1 ? R.drawable.ic_check : R.drawable.ic_circle));
+
+    holder.imageView.setColorFilter(
+        ContextCompat.getColor(context, action.checked == 1 ? R.color.done_color : R.color.white));
+
+    final int size = action.goal.actions.size();
+    int count = 0;
+    if (action.goal.actions != null) {
+      for (Action actionGoal : action.goal.actions) {
+        if (actionGoal.checked == 1) {
+          count++;
+        }
+      }
+    }
+
+    holder.bodyLayout.setSelected(count == size);
     holder.bodyLayout.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {

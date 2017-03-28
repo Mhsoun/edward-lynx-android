@@ -25,6 +25,8 @@
   <color name="dashboard_green">#38b386</color>
   <color name="dashboard_blue">#3bb0c1</color>
   <color name="dashboard_pink">#c845dc</color>
+  <color name="dev_plan_color">#18b3c9</color>
+  <color name="done_color">#00c853</color>
 
   <color name="unfinished_status">#636363</color>
 </resources>

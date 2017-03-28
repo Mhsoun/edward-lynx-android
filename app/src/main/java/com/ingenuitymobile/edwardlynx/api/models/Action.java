@@ -16,4 +16,6 @@ public class Action extends Model {
   public int    checked;
   @SerializedName("position")
   public int    position;
+
+  public Goal goal;
 }

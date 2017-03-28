@@ -136,7 +136,8 @@
 
   // region Development plan details
   <string name="completed_details">%1$d / %2$d completed</string>
-
+  <string name="goals_details">%1$d of %2$d goals</string>
+  <string name="completed"> completed</string>
 
   // region Invite to answer
   <string name="send_invites">Send Invites</string>

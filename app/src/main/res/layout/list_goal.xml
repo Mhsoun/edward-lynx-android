@@ -11,20 +11,12 @@
                 android:orientation="vertical"
                 android:padding="8dp">
 
-  <ImageView
-      android:id="@+id/image_check"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentRight="true"
-      android:src="@mipmap/close"
-      android:visibility="gone"/>
-
   <LinearLayout
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentLeft="true"
       android:layout_centerVertical="true"
-      android:layout_toLeftOf="@id/image_check"
+      android:layout_marginLeft="9dp"
       android:orientation="vertical">
 
     <TextView
@@ -49,7 +41,7 @@
           android:id="@+id/text_count"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textColor="@color/white"
+          android:textColor="@color/dev_plan_selector"
           android:textSize="10sp"
           android:textStyle="bold"/>
 
@@ -64,5 +56,15 @@
           android:textStyle="bold"
           tools:ignore="MissingPrefix"/>
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_development"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:max="100"
+        android:progress="45"/>
   </LinearLayout>
 </RelativeLayout>
