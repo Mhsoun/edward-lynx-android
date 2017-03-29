@@ -1,13 +1,18 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
@@ -15,8 +20,20 @@ import com.ingenuitymobile.edwardlynx.activities.CreateDevelopmentPlanActivity;
 import com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity;
 import com.ingenuitymobile.edwardlynx.activities.FeedbackRequestsActivity;
 import com.ingenuitymobile.edwardlynx.activities.ReportsActivity;
-import com.ingenuitymobile.edwardlynx.api.models.User;
+import com.ingenuitymobile.edwardlynx.adapters.DevelopmentPlanAdapter;
+import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
+import com.ingenuitymobile.edwardlynx.api.models.Goal;
+import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+import com.ingenuitymobile.edwardlynx.activities.MainActivity.OnChangeFragmentListener;
+import com.ingenuitymobile.edwardlynx.activities.MainActivity.ChangeFragment;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 04/01/2017.
@@ -24,21 +41,36 @@ import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 public class DashboardFragment extends BaseFragment {
 
-  private View           mainView;
-  private RelativeLayout createFeedbackLayout;
-  private RelativeLayout createDevelopmenPlanLayout;
-  private RelativeLayout viewReportsLayout;
-  private RelativeLayout viewSurveyLayout;
-  private RelativeLayout feedback360Layout;
-  private RelativeLayout newReportsLayout;
-  private RelativeLayout instantFeedbackLayout;
+  private View mainView;
 
-  public static DashboardFragment newInstance(Context ctx) {
+  private RelativeLayout devPlanLayout;
+  private RelativeLayout instantFeedbackLayout;
+  private RelativeLayout lynxLayout;
+
+  private TextView answerText;
+  private TextView resultsText;
+  private TextView inviteText;
+  private TextView createText;
+
+  private TextView seeMoreText;
+
+  private OnChangeFragmentListener listener;
+
+  private List<DevelopmentPlan>  devPlanData;
+  private DevelopmentPlanAdapter devPlanAdapter;
+
+
+  public static DashboardFragment newInstance(Context ctx, OnChangeFragmentListener listener) {
     DashboardFragment fragment = new DashboardFragment();
     Bundle bundle = new Bundle();
     bundle.putString("title", ctx.getString(R.string.dashboard_bold));
     fragment.setArguments(bundle);
+    fragment.listener = listener;
     return fragment;
+  }
+
+  public DashboardFragment() {
+    devPlanData = new ArrayList<>();
   }
 
   @Override
@@ -62,47 +94,121 @@ public class DashboardFragment extends BaseFragment {
     return mainView;
   }
 
-  private void initViews() {
-    createFeedbackLayout = (RelativeLayout) mainView.findViewById(R.id.layout_create_feedback);
-    createDevelopmenPlanLayout = (RelativeLayout) mainView.findViewById(
-        R.id.layout_create_development_plan);
-    viewReportsLayout = (RelativeLayout) mainView.findViewById(R.id.layout_view_report);
-    viewSurveyLayout = (RelativeLayout) mainView.findViewById(R.id.layout_view_survey);
-    feedback360Layout = (RelativeLayout) mainView.findViewById(R.id.layout_360_feedback);
-    newReportsLayout = (RelativeLayout) mainView.findViewById(R.id.layout_new_report);
-    instantFeedbackLayout = (RelativeLayout) mainView.findViewById(R.id.layout_instant_feedback);
+  @Override
+  public void onResume() {
+    super.onResume();
+    getDevPlans();
+  }
 
-    createFeedbackLayout.setOnClickListener(onClickListener);
+  private void initViews() {
+    devPlanLayout = (RelativeLayout) mainView.findViewById(R.id.layout_dev_plan);
+    instantFeedbackLayout = (RelativeLayout) mainView.findViewById(R.id.layout_instant_feedback);
+    lynxLayout = (RelativeLayout) mainView.findViewById(R.id.layout_lynx_measurement);
+
+    answerText = (TextView) mainView.findViewById(R.id.text_answer);
+    resultsText = (TextView) mainView.findViewById(R.id.text_results);
+    inviteText = (TextView) mainView.findViewById(R.id.text_invite);
+    createText = (TextView) mainView.findViewById(R.id.text_create);
+
+    seeMoreText = (TextView) mainView.findViewById(R.id.text_see_more);
+
+    devPlanLayout.setOnClickListener(onClickListener);
     instantFeedbackLayout.setOnClickListener(onClickListener);
-    viewReportsLayout.setOnClickListener(onClickListener);
-    createDevelopmenPlanLayout.setOnClickListener(onClickListener);
+    lynxLayout.setOnClickListener(onClickListener);
+
+    answerText.setOnClickListener(onClickListener);
+    resultsText.setOnClickListener(onClickListener);
+    inviteText.setOnClickListener(onClickListener);
+    createText.setOnClickListener(onClickListener);
+    seeMoreText.setOnClickListener(onClickListener);
+
+    final RecyclerView surveyList = (RecyclerView) mainView.findViewById(R.id.recycler_dev_plans);
+    final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
+        LinearLayoutManager.VERTICAL);
+    surveyList.addItemDecoration(dividerItemDecoration);
+    surveyList.setHasFixedSize(true);
+    surveyList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+    devPlanAdapter = new DevelopmentPlanAdapter(devPlanData);
+    surveyList.setAdapter(devPlanAdapter);
   }
 
   private void setupViews() {
-    final int disabledColor = Color.parseColor("#3f244f");
-    if (Shared.user.type.equals(User.FEEDBACK_PROVIDER)) {
-      createDevelopmenPlanLayout.setBackgroundColor(disabledColor);
-      viewReportsLayout.setBackgroundColor(disabledColor);
-    } else if (Shared.user.type.equals(User.ANALYST)) {
-      createDevelopmenPlanLayout.setBackgroundColor(disabledColor);
-    }
+//    final int disabledColor = Color.parseColor("#3f244f");
+//    if (Shared.user.type.equals(User.FEEDBACK_PROVIDER)) {
+//      createDevelopmenPlanLayout.setBackgroundColor(disabledColor);
+//      viewReportsLayout.setBackgroundColor(disabledColor);
+//    } else if (Shared.user.type.equals(User.ANALYST)) {
+//      createDevelopmenPlanLayout.setBackgroundColor(disabledColor);
+//    }
+  }
+
+  private void getDevPlans() {
+    subscription.add(
+        Shared.apiClient.getDevelopmentPlans(new Subscriber<DevelopmentPlansResponse>() {
+          @Override
+          public void onCompleted() {
+            LogUtil.e("AAA onCompleted ");
+            devPlanAdapter.notifyDataSetChanged();
+          }
+
+          @Override
+          public void onError(Throwable e) {
+            LogUtil.e("AAA onError " + e);
+          }
+
+          @Override
+          public void onNext(final DevelopmentPlansResponse response) {
+            LogUtil.e("AAA onNext ");
+            devPlanData.clear();
+            if (response.items.size() > 2) {
+              devPlanData.add(response.items.get(0));
+              devPlanData.add(response.items.get(2));
+            } else {
+              devPlanData.addAll(response.items);
+            }
+          }
+        }));
   }
 
   private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
     public void onClick(View view) {
       switch (view.getId()) {
-      case R.id.layout_create_feedback:
-        startActivity(new Intent(getActivity(), CreateFeedbackActivity.class));
+      case R.id.layout_dev_plan:
         break;
       case R.id.layout_instant_feedback:
-        startActivity(new Intent(getActivity(), FeedbackRequestsActivity.class));
-        break;
-      case R.id.layout_view_report:
         startActivity(new Intent(getActivity(), ReportsActivity.class));
         break;
-      case R.id.layout_create_development_plan:
-        startActivity(new Intent(getActivity(), CreateDevelopmentPlanActivity.class));
+      case R.id.layout_lynx_measurement:
+        break;
+      case R.id.text_answer:
+        startActivity(new Intent(getActivity(), FeedbackRequestsActivity.class));
+        break;
+      case R.id.text_results:
+        break;
+      case R.id.text_invite:
+        break;
+      case R.id.text_create:
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
+        alertBuilder.setMessage(getString(R.string.create_new_dashboard));
+        alertBuilder.setNegativeButton(getString(R.string.goals_dashboard),
+            new DialogInterface.OnClickListener() {
+              public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(getActivity(), CreateDevelopmentPlanActivity.class));
+              }
+            });
+        alertBuilder.setPositiveButton(getString(R.string.instant_feedback_dashboard),
+            new DialogInterface.OnClickListener() {
+              public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(getActivity(), CreateFeedbackActivity.class));
+              }
+            });
+        alertBuilder.create().show();
+        break;
+      case R.id.text_see_more:
+        LogUtil.e("AAA onCLick");
+        listener.onChange(ChangeFragment.DEVPLANS);
         break;
       }
     }

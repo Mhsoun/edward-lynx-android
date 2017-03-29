@@ -16,7 +16,7 @@
       android:title="@string/drawer_surveys"/>
   <item
       android:id="@+id/development_plans"
-      android:icon="@drawable/ic_dev_plan"
+      android:icon="@drawable/ic_briefcase"
       android:title="@string/drawer_development_plans"/>
   <item
       android:id="@+id/settings"
@@ -24,6 +24,6 @@
       android:title="@string/drawer_settings"/>
   <item
       android:id="@+id/logout"
-      android:icon="@drawable/ic_logout"
+      android:icon="@drawable/ic_sign_out"
       android:title="@string/drawer_logout"/>
 </menu>

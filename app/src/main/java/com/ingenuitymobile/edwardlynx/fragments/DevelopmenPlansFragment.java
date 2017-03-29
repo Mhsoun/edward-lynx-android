@@ -2,6 +2,7 @@ package com.ingenuitymobile.edwardlynx.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -18,11 +19,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.activities.CreateDevelopmentPlanActivity;
+import com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity;
+import com.ingenuitymobile.edwardlynx.activities.FeedbackRequestsActivity;
+import com.ingenuitymobile.edwardlynx.activities.ReportsActivity;
 import com.ingenuitymobile.edwardlynx.adapters.DevelopmentPlanAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
@@ -108,6 +114,9 @@ public class DevelopmenPlansFragment extends BaseFragment {
     refreshLayout = (SwipeRefreshLayout) mainView.findViewById(R.id.swipe_refresh_layout);
     refreshLayout.setOnRefreshListener(refreshListener);
     refreshLayout.setRefreshing(true);
+
+    final ImageView imageView = (ImageView) mainView.findViewById(R.id.image_create_dev_plan);
+    imageView.setOnClickListener(onClickListener);
   }
 
   private void getData() {
@@ -195,6 +204,17 @@ public class DevelopmenPlansFragment extends BaseFragment {
       break;
     }
   }
+
+  private View.OnClickListener onClickListener = new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+      switch (view.getId()) {
+      case R.id.image_create_dev_plan:
+        startActivity(new Intent(getActivity(), CreateDevelopmentPlanActivity.class));
+        break;
+      }
+    }
+  };
 
   private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener
       () {

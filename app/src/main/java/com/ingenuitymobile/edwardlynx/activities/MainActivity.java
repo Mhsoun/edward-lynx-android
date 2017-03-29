@@ -23,11 +23,20 @@ import com.ingenuitymobile.edwardlynx.fragments.DashboardFragment;
 import com.ingenuitymobile.edwardlynx.fragments.DevelopmenPlansFragment;
 import com.ingenuitymobile.edwardlynx.fragments.ProfileFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveysFragment;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends BaseActivity implements
     NavigationView.OnNavigationItemSelectedListener {
+
+  public enum ChangeFragment {
+    DASHBOARD,
+    SURVEYS,
+    DEVPLANS,
+    PROFILE,
+    CHANGE_PASSWORD;
+  }
 
   private Toolbar                 toolbar;
   private SurveysFragment         surveysFragment;
@@ -47,10 +56,7 @@ public class MainActivity extends BaseActivity implements
     initViews();
     setUserCrashlytics();
 
-    if (savedInstanceState == null) {
-      DashboardFragment fragment = DashboardFragment.newInstance(context);
-      changeFragment(fragment);
-    }
+    changeToDashboard();
     checkIntent();
   }
 
@@ -70,10 +76,7 @@ public class MainActivity extends BaseActivity implements
     int id = item.getItemId();
 
     if (id == R.id.dashboard) {
-      if (dashboardFragment == null) {
-        dashboardFragment = DashboardFragment.newInstance(context);
-      }
-      changeFragment(dashboardFragment);
+      changeToDashboard();
     } else if (id == R.id.profile) {
       if (profileFragment == null) {
         profileFragment = ProfileFragment.newInstance(context);
@@ -85,10 +88,7 @@ public class MainActivity extends BaseActivity implements
       }
       changeFragment(surveysFragment);
     } else if (id == R.id.development_plans) {
-      if (developmenPlansFragment == null) {
-        developmenPlansFragment = DevelopmenPlansFragment.newInstance(context);
-      }
-      changeFragment(developmenPlansFragment);
+      changeToDevPlan();
     } else if (id == R.id.settings) {
       if (changePasswordFragment == null) {
         changePasswordFragment = ChangePasswordFragment.newInstance(context);
@@ -171,6 +171,45 @@ public class MainActivity extends BaseActivity implements
         }
       }
     }
+  }
+
+  private void changeToDashboard() {
+    if (dashboardFragment == null) {
+      dashboardFragment = DashboardFragment.newInstance(context, listener);
+    }
+    changeFragment(dashboardFragment);
+  }
+
+  private void changeToDevPlan() {
+    if (developmenPlansFragment == null) {
+      developmenPlansFragment = DevelopmenPlansFragment.newInstance(context);
+    }
+    changeFragment(developmenPlansFragment);
+  }
+
+  private OnChangeFragmentListener listener = new OnChangeFragmentListener() {
+    @Override
+    public void onChange(ChangeFragment changeFragment) {
+      LogUtil.e("AAA onchange");
+      switch (changeFragment) {
+      case DASHBOARD:
+        changeToDashboard();
+        break;
+      case SURVEYS:
+        break;
+      case DEVPLANS:
+        changeToDevPlan();
+        break;
+      case PROFILE:
+        break;
+      case CHANGE_PASSWORD:
+        break;
+      }
+    }
+  };
+
+  public interface OnChangeFragmentListener {
+    void onChange(ChangeFragment changeFragment);
   }
 }
 

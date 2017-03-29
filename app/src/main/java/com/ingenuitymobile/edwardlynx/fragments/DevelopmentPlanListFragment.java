@@ -80,8 +80,4 @@ public class DevelopmentPlanListFragment extends BaseFragment {
       }
     }
   }
-
-  private void notifyAdapter() {
-
-  }
 }

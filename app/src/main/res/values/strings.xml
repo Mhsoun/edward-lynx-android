@@ -178,6 +178,18 @@
   // Dashboard
   <string name="status">STATUS</string>
   <string name="shortcuts">SHORTCUTS</string>
+  <string name="dev_plan_dashboard">Development\nPlan</string>
+  <string name="instant_feedback_dashboard">Instant\nFeedback</string>
+  <string name="lynx_measurement_dashboard">Lynx\nMeasurement</string>
+  <string name="answer_dashboard">ANSWER</string>
+  <string name="results_dashboard">RESULTS</string>
+  <string name="invite_dashboard">INVITE</string>
+  <string name="create_dashboard">CREATE</string>
+  <string name="create_new_dashboard">Create New</string>
+  <string name="goals_dashboard">Goals</string>
+  <string name="reminders_dashboard">REMINDERS</string>
+  <string name="no_reminders">No Reminders</string>
+  <string name="see_more">See More</string>
 
   <string name="navigation_drawer_open">Open navigation drawer</string>
   <string name="navigation_drawer_close">Close navigation drawer</string>
