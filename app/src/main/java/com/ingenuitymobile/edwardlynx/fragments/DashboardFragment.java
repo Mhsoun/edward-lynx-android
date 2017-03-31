@@ -21,8 +21,10 @@ import com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity;
 import com.ingenuitymobile.edwardlynx.activities.FeedbackRequestsActivity;
 import com.ingenuitymobile.edwardlynx.activities.ReportsActivity;
 import com.ingenuitymobile.edwardlynx.adapters.DevelopmentPlanAdapter;
+import com.ingenuitymobile.edwardlynx.adapters.ReminderAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
+import com.ingenuitymobile.edwardlynx.api.models.Reminder;
 import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.activities.MainActivity.OnChangeFragmentListener;
@@ -54,10 +56,15 @@ public class DashboardFragment extends BaseFragment {
 
   private TextView seeMoreText;
 
+  private TextView emptyReminderText;
+
   private OnChangeFragmentListener listener;
 
   private List<DevelopmentPlan>  devPlanData;
   private DevelopmentPlanAdapter devPlanAdapter;
+
+  private List<Reminder>  reminders;
+  private ReminderAdapter reminderAdapter;
 
 
   public static DashboardFragment newInstance(Context ctx, OnChangeFragmentListener listener) {
@@ -71,6 +78,42 @@ public class DashboardFragment extends BaseFragment {
 
   public DashboardFragment() {
     devPlanData = new ArrayList<>();
+    reminders = new ArrayList<>();
+
+    Reminder reminder = new Reminder();
+    reminder.type = Reminder.Type.GOAL.toString();
+    reminder.description = "Provide Instant Feedback";
+    reminders.add(reminder);
+
+    reminder = new Reminder();
+    reminder.type = Reminder.Type.INVITE_FEEDBACK.toString();
+    reminder.description = "Provide Instant Feedback";
+    reminders.add(reminder);
+
+    reminder = new Reminder();
+    reminder.type = Reminder.Type.ANSWER_FEEDBACK.toString();
+    reminder.description = "Provide Instant Feedback";
+    reminders.add(reminder);
+
+    reminder = new Reminder();
+    reminder.type = Reminder.Type.GOAL.toString();
+    reminder.description = "Provide Instant Feedback";
+    reminders.add(reminder);
+
+    reminder = new Reminder();
+    reminder.type = Reminder.Type.ANSWER_FEEDBACK.toString();
+    reminder.description = "Provide Instant Feedback";
+    reminders.add(reminder);
+
+    reminder = new Reminder();
+    reminder.type = Reminder.Type.INVITE_FEEDBACK.toString();
+    reminder.description = "Provide Instant Feedback";
+    reminders.add(reminder);
+
+    reminder = new Reminder();
+    reminder.type = Reminder.Type.GOAL.toString();
+    reminder.description = "Provide Instant Feedback";
+    reminders.add(reminder);
   }
 
   @Override
@@ -131,6 +174,16 @@ public class DashboardFragment extends BaseFragment {
 
     devPlanAdapter = new DevelopmentPlanAdapter(devPlanData);
     surveyList.setAdapter(devPlanAdapter);
+
+    final RecyclerView reminderList = (RecyclerView) mainView.findViewById(R.id.recycler_reminders);
+    reminderList.setLayoutManager(new LinearLayoutManager(getActivity()));
+    emptyReminderText = (TextView) mainView.findViewById(R.id.text_empty_reminders);
+
+    reminderAdapter = new ReminderAdapter(reminders);
+    reminderList.setAdapter(reminderAdapter);
+    LogUtil.e("AAA " + reminderAdapter.getItemCount());
+
+    emptyReminderText.setVisibility(reminders.isEmpty() ? View.VISIBLE : View.GONE);
   }
 
   private void setupViews() {

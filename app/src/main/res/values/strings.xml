@@ -190,6 +190,9 @@
   <string name="reminders_dashboard">REMINDERS</string>
   <string name="no_reminders">No Reminders</string>
   <string name="see_more">See More</string>
+  <string name="now">Now</string>
+  <string name="due_in">Due in</string>
+  <string name="days">%1$d Days</string>
 
   <string name="navigation_drawer_open">Open navigation drawer</string>
   <string name="navigation_drawer_close">Close navigation drawer</string>

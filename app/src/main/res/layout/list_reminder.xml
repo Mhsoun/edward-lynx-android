@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/layout_body"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/bg_rounded_reminder">
+
+  <View
+      android:id="@+id/space"
+      android:layout_width="1dp"
+      android:layout_height="match_parent"
+      android:layout_alignParentRight="true"
+      android:layout_marginRight="84dp"/>
+
+  <LinearLayout
+      android:id="@+id/layout_due_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignLeft="@id/space"
+      android:layout_centerVertical="true"
+      android:orientation="vertical"
+      android:visibility="visible">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/due_in"
+        android:textColor="@color/white"
+        android:textSize="11sp"/>
+
+    <TextView
+        android:id="@+id/text_due_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/days"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+  </LinearLayout>
+
+  <TextView
+      android:id="@+id/text_now"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignLeft="@id/space"
+      android:layout_centerVertical="true"
+      android:text="@string/now"
+      android:textColor="@color/colorAccent"
+      android:textSize="16sp"
+      android:textStyle="bold"/>
+
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_centerVertical="true"
+      android:layout_marginLeft="32dp"
+      android:layout_marginRight="8dp"
+      android:layout_toLeftOf="@id/layout_due_date"
+      android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="INVITE FEEDBACK"
+        android:textColor="@color/reminder_selector"/>
+
+    <TextView
+        android:id="@+id/text_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Providers to your instant feedback feedback"
+        android:textColor="@color/white"
+        android:textSize="12sp"/>
+  </LinearLayout>
+
+</RelativeLayout>
