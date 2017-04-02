@@ -2,7 +2,14 @@ package com.ingenuitymobile.edwardlynx.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
@@ -12,11 +19,14 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.activities.CreateDevelopmentPlanActivity;
+import com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity;
 import com.ingenuitymobile.edwardlynx.adapters.SurveyAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
@@ -32,17 +42,23 @@ import rx.Subscriber;
 
 public class SurveysFragment extends BaseFragment {
 
-  private final static int NUM = 3;
+  public static final int ALL      = 0;
+  public static final int FEEDBACK = 1;
+  public static final int LYNX     = 2;
 
-  private View               mainView;
-  private ArrayList<Survey>  data;
-  private SurveyAdapter      adapter;
-  private TextView           emptyText;
-  private SwipeRefreshLayout refreshLayout;
+  private View      mainView;
+  private ViewPager viewPager;
+  private ImageView createImage;
 
-  private boolean             loading;
-  private int                 page;
-  private LinearLayoutManager manager;
+  private SurveysListFragment      allFragment;
+  private FeedbackRequestsFragment feedbackFragment;
+  private SurveysListFragment      lynxFragment;
+
+  private int position;
+
+  public SurveysFragment() {
+    position = 0;
+  }
 
 
   public static SurveysFragment newInstance(Context ctx) {
@@ -51,12 +67,6 @@ public class SurveysFragment extends BaseFragment {
     bundle.putString("title", ctx.getString(R.string.surveys_bold));
     fragment.setArguments(bundle);
     return fragment;
-  }
-
-  public SurveysFragment() {
-    data = new ArrayList<>();
-    loading = false;
-    page = 1;
   }
 
   @Override
@@ -69,166 +79,142 @@ public class SurveysFragment extends BaseFragment {
     return mainView;
   }
 
-  @Override
-  public void onResume() {
-    super.onResume();
-    page = 1;
-    getData(true);
-    LogUtil.e("AAA onResume survey");
-  }
-
   private void initViews() {
-    final RecyclerView surveyList = (RecyclerView) mainView.findViewById(R.id.list_survey);
-    final RelativeLayout filterLayout = (RelativeLayout) mainView.findViewById(R.id.layout_filter);
-    final RelativeLayout sortLayout = (RelativeLayout) mainView.findViewById(R.id.layout_sort);
-
     final SearchView searchView = (SearchView) mainView.findViewById(R.id.searchview);
     searchView.setQueryHint("Search Survey");
 
-    emptyText = (TextView) mainView.findViewById(R.id.text_empty_state);
-    refreshLayout = (SwipeRefreshLayout) mainView.findViewById(R.id.swipe_refresh_layout);
+    viewPager = (ViewPager) mainView.findViewById(R.id.viewpager);
+    final MyPagerAdapter adapter = new MyPagerAdapter(getChildFragmentManager());
+    viewPager.setOnPageChangeListener(pageChangeListener);
+    viewPager.setAdapter(adapter);
 
-    final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
-        LinearLayoutManager.VERTICAL);
-    surveyList.addItemDecoration(dividerItemDecoration);
-    surveyList.setHasFixedSize(true);
+    final TabLayout tabLayout = (TabLayout) mainView.findViewById(R.id.tablayout);
+    tabLayout.setupWithViewPager(viewPager);
 
-    manager = new LinearLayoutManager(getActivity());
-    surveyList.setLayoutManager(manager);
+    createImage = (ImageView) mainView.findViewById(R.id.image_create);
+    createImage.setOnClickListener(onClickListener);
 
-    adapter = new SurveyAdapter(data);
-    surveyList.setAdapter(adapter);
-    refreshLayout.setRefreshing(true);
-
-    refreshLayout.setOnRefreshListener(refreshListener);
-    surveyList.setOnScrollListener(onScrollListener);
-    mainView.findViewById(R.id.text_all).setSelected(true);
-
-    filterLayout.setOnClickListener(onClickListener);
-    sortLayout.setOnClickListener(onClickListener);
+    viewPager.setCurrentItem(position);
   }
 
-  private void notifyAdapter() {
-    emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
-    adapter.notifyDataSetChanged();
-  }
-
-  private void getData(final boolean isRefresh) {
-    LogUtil.e("AAA getData survey");
-    subscription.add(Shared.apiClient.getSurveys(page, NUM, new Subscriber<Surveys>() {
-      @Override
-      public void onCompleted() {
-        refreshLayout.setRefreshing(false);
-        LogUtil.e("AAA onCompleted ");
-      }
-
-      @Override
-      public void onError(Throwable e) {
-        LogUtil.e("AAA onError " + e);
-        refreshLayout.setRefreshing(false);
-      }
-
-      @Override
-      public void onNext(final Surveys surveys) {
-        LogUtil.e("AAA onNext ");
-        if (isRefresh) {
-          data.clear();
+  public void setPosition(final int position) {
+    LogUtil.e("AAA setPosition");
+    this.position = position;
+    if (viewPager != null) {
+      new Handler().postDelayed(new Runnable() {
+        @Override
+        public void run() {
+          viewPager.setCurrentItem(position);
         }
-        data.addAll(surveys.items);
-        notifyAdapter();
-      }
-    }));
+      }, 100);
+      LogUtil.e("AAA setPosition " + position);
+    }
   }
 
+  private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener
+      () {
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+      LogUtil.e("AAA onPageSelected " + position);
+      setSelection();
+      createImage.setVisibility(position == FEEDBACK ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+  };
+
+  private void setSelection() {
+    switch (viewPager.getCurrentItem()) {
+    case ALL:
+      if (allFragment == null) {
+        allFragment = new SurveysListFragment();
+      }
+      allFragment.onResume();
+      break;
+    case FEEDBACK:
+      if (feedbackFragment == null) {
+        feedbackFragment = new FeedbackRequestsFragment();
+      }
+      feedbackFragment.onResume();
+      break;
+    case LYNX:
+      if (lynxFragment == null) {
+        lynxFragment = new SurveysListFragment();
+      }
+      lynxFragment.onResume();
+      break;
+    }
+  }
 
   private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
     public void onClick(View view) {
       switch (view.getId()) {
-      case R.id.layout_filter:
-        final CharSequence[] filterItems =
-            {"Open", "Unfinished", "Completed", "Not Invited"};
-        final ArrayList seletedItems = new ArrayList();
-
-        AlertDialog FilterDialog = new AlertDialog.Builder(getActivity())
-            .setTitle("FILTER BY:")
-            .setMultiChoiceItems(filterItems, null,
-                new DialogInterface.OnMultiChoiceClickListener() {
-                  @Override
-                  public void onClick(DialogInterface dialogInterface, int i, boolean isChecked) {
-                    if (isChecked) {
-                      seletedItems.add(i);
-                    } else if (seletedItems.contains(i)) {
-                      seletedItems.remove(Integer.valueOf(i));
-                    }
-                  }
-                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int id) {
-                //  Your code when user clicked on OK
-                //  You can write the code  to save the selected item here
-              }
-            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int id) {
-                //  Your code when user clicked on Cancel
-              }
-            }).create();
-        FilterDialog.show();
-        break;
-      case R.id.layout_sort:
-        final CharSequence[] sortItems =
-            {"Date Modified", "Date Posted", "Date Expiry", "Name A to Z"};
-
-        AlertDialog sortDialog = new AlertDialog.Builder(getActivity())
-            .setTitle("SORT BY:")
-            .setSingleChoiceItems(sortItems, 0, new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialogInterface, int i) {
-                LogUtil.e("AAA " + sortItems[i]);
-              }
-            }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int id) {
-                //  Your code when user clicked on OK
-                //  You can write the code  to save the selected item here
-              }
-            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int id) {
-                //  Your code when user clicked on Cancel
-              }
-            }).create();
-        sortDialog.show();
+      case R.id.image_create_dev_plan:
+        startActivity(new Intent(getActivity(), CreateFeedbackActivity.class));
         break;
       }
-
     }
   };
 
-  private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout
-      .OnRefreshListener() {
-    @Override
-    public void onRefresh() {
-      page = 1;
-      getData(true);
+  private class MyPagerAdapter extends FragmentPagerAdapter {
+    private int NUM_ITEMS = 3;
+
+    MyPagerAdapter(FragmentManager fragmentManager) {
+      super(fragmentManager);
     }
-  };
 
-  private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+    // Returns total number of pages
     @Override
-    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-      super.onScrolled(recyclerView, dx, dy);
-      int totalItem = manager.getItemCount();
-      int lastVisibleItem = manager.findLastVisibleItemPosition();
+    public int getCount() {
+      return NUM_ITEMS;
+    }
 
-      if (!loading && lastVisibleItem == totalItem - 1) {
-        loading = true;
-        page++;
-        getData(false);
-        LogUtil.e("AAA loading");
-        loading = false;
+    // Returns the fragment to display for that page
+    @Override
+    public Fragment getItem(int position) {
+      switch (position) {
+      case ALL:
+        if (allFragment == null) {
+          allFragment = new SurveysListFragment();
+        }
+        return allFragment;
+      case FEEDBACK:
+        if (feedbackFragment == null) {
+          feedbackFragment = new FeedbackRequestsFragment();
+        }
+        return feedbackFragment;
+      case LYNX:
+        if (lynxFragment == null) {
+          lynxFragment = new SurveysListFragment();
+        }
+        return lynxFragment;
+      default:
+        return null;
       }
     }
-  };
+
+    // Returns the page title for the top indicator
+    @Override
+    public CharSequence getPageTitle(int position) {
+      switch (position) {
+      case ALL:
+        return getString(R.string.all_bold);
+      case FEEDBACK:
+        return getString(R.string.instant_feedback_bold);
+      case LYNX:
+        return getString(R.string.lynx_measurement);
+      default:
+        return "";
+      }
+    }
+  }
 }

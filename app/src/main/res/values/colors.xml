@@ -29,6 +29,8 @@
   <color name="dashboard_blue">#3bb0c1</color>
   <color name="dashboard_pink">#c845dc</color>
   <color name="done_color">#00c853</color>
+  <color name="deadline_color">#dd0024</color>
+  <color name="calendar_color">#6a5088</color>
 
   <color name="unfinished_status">#636363</color>
 </resources>

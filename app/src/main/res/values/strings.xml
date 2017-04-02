@@ -206,8 +206,9 @@
   <string name="complete">Complete</string>
 
   // region survey
-  <string name="end_date">End date: %1$s</string>
-  <string name="contact_to_reactivate">Contact to reactivate</string>
+  <string name="contact_to_reactivate">Reactivate</string>
+  <string name="lynx_measurement">LYNX MEASUREMENT</string>
+  <string name="lynx_progress_bold">LYNX PROGRESS</string>
 
 
   <string name="no_data_found">No data found</string>

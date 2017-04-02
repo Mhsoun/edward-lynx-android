@@ -42,7 +42,7 @@ public class DevelopmentPlanListFragment extends BaseFragment {
       return mainView;
     }
 
-    mainView = inflater.inflate(R.layout.fragment_survey_list, container, false);
+    mainView = inflater.inflate(R.layout.fragment_dev_plan_list, container, false);
     initViews();
     LogUtil.e("AAA onCreateView SurveyListFragment2");
     return mainView;

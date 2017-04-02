@@ -23,8 +23,10 @@ import java.util.List;
 
 public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder> {
 
-  private SimpleDateFormat format        = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
-  private SimpleDateFormat displayFormat = new SimpleDateFormat("MMMM dd, yyyy");
+  private SimpleDateFormat format      = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
+  private SimpleDateFormat monthFormat = new SimpleDateFormat("MMM");
+  private SimpleDateFormat dateFormat  = new SimpleDateFormat("dd");
+  private SimpleDateFormat yearFormat  = new SimpleDateFormat("yyyy");
 
   private List<Survey> data;
 
@@ -34,20 +36,26 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
   }
 
   class ViewHolder extends RecyclerView.ViewHolder {
-    TextView dateText;
+    TextView monthText;
+    TextView dateTExt;
+    TextView yearText;
     TextView nameText;
     TextView descriptionText;
     TextView statusText;
     TextView reactivateText;
+    TextView evaluateText;
     boolean  isExpired;
 
     ViewHolder(View itemView) {
       super(itemView);
-      dateText = (TextView) itemView.findViewById(R.id.text_date);
+      monthText = (TextView) itemView.findViewById(R.id.text_month);
+      dateTExt = (TextView) itemView.findViewById(R.id.text_date);
+      yearText = (TextView) itemView.findViewById(R.id.text_year);
       nameText = (TextView) itemView.findViewById(R.id.text_name);
       descriptionText = (TextView) itemView.findViewById(R.id.text_description);
       statusText = (TextView) itemView.findViewById(R.id.text_status);
       reactivateText = (TextView) itemView.findViewById(R.id.text_reactivate);
+      evaluateText = (TextView) itemView.findViewById(R.id.text_evaluate);
       isExpired = false;
     }
   }
@@ -63,15 +71,18 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
     final Context context = holder.itemView.getContext();
     final Survey survey = data.get(position);
     holder.nameText.setText(survey.name);
-    holder.descriptionText.setText(survey.personsEvaluatedText);
+    holder.descriptionText.setText(
+        context.getResources().getString(R.string.lynx_progress_bold));
+    holder.evaluateText.setText(survey.personsEvaluatedText);
 
     try {
       Date date = format.parse(survey.endDate);
-      holder.dateText.setText(context.getString(R.string.end_date, displayFormat.format(date)));
-
+      holder.monthText.setText(monthFormat.format(date));
+      holder.dateTExt.setText(dateFormat.format(date));
+      holder.yearText.setText(yearFormat.format(date));
       holder.isExpired = new Date().compareTo(date) == 1;
     } catch (Exception e) {
-      holder.dateText.setText("");
+      LogUtil.e("AAA " + e);
     }
 
     holder.reactivateText.setVisibility(holder.isExpired ? View.VISIBLE : View.GONE);
@@ -104,7 +115,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
     case Survey.COMPLETED:
       holder.statusText.setText("COMPLETED");
       holder.statusText.setBackgroundColor(
-          context.getResources().getColor(R.color.dashboard_green));
+          context.getResources().getColor(R.color.done_color));
       break;
     case Survey.NOT_INVITED:
       holder.statusText.setText("NOT INVITED");

@@ -229,16 +229,19 @@ public class DashboardFragment extends BaseFragment {
     public void onClick(View view) {
       switch (view.getId()) {
       case R.id.layout_dev_plan:
+        listener.onChange(ChangeFragment.DEVPLANS);
         break;
       case R.id.layout_instant_feedback:
-        startActivity(new Intent(getActivity(), ReportsActivity.class));
+        listener.onChange(ChangeFragment.SURVEYS_FEEDBACK);
         break;
       case R.id.layout_lynx_measurement:
+        listener.onChange(ChangeFragment.SURVEYS_LYNX);
         break;
       case R.id.text_answer:
         startActivity(new Intent(getActivity(), FeedbackRequestsActivity.class));
         break;
       case R.id.text_results:
+        startActivity(new Intent(getActivity(), ReportsActivity.class));
         break;
       case R.id.text_invite:
         break;

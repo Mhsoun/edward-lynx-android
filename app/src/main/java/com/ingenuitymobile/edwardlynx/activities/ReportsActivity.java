@@ -96,7 +96,7 @@ public class ReportsActivity extends BaseActivity {
       .OnSelectFeedbackListener() {
     @Override
     public void onSelect(long id, String key) {
-      Intent intent = new Intent(ReportsActivity.this, InstantFeedbackDetailedActivity.class);
+      Intent intent = new Intent(ReportsActivity.this, InstantFeedbackReportActivity.class);
       intent.putExtra("id", id);
       startActivity(intent);
     }

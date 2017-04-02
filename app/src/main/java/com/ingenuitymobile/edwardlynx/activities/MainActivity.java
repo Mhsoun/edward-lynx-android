@@ -32,7 +32,9 @@ public class MainActivity extends BaseActivity implements
 
   public enum ChangeFragment {
     DASHBOARD,
-    SURVEYS,
+    SURVEYS_ALL,
+    SURVEYS_FEEDBACK,
+    SURVEYS_LYNX,
     DEVPLANS,
     PROFILE,
     CHANGE_PASSWORD;
@@ -83,10 +85,7 @@ public class MainActivity extends BaseActivity implements
       }
       changeFragment(profileFragment);
     } else if (id == R.id.survey) {
-      if (surveysFragment == null) {
-        surveysFragment = SurveysFragment.newInstance(context);
-      }
-      changeFragment(surveysFragment);
+      changeToSurveys(SurveysFragment.ALL);
     } else if (id == R.id.development_plans) {
       changeToDevPlan();
     } else if (id == R.id.settings) {
@@ -180,6 +179,14 @@ public class MainActivity extends BaseActivity implements
     changeFragment(dashboardFragment);
   }
 
+  private void changeToSurveys(int position) {
+    if (surveysFragment == null) {
+      surveysFragment = SurveysFragment.newInstance(context);
+    }
+    surveysFragment.setPosition(position);
+    changeFragment(surveysFragment);
+  }
+
   private void changeToDevPlan() {
     if (developmenPlansFragment == null) {
       developmenPlansFragment = DevelopmenPlansFragment.newInstance(context);
@@ -190,12 +197,18 @@ public class MainActivity extends BaseActivity implements
   private OnChangeFragmentListener listener = new OnChangeFragmentListener() {
     @Override
     public void onChange(ChangeFragment changeFragment) {
-      LogUtil.e("AAA onchange");
       switch (changeFragment) {
       case DASHBOARD:
         changeToDashboard();
         break;
-      case SURVEYS:
+      case SURVEYS_ALL:
+        changeToSurveys(SurveysFragment.ALL);
+        break;
+      case SURVEYS_FEEDBACK:
+        changeToSurveys(SurveysFragment.FEEDBACK);
+        break;
+      case SURVEYS_LYNX:
+        changeToSurveys(SurveysFragment.LYNX);
         break;
       case DEVPLANS:
         changeToDevPlan();
