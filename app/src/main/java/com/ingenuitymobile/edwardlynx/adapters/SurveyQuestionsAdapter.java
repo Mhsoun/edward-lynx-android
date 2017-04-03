@@ -1,16 +1,14 @@
 package com.ingenuitymobile.edwardlynx.adapters;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -42,18 +40,16 @@ public class SurveyQuestionsAdapter extends
     isEnabled = true;
   }
 
-  class SectionViewHolder extends RecyclerView.ViewHolder {
+  private class SectionViewHolder extends RecyclerView.ViewHolder {
     TextView nameText;
-    TextView descriptionText;
 
     SectionViewHolder(View itemView) {
       super(itemView);
       nameText = (TextView) itemView.findViewById(R.id.text_category_name);
-      descriptionText = (TextView) itemView.findViewById(R.id.text_category_description);
     }
   }
 
-  class DataViewHolder extends RecyclerView.ViewHolder {
+  private class DataViewHolder extends RecyclerView.ViewHolder {
     TextView   questionText;
     RadioGroup radioGroup;
     EditText   editText;
@@ -71,7 +67,7 @@ public class SurveyQuestionsAdapter extends
     switch (viewType) {
     case CATEGORY:
       return new SurveyQuestionsAdapter.SectionViewHolder(LayoutInflater.from(parent.getContext())
-          .inflate(R.layout.list_suvery_section, parent, false));
+          .inflate(R.layout.list_survey_section, parent, false));
     default:
       return new SurveyQuestionsAdapter.DataViewHolder(LayoutInflater.from(parent.getContext())
           .inflate(R.layout.list_survey_questions, parent, false));
@@ -86,11 +82,11 @@ public class SurveyQuestionsAdapter extends
     if (question.isSectionHeader) {
       final SectionViewHolder holder = (SectionViewHolder) viewHolder;
       holder.nameText.setText(question.text);
-      holder.descriptionText.setText(question.description);
     } else {
       final DataViewHolder holder = (DataViewHolder) viewHolder;
       holder.questionText.setText(question.text);
       holder.editText.setVisibility(View.GONE);
+
       if (question.answer.options != null) {
         holder.radioGroup.removeAllViews();
         for (Option option : question.answer.options) {
@@ -167,14 +163,15 @@ public class SurveyQuestionsAdapter extends
   private void createRadioButton(final RadioGroup radioGroup, final Context context,
       final String description, int value) {
     final RadioButton radioButton = new RadioButton(context);
-    final LayoutParams lparam = new LayoutParams(LayoutParams.WRAP_CONTENT,
-        LayoutParams.WRAP_CONTENT);
+    final LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.WRAP_CONTENT,
+        LinearLayout.LayoutParams.WRAP_CONTENT);
+    lparam.setMargins(0, 20, 0, 0);
     radioButton.setLayoutParams(lparam);
     radioButton.setTextColor(context.getResources().getColor(R.color.white));
     radioButton.setTag(String.valueOf(value));
-    int textColor = Color.parseColor("#ffffff");
-    radioButton.setButtonTintList(ColorStateList.valueOf(textColor));
     radioButton.setText(description);
+    radioButton.setTextSize(14);
     radioGroup.addView(radioButton);
   }
 
@@ -184,6 +181,6 @@ public class SurveyQuestionsAdapter extends
   }
 
   public interface OnAnswerItemListener {
-    public void onAnswer(long id, String value);
+    void onAnswer(long id, String value);
   }
 }

@@ -4,20 +4,20 @@
               android:layout_height="wrap_content"
               android:layout_marginBottom="4dp"
               android:layout_marginLeft="36dp"
-              android:layout_marginRight="16dp"
-              android:layout_marginTop="4dp"
+              android:layout_marginRight="36dp"
               android:orientation="vertical">
 
   <TextView
       android:id="@+id/text_question"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Important survey sample"
+      android:layout_marginTop="8dp"
       android:textColor="@color/white"
-      android:textSize="13sp"/>
+      android:textSize="16sp"/>
 
   <RadioGroup
       android:id="@+id/group_button"
+      style="@style/Widget.AppCompat.CompoundButton.RadioButton"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
   </RadioGroup>

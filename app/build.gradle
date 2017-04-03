@@ -60,22 +60,19 @@ dependencies {
   compile 'com.squareup.okhttp:okhttp:+'
   compile 'com.squareup.okhttp:okhttp-urlconnection:+'
   compile 'com.squareup.okio:okio:+'
-
-  // single date picker
   // https://github.com/florent37/SingleDateAndTimePicker
   compile 'com.github.florent37:singledateandtimepicker:1.0.4'
-
   // Firabase messaging
   compile 'com.google.firebase:firebase-messaging:10.2.0'
-
   // Expandable recycler adapter
   // https://bignerdranch.github.io/expandable-recycler-view/
   compile 'com.bignerdranch.android:expandablerecyclerview:2.1.1'
-
   // https://github.com/txusballesteros/fit-chart
   compile 'com.txusballesteros:FitChart:1.0'
   // https://github.com/PhilJay/MPAndroidChart
   compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+  // https://github.com/ongakuer/CircleIndicator
+  compile 'me.relex:circleindicator:1.2.2@aar'
 
   // tests
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
