@@ -5,7 +5,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,10 +79,11 @@ public class SurveysListFragment extends BaseFragment {
 
     adapter = new SurveyAdapter(data);
     surveyList.setAdapter(adapter);
-    refreshLayout.setRefreshing(true);
 
     refreshLayout.setOnRefreshListener(refreshListener);
     surveyList.setOnScrollListener(onScrollListener);
+
+    refreshLayout.setRefreshing(true);
   }
 
   private void notifyAdapter() {

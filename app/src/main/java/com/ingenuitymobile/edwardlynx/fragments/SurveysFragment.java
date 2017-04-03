@@ -28,6 +28,7 @@ import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.activities.CreateDevelopmentPlanActivity;
 import com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity;
 import com.ingenuitymobile.edwardlynx.adapters.SurveyAdapter;
+import com.ingenuitymobile.edwardlynx.api.models.AllSurveys;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
@@ -50,7 +51,7 @@ public class SurveysFragment extends BaseFragment {
   private ViewPager viewPager;
   private ImageView createImage;
 
-  private SurveysListFragment      allFragment;
+  private AllSurveysFragment       allFragment;
   private FeedbackRequestsFragment feedbackFragment;
   private SurveysListFragment      lynxFragment;
 
@@ -135,7 +136,7 @@ public class SurveysFragment extends BaseFragment {
     switch (viewPager.getCurrentItem()) {
     case ALL:
       if (allFragment == null) {
-        allFragment = new SurveysListFragment();
+        allFragment = new AllSurveysFragment();
       }
       allFragment.onResume();
       break;
@@ -184,7 +185,7 @@ public class SurveysFragment extends BaseFragment {
       switch (position) {
       case ALL:
         if (allFragment == null) {
-          allFragment = new SurveysListFragment();
+          allFragment = new AllSurveysFragment();
         }
         return allFragment;
       case FEEDBACK:

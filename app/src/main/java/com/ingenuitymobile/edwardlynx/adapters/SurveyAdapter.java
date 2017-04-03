@@ -100,25 +100,24 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
       }
     });
 
-
     switch (survey.status) {
     case Survey.OPEN:
-      holder.statusText.setText("OPEN");
+      holder.statusText.setText(context.getResources().getString(R.string.open_status_bold));
       holder.statusText.setBackgroundColor(
           context.getResources().getColor(R.color.unfinished_status));
       break;
     case Survey.UNFINISHED:
-      holder.statusText.setText("UNFINISHED");
+      holder.statusText.setText(context.getResources().getString(R.string.unfinished_status_bold));
       holder.statusText.setBackgroundColor(
           context.getResources().getColor(R.color.unfinished_status));
       break;
     case Survey.COMPLETED:
-      holder.statusText.setText("COMPLETED");
+      holder.statusText.setText(context.getResources().getString(R.string.completed_bold));
       holder.statusText.setBackgroundColor(
           context.getResources().getColor(R.color.done_color));
       break;
     case Survey.NOT_INVITED:
-      holder.statusText.setText("NOT INVITED");
+      holder.statusText.setText(context.getResources().getString(R.string.not_invited_status_bold));
       holder.statusText.setBackgroundColor(
           context.getResources().getColor(R.color.unfinished_status));
       break;

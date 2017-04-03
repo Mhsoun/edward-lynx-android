@@ -209,7 +209,9 @@
   <string name="contact_to_reactivate">Reactivate</string>
   <string name="lynx_measurement">LYNX MEASUREMENT</string>
   <string name="lynx_progress_bold">LYNX PROGRESS</string>
-
+  <string name="open_status_bold">OPEN</string>
+  <string name="unfinished_status_bold">UNFINISHED</string>
+  <string name="not_invited_status_bold">NOT INVITED</string>
 
   <string name="no_data_found">No data found</string>
   <string name="question_label">Question: </string>

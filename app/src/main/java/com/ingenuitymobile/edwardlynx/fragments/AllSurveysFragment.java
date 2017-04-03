@@ -14,8 +14,12 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.activities.AnswerFeedbackActivity;
+import com.ingenuitymobile.edwardlynx.adapters.AllSurveysAdapter;
 import com.ingenuitymobile.edwardlynx.adapters.FeedbackAdapter;
+import com.ingenuitymobile.edwardlynx.api.models.AllSurveys;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
+import com.ingenuitymobile.edwardlynx.api.models.Survey;
+import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
@@ -24,18 +28,20 @@ import java.util.ArrayList;
 import rx.Subscriber;
 
 /**
- * Created by memengski on 3/31/17.
+ * Created by memengski on 4/3/17.
  */
 
-public class FeedbackRequestsFragment extends BaseFragment {
+public class AllSurveysFragment extends BaseFragment {
 
-  private View                mainView;
-  private ArrayList<Feedback> data;
-  private FeedbackAdapter     adapter;
-  private TextView            emptyText;
-  private SwipeRefreshLayout  refreshLayout;
+  private final static int NUM = 5;
 
-  public FeedbackRequestsFragment() {
+  private View                  mainView;
+  private ArrayList<AllSurveys> data;
+  private AllSurveysAdapter     adapter;
+  private TextView              emptyText;
+  private SwipeRefreshLayout    refreshLayout;
+
+  public AllSurveysFragment() {
     data = new ArrayList<>();
   }
 
@@ -49,20 +55,20 @@ public class FeedbackRequestsFragment extends BaseFragment {
         parent = container;
       }
       parent.removeView(mainView);
-      LogUtil.e("AAA onCreateView FeedbackRequestsFragment1");
+      LogUtil.e("AAA onCreateView AllSurveysFragment1");
       return mainView;
     }
 
     mainView = inflater.inflate(R.layout.fragment_survey_list, container, false);
     initViews();
-    LogUtil.e("AAA onCreateView FeedbackRequestsFragment2");
+    LogUtil.e("AAA onCreateView AllSurveysFragment2");
     return mainView;
   }
 
   @Override
   public void onResume() {
     super.onResume();
-    getData();
+    getSurveys();
   }
 
   private void initViews() {
@@ -76,20 +82,41 @@ public class FeedbackRequestsFragment extends BaseFragment {
     feedbackList.setHasFixedSize(true);
     feedbackList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    adapter = new FeedbackAdapter(data, listener);
+    adapter = new AllSurveysAdapter(data, listener);
     feedbackList.setAdapter(adapter);
 
     refreshLayout.setOnRefreshListener(refreshListener);
     refreshLayout.setRefreshing(true);
   }
 
-  private void getData() {
+  private void getSurveys() {
+    subscription.add(Shared.apiClient.getSurveys(1, NUM, new Subscriber<Surveys>() {
+      @Override
+      public void onCompleted() {
+        getInstantFeedbacks();
+      }
+
+      @Override
+      public void onError(Throwable e) {
+        refreshLayout.setRefreshing(false);
+      }
+
+      @Override
+      public void onNext(final Surveys surveys) {
+        data.clear();
+        for (Survey survey : surveys.items) {
+          data.add(new AllSurveys(survey, null));
+        }
+      }
+    }));
+  }
+
+  private void getInstantFeedbacks() {
     LogUtil.e("AAA getData FeedbackRequestsFragment");
     subscription.add(
         Shared.apiClient.getInstantFeedbacks("to_answer", new Subscriber<FeedbacksResponse>() {
           @Override
           public void onCompleted() {
-            LogUtil.e("AAA onCompleted ");
             adapter.notifyDataSetChanged();
             emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
             refreshLayout.setRefreshing(false);
@@ -97,16 +124,14 @@ public class FeedbackRequestsFragment extends BaseFragment {
 
           @Override
           public void onError(Throwable e) {
-            LogUtil.e("AAA onError " + e);
             refreshLayout.setRefreshing(false);
           }
 
           @Override
           public void onNext(final FeedbacksResponse response) {
-            LogUtil.e("AAA onNext ");
-            data.clear();
-            data.addAll(response.items);
-            refreshLayout.setRefreshing(false);
+            for (Feedback feedback : response.items) {
+              data.add(new AllSurveys(null, feedback));
+            }
           }
         }));
   }
@@ -125,7 +150,7 @@ public class FeedbackRequestsFragment extends BaseFragment {
       .OnRefreshListener() {
     @Override
     public void onRefresh() {
-      getData();
+      getSurveys();
     }
   };
 }
