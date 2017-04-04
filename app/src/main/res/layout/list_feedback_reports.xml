@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="12dp"
+              android:layout_marginRight="12dp"
+              android:layout_marginTop="12dp"
+              android:background="@drawable/bg_round_dashboard"
+              android:orientation="vertical">
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/image_next"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_next"
+        android:tint="@color/colorAccent"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_toLeftOf="@id/image_next"
+        android:orientation="vertical">
+
+      <TextView
+          android:id="@+id/text_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:text="Important survey sample"
+          android:textColor="@color/white"
+          android:textSize="18sp"/>
+
+      <TextView
+          android:id="@+id/text_description"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:text="Important survey sample"
+          android:textColor="@color/white"
+          android:textSize="13sp"/>
+
+      <TextView
+          android:id="@+id/text_date"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:text="Important survey sample"
+          android:textColor="@color/unfinished_status"
+          android:textSize="13sp"/>
+
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/instant_feedback_color"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingBottom="2dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="2dp"
+            android:text="@string/instant_feedback_bold"
+            android:textColor="@color/white"
+            android:textSize="10sp"/>
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_person"
+            android:tint="@color/white"/>
+
+        <TextView
+            android:id="@+id/text_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="31/31"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="italic"/>
+      </LinearLayout>
+    </LinearLayout>
+  </RelativeLayout>
+
+</LinearLayout>

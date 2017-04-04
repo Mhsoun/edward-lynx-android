@@ -2,17 +2,32 @@ package com.ingenuitymobile.edwardlynx.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.FeedbackAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
+import com.ingenuitymobile.edwardlynx.fragments.AllSurveysFragment;
+import com.ingenuitymobile.edwardlynx.fragments.FeedbackReportsFragment;
+import com.ingenuitymobile.edwardlynx.fragments.FeedbackRequestsFragment;
+import com.ingenuitymobile.edwardlynx.fragments.SurveysFragment;
+import com.ingenuitymobile.edwardlynx.fragments.SurveysListFragment;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.ArrayList;
@@ -26,11 +41,20 @@ import rx.Subscriber;
 public class ReportsActivity extends BaseActivity {
 
 
-  private ArrayList<Feedback> data;
-  private FeedbackAdapter     adapter;
+  public static final int ALL      = 0;
+  public static final int FEEDBACK = 1;
+  public static final int LYNX     = 2;
+
+  private ViewPager viewPager;
+
+  private FeedbackReportsFragment allFragments;
+  private FeedbackReportsFragment feedbackFragments;
+  private FeedbackReportsFragment lynxFragments;
+
+  private int position;
 
   public ReportsActivity() {
-    data = new ArrayList<>();
+    position = 0;
   }
 
   @Override
@@ -44,7 +68,6 @@ public class ReportsActivity extends BaseActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     initViews();
-    getData();
   }
 
   @Override
@@ -56,51 +79,114 @@ public class ReportsActivity extends BaseActivity {
   }
 
   private void initViews() {
-    final RecyclerView feedbackList = (RecyclerView) findViewById(R.id.list_reports);
+    final SearchView searchView = (SearchView) findViewById(R.id.searchview);
+    searchView.setQueryHint("Search Reports");
 
-    final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
-        LinearLayoutManager.VERTICAL);
-    feedbackList.addItemDecoration(dividerItemDecoration);
-    feedbackList.setHasFixedSize(true);
-    feedbackList.setLayoutManager(new LinearLayoutManager(this));
+    viewPager = (ViewPager) findViewById(R.id.viewpager);
+    final MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
+    viewPager.setOnPageChangeListener(pageChangeListener);
+    viewPager.setAdapter(adapter);
 
-    adapter = new FeedbackAdapter(data, listener);
-    feedbackList.setAdapter(adapter);
+    final TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
+    tabLayout.setupWithViewPager(viewPager);
+
+    viewPager.setCurrentItem(position);
   }
 
-  private void getData() {
-    LogUtil.e("AAA getData instant feedbaks");
-    subscription.add(
-        Shared.apiClient.getInstantFeedbacks("mine", new Subscriber<FeedbacksResponse>() {
-          @Override
-          public void onCompleted() {
-            LogUtil.e("AAA onCompleted ");
-            adapter.notifyDataSetChanged();
-          }
-
-          @Override
-          public void onError(Throwable e) {
-            LogUtil.e("AAA onError " + e);
-          }
-
-          @Override
-          public void onNext(final FeedbacksResponse response) {
-            LogUtil.e("AAA onNext ");
-            data.clear();
-            data.addAll(response.items);
-          }
-        }));
+  private void setSelection() {
+    switch (viewPager.getCurrentItem()) {
+    case ALL:
+      if (allFragments == null) {
+        allFragments = new FeedbackReportsFragment();
+      }
+      allFragments.onResume();
+      break;
+    case FEEDBACK:
+      if (feedbackFragments == null) {
+        feedbackFragments = new FeedbackReportsFragment();
+      }
+      feedbackFragments.onResume();
+      break;
+    case LYNX:
+      if (lynxFragments == null) {
+        lynxFragments = new FeedbackReportsFragment();
+      }
+      lynxFragments.onResume();
+      break;
+    }
   }
 
-  private FeedbackAdapter.OnSelectFeedbackListener listener = new FeedbackAdapter
-      .OnSelectFeedbackListener() {
+  private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener
+      () {
     @Override
-    public void onSelect(long id, String key) {
-      Intent intent = new Intent(ReportsActivity.this, InstantFeedbackReportActivity.class);
-      intent.putExtra("id", id);
-      startActivity(intent);
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+      LogUtil.e("AAA onPageSelected " + position);
+      setSelection();
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
   };
+
+  private class MyPagerAdapter extends FragmentPagerAdapter {
+    private int NUM_ITEMS = 3;
+
+    MyPagerAdapter(FragmentManager fragmentManager) {
+      super(fragmentManager);
+    }
+
+    // Returns total number of pages
+    @Override
+    public int getCount() {
+      return NUM_ITEMS;
+    }
+
+    // Returns the fragment to display for that page
+    @Override
+    public Fragment getItem(int position) {
+      switch (position) {
+      case ALL:
+        if (allFragments == null) {
+          allFragments = new FeedbackReportsFragment();
+        }
+        return allFragments;
+      case FEEDBACK:
+        if (feedbackFragments == null) {
+          feedbackFragments = new FeedbackReportsFragment();
+        }
+        return feedbackFragments;
+      case LYNX:
+        if (lynxFragments == null) {
+          lynxFragments = new FeedbackReportsFragment();
+        }
+        return lynxFragments;
+      default:
+        return null;
+      }
+    }
+
+    // Returns the page title for the top indicator
+    @Override
+    public CharSequence getPageTitle(int position) {
+      switch (position) {
+      case ALL:
+        return getString(R.string.all_bold);
+      case FEEDBACK:
+        return getString(R.string.instant_feedback_bold);
+      case LYNX:
+        return getString(R.string.lynx_measurement);
+      default:
+        return "";
+      }
+    }
+  }
 }
 
 
