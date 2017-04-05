@@ -161,6 +161,9 @@ public class DevelopmenPlansFragment extends BaseFragment {
                 try {
                   final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
                   final Date date = sdf.parse(plan.updatedAt);
+                  date.setHours(23);
+                  date.setMinutes(59);
+                  date.setSeconds(59);
                   if (date.getTime() < System.currentTimeMillis()) {
                     expiredData.add(plan);
                   } else {

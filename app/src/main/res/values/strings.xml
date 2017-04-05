@@ -135,7 +135,7 @@
   <string name="goal_prgress">Goals Progress Bar</string>
 
   // region Development plan details
-  <string name="completed_details">%1$d / %2$d completed</string>
+  <string name="completed_details">%1$d / %2$d Completed</string>
   <string name="goals_details">%1$d of %2$d goals</string>
   <string name="completed"> completed</string>
 
@@ -222,4 +222,14 @@
   <string name="label_popup">You\'ve got the right mix of dedication and\nenthusiasm. Keep it up</string>
   <string name="thanks">Thanks</string>
   <string name="close">Close</string>
+
+  // date
+  <string name="just_now">just now</string>
+  <string name="a_minute_ago">a minute ago</string>
+  <string name="minutes_ago">%1$d minutes ago</string>
+  <string name="an_hour_ago">an hour ago</string>
+  <string name="hours_ago">%1$d hours ago</string>
+  <string name="yesterday">yesterday</string>
+  <string name="today">today</string>
+  <string name="days_ago">%1$d days ago</string>
 </resources>

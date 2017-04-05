@@ -3,6 +3,7 @@ package com.ingenuitymobile.edwardlynx.adapters;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+import com.ingenuitymobile.edwardlynx.utils.StringUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,8 +34,7 @@ import java.util.List;
 public class GoalAdapter extends
     ExpandableRecyclerAdapter<GoalAdapter.ParentView, GoalAdapter.ChildView> {
 
-  private SimpleDateFormat format        = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
-  private SimpleDateFormat displayFormat = new SimpleDateFormat("MMMM dd, yyyy hh:mm a");
+  private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
 
   private OnSelectActionListener listener;
 
@@ -106,7 +107,10 @@ public class GoalAdapter extends
 
     try {
       Date date = format.parse(goal.dueDate);
-      holder.dateText.setText(displayFormat.format(date));
+      date.setHours(23);
+      date.setMinutes(59);
+      date.setSeconds(59);
+      holder.dateText.setText(StringUtil.getTimeAgo(date.getTime(), context));
     } catch (Exception e) {
       LogUtil.e("AAA " + e);
       holder.dateText.setText("");

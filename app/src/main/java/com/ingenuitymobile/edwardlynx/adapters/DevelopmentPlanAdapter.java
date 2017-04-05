@@ -107,6 +107,7 @@ public class DevelopmentPlanAdapter extends
       rightAxis.setAxisMaximum(100f);
 
       goalBarChart.getXAxis().setTextColor(Color.WHITE);
+      goalBarChart.getXAxis().setAxisLineColor(Color.BLACK);
     }
   }
 
