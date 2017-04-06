@@ -14,6 +14,7 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,10 +55,12 @@ public class InviteActivity extends InviteBaseActivity {
     if (ids.isEmpty()) {
       Toast.makeText(InviteActivity.this, getString(R.string.select_atleast_one),
           Toast.LENGTH_SHORT).show();
+    } else if (ids.size() < 3) {
+      ViewUtil.showAlert(this, null, getString(R.string.invite_info));
     } else {
       List<Id> recipients = new ArrayList<>();
       for (User user : data) {
-        if (!user.isAddedbyEmail) {
+        if (user.isAddedbyEmail) {
           ids.remove(String.valueOf(user.id));
           recipients.add(new Id(user.name, user.email));
         }

@@ -74,7 +74,7 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
     }));
   }
 
-  public void addMore(View v) {
+  public void create(View v) {
     final TextView textView = (TextView) v;
 
     if (ids.isEmpty()) {

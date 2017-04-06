@@ -1,6 +1,7 @@
 package com.ingenuitymobile.edwardlynx.adapters;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +67,10 @@ public class FeedbackAnswersAdapter extends
     holder.progressBar.setProgress(
         (int) (((float) (frequency.count) / (float) totalAnswers) * 100));
     holder.progressBar.setScaleY(3f);
+    holder.progressBar
+        .getProgressDrawable()
+        .setColorFilter(context.getResources().getColor(R.color.lynx_color),
+            PorterDuff.Mode.SRC_IN);
   }
 
   @Override

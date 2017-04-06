@@ -33,4 +33,6 @@
   <color name="calendar_color">#6a5088</color>
 
   <color name="unfinished_status">#636363</color>
+  <color name="survey_line">#7d648f</color>
+
 </resources>

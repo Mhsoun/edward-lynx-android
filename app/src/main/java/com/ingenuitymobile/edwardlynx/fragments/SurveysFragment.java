@@ -159,7 +159,7 @@ public class SurveysFragment extends BaseFragment {
     @Override
     public void onClick(View view) {
       switch (view.getId()) {
-      case R.id.image_create_dev_plan:
+      case R.id.image_create:
         startActivity(new Intent(getActivity(), CreateFeedbackActivity.class));
         break;
       }

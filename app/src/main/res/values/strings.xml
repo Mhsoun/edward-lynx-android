@@ -40,7 +40,7 @@
   <string name="reports_bold">REPORTS</string>
   <string name="goals_details_bold">GOALS DETAILS</string>
   <string name="instant_feedback_bold">INSTANT FEEDBACK</string>
-  <string name="instant_feedback_answers_bold">INSTANT FEEDBACK ANSWERS</string>
+  <string name="instant_feedback_answers_bold">FEEDBACK REPORT</string>
   <string name="share_report_bold">SHARE REPORT</string>
   <string name="create_development_plan_bold">CREATE DEVELOPMENT PLAN</string>
   <string name="details_bold">DETAILS</string>
@@ -70,6 +70,8 @@
   <string name="total_answers">Total answers: %1$d</string>
   <string name="total_shared">Total count shared to other people: %1$d</string>
   <string name="type_here">Type here. . .</string>
+  <string name="shows_averages">Shows the averages for all categories</string>
+  <string name="details_circle_chart">Invited: %1$d | Answered: %2$d</string>
 
   // region Create instant feedback
   <string name="question">Question</string>

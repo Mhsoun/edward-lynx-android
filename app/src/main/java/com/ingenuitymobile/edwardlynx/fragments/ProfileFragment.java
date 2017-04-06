@@ -44,7 +44,6 @@ public class ProfileFragment extends BaseFragment {
   private TextView   editText;
   private TextView   cancelText;
 
-  private User   user;
   private String gender;
 
   public static ProfileFragment newInstance(Context ctx) {
@@ -99,7 +98,7 @@ public class ProfileFragment extends BaseFragment {
 
       @Override
       public void onNext(User userResponse) {
-        user = userResponse;
+        Shared.user = userResponse;
         setEditable(false);
       }
     }));
@@ -133,26 +132,26 @@ public class ProfileFragment extends BaseFragment {
   }
 
   private void setUserData() {
-    gender = user.gender;
+    gender = Shared.user.gender;
 
-    nameEdit.setText(user.name);
-    infoEdit.setText(user.info);
-    departmentEdit.setText(user.department);
-    roleEdit.setText(user.role);
-    countryEdit.setText(user.country);
-    cityEdit.setText(user.city);
+    nameEdit.setText(Shared.user.name);
+    infoEdit.setText(Shared.user.info);
+    departmentEdit.setText(Shared.user.department);
+    roleEdit.setText(Shared.user.role);
+    countryEdit.setText(Shared.user.country);
+    cityEdit.setText(Shared.user.city);
 
     genderEdit.setVisibility(View.GONE);
 
-    if (user.gender.toLowerCase().equals(getString(R.string.male))) {
+    if (Shared.user.gender.toLowerCase().equals(getString(R.string.male))) {
       genderRadiogroup.check(R.id.radiobutton_male);
-    } else if (user.gender.toLowerCase().equals(getString(R.string.female))) {
+    } else if (Shared.user.gender.toLowerCase().equals(getString(R.string.female))) {
       genderRadiogroup.check(R.id.radiobutton_female);
     } else {
       genderRadiogroup.check(R.id.radiobutton_other);
 
       genderEdit.setVisibility(View.VISIBLE);
-      genderEdit.setText(user.gender);
+      genderEdit.setText(Shared.user.gender);
     }
 
     for (int i = 0; i < genderRadiogroup.getChildCount(); i++) {

@@ -80,7 +80,6 @@ public class DevelopmentPlanAdapter extends
       goalBarChart.setDoubleTapToZoomEnabled(false);
 
       goalBarChart.setDrawGridBackground(false);
-      // mChart.setDrawYLabels(false);
 
       XAxis xAxis = goalBarChart.getXAxis();
       xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -180,6 +179,7 @@ public class DevelopmentPlanAdapter extends
 
 
     final MyBarDataSet set = new MyBarDataSet(goalBars, "");
+    set.setHighlightEnabled(false);
     set.setColors(new int[]{
         context.getResources().getColor(R.color.dashboard_green),
         context.getResources().getColor(R.color.colorAccent),
@@ -200,6 +200,7 @@ public class DevelopmentPlanAdapter extends
     holder.goalBarChart.setVisibleXRangeMaximum(10);
     holder.goalBarChart.setVisibleXRangeMinimum(10);
     holder.goalBarChart.setHighlightPerTapEnabled(false);
+    holder.goalBarChart.animateXY(1000, 1000);
   }
 
   @Override
