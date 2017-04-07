@@ -90,6 +90,7 @@ public class AllReportsFragment extends BaseFragment {
     subscription.add(Shared.apiClient.getSurveys(1, NUM, new Subscriber<Surveys>() {
       @Override
       public void onCompleted() {
+        adapter.notifyDataSetChanged();
         getInstantFeedbacks();
       }
 

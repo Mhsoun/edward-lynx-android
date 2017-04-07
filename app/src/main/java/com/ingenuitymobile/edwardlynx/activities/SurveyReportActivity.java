@@ -3,6 +3,7 @@ package com.ingenuitymobile.edwardlynx.activities;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,9 +23,6 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
-import com.ingenuitymobile.edwardlynx.api.models.Category;
-import com.ingenuitymobile.edwardlynx.api.models.Question;
-import com.ingenuitymobile.edwardlynx.api.models.Questions;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
@@ -32,7 +30,6 @@ import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import rx.Subscriber;
 
@@ -86,6 +83,14 @@ public class SurveyReportActivity extends BaseActivity {
   protected void onResume() {
     super.onResume();
     getData();
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == android.R.id.home) {
+      finish();
+    }
+    return super.onOptionsItemSelected(item);
   }
 
   private void initViews() {
