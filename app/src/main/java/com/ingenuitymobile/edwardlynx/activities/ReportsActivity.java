@@ -23,9 +23,11 @@ import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.FeedbackAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
+import com.ingenuitymobile.edwardlynx.fragments.AllReportsFragment;
 import com.ingenuitymobile.edwardlynx.fragments.AllSurveysFragment;
 import com.ingenuitymobile.edwardlynx.fragments.FeedbackReportsFragment;
 import com.ingenuitymobile.edwardlynx.fragments.FeedbackRequestsFragment;
+import com.ingenuitymobile.edwardlynx.fragments.SurveyReportsFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveysFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveysListFragment;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
@@ -47,9 +49,9 @@ public class ReportsActivity extends BaseActivity {
 
   private ViewPager viewPager;
 
-  private FeedbackReportsFragment allFragments;
+  private AllReportsFragment      allFragments;
   private FeedbackReportsFragment feedbackFragments;
-  private FeedbackReportsFragment lynxFragments;
+  private SurveyReportsFragment   lynxFragments;
 
   private int position;
 
@@ -97,7 +99,7 @@ public class ReportsActivity extends BaseActivity {
     switch (viewPager.getCurrentItem()) {
     case ALL:
       if (allFragments == null) {
-        allFragments = new FeedbackReportsFragment();
+        allFragments = new AllReportsFragment();
       }
       allFragments.onResume();
       break;
@@ -109,7 +111,7 @@ public class ReportsActivity extends BaseActivity {
       break;
     case LYNX:
       if (lynxFragments == null) {
-        lynxFragments = new FeedbackReportsFragment();
+        lynxFragments = new SurveyReportsFragment();
       }
       lynxFragments.onResume();
       break;
@@ -154,7 +156,7 @@ public class ReportsActivity extends BaseActivity {
       switch (position) {
       case ALL:
         if (allFragments == null) {
-          allFragments = new FeedbackReportsFragment();
+          allFragments = new AllReportsFragment();
         }
         return allFragments;
       case FEEDBACK:
@@ -164,7 +166,7 @@ public class ReportsActivity extends BaseActivity {
         return feedbackFragments;
       case LYNX:
         if (lynxFragments == null) {
-          lynxFragments = new FeedbackReportsFragment();
+          lynxFragments = new SurveyReportsFragment();
         }
         return lynxFragments;
       default:

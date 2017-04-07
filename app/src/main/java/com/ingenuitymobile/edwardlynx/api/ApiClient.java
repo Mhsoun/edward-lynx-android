@@ -19,6 +19,7 @@ import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
+import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -194,6 +195,18 @@ public class ApiClient {
           @Override
           public void onPostAgain() {
             getSurveyQuestions(id, subscriber);
+          }
+        }));
+  }
+
+  public Subscription getSurveyResults(final long id,
+      final Subscriber<SurveyResultsResponse> subscriber) {
+    return service.getSurveyResults(id)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getSurveyResults(id, subscriber);
           }
         }));
   }

@@ -19,6 +19,7 @@ import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
+import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
 
 import java.util.Map;
@@ -86,6 +87,9 @@ public interface Service {
 
   @GET("/api/v1/surveys/{id}/questions")
   Observable<Questions> getSurveyQuestions(@Path("id") long id);
+
+  @GET("/api/v1/surveys/{id}/questions")
+  Observable<SurveyResultsResponse> getSurveyResults(@Path("id") long id);
   // endregion
 
   // region InstantFeedback

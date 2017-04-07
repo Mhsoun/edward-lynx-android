@@ -21,9 +21,20 @@ import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.api.models.Category;
+import com.ingenuitymobile.edwardlynx.api.models.Question;
+import com.ingenuitymobile.edwardlynx.api.models.Questions;
+import com.ingenuitymobile.edwardlynx.api.models.Survey;
+import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * Created by memengski on 4/7/17.
@@ -40,6 +51,8 @@ public class SurveyReportActivity extends BaseActivity {
   private HorizontalBarChart mulitpleBarChart;
   private TextView           dateText;
   private TextView           detailsText;
+
+  private Survey survey;
 
   public SurveyReportActivity() {
     data = new ArrayList<>();
@@ -69,6 +82,12 @@ public class SurveyReportActivity extends BaseActivity {
     initViews();
   }
 
+  @Override
+  protected void onResume() {
+    super.onResume();
+    getData();
+  }
+
   private void initViews() {
     barChart = (HorizontalBarChart) findViewById(R.id.bar_chart);
     mulitpleBarChart = (HorizontalBarChart) findViewById(R.id.mulitple_bar_chart);
@@ -80,6 +99,60 @@ public class SurveyReportActivity extends BaseActivity {
 
     setBarChart();
     setMulitpleBarChart();
+  }
+
+  private void getData() {
+    LogUtil.e("AAA getData Survey details");
+    subscription.add(Shared.apiClient.getSurvey(id, new Subscriber<Survey>() {
+      @Override
+      public void onCompleted() {
+        LogUtil.e("AAA Survey details onCompleted ");
+        getSurveyQuestions();
+      }
+
+      @Override
+      public void onError(Throwable e) {
+        LogUtil.e("AAA Survey details onError " + e);
+      }
+
+      @Override
+      public void onNext(Survey surveyResponse) {
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
+        final SimpleDateFormat displayFormat = new SimpleDateFormat("MMM dd, yyyy");
+
+        survey = surveyResponse;
+        setTitle(surveyResponse.name);
+
+        try {
+          Date date = format.parse(survey.endDate);
+          dateText.setText(displayFormat.format(date));
+        } catch (Exception e) {
+          dateText.setText("");
+        }
+      }
+    }));
+  }
+
+  private void getSurveyQuestions() {
+    LogUtil.e("AAA getData questions");
+    subscription.add(Shared.apiClient.getSurveyResults(id, new Subscriber<SurveyResultsResponse>() {
+      @Override
+      public void onCompleted() {
+        LogUtil.e("AAA questions onCompleted ");
+
+      }
+
+      @Override
+      public void onError(Throwable e) {
+        LogUtil.e("AAA questions onError " + e);
+      }
+
+      @Override
+      public void onNext(SurveyResultsResponse response) {
+        detailsText.setText(getString(R.string.details_circle_chart, 0,
+            response.totalAnswers));
+      }
+    }));
   }
 
   private void setBarChart() {
