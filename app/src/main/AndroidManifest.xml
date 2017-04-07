@@ -91,6 +91,12 @@
         android:theme="@style/AppTheme">
     </activity>
     <activity
+        android:name=".activities.SurveyReportActivity"
+        android:label="@string/survey_report_bold"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+    </activity>
+    <activity
         android:name=".activities.InstantFeedbackDetailedActivity"
         android:label="@string/instant_feedback_bold"
         android:screenOrientation="portrait"

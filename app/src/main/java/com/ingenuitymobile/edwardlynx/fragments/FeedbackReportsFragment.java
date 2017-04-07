@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.activities.InstantFeedbackReportActivity;
+import com.ingenuitymobile.edwardlynx.activities.SurveyReportActivity;
 import com.ingenuitymobile.edwardlynx.adapters.FeedbackReportsAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
@@ -114,7 +115,7 @@ public class FeedbackReportsFragment extends BaseFragment {
       .OnSelectFeedbackListener() {
     @Override
     public void onSelect(long id, String key) {
-      Intent intent = new Intent(getActivity(), InstantFeedbackReportActivity.class);
+      Intent intent = new Intent(getActivity(), SurveyReportActivity.class);
       intent.putExtra("id", id);
       startActivity(intent);
     }

@@ -35,7 +35,9 @@ import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.txusballesteros.widgets.FitChart;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import rx.Subscriber;
 
@@ -58,6 +60,8 @@ public class InstantFeedbackReportActivity extends BaseActivity {
   private TextView           answerCountText;
   private TextView           shareCountText;
   private TextView           emptyText;
+  private TextView           dateText;
+  private TextView           detailsText;
 
   public InstantFeedbackReportActivity() {
     data = new ArrayList<>();
@@ -103,6 +107,8 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     emptyText = (TextView) findViewById(R.id.text_empty_state);
     feedbackList = (RecyclerView) findViewById(R.id.list_answers);
     horizontalBarChart = (HorizontalBarChart) findViewById(R.id.horizontal_bar_chart);
+    dateText = (TextView) findViewById(R.id.text_date);
+    detailsText = (TextView) findViewById(R.id.text_date_details);
 
     final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
         LinearLayoutManager.VERTICAL);
@@ -112,6 +118,9 @@ public class InstantFeedbackReportActivity extends BaseActivity {
 
     adapter = new FeedbackAnswersAdapter(data);
     feedbackList.setAdapter(adapter);
+
+    dateText.setText("");
+    detailsText.setText("");
   }
 
   private void getData() {
@@ -159,6 +168,8 @@ public class InstantFeedbackReportActivity extends BaseActivity {
   }
 
   private void setData() {
+    final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
+    final SimpleDateFormat displayFormat = new SimpleDateFormat("MMM dd, yyyy");
     final int type = feedback.questions.get(0).answer.type;
 
     int count = 0;
@@ -254,7 +265,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         BarDataSet set1 = new BarDataSet(yVals1, "");
         set1.setDrawValues(true);
         set1.setValueTextSize(FONT_SIZE);
-        set1.setValueTextColor(Color.WHITE);
+        set1.setValueTextColor(context.getResources().getColor(R.color.lynx_color));
         set1.setHighlightEnabled(false);
         set1.setColor(context.getResources().getColor(R.color.lynx_color));
         set1.setValueFormatter(new IValueFormatter() {
@@ -269,7 +280,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         dataSets.add(set1);
 
         BarData barData = new BarData(dataSets);
-        barData.setBarWidth(0.7f);
+        barData.setBarWidth(0.6f);
 
         horizontalBarChart.setData(barData);
         horizontalBarChart.getLegend().setEnabled(false);
@@ -278,11 +289,21 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         horizontalBarChart.setVisibleXRangeMinimum(data.size());
         horizontalBarChart.setFitBars(false);
 
-        horizontalBarChart.getLayoutParams().height = (110 * data.size()) + 100;
+        horizontalBarChart.getLayoutParams().height = (110 * data.size());
         horizontalBarChart.animateXY(1000, 1000);
         horizontalBarChart.invalidate();
       }
     }
+
+    try {
+      Date date = format.parse(feedback.createdAt);
+      dateText.setText(displayFormat.format(date));
+    } catch (Exception e) {
+      dateText.setText("");
+    }
+
+    detailsText.setText(getString(R.string.details_circle_chart, feedback.recipients.size(),
+        feedbackResponse.totalAnswers));
   }
 
   public void share(View v) {

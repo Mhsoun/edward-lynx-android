@@ -6,8 +6,8 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                tools:context="com.ingenuitymobile.edwardlynx.activities.InstantFeedbackReportActivity"
-                tools:showIn="@layout/activity_feedback_report">
+                tools:context="com.ingenuitymobile.edwardlynx.activities.SurveyReportActivity"
+                tools:showIn="@layout/activity_survey_report">
 
   <ImageView
       android:layout_width="match_parent"
@@ -36,9 +36,9 @@
           android:orientation="vertical">
 
         <TextView
-            android:id="@+id/text_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/average_values"
             android:textColor="@color/white"
             android:textSize="22sp"/>
 
@@ -49,63 +49,42 @@
             android:textColor="@color/survey_line"
             android:textSize="10sp"
             android:textStyle="italic"/>
-
-        <TextView
-            android:id="@+id/text_answer_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="10sp"/>
-
-        <TextView
-            android:id="@+id/text_share_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="10sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="addMore"
-            android:paddingBottom="4dp"
-            android:text="@string/add_more_participants"
-            android:textColor="@color/colorAccent"
-            android:textSize="12sp"/>
       </LinearLayout>
 
-      <RelativeLayout
+      <com.github.mikephil.charting.charts.HorizontalBarChart
+          android:id="@+id/bar_chart"
           android:layout_width="match_parent"
           android:layout_height="wrap_content">
+      </com.github.mikephil.charting.charts.HorizontalBarChart>
 
-        <TextView
-            android:id="@+id/text_empty_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/no_data_found"
-            android:textColor="@color/white"
-            android:visibility="gone"/>
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="12dp"
+          android:text="@string/index_over_competencies"
+          android:textColor="@color/white"
+          android:textSize="22sp"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/list_answers"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </android.support.v7.widget.RecyclerView>
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/index_over_competencies_details"
+          android:textColor="@color/survey_line"
+          android:textSize="10sp"
+          android:textStyle="italic"/>
 
-        <com.github.mikephil.charting.charts.HorizontalBarChart
-            android:id="@+id/horizontal_bar_chart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </com.github.mikephil.charting.charts.HorizontalBarChart>
-      </RelativeLayout>
+      <com.github.mikephil.charting.charts.HorizontalBarChart
+          android:id="@+id/mulitple_bar_chart"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+      </com.github.mikephil.charting.charts.HorizontalBarChart>
 
       <TextView
           android:id="@+id/text_date"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_horizontal"
-          android:layout_marginTop="8dp"
+          android:layout_marginTop="12dp"
           android:text="January, 3, 2015"
           android:textColor="@color/white"
           android:textSize="16sp"/>
@@ -117,6 +96,10 @@
           android:layout_gravity="center_horizontal"
           android:text="@string/details_circle_chart"
           android:textColor="@color/white"/>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="12dp"/>
     </LinearLayout>
   </ScrollView>
 </RelativeLayout>
