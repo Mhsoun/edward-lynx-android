@@ -106,6 +106,7 @@ public class SurveyQuestionsAdapter extends
             if (holder.radioGroup.getChildAt(i).getTag().equals(
                 String.valueOf((int) (double) question.value))) {
               ((RadioButton) holder.radioGroup.getChildAt(i)).setChecked(true);
+              listener.onAnswer(question.id, (String) holder.radioGroup.getChildAt(i).getTag());
             }
           }
         }
@@ -119,7 +120,8 @@ public class SurveyQuestionsAdapter extends
         });
 
 
-      } else if (question.answer.decscription.equals("Text")) {
+      } else if (question.answer.decscription.equals(
+          context.getResources().getString(R.string.free_text_description))) {
         holder.editText.setVisibility(View.VISIBLE);
         holder.editText.setEnabled(isEnabled);
         if (question.value != null) {

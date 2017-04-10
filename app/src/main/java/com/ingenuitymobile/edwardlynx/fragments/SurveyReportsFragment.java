@@ -29,7 +29,7 @@ import rx.Subscriber;
 
 public class SurveyReportsFragment extends BaseFragment {
 
-  private final static int NUM = 3;
+  private final static int NUM = 10;
 
   private View                 mainView;
   private ArrayList<Survey>    data;
@@ -94,6 +94,7 @@ public class SurveyReportsFragment extends BaseFragment {
   }
 
   private void getData(final boolean isRefresh) {
+
     LogUtil.e("AAA getData survey");
     subscription.add(Shared.apiClient.getSurveys(page, NUM, new Subscriber<Surveys>() {
       @Override
@@ -135,6 +136,7 @@ public class SurveyReportsFragment extends BaseFragment {
       .OnRefreshListener() {
     @Override
     public void onRefresh() {
+      page = 1;
       getData(true);
     }
   };

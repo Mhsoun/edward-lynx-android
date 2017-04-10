@@ -47,6 +47,8 @@
   <string name="details_bold">DETAILS</string>
   <string name="development_plan_bold">DEVELOPMENT PLAN</string>
   <string name="add_more_participants_bold">ADD MORE PARTICIPANTS</string>
+  <string name="free_text_description">Text</string>
+
 
   // region Answer type label
   <string name="numeric_1_to_5">Numeric 1&#8211;5 scale</string>
@@ -215,6 +217,7 @@
   <string name="open_status_bold">OPEN</string>
   <string name="unfinished_status_bold">UNFINISHED</string>
   <string name="not_invited_status_bold">NOT INVITED</string>
+  <string name="save_to_drafts">Save to Drafts</string>
 
   <string name="no_data_found">No data found</string>
   <string name="question_label">Question: </string>

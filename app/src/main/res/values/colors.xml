@@ -25,6 +25,7 @@
   <color name="dashboard_container">#462063</color>
   <color name="text_input_field">#72508a</color>
   <color name="orange_button">#f79646</color>
+  <color name="save_drafts">#a0a0a0</color>
   <color name="dashboard_green">#38b386</color>
   <color name="dashboard_blue">#3bb0c1</color>
   <color name="dashboard_pink">#c845dc</color>

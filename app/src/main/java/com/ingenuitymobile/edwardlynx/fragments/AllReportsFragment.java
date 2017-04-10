@@ -30,7 +30,7 @@ import rx.Subscriber;
 
 public class AllReportsFragment extends BaseFragment {
 
-  private final static int NUM = 5;
+  private final static int NUM = 10;
 
   private View                  mainView;
   private ArrayList<AllSurveys> data;

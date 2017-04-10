@@ -40,6 +40,7 @@ import rx.Subscriber;
 public class SurveyQuestionsActivity extends BaseActivity {
 
   private TextView submitText;
+  private TextView saveDraftsText;
 
   private long             id;
   private PagerAdapter     adapter;
@@ -84,6 +85,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
   private void initViews() {
     submitText = (TextView) findViewById(R.id.text_submit);
+    saveDraftsText = (TextView) findViewById(R.id.text_save_drafts);
 
     previousImage = (ImageView) findViewById(R.id.image_previous);
     nextImage = (ImageView) findViewById(R.id.image_next);
@@ -114,7 +116,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
       public void onNext(Survey surveyResponse) {
         survey = surveyResponse;
         setTitle(surveyResponse.name);
-        submitText.setVisibility(survey.status == Survey.COMPLETED ? View.GONE : View.VISIBLE);
+        saveDraftsText.setVisibility(survey.status == Survey.COMPLETED ? View.GONE : View.VISIBLE);
       }
     }));
   }
@@ -130,6 +132,8 @@ public class SurveyQuestionsActivity extends BaseActivity {
         viewPager.setAdapter(adapter);
         circleIndicator.setViewPager(viewPager);
         setNavigation();
+        submitText.setVisibility(survey.status == Survey.COMPLETED || data.size() != 1
+            ? View.GONE : View.VISIBLE);
       }
 
       @Override
@@ -139,34 +143,20 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
       @Override
       public void onNext(Questions questions) {
-        Category cat = questions.items.get(0);
-        List<Question> questions1 = questions.items.get(0).questions;
         LogUtil.e("AAA questions onNext");
 
         data.clear();
-//         data.addAll(questions.items);
-        Category c = new Category();
-        c.title = cat.title;
-        c.questions = new ArrayList<>(questions1);
-        data.add(c);
-
-        c = new Category();
-        c.title = cat.title;
-        c.questions = new ArrayList<>(questions1);
-        data.add(c);
-
-        c = new Category();
-        c.title = cat.title;
-        c.questions = new ArrayList<>(questions1);
-        data.add(c);
-
-        c = new Category();
-        c.title = cat.title;
-        c.questions = new ArrayList<>(questions1);
-        data.add(c);
-
+        data.addAll(questions.items);
 
         for (Category category : data) {
+          for (Question question : category.questions) {
+            if (question.id != 0L) {
+              AnswerBody body = new AnswerBody();
+              body.question = question.id;
+              body.answer = question.value != null ? String.valueOf(question.value) : null;
+              bodies.add(body);
+            }
+          }
           Question question = new Question();
           question.isSectionHeader = true;
           question.text = category.title;
@@ -185,14 +175,16 @@ public class SurveyQuestionsActivity extends BaseActivity {
   }
 
   public void submit(View v) {
+    final TextView textView = (TextView) v;
     AnswerParam param = new AnswerParam();
     param.answers = bodies;
     param.key = survey.key;
-    param.isFinal = bodies.size() == data.size();
+    param.isFinal = v.getId() == R.id.text_submit;
+
 
     LogUtil.e("AAA id " + id);
     LogUtil.e("AAA " + param.toString());
-    submitText.setText(getString(R.string.loading));
+    textView.setText(getString(R.string.loading));
     subscription.add(Shared.apiClient.postAnswerSurvey(id, param,
         new Subscriber<Response>() {
           @Override
@@ -203,7 +195,8 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
           @Override
           public void onError(Throwable e) {
-            submitText.setText(R.string.submit);
+            textView.setText(
+                textView.getId() == R.id.text_submit ? R.string.submit : R.string.save_to_drafts);
             LogUtil.e("AAA onError" + e);
             Toast.makeText(SurveyQuestionsActivity.this, getString(R.string.cant_connect),
                 Toast.LENGTH_SHORT).show();
@@ -254,6 +247,8 @@ public class SurveyQuestionsActivity extends BaseActivity {
     public void onPageSelected(int position) {
       LogUtil.e("AAA onPageSelected " + position);
       setNavigation();
+      submitText.setVisibility(position != data.size() - 1
+          ? View.GONE : View.VISIBLE);
     }
 
     @Override

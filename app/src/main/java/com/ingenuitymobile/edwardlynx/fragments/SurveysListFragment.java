@@ -27,7 +27,7 @@ import rx.Subscriber;
 
 public class SurveysListFragment extends BaseFragment {
 
-  private final static int NUM = 3;
+  private final static int NUM = 10;
 
   private View               mainView;
   private ArrayList<Survey>  data;

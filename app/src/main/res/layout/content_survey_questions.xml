@@ -57,6 +57,18 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/text_save_drafts"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_rounded_save_drafts"
+        android:gravity="center"
+        android:onClick="submit"
+        android:text="@string/save_to_drafts"
+        android:textColor="@color/common_text_color"
+        android:textSize="18sp"/>
+
+    <TextView
         android:id="@+id/text_submit"
         style="@style/orange_button"
         android:layout_width="match_parent"
@@ -64,7 +76,7 @@
         android:layout_marginBottom="12dp"
         android:onClick="submit"
         android:text="@string/submit"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
   </LinearLayout>
 
   <android.support.v4.view.ViewPager
