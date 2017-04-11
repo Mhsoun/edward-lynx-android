@@ -42,6 +42,9 @@ public class Survey {
   public int    status;
   @SerializedName("personsEvaluatedText")
   public String personsEvaluatedText;
+  @SerializedName("stats")
+  public Stats  stats;
+
 
   @SerializedName("key")
   public String key;

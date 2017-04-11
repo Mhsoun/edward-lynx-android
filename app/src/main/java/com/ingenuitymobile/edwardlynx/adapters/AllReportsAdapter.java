@@ -75,7 +75,7 @@ public class AllReportsAdapter extends RecyclerView.Adapter<AllReportsAdapter.Vi
         LogUtil.e("AAA " + e);
       }
 
-      holder.countText.setText("0/0");
+      holder.countText.setText(survey.stats.answered + "/" + survey.stats.invited);
       holder.nameText.setText(survey.name);
       holder.descriptionText.setText(survey.personsEvaluatedText);
 

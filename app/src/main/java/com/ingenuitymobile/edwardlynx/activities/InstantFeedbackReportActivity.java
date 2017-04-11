@@ -57,8 +57,6 @@ public class InstantFeedbackReportActivity extends BaseActivity {
   private RecyclerView       feedbackList;
   private HorizontalBarChart horizontalBarChart;
   private TextView           questionText;
-  private TextView           answerCountText;
-  private TextView           shareCountText;
   private TextView           emptyText;
   private TextView           dateText;
   private TextView           detailsText;
@@ -102,8 +100,6 @@ public class InstantFeedbackReportActivity extends BaseActivity {
 
   private void initViews() {
     questionText = (TextView) findViewById(R.id.text_question);
-    answerCountText = (TextView) findViewById(R.id.text_answer_count);
-    shareCountText = (TextView) findViewById(R.id.text_share_count);
     emptyText = (TextView) findViewById(R.id.text_empty_state);
     feedbackList = (RecyclerView) findViewById(R.id.list_answers);
     horizontalBarChart = (HorizontalBarChart) findViewById(R.id.horizontal_bar_chart);
@@ -176,12 +172,10 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     if (feedback.shares != null) {
       count = feedback.shares.size();
     }
-    shareCountText.setText(getString(R.string.total_shared, count));
     data.clear();
     data.addAll(feedbackResponse.frequencies);
 
     questionText.setText(feedback.questions.get(0).text);
-    answerCountText.setText(getString(R.string.total_answers, feedbackResponse.totalAnswers));
     emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
 
     horizontalBarChart.setVisibility(View.GONE);

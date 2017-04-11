@@ -46,7 +46,8 @@ public class ApiClient {
   private String consumerKey;
   private String consumerSecret;
   private String baseUrl;
-  private String refreshToken;
+  private String username;
+  private String password;
 
   private OnRefreshTokenListener refreshListener;
 
@@ -58,13 +59,11 @@ public class ApiClient {
     this.refreshListener = refreshListener;
   }
 
-  public void setRefreshToken(String refreshToken) {
-    this.refreshToken = refreshToken;
+  public void setRefreshToken(String username, String password) {
+    this.username = password;
+    this.password = password;
   }
 
-  public String getRefreshToken() {
-    return refreshToken;
-  }
 
   public void setAccessToken(String accessToken) {
     service = createRetrofitService(accessToken);
@@ -98,10 +97,11 @@ public class ApiClient {
     return service.postLogin(map);
   }
 
-  public Authentication postRefreshToken(String refreshToken) {
+  public Authentication postRefreshToken(final String username, final String password) {
     Map<String, String> map = new HashMap<>();
-    map.put("grant_type", "refresh_token");
-    map.put("refresh_token", refreshToken);
+    map.put("grant_type", "password");
+    map.put("username", username);
+    map.put("password", password);
     map.put("client_id", consumerKey);
     map.put("client_secret", consumerSecret);
     return service.postRefreshToken(map);
@@ -389,7 +389,7 @@ public class ApiClient {
             @Override
             public void run() {
               try {
-                final Authentication authentication = postRefreshToken(refreshToken);
+                final Authentication authentication = postRefreshToken(username, password);
                 if (authentication != null) {
                   refreshListener.onRefreshToken(authentication);
                   listener.onPostAgain();

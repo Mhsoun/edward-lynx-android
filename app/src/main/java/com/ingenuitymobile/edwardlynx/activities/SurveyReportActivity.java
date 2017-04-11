@@ -113,6 +113,9 @@ public class SurveyReportActivity extends BaseActivity {
       public void onCompleted() {
         LogUtil.e("AAA Survey details onCompleted ");
         getSurveyQuestions();
+
+        detailsText.setText(getString(R.string.details_circle_chart, survey.stats.invited,
+            survey.stats.answered));
       }
 
       @Override
@@ -154,8 +157,7 @@ public class SurveyReportActivity extends BaseActivity {
 
       @Override
       public void onNext(SurveyResultsResponse response) {
-        detailsText.setText(getString(R.string.details_circle_chart, 0,
-            response.totalAnswers));
+        // TODO data
       }
     }));
   }

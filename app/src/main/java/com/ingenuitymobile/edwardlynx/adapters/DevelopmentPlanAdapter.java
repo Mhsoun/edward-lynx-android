@@ -125,8 +125,7 @@ public class DevelopmentPlanAdapter extends
 
     try {
       Date date = format.parse(plan.updatedAt);
-      holder.dateText.setText(
-          context.getResources().getString(R.string.due_date) + ": " + displayFormat.format(date));
+      holder.dateText.setText(displayFormat.format(date));
     } catch (Exception e) {
       holder.dateText.setText("");
     }

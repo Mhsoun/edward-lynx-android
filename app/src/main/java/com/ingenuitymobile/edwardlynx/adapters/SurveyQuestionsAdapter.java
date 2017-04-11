@@ -84,7 +84,8 @@ public class SurveyQuestionsAdapter extends
       holder.nameText.setText(question.text);
     } else {
       final DataViewHolder holder = (DataViewHolder) viewHolder;
-      holder.questionText.setText(question.text);
+      holder.questionText.setText(question.text + (question.optional == 1 ? " " +
+          context.getResources().getString(R.string.optional) : ""));
       holder.editText.setVisibility(View.GONE);
 
       if (question.answer.options != null) {

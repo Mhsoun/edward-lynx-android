@@ -17,6 +17,6 @@ public class AnswerBody {
   
   @SerializedName("question")
   public long   question;
-  @SerializedName("answer")
+  @SerializedName("value")
   public String answer;
 }

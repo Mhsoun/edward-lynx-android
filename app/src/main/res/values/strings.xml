@@ -48,6 +48,8 @@
   <string name="development_plan_bold">DEVELOPMENT PLAN</string>
   <string name="add_more_participants_bold">ADD MORE PARTICIPANTS</string>
   <string name="free_text_description">Text</string>
+  <string name="optional">(optional)</string>
+  <string name="required_fields">Please fill up all required questions</string>
 
 
   // region Answer type label
@@ -232,6 +234,7 @@
 
   // popup
   <string name="goal_completed">Goal Completed</string>
+  <string name="survey_completed">Survey Completed</string>
   <string name="label_popup">You\'ve got the right mix of dedication and\nenthusiasm. Keep it up</string>
   <string name="thanks">Thanks</string>
   <string name="close">Close</string>

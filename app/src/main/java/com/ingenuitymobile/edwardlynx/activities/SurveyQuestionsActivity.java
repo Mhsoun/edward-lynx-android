@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Questions;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.fragments.DevelopmentPlanListFragment;
+import com.ingenuitymobile.edwardlynx.fragments.PopupDialogFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveyQuestionsFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveysListFragment;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
@@ -35,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
+import retrofit.RetrofitError;
 import rx.Subscriber;
 
 public class SurveyQuestionsActivity extends BaseActivity {
@@ -150,10 +153,10 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
         for (Category category : data) {
           for (Question question : category.questions) {
-            if (question.id != 0L) {
+            if (question.id != 0L && question.value != null) {
               AnswerBody body = new AnswerBody();
               body.question = question.id;
-              body.answer = question.value != null ? String.valueOf(question.value) : null;
+              body.answer = String.valueOf(question.value);
               bodies.add(body);
             }
           }
@@ -181,7 +184,6 @@ public class SurveyQuestionsActivity extends BaseActivity {
     param.key = survey.key;
     param.isFinal = v.getId() == R.id.text_submit;
 
-
     LogUtil.e("AAA id " + id);
     LogUtil.e("AAA " + param.toString());
     textView.setText(getString(R.string.loading));
@@ -190,16 +192,30 @@ public class SurveyQuestionsActivity extends BaseActivity {
           @Override
           public void onCompleted() {
             LogUtil.e("AAA onCompleted");
-            finish();
+
+
+            if (textView.getId() == R.id.text_submit) {
+              PopupDialogFragment dialogFragment = PopupDialogFragment.newInstance(false,
+                  survey.name,
+                  getString(R.string.survey_completed), getString(R.string.label_popup));
+              dialogFragment.show(getSupportFragmentManager(), "Popup");
+            } else {
+              finish();
+            }
           }
 
           @Override
           public void onError(Throwable e) {
+            if (((RetrofitError) e).getResponse().getStatus() == 422) {
+              Toast.makeText(SurveyQuestionsActivity.this, getString(R.string.required_fields),
+                  Toast.LENGTH_SHORT).show();
+            } else {
+              Toast.makeText(SurveyQuestionsActivity.this, getString(R.string.cant_connect),
+                  Toast.LENGTH_SHORT).show();
+            }
             textView.setText(
                 textView.getId() == R.id.text_submit ? R.string.submit : R.string.save_to_drafts);
             LogUtil.e("AAA onError" + e);
-            Toast.makeText(SurveyQuestionsActivity.this, getString(R.string.cant_connect),
-                Toast.LENGTH_SHORT).show();
           }
 
           @Override
@@ -247,8 +263,10 @@ public class SurveyQuestionsActivity extends BaseActivity {
     public void onPageSelected(int position) {
       LogUtil.e("AAA onPageSelected " + position);
       setNavigation();
-      submitText.setVisibility(position != data.size() - 1
-          ? View.GONE : View.VISIBLE);
+      if (survey.status != Survey.COMPLETED) {
+        submitText.setVisibility(position != data.size() - 1
+            ? View.GONE : View.VISIBLE);
+      }
     }
 
     @Override

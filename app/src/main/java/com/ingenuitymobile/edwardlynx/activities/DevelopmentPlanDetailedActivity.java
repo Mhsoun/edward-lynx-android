@@ -129,7 +129,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         if (goalId != 0L) {
           for (final Goal goal : data) {
             if (goal.id == goalId && goal.checked == 1) {
-              PopupDialogFragment dialogFragment = PopupDialogFragment.newInstance(goal.title,
+              PopupDialogFragment dialogFragment = PopupDialogFragment.newInstance(true, goal.title,
                   getString(R.string.goal_completed), getString(R.string.label_popup));
               dialogFragment.show(getSupportFragmentManager(), "Popup");
               return;

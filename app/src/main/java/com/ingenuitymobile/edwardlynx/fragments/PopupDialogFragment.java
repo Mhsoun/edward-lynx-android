@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 /**
@@ -18,10 +20,13 @@ import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 public class PopupDialogFragment extends DialogFragment {
 
   private String title, description, label;
+  private boolean isGoal;
 
-  public static PopupDialogFragment newInstance(String title, String description, String label) {
+  public static PopupDialogFragment newInstance(boolean isGOal, String title, String description,
+      String label) {
     PopupDialogFragment fragment = new PopupDialogFragment();
     fragment.title = title;
+    fragment.isGoal = isGOal;
     fragment.description = description;
     fragment.label = label;
     return fragment;
@@ -38,11 +43,33 @@ public class PopupDialogFragment extends DialogFragment {
     final TextView descriptionText = (TextView) v.findViewById(R.id.text_description);
     final TextView labelText = (TextView) v.findViewById(R.id.text_label);
     final ImageView imageView = (ImageView) v.findViewById(R.id.imageview);
+    final ImageView imageView1 = (ImageView) v.findViewById(R.id.imageview1);
+
+    imageView.setVisibility(isGoal ? View.GONE : View.VISIBLE);
+    imageView1.setVisibility(isGoal ? View.VISIBLE : View.GONE);
+
+    v.findViewById(R.id.text_close).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        dismiss();
+      }
+    });
 
     titleText.setText(title);
     descriptionText.setText(description);
     labelText.setText(label);
+
+    getDialog().setCanceledOnTouchOutside(false);
     return v;
+  }
+
+  @Override
+  public void onDismiss(final DialogInterface dialog) {
+    super.onDismiss(dialog);
+    if (!isGoal) {
+      final SurveyQuestionsActivity activity = (SurveyQuestionsActivity) getActivity();
+      activity.finish();
+    }
   }
 
 }
