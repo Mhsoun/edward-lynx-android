@@ -25,6 +25,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.fragments.AllReportsFragment;
 import com.ingenuitymobile.edwardlynx.fragments.AllSurveysFragment;
+import com.ingenuitymobile.edwardlynx.fragments.BaseFragment;
 import com.ingenuitymobile.edwardlynx.fragments.FeedbackReportsFragment;
 import com.ingenuitymobile.edwardlynx.fragments.FeedbackRequestsFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveyReportsFragment;
@@ -83,6 +84,7 @@ public class ReportsActivity extends BaseActivity {
   private void initViews() {
     final SearchView searchView = (SearchView) findViewById(R.id.searchview);
     searchView.setQueryHint("Search Reports");
+    searchView.setOnQueryTextListener(onQueryTextListener);
 
     viewPager = (ViewPager) findViewById(R.id.viewpager);
     final MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
@@ -117,6 +119,33 @@ public class ReportsActivity extends BaseActivity {
       break;
     }
   }
+
+  private SearchView.OnQueryTextListener onQueryTextListener = new SearchView.OnQueryTextListener
+      () {
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+      return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+      if (allFragments == null) {
+        allFragments = new AllReportsFragment();
+      }
+      allFragments.setQueryString(newText);
+
+      if (feedbackFragments == null) {
+        feedbackFragments = new FeedbackReportsFragment();
+      }
+      feedbackFragments.setQueryString(newText);
+
+      if (lynxFragments == null) {
+        lynxFragments = new SurveyReportsFragment();
+      }
+      lynxFragments.setQueryString(newText);
+      return false;
+    }
+  };
 
   private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener
       () {

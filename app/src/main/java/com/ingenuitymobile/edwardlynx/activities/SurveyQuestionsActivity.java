@@ -1,6 +1,5 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -8,8 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,10 +24,8 @@ import com.ingenuitymobile.edwardlynx.api.models.Question;
 import com.ingenuitymobile.edwardlynx.api.models.Questions;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
-import com.ingenuitymobile.edwardlynx.fragments.DevelopmentPlanListFragment;
 import com.ingenuitymobile.edwardlynx.fragments.PopupDialogFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveyQuestionsFragment;
-import com.ingenuitymobile.edwardlynx.fragments.SurveysListFragment;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.ArrayList;

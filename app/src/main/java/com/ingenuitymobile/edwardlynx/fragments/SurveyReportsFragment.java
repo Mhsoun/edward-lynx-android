@@ -15,6 +15,7 @@ import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.activities.SurveyReportActivity;
 import com.ingenuitymobile.edwardlynx.adapters.SurveyReportsAdapter;
+import com.ingenuitymobile.edwardlynx.api.models.AllSurveys;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
@@ -33,6 +34,7 @@ public class SurveyReportsFragment extends BaseFragment {
 
   private View                 mainView;
   private ArrayList<Survey>    data;
+  private ArrayList<Survey>    displayData;
   private SurveyReportsAdapter adapter;
   private TextView             emptyText;
   private SwipeRefreshLayout   refreshLayout;
@@ -43,6 +45,7 @@ public class SurveyReportsFragment extends BaseFragment {
 
   public SurveyReportsFragment() {
     data = new ArrayList<>();
+    displayData = new ArrayList<>();
     loading = false;
     page = 1;
   }
@@ -79,7 +82,7 @@ public class SurveyReportsFragment extends BaseFragment {
     manager = new LinearLayoutManager(getActivity());
     surveyList.setLayoutManager(manager);
 
-    adapter = new SurveyReportsAdapter(data, listener);
+    adapter = new SurveyReportsAdapter(displayData, listener);
     surveyList.setAdapter(adapter);
 
     refreshLayout.setOnRefreshListener(refreshListener);
@@ -89,7 +92,7 @@ public class SurveyReportsFragment extends BaseFragment {
   }
 
   private void notifyAdapter() {
-    emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
+    emptyText.setVisibility(displayData.isEmpty() ? View.VISIBLE : View.GONE);
     adapter.notifyDataSetChanged();
   }
 
@@ -99,8 +102,9 @@ public class SurveyReportsFragment extends BaseFragment {
     subscription.add(Shared.apiClient.getSurveys(page, NUM, new Subscriber<Surveys>() {
       @Override
       public void onCompleted() {
-        refreshLayout.setRefreshing(false);
         LogUtil.e("AAA onCompleted ");
+        refreshLayout.setRefreshing(false);
+        setData();
       }
 
       @Override
@@ -116,9 +120,26 @@ public class SurveyReportsFragment extends BaseFragment {
           data.clear();
         }
         data.addAll(surveys.items);
-        notifyAdapter();
       }
     }));
+  }
+
+  private void setData() {
+    displayData.clear();
+    for (Survey survey : data) {
+      if (survey.name.toLowerCase().contains(queryString.toLowerCase())) {
+        displayData.add(survey);
+      }
+    }
+
+    notifyAdapter();
+  }
+
+  public void setQueryString(String queryString) {
+    this.queryString = queryString;
+    if (adapter != null && emptyText != null) {
+      setData();
+    }
   }
 
 

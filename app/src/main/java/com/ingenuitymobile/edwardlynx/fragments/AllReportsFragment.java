@@ -17,6 +17,7 @@ import com.ingenuitymobile.edwardlynx.api.models.AllSurveys;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
+import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
@@ -34,12 +35,14 @@ public class AllReportsFragment extends BaseFragment {
 
   private View                  mainView;
   private ArrayList<AllSurveys> data;
+  private ArrayList<AllSurveys> displayData;
   private AllReportsAdapter     adapter;
   private TextView              emptyText;
   private SwipeRefreshLayout    refreshLayout;
 
   public AllReportsFragment() {
     data = new ArrayList<>();
+    displayData = new ArrayList<>();
   }
 
   @Override
@@ -79,7 +82,7 @@ public class AllReportsFragment extends BaseFragment {
     feedbackList.setHasFixedSize(true);
     feedbackList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    adapter = new AllReportsAdapter(data);
+    adapter = new AllReportsAdapter(displayData);
     feedbackList.setAdapter(adapter);
 
     refreshLayout.setOnRefreshListener(refreshListener);
@@ -115,9 +118,8 @@ public class AllReportsFragment extends BaseFragment {
         Shared.apiClient.getInstantFeedbacks("to_answer", new Subscriber<FeedbacksResponse>() {
           @Override
           public void onCompleted() {
-            adapter.notifyDataSetChanged();
-            emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
             refreshLayout.setRefreshing(false);
+            setData();
           }
 
           @Override
@@ -132,6 +134,34 @@ public class AllReportsFragment extends BaseFragment {
             }
           }
         }));
+  }
+
+  private void setData() {
+    displayData.clear();
+    for (AllSurveys allSurveys : data) {
+      if (allSurveys.survey != null) {
+        if (allSurveys.survey.name.toLowerCase().contains(queryString.toLowerCase())) {
+          displayData.add(allSurveys);
+        }
+      } else {
+        if (!allSurveys.feedback.questions.isEmpty()) {
+          if (allSurveys.feedback.questions.get(0).text.toLowerCase().contains(
+              queryString.toLowerCase())) {
+            displayData.add(allSurveys);
+          }
+        }
+      }
+    }
+
+    adapter.notifyDataSetChanged();
+    emptyText.setVisibility(displayData.isEmpty() ? View.VISIBLE : View.GONE);
+  }
+
+  public void setQueryString(String queryString) {
+    this.queryString = queryString;
+    if (adapter != null && emptyText != null) {
+      setData();
+    }
   }
 
   private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout

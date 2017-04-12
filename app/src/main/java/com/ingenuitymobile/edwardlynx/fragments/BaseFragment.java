@@ -16,8 +16,11 @@ public class BaseFragment extends Fragment {
 
   protected CompositeSubscription subscription;
 
+  protected String queryString;
+
   public BaseFragment() {
     subscription = new CompositeSubscription();
+    queryString = "";
   }
 
   @Override
