@@ -1,6 +1,7 @@
 package com.ingenuitymobile.edwardlynx.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.activities.AnswerFeedbackActivity;
+import com.ingenuitymobile.edwardlynx.activities.MainActivity;
+import com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity;
 import com.ingenuitymobile.edwardlynx.api.models.Reminder;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
@@ -25,11 +29,13 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
 
   private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
 
-  private List<Reminder> data;
+  private List<Reminder>                        data;
+  private MainActivity.OnChangeFragmentListener listener;
 
-  public ReminderAdapter(List<Reminder> data) {
+  public ReminderAdapter(List<Reminder> data, MainActivity.OnChangeFragmentListener listener) {
     super();
     this.data = data;
+    this.listener = listener;
   }
 
   class ViewHolder extends RecyclerView.ViewHolder {
@@ -93,6 +99,23 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
     } catch (Exception e) {
       LogUtil.e("Error", e);
     }
+
+    holder.itemView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        if (reminder.type.equals(Reminder.Type.INVITE_FEEDBACK.toString())) {
+          Intent intent = new Intent(context, AnswerFeedbackActivity.class);
+          intent.putExtra("id", reminder.id);
+          context.startActivity(intent);
+        } else if (reminder.type.equals(Reminder.Type.SURVEY.toString())) {
+          Intent intent = new Intent(context, SurveyQuestionsActivity.class);
+          intent.putExtra("id", reminder.id);
+          context.startActivity(intent);
+        } else {
+          listener.onChange(MainActivity.ChangeFragment.DEVPLANS);
+        }
+      }
+    });
   }
 
   @Override

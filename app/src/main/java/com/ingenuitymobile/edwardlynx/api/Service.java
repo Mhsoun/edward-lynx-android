@@ -92,7 +92,7 @@ public interface Service {
   @GET("/api/v1/surveys/{id}/questions")
   Observable<Questions> getSurveyQuestions(@Path("id") long id);
 
-  @GET("/api/v1/surveys/{id}/questions")
+  @GET("/api/v1/surveys/{id}/results")
   Observable<SurveyResultsResponse> getSurveyResults(@Path("id") long id);
   // endregion
 

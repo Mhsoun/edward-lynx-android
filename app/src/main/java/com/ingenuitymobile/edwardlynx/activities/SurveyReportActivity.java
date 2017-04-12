@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -23,9 +24,11 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.api.models.Average;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,8 +44,9 @@ public class SurveyReportActivity extends BaseActivity {
 
   private static final float FONT_SIZE = 11;
 
-  private long              id;
-  private ArrayList<String> data;
+  private long               id;
+  private ArrayList<Average> averages;
+  private ArrayList<Average> ioc;
 
   private HorizontalBarChart barChart;
   private HorizontalBarChart mulitpleBarChart;
@@ -52,12 +56,8 @@ public class SurveyReportActivity extends BaseActivity {
   private Survey survey;
 
   public SurveyReportActivity() {
-    data = new ArrayList<>();
-    data.add("Category 1");
-    data.add("Category 2");
-    data.add("Category 3");
-    data.add("Category 4");
-    data.add("Category 5");
+    averages = new ArrayList<>();
+    ioc = new ArrayList<>();
   }
 
   @Override
@@ -101,9 +101,6 @@ public class SurveyReportActivity extends BaseActivity {
 
     dateText.setText("January 3, 2017");
     detailsText.setText(getString(R.string.details_circle_chart, 0, 0));
-
-    setBarChart();
-    setMulitpleBarChart();
   }
 
   private void getData() {
@@ -142,12 +139,13 @@ public class SurveyReportActivity extends BaseActivity {
   }
 
   private void getSurveyQuestions() {
-    LogUtil.e("AAA getData questions");
+    LogUtil.e("AAA getData questions " + id);
     subscription.add(Shared.apiClient.getSurveyResults(id, new Subscriber<SurveyResultsResponse>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA questions onCompleted ");
-
+        setBarChart();
+        setMulitpleBarChart();
       }
 
       @Override
@@ -157,18 +155,24 @@ public class SurveyReportActivity extends BaseActivity {
 
       @Override
       public void onNext(SurveyResultsResponse response) {
-        // TODO data
+        ioc.clear();
+        ioc.addAll(response.ioc);
+
+        averages.clear();
+        averages.addAll(response.averages);
       }
     }));
   }
 
   private void setBarChart() {
+    final int size = averages.size();
+    LogUtil.e("AAA " + size);
     setChart(barChart);
 
     ArrayList<BarEntry> yVals1 = new ArrayList<>();
 
-    for (int i = 0; i < data.size(); i++) {
-      float val = (float) (Math.random()) * 100f;
+    for (int i = 0; i < size; i++) {
+      float val = averages.get(i).average * 100f;
       yVals1.add(new BarEntry(i, val));
     }
 
@@ -195,16 +199,21 @@ public class SurveyReportActivity extends BaseActivity {
     barChart.setData(barData);
     barChart.getLegend().setEnabled(false);
 
-    barChart.setVisibleXRangeMaximum(data.size());
-    barChart.setVisibleXRangeMinimum(data.size());
+    barChart.setVisibleXRangeMaximum(size);
+    barChart.setVisibleXRangeMinimum(size);
     barChart.setFitBars(false);
 
-    barChart.getLayoutParams().height = (100 * data.size());
+    ViewGroup.LayoutParams params = barChart.getLayoutParams();
+    params.height =
+        (ViewUtil.dpToPx(15, getResources()) * size) +
+            ViewUtil.dpToPx(40, getResources());
+    barChart.setLayoutParams(params);
     barChart.animateXY(1000, 1000);
     barChart.invalidate();
   }
 
   private void setMulitpleBarChart() {
+    final int size = ioc.size();
     setChart(mulitpleBarChart);
 
     Legend l = mulitpleBarChart.getLegend();
@@ -218,17 +227,22 @@ public class SurveyReportActivity extends BaseActivity {
     l.setYEntrySpace(0f);
     l.setTextSize(FONT_SIZE);
 
-    ArrayList<BarEntry> yVals1 = new ArrayList<>();
-    ArrayList<BarEntry> yVals2 = new ArrayList<>();
+    ArrayList<BarEntry> self = new ArrayList<>();
+    ArrayList<BarEntry> others = new ArrayList<>();
 
-    for (int i = 0; i < data.size(); i++) {
-      float val = (float) (Math.random()) * 100f;
-      yVals1.add(new BarEntry(i, val));
-      val = (float) (Math.random()) * 100f;
-      yVals2.add(new BarEntry(i, val));
+    for (int i = 0; i < size; i++) {
+      Average average = ioc.get(i);
+      float val = average.roles.get(0).average * 100f;
+      others.add(new BarEntry(i, val));
+
+      float selfValue = 0;
+      if (average.roles.size() >= 2) {
+        selfValue = average.roles.get(1).average * 100f;
+      }
+      self.add(new BarEntry(i, selfValue));
     }
 
-    BarDataSet set1 = new BarDataSet(yVals1, getString(R.string.self));
+    BarDataSet set1 = new BarDataSet(self, getString(R.string.self));
     set1.setDrawValues(true);
     set1.setValueTextSize(FONT_SIZE);
     set1.setValueTextColor(context.getResources().getColor(R.color.lynx_color));
@@ -242,7 +256,7 @@ public class SurveyReportActivity extends BaseActivity {
       }
     });
 
-    BarDataSet set2 = new BarDataSet(yVals2, getString(R.string.others_ombined));
+    BarDataSet set2 = new BarDataSet(others, getString(R.string.others_ombined));
     set2.setDrawValues(true);
     set2.setValueTextSize(FONT_SIZE);
     set2.setValueTextColor(context.getResources().getColor(R.color.colorAccent));
@@ -261,20 +275,19 @@ public class SurveyReportActivity extends BaseActivity {
 
     mulitpleBarChart.setData(barData);
 
-    mulitpleBarChart.setVisibleXRangeMaximum(data.size());
-    mulitpleBarChart.setVisibleXRangeMinimum(data.size());
-    mulitpleBarChart.setFitBars(true);
-
-    float groupSpace = 0.15f;
-    float barSpace = 0.0f; // x4 DataSet
-    // (0.2 + 0.03) * 4 + 0.08 = 1.00 -> interval per "group"
+    float groupSpace = 0.11f;
+    float barSpace = 0.0f;
 
     mulitpleBarChart.getXAxis().setCenterAxisLabels(true);
-    mulitpleBarChart.setVisibleXRangeMaximum(data.size());
-    mulitpleBarChart.setVisibleXRangeMinimum(data.size());
+    mulitpleBarChart.setVisibleXRangeMaximum(size * 2);
+    mulitpleBarChart.setVisibleXRangeMinimum(2);
     mulitpleBarChart.setFitBars(true);
 
-    mulitpleBarChart.getLayoutParams().height = (77 * data.size() * 2);
+    ViewGroup.LayoutParams params = mulitpleBarChart.getLayoutParams();
+    params.height =
+        (ViewUtil.dpToPx(17, getResources()) * size * 2) +
+            ViewUtil.dpToPx(40, getResources());
+    mulitpleBarChart.setLayoutParams(params);
     mulitpleBarChart.getXAxis().setAxisMinimum(0f);
     mulitpleBarChart.groupBars(0, groupSpace, barSpace);
     mulitpleBarChart.animateXY(1000, 1000);
@@ -296,7 +309,7 @@ public class SurveyReportActivity extends BaseActivity {
     xl.setDrawAxisLine(true);
     xl.setGranularity(1f);
     xl.setGranularityEnabled(true);
-    xl.setLabelCount(data.size());
+    xl.setLabelCount(averages.size());
     xl.setTextColor(Color.WHITE);
     xl.setTextSize(FONT_SIZE);
     xl.setAxisLineColor(getResources().getColor(R.color.survey_line));
@@ -304,8 +317,8 @@ public class SurveyReportActivity extends BaseActivity {
       @Override
       public String getFormattedValue(float value, AxisBase axis) {
         final int index = (int) value;
-        if (index >= 0 && index < data.size()) {
-          return data.get(index);
+        if (index >= 0 && index < averages.size()) {
+          return averages.get(index).name;
         }
         return "";
       }
@@ -315,7 +328,7 @@ public class SurveyReportActivity extends BaseActivity {
     yl.setDrawAxisLine(false);
     yl.setDrawGridLines(false);
     yl.setAxisMinimum(0f);
-    yl.setAxisMaximum(110f);
+    yl.setAxisMaximum(112f);
     yl.setDrawTopYLabelEntry(true);
     yl.setDrawLabels(false);
 

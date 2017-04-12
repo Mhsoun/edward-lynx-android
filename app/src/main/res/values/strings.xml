@@ -230,7 +230,7 @@
   // region survey reports
   <string name="average_values">Average values</string>
   <string name="index_over_competencies">Index over competencies</string>
-  <string name="self">Self</string>
+  <string name="self">Candidates</string>
   <string name="others_ombined">Others Combined</string>
   <string name="index_over_competencies_details">Shows the overall values for each area of competence (the average of all the answers from those who responded to your feedback request.) Your own personal assessment is shown in a separate bar.</string>
 

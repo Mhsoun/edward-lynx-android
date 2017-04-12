@@ -145,7 +145,7 @@ public class DashboardFragment extends BaseFragment {
     reminderList.setLayoutManager(new LinearLayoutManager(getActivity()));
     emptyReminderText = (TextView) mainView.findViewById(R.id.text_empty_reminders);
 
-    reminderAdapter = new ReminderAdapter(reminders);
+    reminderAdapter = new ReminderAdapter(reminders, listener);
     reminderList.setAdapter(reminderAdapter);
 
     badgeView = new BadgeView(getActivity(), answerLayout);

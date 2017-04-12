@@ -1,7 +1,7 @@
 package com.ingenuitymobile.edwardlynx.api.responses;
 
 import com.google.gson.annotations.SerializedName;
-import com.ingenuitymobile.edwardlynx.api.models.FeedbackFrequency;
+import com.ingenuitymobile.edwardlynx.api.models.Average;
 import com.ingenuitymobile.edwardlynx.api.models.Links;
 import com.ingenuitymobile.edwardlynx.api.models.SurveyFrequency;
 
@@ -19,4 +19,8 @@ public class SurveyResultsResponse extends Response {
   public List<SurveyFrequency> frequencies;
   @SerializedName("totalAnswers")
   public int                   totalAnswers;
+  @SerializedName("average")
+  public List<Average>         averages;
+  @SerializedName("ioc")
+  public List<Average>         ioc;
 }
