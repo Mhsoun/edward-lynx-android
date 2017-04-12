@@ -102,6 +102,7 @@ public class DevelopmenPlansFragment extends BaseFragment {
   private void initViews() {
     final SearchView searchView = (SearchView) mainView.findViewById(R.id.searchview);
     searchView.setQueryHint("Search Development Plan");
+    searchView.setOnQueryTextListener(onQueryTextListener);
 
     viewPager = (ViewPager) mainView.findViewById(R.id.viewpager);
     MyPagerAdapter adapter = new MyPagerAdapter(getChildFragmentManager());
@@ -207,6 +208,38 @@ public class DevelopmenPlansFragment extends BaseFragment {
       break;
     }
   }
+
+  private SearchView.OnQueryTextListener onQueryTextListener = new SearchView.OnQueryTextListener
+      () {
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+      return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+      if (allFragment == null) {
+        allFragment = new DevelopmentPlanListFragment();
+      }
+      allFragment.setQueryString(newText);
+
+      if (unfinishedFragment == null) {
+        unfinishedFragment = new DevelopmentPlanListFragment();
+      }
+      unfinishedFragment.setQueryString(newText);
+
+      if (completedFragment == null) {
+        completedFragment = new DevelopmentPlanListFragment();
+      }
+      completedFragment.setQueryString(newText);
+
+      if (expiredFragment == null) {
+        expiredFragment = new DevelopmentPlanListFragment();
+      }
+      expiredFragment.setQueryString(newText);
+      return false;
+    }
+  };
 
   private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override

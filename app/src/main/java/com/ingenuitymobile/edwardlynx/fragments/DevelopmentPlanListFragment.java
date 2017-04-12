@@ -12,8 +12,10 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.adapters.DevelopmentPlanAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
+import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,8 +26,14 @@ public class DevelopmentPlanListFragment extends BaseFragment {
 
   private View                   mainView;
   private List<DevelopmentPlan>  data;
+  private List<DevelopmentPlan>  displayData;
   private DevelopmentPlanAdapter adapter;
   private TextView               emptyText;
+
+  public DevelopmentPlanListFragment() {
+    data = new ArrayList<>();
+    displayData = new ArrayList<>();
+  }
 
 
   @Override
@@ -63,21 +71,40 @@ public class DevelopmentPlanListFragment extends BaseFragment {
     surveyList.setHasFixedSize(true);
     surveyList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    adapter = new DevelopmentPlanAdapter(data);
+    adapter = new DevelopmentPlanAdapter(displayData);
     surveyList.setAdapter(adapter);
-    emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
-    adapter.notifyDataSetChanged();
+    setDisplayData();
   }
 
   public void setData(List<DevelopmentPlan> data) {
     if (data != null) {
       this.data = data;
-      if (adapter != null) {
-        if (emptyText != null) {
-          emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
-        }
-        adapter.notifyDataSetChanged();
+      if (adapter != null && emptyText != null) {
+        setDisplayData();
       }
+    }
+  }
+
+  private void setDisplayData() {
+    displayData.clear();
+    for (DevelopmentPlan plan : data) {
+      if (plan.name.toLowerCase().contains(queryString.toLowerCase())) {
+        displayData.add(plan);
+      }
+    }
+
+    if (adapter != null) {
+      adapter.notifyDataSetChanged();
+    }
+    if (emptyText != null) {
+      emptyText.setVisibility(displayData.isEmpty() ? View.VISIBLE : View.GONE);
+    }
+  }
+
+  public void setQueryString(String queryString) {
+    this.queryString = queryString;
+    if (adapter != null && emptyText != null) {
+      setDisplayData();
     }
   }
 }
