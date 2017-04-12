@@ -19,20 +19,18 @@ import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.activities.CreateDevelopmentPlanActivity;
 import com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity;
 import com.ingenuitymobile.edwardlynx.activities.FeedbackRequestsActivity;
+import com.ingenuitymobile.edwardlynx.activities.MainActivity.ChangeFragment;
+import com.ingenuitymobile.edwardlynx.activities.MainActivity.OnChangeFragmentListener;
 import com.ingenuitymobile.edwardlynx.activities.ReportsActivity;
 import com.ingenuitymobile.edwardlynx.adapters.DevelopmentPlanAdapter;
 import com.ingenuitymobile.edwardlynx.adapters.ReminderAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
-import com.ingenuitymobile.edwardlynx.api.models.Goal;
 import com.ingenuitymobile.edwardlynx.api.models.Reminder;
-import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.DashboardResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
-import com.ingenuitymobile.edwardlynx.activities.MainActivity.OnChangeFragmentListener;
-import com.ingenuitymobile.edwardlynx.activities.MainActivity.ChangeFragment;
+import com.ingenuitymobile.edwardlynx.views.BadgeView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import rx.Subscriber;
@@ -49,10 +47,10 @@ public class DashboardFragment extends BaseFragment {
   private RelativeLayout instantFeedbackLayout;
   private RelativeLayout lynxLayout;
 
-  private TextView answerText;
-  private TextView resultsText;
-  private TextView inviteText;
-  private TextView createText;
+  private RelativeLayout answerLayout;
+  private TextView       resultsText;
+  private TextView       inviteText;
+  private TextView       createText;
 
   private TextView seeMoreText;
 
@@ -65,6 +63,8 @@ public class DashboardFragment extends BaseFragment {
 
   private List<Reminder>  reminders;
   private ReminderAdapter reminderAdapter;
+
+  private BadgeView badgeView;
 
 
   public static DashboardFragment newInstance(Context ctx, OnChangeFragmentListener listener) {
@@ -140,7 +140,8 @@ public class DashboardFragment extends BaseFragment {
   @Override
   public void onResume() {
     super.onResume();
-    getDevPlans();
+    LogUtil.e("AAA on Resume Dashboard");
+    getDasboard();
   }
 
   private void initViews() {
@@ -148,7 +149,7 @@ public class DashboardFragment extends BaseFragment {
     instantFeedbackLayout = (RelativeLayout) mainView.findViewById(R.id.layout_instant_feedback);
     lynxLayout = (RelativeLayout) mainView.findViewById(R.id.layout_lynx_measurement);
 
-    answerText = (TextView) mainView.findViewById(R.id.text_answer);
+    answerLayout = (RelativeLayout) mainView.findViewById(R.id.layout_answer);
     resultsText = (TextView) mainView.findViewById(R.id.text_results);
     inviteText = (TextView) mainView.findViewById(R.id.text_invite);
     createText = (TextView) mainView.findViewById(R.id.text_create);
@@ -159,7 +160,7 @@ public class DashboardFragment extends BaseFragment {
     instantFeedbackLayout.setOnClickListener(onClickListener);
     lynxLayout.setOnClickListener(onClickListener);
 
-    answerText.setOnClickListener(onClickListener);
+    answerLayout.setOnClickListener(onClickListener);
     resultsText.setOnClickListener(onClickListener);
     inviteText.setOnClickListener(onClickListener);
     createText.setOnClickListener(onClickListener);
@@ -181,9 +182,10 @@ public class DashboardFragment extends BaseFragment {
 
     reminderAdapter = new ReminderAdapter(reminders);
     reminderList.setAdapter(reminderAdapter);
-    LogUtil.e("AAA " + reminderAdapter.getItemCount());
 
     emptyReminderText.setVisibility(reminders.isEmpty() ? View.VISIBLE : View.GONE);
+
+    badgeView = new BadgeView(getActivity(), answerLayout);
   }
 
   private void setupViews() {
@@ -196,9 +198,9 @@ public class DashboardFragment extends BaseFragment {
 //    }
   }
 
-  private void getDevPlans() {
+  private void getDasboard() {
     subscription.add(
-        Shared.apiClient.getDevelopmentPlans(new Subscriber<DevelopmentPlansResponse>() {
+        Shared.apiClient.getUserDashboard(new Subscriber<DashboardResponse>() {
           @Override
           public void onCompleted() {
             LogUtil.e("AAA onCompleted ");
@@ -211,14 +213,21 @@ public class DashboardFragment extends BaseFragment {
           }
 
           @Override
-          public void onNext(final DevelopmentPlansResponse response) {
+          public void onNext(final DashboardResponse response) {
             LogUtil.e("AAA onNext ");
             devPlanData.clear();
-            if (response.items.size() > 2) {
-              devPlanData.add(response.items.get(0));
-              devPlanData.add(response.items.get(2));
+            if (response.developmentPlans.size() > 2) {
+              devPlanData.add(response.developmentPlans.get(0));
+              devPlanData.add(response.developmentPlans.get(2));
             } else {
-              devPlanData.addAll(response.items);
+              devPlanData.addAll(response.developmentPlans);
+            }
+
+            badgeView.setText(String.valueOf(response.answerableCount));
+            if (response.answerableCount == 0) {
+              badgeView.hide();
+            } else {
+              badgeView.show();
             }
           }
         }));
@@ -237,7 +246,7 @@ public class DashboardFragment extends BaseFragment {
       case R.id.layout_lynx_measurement:
         listener.onChange(ChangeFragment.SURVEYS_LYNX);
         break;
-      case R.id.text_answer:
+      case R.id.layout_answer:
         startActivity(new Intent(getActivity(), FeedbackRequestsActivity.class));
         break;
       case R.id.text_results:
@@ -263,7 +272,6 @@ public class DashboardFragment extends BaseFragment {
         alertBuilder.create().show();
         break;
       case R.id.text_see_more:
-        LogUtil.e("AAA onCLick");
         listener.onChange(ChangeFragment.DEVPLANS);
         break;
       }

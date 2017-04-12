@@ -22,7 +22,10 @@ public class SessionStore {
 
   static boolean restore(ApiClient apiClient, Context context) {
     final SharedPreferences savedSession = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
-    apiClient.setRefreshToken(savedSession.getString(REFRESH_TOKEN, null));
+    apiClient.setRefreshToken(
+        savedSession.getString(USERNAME, null),
+        savedSession.getString(PASSWORD, null)
+    );
     apiClient.setAccessToken(savedSession.getString(ACCESS_TOKEN, null));
     return apiClient.service != null;
   }

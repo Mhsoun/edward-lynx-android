@@ -1,10 +1,12 @@
 package com.ingenuitymobile.edwardlynx.api.models;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by memengski on 3/31/17.
  */
 
-public class Reminder {
+public class Reminder extends Model {
 
   public enum Type {
     GOAL("GOAL"),
@@ -21,6 +23,12 @@ public class Reminder {
     }
   }
 
+  @SerializedName("type")
   public String type;
+  @SerializedName("name")
+  public String name;
+  @SerializedName("description")
   public String description;
+  @SerializedName("due")
+  public String due;
 }

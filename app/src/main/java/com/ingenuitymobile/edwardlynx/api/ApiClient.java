@@ -15,12 +15,14 @@ import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
 import com.ingenuitymobile.edwardlynx.api.responses.CategoriesResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.DashboardResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.HashMap;
@@ -125,6 +127,17 @@ public class ApiClient {
           @Override
           public void onPostAgain() {
             getUsers(type, subscriber);
+          }
+        }));
+  }
+
+  public Subscription getUserDashboard(final Subscriber<DashboardResponse> subscriber) {
+    return service.getUserDashboard()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getUserDashboard(subscriber);
           }
         }));
   }
@@ -384,6 +397,7 @@ public class ApiClient {
     @Override
     public void onError(final Throwable e) {
       if (((RetrofitError) e).getResponse().getStatus() == 401) {
+        LogUtil.e("AAA onError " + e);
         try {
           new Thread(new Runnable() {
             @Override

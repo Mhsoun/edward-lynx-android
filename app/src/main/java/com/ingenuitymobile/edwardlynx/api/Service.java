@@ -15,6 +15,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
 import com.ingenuitymobile.edwardlynx.api.responses.CategoriesResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.DashboardResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
@@ -57,6 +58,9 @@ public interface Service {
 
   @GET("/api/v1/users")
   Observable<UsersResponse> getUsers(@Query("type") String type);
+
+  @GET("/api/v1/user/dashboard")
+  Observable<DashboardResponse> getUserDashboard();
 
   @Headers("Content-Type: application/json")
   @PATCH("/api/v1/user")
