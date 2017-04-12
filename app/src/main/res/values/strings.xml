@@ -198,8 +198,10 @@
   <string name="no_reminders">No Reminders</string>
   <string name="see_more">See More</string>
   <string name="now">Now</string>
+  <string name="expired">Expired</string>
   <string name="due_in">Due in</string>
   <string name="days">%1$d Days</string>
+  <string name="day">%1$d Day</string>
 
   <string name="navigation_drawer_open">Open navigation drawer</string>
   <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -248,4 +250,8 @@
   <string name="yesterday">yesterday</string>
   <string name="today">today</string>
   <string name="days_ago">%1$d days ago</string>
+
+  // reminder
+  <string name="goal_bold">GOAL</string>
+  <string name="survey_bold">SURVEY</string>
 </resources>

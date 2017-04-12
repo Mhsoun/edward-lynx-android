@@ -1,6 +1,9 @@
 package com.ingenuitymobile.edwardlynx.api.models;
 
+import android.content.Context;
+
 import com.google.gson.annotations.SerializedName;
+import com.ingenuitymobile.edwardlynx.R;
 
 /**
  * Created by memengski on 3/31/17.
@@ -9,9 +12,9 @@ import com.google.gson.annotations.SerializedName;
 public class Reminder extends Model {
 
   public enum Type {
-    GOAL("GOAL"),
-    INVITE_FEEDBACK("INVITE FEEDBACK"),
-    ANSWER_FEEDBACK("ANSWER INSTANT FEEDBACK");
+    GOAL("development-plan-goal"),
+    INVITE_FEEDBACK("instant-feedback"),
+    SURVEY("survey");
 
     private String string;
 
@@ -31,4 +34,14 @@ public class Reminder extends Model {
   public String description;
   @SerializedName("due")
   public String due;
+
+  public String getType(Context ctx) {
+    if (type.equals(Type.GOAL.toString())) {
+      return ctx.getResources().getString(R.string.goal_bold);
+    } else if (type.equals(Type.SURVEY.toString())) {
+      return ctx.getResources().getString(R.string.survey_bold);
+    } else {
+      return ctx.getResources().getString(R.string.instant_feedback_bold);
+    }
+  }
 }

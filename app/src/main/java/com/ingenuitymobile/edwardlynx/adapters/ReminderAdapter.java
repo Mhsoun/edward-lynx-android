@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Reminder;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,6 +22,8 @@ import java.util.List;
  */
 
 public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHolder> {
+
+  private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
 
   private List<Reminder> data;
 
@@ -64,16 +69,29 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
     holder.bodyLayout.setSelected(isGoal);
     holder.typeText.setSelected(isGoal);
 
-    holder.typeText.setText(reminder.type);
+    holder.typeText.setText(reminder.getType(context));
 
-    if ((position % 2) == 0) {
-      holder.dueDateLayout.setVisibility(View.GONE);
-      holder.nowText.setVisibility(View.VISIBLE);
-    } else {
-      holder.dueDateLayout.setVisibility(View.VISIBLE);
-      holder.nowText.setVisibility(View.GONE);
 
-      holder.dueDateText.setText(context.getResources().getString(R.string.days, position));
+    try {
+      Date date = format.parse(reminder.due);
+      long diff = date.getTime() - new Date().getTime();
+
+      long seconds = diff / 1000;
+      long minutes = seconds / 60;
+      long hours = minutes / 60;
+      long days = hours / 24;
+      if (days <= 0) {
+        holder.dueDateLayout.setVisibility(View.GONE);
+        holder.nowText.setVisibility(View.VISIBLE);
+      } else {
+        holder.dueDateLayout.setVisibility(View.VISIBLE);
+        holder.nowText.setVisibility(View.GONE);
+
+        holder.dueDateText.setText(
+            context.getResources().getString(days == 1 ? R.string.day : R.string.days, days));
+      }
+    } catch (Exception e) {
+      LogUtil.e("Error", e);
     }
   }
 

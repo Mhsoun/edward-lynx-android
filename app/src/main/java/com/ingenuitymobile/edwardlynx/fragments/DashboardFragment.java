@@ -79,41 +79,6 @@ public class DashboardFragment extends BaseFragment {
   public DashboardFragment() {
     devPlanData = new ArrayList<>();
     reminders = new ArrayList<>();
-
-    Reminder reminder = new Reminder();
-    reminder.type = Reminder.Type.GOAL.toString();
-    reminder.description = "Provide Instant Feedback";
-    reminders.add(reminder);
-
-    reminder = new Reminder();
-    reminder.type = Reminder.Type.INVITE_FEEDBACK.toString();
-    reminder.description = "Provide Instant Feedback";
-    reminders.add(reminder);
-
-    reminder = new Reminder();
-    reminder.type = Reminder.Type.ANSWER_FEEDBACK.toString();
-    reminder.description = "Provide Instant Feedback";
-    reminders.add(reminder);
-
-    reminder = new Reminder();
-    reminder.type = Reminder.Type.GOAL.toString();
-    reminder.description = "Provide Instant Feedback";
-    reminders.add(reminder);
-
-    reminder = new Reminder();
-    reminder.type = Reminder.Type.ANSWER_FEEDBACK.toString();
-    reminder.description = "Provide Instant Feedback";
-    reminders.add(reminder);
-
-    reminder = new Reminder();
-    reminder.type = Reminder.Type.INVITE_FEEDBACK.toString();
-    reminder.description = "Provide Instant Feedback";
-    reminders.add(reminder);
-
-    reminder = new Reminder();
-    reminder.type = Reminder.Type.GOAL.toString();
-    reminder.description = "Provide Instant Feedback";
-    reminders.add(reminder);
   }
 
   @Override
@@ -183,8 +148,6 @@ public class DashboardFragment extends BaseFragment {
     reminderAdapter = new ReminderAdapter(reminders);
     reminderList.setAdapter(reminderAdapter);
 
-    emptyReminderText.setVisibility(reminders.isEmpty() ? View.VISIBLE : View.GONE);
-
     badgeView = new BadgeView(getActivity(), answerLayout);
   }
 
@@ -205,6 +168,7 @@ public class DashboardFragment extends BaseFragment {
           public void onCompleted() {
             LogUtil.e("AAA onCompleted ");
             devPlanAdapter.notifyDataSetChanged();
+            reminderAdapter.notifyDataSetChanged();
           }
 
           @Override
@@ -222,6 +186,10 @@ public class DashboardFragment extends BaseFragment {
             } else {
               devPlanData.addAll(response.developmentPlans);
             }
+
+            reminders.clear();
+            reminders.addAll(response.reminders);
+            emptyReminderText.setVisibility(reminders.isEmpty() ? View.VISIBLE : View.GONE);
 
             badgeView.setText(String.valueOf(response.answerableCount));
             if (response.answerableCount == 0) {
