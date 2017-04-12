@@ -31,12 +31,14 @@ public class FeedbackRequestsFragment extends BaseFragment {
 
   private View                mainView;
   private ArrayList<Feedback> data;
+  private ArrayList<Feedback> displayData;
   private FeedbackAdapter     adapter;
   private TextView            emptyText;
   private SwipeRefreshLayout  refreshLayout;
 
   public FeedbackRequestsFragment() {
     data = new ArrayList<>();
+    displayData = new ArrayList<>();
   }
 
   @Override
@@ -76,7 +78,7 @@ public class FeedbackRequestsFragment extends BaseFragment {
     feedbackList.setHasFixedSize(true);
     feedbackList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    adapter = new FeedbackAdapter(data, listener);
+    adapter = new FeedbackAdapter(displayData, listener);
     feedbackList.setAdapter(adapter);
 
     refreshLayout.setOnRefreshListener(refreshListener);
@@ -90,9 +92,8 @@ public class FeedbackRequestsFragment extends BaseFragment {
           @Override
           public void onCompleted() {
             LogUtil.e("AAA onCompleted ");
-            adapter.notifyDataSetChanged();
-            emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
             refreshLayout.setRefreshing(false);
+            setData();
           }
 
           @Override
@@ -109,6 +110,28 @@ public class FeedbackRequestsFragment extends BaseFragment {
             refreshLayout.setRefreshing(false);
           }
         }));
+  }
+
+  private void setData() {
+    displayData.clear();
+    for (Feedback feedback : data) {
+      if (!feedback.questions.isEmpty()) {
+        if (feedback.questions.get(0).text.toLowerCase().contains(
+            queryString.toLowerCase())) {
+          displayData.add(feedback);
+        }
+      }
+    }
+
+    adapter.notifyDataSetChanged();
+    emptyText.setVisibility(displayData.isEmpty() ? View.VISIBLE : View.GONE);
+  }
+
+  public void setQueryString(String queryString) {
+    this.queryString = queryString;
+    if (adapter != null && emptyText != null) {
+      setData();
+    }
   }
 
   private FeedbackAdapter.OnSelectFeedbackListener listener = new FeedbackAdapter

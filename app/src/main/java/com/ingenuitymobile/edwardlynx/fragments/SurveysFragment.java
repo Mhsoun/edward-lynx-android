@@ -83,6 +83,7 @@ public class SurveysFragment extends BaseFragment {
   private void initViews() {
     final SearchView searchView = (SearchView) mainView.findViewById(R.id.searchview);
     searchView.setQueryHint("Search Survey");
+    searchView.setOnQueryTextListener(onQueryTextListener);
 
     viewPager = (ViewPager) mainView.findViewById(R.id.viewpager);
     final MyPagerAdapter adapter = new MyPagerAdapter(getChildFragmentManager());
@@ -154,6 +155,34 @@ public class SurveysFragment extends BaseFragment {
       break;
     }
   }
+
+  private SearchView.OnQueryTextListener onQueryTextListener = new SearchView.OnQueryTextListener
+      () {
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+      return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+      if (allFragment == null) {
+        allFragment = new AllSurveysFragment();
+      }
+      allFragment.setQueryString(newText);
+
+      if (feedbackFragment == null) {
+        feedbackFragment = new FeedbackRequestsFragment();
+      }
+      feedbackFragment.setQueryString(newText);
+
+      if (lynxFragment == null) {
+        lynxFragment = new SurveysListFragment();
+      }
+      lynxFragment.setQueryString(newText);
+      return false;
+    }
+  };
+
 
   private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override

@@ -37,12 +37,14 @@ public class AllSurveysFragment extends BaseFragment {
 
   private View                  mainView;
   private ArrayList<AllSurveys> data;
+  private ArrayList<AllSurveys> displayData;
   private AllSurveysAdapter     adapter;
   private TextView              emptyText;
   private SwipeRefreshLayout    refreshLayout;
 
   public AllSurveysFragment() {
     data = new ArrayList<>();
+    displayData = new ArrayList<>();
   }
 
   @Override
@@ -82,7 +84,7 @@ public class AllSurveysFragment extends BaseFragment {
     feedbackList.setHasFixedSize(true);
     feedbackList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    adapter = new AllSurveysAdapter(data, listener);
+    adapter = new AllSurveysAdapter(displayData, listener);
     feedbackList.setAdapter(adapter);
 
     refreshLayout.setOnRefreshListener(refreshListener);
@@ -118,9 +120,8 @@ public class AllSurveysFragment extends BaseFragment {
         Shared.apiClient.getInstantFeedbacks("to_answer", new Subscriber<FeedbacksResponse>() {
           @Override
           public void onCompleted() {
-            adapter.notifyDataSetChanged();
-            emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
             refreshLayout.setRefreshing(false);
+            setData();
           }
 
           @Override
@@ -135,6 +136,34 @@ public class AllSurveysFragment extends BaseFragment {
             }
           }
         }));
+  }
+
+  private void setData() {
+    displayData.clear();
+    for (AllSurveys allSurveys : data) {
+      if (allSurveys.survey != null) {
+        if (allSurveys.survey.name.toLowerCase().contains(queryString.toLowerCase())) {
+          displayData.add(allSurveys);
+        }
+      } else {
+        if (!allSurveys.feedback.questions.isEmpty()) {
+          if (allSurveys.feedback.questions.get(0).text.toLowerCase().contains(
+              queryString.toLowerCase())) {
+            displayData.add(allSurveys);
+          }
+        }
+      }
+    }
+
+    adapter.notifyDataSetChanged();
+    emptyText.setVisibility(displayData.isEmpty() ? View.VISIBLE : View.GONE);
+  }
+
+  public void setQueryString(String queryString) {
+    this.queryString = queryString;
+    if (adapter != null && emptyText != null) {
+      setData();
+    }
   }
 
   private FeedbackAdapter.OnSelectFeedbackListener listener = new FeedbackAdapter

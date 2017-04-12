@@ -31,6 +31,7 @@ public class SurveysListFragment extends BaseFragment {
 
   private View               mainView;
   private ArrayList<Survey>  data;
+  private ArrayList<Survey>  displayData;
   private SurveyAdapter      adapter;
   private TextView           emptyText;
   private SwipeRefreshLayout refreshLayout;
@@ -41,6 +42,7 @@ public class SurveysListFragment extends BaseFragment {
 
   public SurveysListFragment() {
     data = new ArrayList<>();
+    displayData = new ArrayList<>();
     loading = false;
     page = 1;
   }
@@ -77,7 +79,7 @@ public class SurveysListFragment extends BaseFragment {
     manager = new LinearLayoutManager(getActivity());
     surveyList.setLayoutManager(manager);
 
-    adapter = new SurveyAdapter(data);
+    adapter = new SurveyAdapter(displayData);
     surveyList.setAdapter(adapter);
 
     refreshLayout.setOnRefreshListener(refreshListener);
@@ -96,8 +98,9 @@ public class SurveysListFragment extends BaseFragment {
     subscription.add(Shared.apiClient.getSurveys(page, NUM, new Subscriber<Surveys>() {
       @Override
       public void onCompleted() {
-        refreshLayout.setRefreshing(false);
         LogUtil.e("AAA onCompleted ");
+        refreshLayout.setRefreshing(false);
+        setData();
       }
 
       @Override
@@ -113,9 +116,26 @@ public class SurveysListFragment extends BaseFragment {
           data.clear();
         }
         data.addAll(surveys.items);
-        notifyAdapter();
       }
     }));
+  }
+
+  private void setData() {
+    displayData.clear();
+    for (Survey survey : data) {
+      if (survey.name.toLowerCase().contains(queryString.toLowerCase())) {
+        displayData.add(survey);
+      }
+    }
+
+    notifyAdapter();
+  }
+
+  public void setQueryString(String queryString) {
+    this.queryString = queryString;
+    if (adapter != null && emptyText != null) {
+      setData();
+    }
   }
 
   private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout

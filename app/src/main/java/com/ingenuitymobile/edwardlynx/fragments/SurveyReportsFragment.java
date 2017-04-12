@@ -15,7 +15,6 @@ import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.activities.SurveyReportActivity;
 import com.ingenuitymobile.edwardlynx.adapters.SurveyReportsAdapter;
-import com.ingenuitymobile.edwardlynx.api.models.AllSurveys;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
