@@ -139,22 +139,21 @@ public class DevelopmentPlanAdapter extends
       for (Goal goal : plan.goals) {
         if (goal.checked == 1) {
           count++;
-          goalBars.add(new BarEntry(goalBars.size() + 1, 100));
-        } else {
-          if (goal.actions != null) {
-            final int actionSize = goal.actions.size();
-            int actionCount = 0;
-            for (Action action : goal.actions) {
-              if (action.checked == 1) {
-                actionCount++;
-              }
+        }
+
+        if (goal.actions != null) {
+          final int actionSize = goal.actions.size();
+          int actionCount = 0;
+          for (Action action : goal.actions) {
+            if (action.checked == 1) {
+              actionCount++;
             }
-
-            final float actionProgress = ((float) (actionCount) / (float) actionSize);
-
-            progress = progress + actionProgress;
-            goalBars.add(new BarEntry(goalBars.size() + 1, actionProgress * 100));
           }
+
+          final float actionProgress = ((float) (actionCount) / (float) actionSize);
+
+          progress = progress + actionProgress;
+          goalBars.add(new BarEntry(goalBars.size() + 1, actionProgress * 100));
         }
       }
 

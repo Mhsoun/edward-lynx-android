@@ -165,21 +165,20 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
       for (Goal goal : plan.goals) {
         if (goal.checked == 1) {
           count++;
-        } else {
-          if (goal.actions != null) {
-            final int actionSize = goal.actions.size();
-            int actionCount = 0;
-            for (Action action : goal.actions) {
-              if (action.checked == 1) {
-                actionCount++;
-              }
-            }
+        }
 
-            progress = progress + ((float) (actionCount) / (float) actionSize);
+        if (goal.actions != null) {
+          final int actionSize = goal.actions.size();
+          int actionCount = 0;
+          for (Action action : goal.actions) {
+            if (action.checked == 1) {
+              actionCount++;
+            }
           }
+
+          progress = progress + ((float) (actionCount) / (float) actionSize);
         }
       }
-
       progress = ((progress) / (float) size) * 100;
     }
 
