@@ -116,7 +116,8 @@ public class SplashActivity extends BaseActivity {
 
   private void showError(Throwable e) {
     LogUtil.e("AAA " + e);
-    if (((RetrofitError) e).getResponse().getStatus() == 401) {
+    final retrofit.client.Response error = ((RetrofitError) e).getResponse();
+    if (error != null && error.getStatus() == 401) {
       SessionStore.saveRefreshToken(null, SplashActivity.this);
       SessionStore.saveAccessToken(null, SplashActivity.this);
     }

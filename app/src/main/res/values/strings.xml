@@ -84,7 +84,7 @@
   <string name="answer_type_label">Answer Type</string>
   <string name="options">Options</string>
   <string name="question_type_preview">Question Type Preview</string>
-  <string name="is_anonymous">Is Anonymmous</string>
+  <string name="is_anonymous">Is Anonymous</string>
   <string name="add_na_option">Add a N/A option</string>
   <string name="custom_scale_hit">Input option, and press Done</string>
   <string name="invite">Invite</string>

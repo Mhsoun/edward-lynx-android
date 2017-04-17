@@ -160,21 +160,33 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
   private void setData(DevelopmentPlan plan) {
     final int size = plan.goals.size();
     int count = 0;
+    float progress = 0;
     if (plan.goals != null) {
       for (Goal goal : plan.goals) {
         if (goal.checked == 1) {
           count++;
+        } else {
+          if (goal.actions != null) {
+            final int actionSize = goal.actions.size();
+            int actionCount = 0;
+            for (Action action : goal.actions) {
+              if (action.checked == 1) {
+                actionCount++;
+              }
+            }
+
+            progress = progress + ((float) (actionCount) / (float) actionSize);
+          }
         }
       }
+
+      progress = ((progress) / (float) size) * 100;
     }
 
-    final float percentage = ((float) (count) / (float) size) * 100;
     Collection<FitChartValue> values = new ArrayList<>();
-    values.add(new FitChartValue(percentage,
-        context.getResources()
-            .getColor(percentage == 100 ? R.color.dashboard_green : R.color.colorAccent)));
+    values.add(new FitChartValue(progress, context.getResources().getColor(R.color.colorAccent)));
     progressFitChart.setValues(values);
-    percentageText.setText(((int) percentage) + "%");
+    percentageText.setText(((int) progress) + "%");
     goalsText.setText(context.getString(R.string.goals_details, count, size));
   }
 

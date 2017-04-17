@@ -128,7 +128,7 @@ public class InviteBaseActivity extends BaseActivity {
   }
 
   private void updateUI() {
-    if (ids.size() >= adapter.getItemCount()) {
+    if (ids.size() != 0 && ids.size() >= adapter.getItemCount()) {
       selectText.setText(getString(R.string.deselect_all));
     } else {
       selectText.setText(getString(R.string.select_all));

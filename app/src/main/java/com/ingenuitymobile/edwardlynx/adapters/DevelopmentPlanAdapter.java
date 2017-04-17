@@ -134,6 +134,7 @@ public class DevelopmentPlanAdapter extends
 
     final int size = plan.goals.size();
     int count = 0;
+    float progress = 0;
     if (plan.goals != null) {
       for (Goal goal : plan.goals) {
         if (goal.checked == 1) {
@@ -149,23 +150,24 @@ public class DevelopmentPlanAdapter extends
               }
             }
 
-            goalBars.add(new BarEntry(goalBars.size() + 1,
-                ((float) (actionCount) / (float) actionSize) * 100));
+            final float actionProgress = ((float) (actionCount) / (float) actionSize);
+
+            progress = progress + actionProgress;
+            goalBars.add(new BarEntry(goalBars.size() + 1, actionProgress * 100));
           }
         }
       }
+
+      progress = ((progress) / (float) size) * 100;
     }
 
     holder.countText.setText(context.getString(R.string.completed_details, count, size));
 
-    final float percentage = ((float) (count) / (float) size) * 100;
 
     Collection<FitChartValue> values = new ArrayList<>();
-    values.add(new FitChartValue(percentage,
-        context.getResources()
-            .getColor(percentage == 100 ? R.color.dashboard_green : R.color.colorAccent)));
+    values.add(new FitChartValue(progress, context.getResources().getColor(R.color.colorAccent)));
     holder.progressFitChart.setValues(values);
-    holder.percentageText.setText(((int) percentage) + "%");
+    holder.percentageText.setText(((int) progress) + "%");
 
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -180,8 +182,8 @@ public class DevelopmentPlanAdapter extends
     final MyBarDataSet set = new MyBarDataSet(goalBars, "");
     set.setHighlightEnabled(false);
     set.setColors(new int[]{
-        context.getResources().getColor(R.color.dashboard_green),
         context.getResources().getColor(R.color.colorAccent),
+        context.getResources().getColor(R.color.dev_plan_color),
     });
 
     final ArrayList<IBarDataSet> dataSets = new ArrayList<>();

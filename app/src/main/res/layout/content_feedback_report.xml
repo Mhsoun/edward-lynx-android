@@ -45,19 +45,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
             android:text="@string/shows_averages"
             android:textColor="@color/survey_line"
             android:textSize="10sp"
             android:textStyle="italic"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="addMore"
-            android:paddingBottom="4dp"
-            android:text="@string/add_more_participants"
-            android:textColor="@color/colorAccent"
-            android:textSize="12sp"/>
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:onClick="addMore"-->
+        <!--android:paddingBottom="4dp"-->
+        <!--android:text="@string/add_more_participants"-->
+        <!--android:textColor="@color/colorAccent"-->
+        <!--android:textSize="12sp"/>-->
       </LinearLayout>
 
       <RelativeLayout

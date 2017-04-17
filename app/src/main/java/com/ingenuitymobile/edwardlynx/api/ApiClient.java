@@ -396,7 +396,8 @@ public class ApiClient {
 
     @Override
     public void onError(final Throwable e) {
-      if (((RetrofitError) e).getResponse().getStatus() == 401) {
+      final retrofit.client.Response error = ((RetrofitError) e).getResponse();
+      if (error != null && error.getStatus() == 401) {
         LogUtil.e("AAA onError " + e);
         try {
           new Thread(new Runnable() {

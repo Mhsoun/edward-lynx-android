@@ -55,7 +55,7 @@ public class InviteActivity extends InviteBaseActivity {
     if (ids.isEmpty()) {
       Toast.makeText(InviteActivity.this, getString(R.string.select_atleast_one),
           Toast.LENGTH_SHORT).show();
-    } else if (ids.size() < 3) {
+    } else if (ids.size() <= 3) {
       ViewUtil.showAlert(this, null, getString(R.string.invite_info));
     } else {
       List<Id> recipients = new ArrayList<>();
