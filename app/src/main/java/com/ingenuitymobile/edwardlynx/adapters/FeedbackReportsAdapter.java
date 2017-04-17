@@ -68,9 +68,7 @@ public class FeedbackReportsAdapter extends
       LogUtil.e("AAA " + e);
     }
 
-    holder.countText.setText(
-        String.valueOf(feedback.recipients.size()) + "/" +
-            String.valueOf(feedback.recipients.size()));
+    holder.countText.setText(feedback.stats.answered + "/" + feedback.stats.invited);
 
     if (!feedback.questions.isEmpty()) {
       Question question = feedback.questions.get(0);

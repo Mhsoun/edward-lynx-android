@@ -31,6 +31,8 @@ public class Feedback extends Response {
   public List<Long>     shares;
   @SerializedName("key")
   public String         key;
+  @SerializedName("stats")
+  public Stats          stats;
 
   @SerializedName("recipients")
   public List<User> recipients;

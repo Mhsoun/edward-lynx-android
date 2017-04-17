@@ -132,10 +132,11 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
               PopupDialogFragment dialogFragment = PopupDialogFragment.newInstance(true, goal.title,
                   getString(R.string.goal_completed), getString(R.string.label_popup));
               dialogFragment.show(getSupportFragmentManager(), "Popup");
-              return;
+              break;
             }
           }
         }
+        goalId = 0L;
       }
 
       @Override
