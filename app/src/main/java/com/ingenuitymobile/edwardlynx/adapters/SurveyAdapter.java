@@ -105,21 +105,29 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
       holder.statusText.setText(context.getResources().getString(R.string.open_status_bold));
       holder.statusText.setBackgroundColor(
           context.getResources().getColor(R.color.unfinished_status));
+      holder.monthText.setBackground(
+          context.getResources().getDrawable(R.drawable.bg_normal_calendar_text));
       break;
     case Survey.UNFINISHED:
       holder.statusText.setText(context.getResources().getString(R.string.unfinished_status_bold));
       holder.statusText.setBackgroundColor(
           context.getResources().getColor(R.color.unfinished_status));
+      holder.monthText.setBackground(
+          context.getResources().getDrawable(R.drawable.bg_normal_calendar_text));
       break;
     case Survey.COMPLETED:
       holder.statusText.setText(context.getResources().getString(R.string.completed_bold));
       holder.statusText.setBackgroundColor(
           context.getResources().getColor(R.color.done_color));
+      holder.monthText.setBackground(
+          context.getResources().getDrawable(R.drawable.bg_done_calendar_text));
       break;
     case Survey.NOT_INVITED:
       holder.statusText.setText(context.getResources().getString(R.string.not_invited_status_bold));
       holder.statusText.setBackgroundColor(
           context.getResources().getColor(R.color.unfinished_status));
+      holder.monthText.setBackground(
+          context.getResources().getDrawable(R.drawable.bg_normal_calendar_text));
       break;
     }
   }

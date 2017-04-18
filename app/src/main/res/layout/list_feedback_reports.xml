@@ -55,11 +55,11 @@
 
       <TextView
           android:id="@+id/text_date"
+          fontPath="fonts/Lato-Italic.ttf"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="4dp"
           android:ellipsize="end"
-          android:textStyle="italic"
           android:maxLines="1"
           android:text="Important survey sample"
           android:textColor="@color/unfinished_status"
