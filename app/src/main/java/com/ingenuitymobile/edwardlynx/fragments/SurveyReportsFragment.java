@@ -38,15 +38,18 @@ public class SurveyReportsFragment extends BaseFragment {
   private TextView             emptyText;
   private SwipeRefreshLayout   refreshLayout;
 
-  private boolean             loading;
   private int                 page;
   private LinearLayoutManager manager;
+
+  private boolean loading;
+  private int     previousTotal;
 
   public SurveyReportsFragment() {
     data = new ArrayList<>();
     displayData = new ArrayList<>();
-    loading = false;
+    loading = true;
     page = 1;
+    previousTotal = 0;
   }
 
   @Override
@@ -62,7 +65,6 @@ public class SurveyReportsFragment extends BaseFragment {
   @Override
   public void onResume() {
     super.onResume();
-    page = 1;
     getData(true);
     LogUtil.e("AAA onResume SurveysListFragment");
   }
@@ -96,8 +98,14 @@ public class SurveyReportsFragment extends BaseFragment {
   }
 
   private void getData(final boolean isRefresh) {
-
     LogUtil.e("AAA getData survey");
+    if (isRefresh) {
+      page = 1;
+      previousTotal = 0;
+    } else {
+      page++;
+    }
+
     subscription.add(Shared.apiClient.getSurveys(page, NUM, new Subscriber<Surveys>() {
       @Override
       public void onCompleted() {
@@ -162,18 +170,27 @@ public class SurveyReportsFragment extends BaseFragment {
   };
 
   private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
       super.onScrolled(recyclerView, dx, dy);
-      int totalItem = manager.getItemCount();
-      int lastVisibleItem = manager.findLastVisibleItemPosition();
+      if (dy > 0) {
+        final int visibleItemCount = recyclerView.getChildCount();
+        final int totalItemCount = manager.getItemCount();
+        final int firstVisibleItem = manager.findFirstVisibleItemPosition();
 
-      if (!loading && lastVisibleItem == totalItem - 1) {
-        loading = true;
-        page++;
-        getData(false);
-        LogUtil.e("AAA loading");
-        loading = false;
+        if (loading) {
+          if (totalItemCount > previousTotal) {
+            loading = false;
+            previousTotal = totalItemCount;
+          }
+        }
+        if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + NUM)) {
+          page++;
+          getData(false);
+          LogUtil.e("AAA loading");
+          loading = true;
+        }
       }
     }
   };

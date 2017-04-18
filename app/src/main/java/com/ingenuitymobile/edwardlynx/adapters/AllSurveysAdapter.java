@@ -54,6 +54,7 @@ public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     TextView reactivateText;
     TextView evaluateText;
     boolean  isExpired;
+    long     days;
 
     SurveyViewHolder(View itemView) {
       super(itemView);
@@ -66,6 +67,7 @@ public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
       reactivateText = (TextView) itemView.findViewById(R.id.text_reactivate);
       evaluateText = (TextView) itemView.findViewById(R.id.text_evaluate);
       isExpired = false;
+      days = 0;
     }
   }
 
@@ -146,11 +148,16 @@ public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.dateTExt.setText(dateFormat.format(date));
         holder.yearText.setText(yearFormat.format(date));
         holder.isExpired = new Date().compareTo(date) == 1;
+
+        long diff = date.getTime() - new Date().getTime();
+
+        long seconds = diff / 1000;
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+        holder.days = hours / 24;
       } catch (Exception e) {
         LogUtil.e("AAA " + e);
       }
-
-      holder.reactivateText.setVisibility(holder.isExpired ? View.VISIBLE : View.GONE);
 
       holder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -196,6 +203,20 @@ public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.monthText.setBackground(
             context.getResources().getDrawable(R.drawable.bg_normal_calendar_text));
         break;
+      }
+
+      holder.reactivateText.setVisibility(View.GONE);
+      if (holder.isExpired && survey.status != Survey.COMPLETED &&
+          survey.status != Survey.NOT_INVITED) {
+        holder.reactivateText.setVisibility(View.VISIBLE);
+        holder.monthText.setBackground(
+            context.getResources().getDrawable(R.drawable.bg_expired_calendar_text));
+      }
+
+      if (holder.days <= 14 && survey.status != Survey.COMPLETED &&
+          survey.status != Survey.NOT_INVITED) {
+        holder.monthText.setBackground(
+            context.getResources().getDrawable(R.drawable.bg_deadline_calendar_text));
       }
     }
   }
