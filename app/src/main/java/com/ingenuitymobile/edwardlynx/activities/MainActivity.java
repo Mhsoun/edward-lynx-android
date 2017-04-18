@@ -12,9 +12,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.crashlytics.android.Crashlytics;
+import com.ingenuitymobile.edwardlynx.BuildConfig;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.SessionStore;
 import com.ingenuitymobile.edwardlynx.Shared;
@@ -24,6 +26,10 @@ import com.ingenuitymobile.edwardlynx.fragments.DevelopmenPlansFragment;
 import com.ingenuitymobile.edwardlynx.fragments.ProfileFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveysFragment;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+
+import net.hockeyapp.android.CrashManager;
+import net.hockeyapp.android.CrashManagerListener;
+import net.hockeyapp.android.UpdateManager;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -60,6 +66,56 @@ public class MainActivity extends BaseActivity implements
 
     changeToDashboard();
     checkIntent();
+
+    checkForUpdates();
+    autoUploadCrashes();
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    checkForCrashes();
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    unregisterManagers();
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    unregisterManagers();
+  }
+
+  public void autoUploadCrashes() {
+    if (!TextUtils.isEmpty(getString(R.string.hockey_app_id))) {
+      CrashManager.register(this, getResources().getString(R.string.hockey_app_id),
+          new CrashManagerListener() {
+            public boolean shouldAutoUploadCrashes() {
+              return true;
+            }
+          });
+    }
+  }
+
+  private void checkForCrashes() {
+    if (!TextUtils.isEmpty(getString(R.string.hockey_app_id))) {
+      CrashManager.register(this);
+    }
+  }
+
+  private void checkForUpdates() {
+    if (BuildConfig.DEBUG && !TextUtils.isEmpty(getString(R.string.hockey_app_id))) {
+      UpdateManager.register(this);
+    }
+  }
+
+  private void unregisterManagers() {
+    if (!TextUtils.isEmpty(getString(R.string.hockey_app_id))) {
+      UpdateManager.unregister();
+    }
   }
 
   @Override
