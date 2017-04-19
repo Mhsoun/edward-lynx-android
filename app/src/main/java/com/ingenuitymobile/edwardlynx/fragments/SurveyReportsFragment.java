@@ -186,7 +186,6 @@ public class SurveyReportsFragment extends BaseFragment {
           }
         }
         if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + NUM)) {
-          page++;
           getData(false);
           LogUtil.e("AAA loading");
           loading = true;

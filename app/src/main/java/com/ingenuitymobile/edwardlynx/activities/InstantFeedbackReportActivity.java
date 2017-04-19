@@ -297,8 +297,8 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     }
 
     detailsText.setText(getString(R.string.details_circle_chart,
-        feedback.stats.answered,
-        feedback.stats.invited));
+        feedback.stats.invited,
+        feedback.stats.answered));
   }
 
   public void share(View v) {
