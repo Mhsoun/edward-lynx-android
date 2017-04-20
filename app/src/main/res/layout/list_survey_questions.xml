@@ -29,6 +29,7 @@
       android:background="@color/text_input_field"
       android:gravity="top"
       android:inputType="textMultiLine"
+      android:padding="8dp"
       android:textColor="@color/white"
       android:textSize="14sp"/>
 </LinearLayout>

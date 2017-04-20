@@ -128,6 +128,7 @@
   <string name="description">Description</string>
   <string name="actions">Actions</string>
   <string name="due_date">Due Date</string>
+  <string name="due_date_goal">Due Date: %1$s</string>
   <string name="link_to_categroy">Link to a category</string>
   <string name="save">Save</string>
   <string name="edit">Edit</string>
@@ -145,6 +146,7 @@
   <string name="completed_details">%1$d / %2$d Completed</string>
   <string name="goals_details">%1$d of %2$d goals</string>
   <string name="completed"> completed</string>
+  <string name="completed_text">Completed</string>
 
   // region Invite to answer
   <string name="send_invites">Send Invites</string>

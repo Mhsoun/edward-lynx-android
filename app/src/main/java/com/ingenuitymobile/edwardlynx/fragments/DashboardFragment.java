@@ -132,6 +132,7 @@ public class DashboardFragment extends BaseFragment {
     seeMoreText.setOnClickListener(onClickListener);
 
     final RecyclerView surveyList = (RecyclerView) mainView.findViewById(R.id.recycler_dev_plans);
+    surveyList.setNestedScrollingEnabled(false);
     final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
         LinearLayoutManager.VERTICAL);
     surveyList.addItemDecoration(dividerItemDecoration);
@@ -142,6 +143,7 @@ public class DashboardFragment extends BaseFragment {
     surveyList.setAdapter(devPlanAdapter);
 
     final RecyclerView reminderList = (RecyclerView) mainView.findViewById(R.id.recycler_reminders);
+    reminderList.setNestedScrollingEnabled(false);
     reminderList.setLayoutManager(new LinearLayoutManager(getActivity()));
     emptyReminderText = (TextView) mainView.findViewById(R.id.text_empty_reminders);
 

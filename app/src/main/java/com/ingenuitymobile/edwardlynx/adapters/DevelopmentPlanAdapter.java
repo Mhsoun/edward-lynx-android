@@ -161,6 +161,8 @@ public class DevelopmentPlanAdapter extends
     }
 
     holder.countText.setText(context.getString(R.string.completed_details, count, size));
+    holder.countText.setTextColor(context.getResources()
+        .getColor(count == size ? R.color.colorAccent : R.color.dev_plan_color));
 
 
     Collection<FitChartValue> values = new ArrayList<>();

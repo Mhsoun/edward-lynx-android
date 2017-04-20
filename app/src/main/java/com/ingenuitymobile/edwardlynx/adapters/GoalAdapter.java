@@ -34,7 +34,8 @@ import java.util.List;
 public class GoalAdapter extends
     ExpandableRecyclerAdapter<GoalAdapter.ParentView, GoalAdapter.ChildView> {
 
-  private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
+  private SimpleDateFormat format        = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
+  private SimpleDateFormat displayFormat = new SimpleDateFormat("MMM dd, yyyy");
 
   private OnSelectActionListener listener;
 
@@ -105,15 +106,17 @@ public class GoalAdapter extends
     holder.nameText.setText(goal.title);
     holder.descriptionText.setText(goal.description);
 
-    try {
-      Date date = format.parse(goal.dueDate);
-      date.setHours(23);
-      date.setMinutes(59);
-      date.setSeconds(59);
-      holder.dateText.setText(StringUtil.getTimeAgo(date.getTime(), context));
-    } catch (Exception e) {
-      LogUtil.e("AAA " + e);
-      holder.dateText.setText("");
+    if (goal.checked == 1) {
+      holder.dateText.setText(context.getResources().getString(R.string.completed_text));
+    } else {
+      try {
+        Date date = format.parse(goal.dueDate);
+        holder.dateText.setText(
+            context.getResources().getString(R.string.due_date_goal, displayFormat.format(date)));
+      } catch (Exception e) {
+        LogUtil.e("AAA " + e);
+        holder.dateText.setText("");
+      }
     }
 
     final int size = goal.actions.size();
