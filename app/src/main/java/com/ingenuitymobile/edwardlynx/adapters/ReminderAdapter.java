@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.activities.AnswerFeedbackActivity;
+import com.ingenuitymobile.edwardlynx.activities.DevelopmentPlanDetailedActivity;
 import com.ingenuitymobile.edwardlynx.activities.MainActivity;
 import com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity;
 import com.ingenuitymobile.edwardlynx.api.models.Reminder;
@@ -68,7 +69,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
     final Context context = holder.itemView.getContext();
     final Reminder reminder = data.get(position);
 
-    holder.descriptionText.setText(reminder.description);
+    holder.descriptionText.setText(reminder.name);
 
     final boolean isGoal = reminder.type.equals(Reminder.Type.GOAL.toString());
 
@@ -79,6 +80,9 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
 
 
     try {
+      holder.dueDateLayout.setVisibility(View.GONE);
+      holder.nowText.setVisibility(View.GONE);
+
       Date date = format.parse(reminder.due);
       long diff = date.getTime() - new Date().getTime();
 
@@ -87,12 +91,9 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
       long hours = minutes / 60;
       long days = hours / 24;
       if (days <= 0) {
-        holder.dueDateLayout.setVisibility(View.GONE);
         holder.nowText.setVisibility(View.VISIBLE);
       } else {
         holder.dueDateLayout.setVisibility(View.VISIBLE);
-        holder.nowText.setVisibility(View.GONE);
-
         holder.dueDateText.setText(
             context.getResources().getString(days == 1 ? R.string.day : R.string.days, days));
       }
@@ -112,7 +113,9 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
           intent.putExtra("id", reminder.id);
           context.startActivity(intent);
         } else {
-          listener.onChange(MainActivity.ChangeFragment.DEVPLANS);
+          Intent intent = new Intent(context, DevelopmentPlanDetailedActivity.class);
+          intent.putExtra("id", reminder.id);
+          context.startActivity(intent);
         }
       }
     });

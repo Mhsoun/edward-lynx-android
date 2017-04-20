@@ -20,7 +20,7 @@
       android:layout_alignLeft="@id/space"
       android:layout_centerVertical="true"
       android:orientation="vertical"
-      android:visibility="visible">
+      android:visibility="gone">
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,7 +48,8 @@
       android:text="@string/now"
       android:textColor="@color/colorAccent"
       android:textSize="16sp"
-      android:textStyle="bold"/>
+      android:textStyle="bold"
+      android:visibility="gone"/>
 
 
   <LinearLayout
