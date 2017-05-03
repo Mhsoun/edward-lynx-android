@@ -124,7 +124,10 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     subscription.add(Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
       @Override
       public void onCompleted() {
-        getAnswers();
+        if (feedback.stats.answered > 3) {
+          getAnswers();
+        }
+        setDetails();
       }
 
       @Override
@@ -163,19 +166,30 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         }));
   }
 
-  private void setData() {
+  private void setDetails() {
     final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
     final SimpleDateFormat displayFormat = new SimpleDateFormat("MMM dd, yyyy");
+
+    questionText.setText(feedback.questions.get(0).text);
+
+    try {
+      Date date = format.parse(feedback.createdAt);
+      dateText.setText(displayFormat.format(date));
+    } catch (Exception e) {
+      dateText.setText("");
+    }
+
+    detailsText.setText(getString(R.string.details_circle_chart,
+        feedback.stats.invited,
+        feedback.stats.answered));
+  }
+
+  private void setData() {
     final int type = feedback.questions.get(0).answer.type;
 
-    int count = 0;
-    if (feedback.shares != null) {
-      count = feedback.shares.size();
-    }
     data.clear();
     data.addAll(feedbackResponse.frequencies);
 
-    questionText.setText(feedback.questions.get(0).text);
     emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
 
     horizontalBarChart.setVisibility(View.GONE);
@@ -187,11 +201,6 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         adapter.setType(type);
         adapter.setTotalAnswers(feedbackResponse.totalAnswers);
       } else {
-        LogUtil.e("AAA " + data.size());
-
-        for (FeedbackFrequency frequency : data) {
-          LogUtil.e("AAA " + frequency.description + " " + frequency.count);
-        }
         final float FONT_SIZE = 11;
         horizontalBarChart.setVisibility(View.VISIBLE);
 
@@ -288,17 +297,6 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         horizontalBarChart.invalidate();
       }
     }
-
-    try {
-      Date date = format.parse(feedback.createdAt);
-      dateText.setText(displayFormat.format(date));
-    } catch (Exception e) {
-      dateText.setText("");
-    }
-
-    detailsText.setText(getString(R.string.details_circle_chart,
-        feedback.stats.invited,
-        feedback.stats.answered));
   }
 
   public void share(View v) {
