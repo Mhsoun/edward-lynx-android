@@ -100,11 +100,6 @@ public class FeedbackReportsFragment extends BaseFragment {
           public void onError(Throwable e) {
             LogUtil.e("AAA onError " + e);
             refreshLayout.setRefreshing(false);
-            Toast.makeText(
-                getActivity(),
-                getString(R.string.cant_connect),
-                Toast.LENGTH_SHORT
-            ).show();
           }
 
           @Override

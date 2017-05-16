@@ -92,11 +92,6 @@ public class AnswerFeedbackActivity extends BaseActivity {
       @Override
       public void onError(Throwable e) {
         LogUtil.e("AAA onError " + e);
-        Toast.makeText(
-            context,
-            context.getString(R.string.cant_connect),
-            Toast.LENGTH_SHORT
-        ).show();
       }
 
       @Override
@@ -130,11 +125,6 @@ public class AnswerFeedbackActivity extends BaseActivity {
           public void onError(Throwable e) {
             progressDialog.dismiss();
             LogUtil.e("AAA onError " + e);
-            Toast.makeText(
-                context,
-                context.getString(R.string.cant_connect),
-                Toast.LENGTH_SHORT
-            ).show();
           }
 
           @Override

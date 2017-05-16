@@ -106,11 +106,6 @@ public class InstantFeedbackDetailedActivity extends BaseActivity {
       @Override
       public void onError(Throwable e) {
         LogUtil.e("AAA onError " + e);
-        Toast.makeText(
-            context,
-            context.getString(R.string.cant_connect),
-            Toast.LENGTH_SHORT
-        ).show();
       }
 
       @Override

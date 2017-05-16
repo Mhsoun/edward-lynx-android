@@ -10,14 +10,13 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.SessionStore;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
+import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
-import com.ingenuitymobile.edwardlynx.utils.NetUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 import com.ingenuitymobile.edwardlynx.views.EditTextGroup;
 
@@ -95,11 +94,8 @@ public class LoginActivity extends BaseActivity {
           @Override
           public void onError(Throwable e) {
             loginText.setText(getString(R.string.login));
-            if (!NetUtil.hasActiveConnection(LoginActivity.this)) {
-              Toast.makeText(LoginActivity.this, getString(R.string.no_internet_connection),
-                  Toast.LENGTH_SHORT).show();
-            } else {
-              Authentication response = (Authentication) ((RetrofitError) e).getBody();
+            if (e != null) {
+              Response response = (Response) ((RetrofitError) e).getBody();
               if (response != null) {
                 ViewUtil.showAlert(LoginActivity.this, getString(R.string.error), response.message);
               }

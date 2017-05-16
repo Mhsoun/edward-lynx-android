@@ -177,11 +177,6 @@ public class DashboardFragment extends BaseFragment {
           @Override
           public void onError(Throwable e) {
             LogUtil.e("AAA onError " + e);
-            Toast.makeText(
-                getActivity(),
-                getString(R.string.cant_connect),
-                Toast.LENGTH_SHORT
-            ).show();
           }
 
           @Override

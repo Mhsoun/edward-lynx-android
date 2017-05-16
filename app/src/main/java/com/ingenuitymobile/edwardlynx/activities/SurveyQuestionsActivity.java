@@ -108,11 +108,6 @@ public class SurveyQuestionsActivity extends BaseActivity {
       @Override
       public void onError(Throwable e) {
         LogUtil.e("AAA Survey details onError " + e);
-        Toast.makeText(
-            context,
-            context.getString(R.string.cant_connect),
-            Toast.LENGTH_SHORT
-        ).show();
       }
 
       @Override
@@ -142,11 +137,6 @@ public class SurveyQuestionsActivity extends BaseActivity {
       @Override
       public void onError(Throwable e) {
         LogUtil.e("AAA questions onError " + e);
-        Toast.makeText(
-            context,
-            context.getString(R.string.cant_connect),
-            Toast.LENGTH_SHORT
-        ).show();
       }
 
       @Override
@@ -212,11 +202,8 @@ public class SurveyQuestionsActivity extends BaseActivity {
           @Override
           public void onError(Throwable e) {
             progressDialog.dismiss();
-            if (((RetrofitError) e).getResponse().getStatus() == 422) {
+            if (e != null && ((RetrofitError) e).getResponse().getStatus() == 422) {
               Toast.makeText(SurveyQuestionsActivity.this, getString(R.string.required_fields),
-                  Toast.LENGTH_SHORT).show();
-            } else {
-              Toast.makeText(SurveyQuestionsActivity.this, getString(R.string.cant_connect),
                   Toast.LENGTH_SHORT).show();
             }
             textView.setText(

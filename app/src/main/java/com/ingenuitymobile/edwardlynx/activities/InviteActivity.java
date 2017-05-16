@@ -52,8 +52,7 @@ public class InviteActivity extends InviteBaseActivity {
 
   public void create(View v) {
     if (ids.isEmpty()) {
-      Toast.makeText(InviteActivity.this, getString(R.string.select_atleast_one),
-          Toast.LENGTH_SHORT).show();
+      Toast.makeText(context, getString(R.string.select_atleast_one), Toast.LENGTH_SHORT).show();
     } else if (ids.size() < 3) {
       ViewUtil.showAlert(this, null, getString(R.string.invite_info));
     } else {
@@ -88,11 +87,6 @@ public class InviteActivity extends InviteBaseActivity {
           progressDialog.dismiss();
           ids.addAll(deletedIds);
           LogUtil.e("AAA onError " + e);
-          Toast.makeText(
-              context,
-              context.getString(R.string.cant_connect),
-              Toast.LENGTH_SHORT
-          ).show();
         }
 
         @Override

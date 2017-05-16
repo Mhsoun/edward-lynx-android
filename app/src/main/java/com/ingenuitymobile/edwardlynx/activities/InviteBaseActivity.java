@@ -102,11 +102,6 @@ public class InviteBaseActivity extends BaseActivity {
 
       @Override
       public void onError(Throwable e) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.cant_connect),
-            Toast.LENGTH_SHORT
-        ).show();
         LogUtil.e("AAA onError " + e);
       }
 

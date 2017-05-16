@@ -112,10 +112,7 @@ public class ChangePasswordFragment extends BaseFragment {
         @Override
         public void onError(Throwable e) {
           progressDialog.dismiss();
-          if (!NetUtil.hasActiveConnection(getActivity())) {
-            Toast.makeText(getActivity(), getString(R.string.no_internet_connection),
-                Toast.LENGTH_SHORT).show();
-          } else {
+          if (e != null) {
             Response response = (Response) ((RetrofitError) e).getBody();
             if (response != null) {
               if (response.errors != null) {

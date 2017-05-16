@@ -137,11 +137,6 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         if (dialog != null) {
           dialog.dismiss();
         }
-        Toast.makeText(
-            context,
-            context.getString(R.string.cant_connect),
-            Toast.LENGTH_SHORT
-        ).show();
       }
 
       @Override

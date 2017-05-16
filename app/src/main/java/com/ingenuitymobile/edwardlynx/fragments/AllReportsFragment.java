@@ -101,11 +101,6 @@ public class AllReportsFragment extends BaseFragment {
       @Override
       public void onError(Throwable e) {
         refreshLayout.setRefreshing(false);
-        Toast.makeText(
-            getActivity(),
-            getString(R.string.cant_connect),
-            Toast.LENGTH_SHORT
-        ).show();
       }
 
       @Override
@@ -131,11 +126,6 @@ public class AllReportsFragment extends BaseFragment {
           @Override
           public void onError(Throwable e) {
             refreshLayout.setRefreshing(false);
-            Toast.makeText(
-                getActivity(),
-                getString(R.string.cant_connect),
-                Toast.LENGTH_SHORT
-            ).show();
           }
 
           @Override

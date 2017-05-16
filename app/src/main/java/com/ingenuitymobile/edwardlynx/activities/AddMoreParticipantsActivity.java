@@ -80,15 +80,15 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
   }
 
   public void create(View v) {
-    final TextView textView = (TextView) v;
-
     if (ids.isEmpty()) {
       Toast.makeText(context, getString(R.string.select_atleast_one), Toast.LENGTH_SHORT).show();
     } else {
+      deletedIds.clear();
       List<Id> recipients = new ArrayList<>();
       for (User user : data) {
         if (user.isAddedbyEmail) {
           ids.remove(String.valueOf(user.id));
+          deletedIds.add(String.valueOf(user.id));
           recipients.add(new Id(user.name, user.email));
         }
       }
@@ -112,12 +112,8 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
             @Override
             public void onError(Throwable e) {
               progressDialog.dismiss();
+              ids.addAll(deletedIds);
               LogUtil.e("AAA onError " + e);
-              Toast.makeText(
-                  context,
-                  context.getString(R.string.cant_connect),
-                  Toast.LENGTH_SHORT
-              ).show();
             }
 
             @Override
