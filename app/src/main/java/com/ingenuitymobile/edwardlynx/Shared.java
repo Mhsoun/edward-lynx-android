@@ -32,7 +32,7 @@ public class Shared {
     final String consumerSecret = context.getResources().getString(R.string.client_secret);
     final String basUrl = context.getResources()
         .getString(BuildConfig.DEBUG ? R.string.staging_url : R.string.live_url);
-    apiClient = new ApiClient(consumerKey, consumerSecret, basUrl,
+    apiClient = new ApiClient(context, consumerKey, consumerSecret, basUrl,
         new ApiClient.OnRefreshTokenListener() {
           @Override
           public void onRefreshToken(Authentication authentication) {

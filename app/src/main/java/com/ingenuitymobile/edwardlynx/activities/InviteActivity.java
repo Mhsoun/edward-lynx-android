@@ -51,17 +51,18 @@ public class InviteActivity extends InviteBaseActivity {
   }
 
   public void create(View v) {
-    final TextView textView = (TextView) v;
     if (ids.isEmpty()) {
       Toast.makeText(InviteActivity.this, getString(R.string.select_atleast_one),
           Toast.LENGTH_SHORT).show();
     } else if (ids.size() < 3) {
       ViewUtil.showAlert(this, null, getString(R.string.invite_info));
     } else {
+      deletedIds.clear();
       List<Id> recipients = new ArrayList<>();
       for (User user : data) {
         if (user.isAddedbyEmail) {
           ids.remove(String.valueOf(user.id));
+          deletedIds.add(String.valueOf(user.id));
           recipients.add(new Id(user.name, user.email));
         }
       }
@@ -73,7 +74,7 @@ public class InviteActivity extends InviteBaseActivity {
       body.recipients = recipients;
       LogUtil.e("AAA " + body.toString());
 
-      textView.setText(getString(R.string.loading));
+      progressDialog.show();
       subscription.add(Shared.apiClient.postInstantFeedback(body, new Subscriber<Response>() {
         @Override
         public void onCompleted() {
@@ -84,13 +85,20 @@ public class InviteActivity extends InviteBaseActivity {
 
         @Override
         public void onError(Throwable e) {
-          textView.setText(getString(R.string.send_invites));
+          progressDialog.dismiss();
+          ids.addAll(deletedIds);
           LogUtil.e("AAA onError " + e);
+          Toast.makeText(
+              context,
+              context.getString(R.string.cant_connect),
+              Toast.LENGTH_SHORT
+          ).show();
         }
 
         @Override
         public void onNext(Response response) {
           LogUtil.e("AAA onNext");
+          progressDialog.dismiss();
           Toast.makeText(InviteActivity.this, getString(R.string.instant_feedback_created),
               Toast.LENGTH_SHORT).show();
         }

@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
@@ -105,6 +106,11 @@ public class InstantFeedbackDetailedActivity extends BaseActivity {
       @Override
       public void onError(Throwable e) {
         LogUtil.e("AAA onError " + e);
+        Toast.makeText(
+            context,
+            context.getString(R.string.cant_connect),
+            Toast.LENGTH_SHORT
+        ).show();
       }
 
       @Override

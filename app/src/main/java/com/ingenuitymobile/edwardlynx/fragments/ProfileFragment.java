@@ -212,8 +212,8 @@ public class ProfileFragment extends BaseFragment {
     }
 
     hideKeyboard();
-    editText.setText(getString(R.string.loading));
 
+    progressDialog.show();
     subscription.add(Shared.apiClient.updateUser(body, new Subscriber<User>() {
       @Override
       public void onCompleted() {
@@ -223,7 +223,7 @@ public class ProfileFragment extends BaseFragment {
 
       @Override
       public void onError(Throwable e) {
-        editText.setText(getString(R.string.save));
+        progressDialog.dismiss();
         if (!NetUtil.hasActiveConnection(getActivity())) {
           Toast.makeText(getActivity(), getString(R.string.no_internet_connection),
               Toast.LENGTH_SHORT).show();
@@ -239,6 +239,7 @@ public class ProfileFragment extends BaseFragment {
 
       @Override
       public void onNext(User userResponse) {
+        progressDialog.dismiss();
         Shared.user = userResponse;
       }
     }));

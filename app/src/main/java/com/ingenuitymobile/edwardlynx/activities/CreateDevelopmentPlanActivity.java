@@ -136,7 +136,6 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
       return;
     }
 
-    doneText.setText(getString(R.string.loading));
     CreateDevelopmentPlanParam planParam = new CreateDevelopmentPlanParam();
     planParam.name = name;
     planParam.goals = data;
@@ -146,6 +145,7 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
     }
 
     LogUtil.e("AAA " + planParam.toString());
+    progressDialog.show();
     subscription.add(Shared.apiClient.postDevelopmentPlans(planParam, new Subscriber<Response>() {
       @Override
       public void onCompleted() {
@@ -155,11 +155,17 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
       @Override
       public void onError(Throwable e) {
         LogUtil.e("AAA " + e);
-        doneText.setText(getString(R.string.done));
+        progressDialog.dismiss();
+        Toast.makeText(
+            context,
+            context.getString(R.string.cant_connect),
+            Toast.LENGTH_SHORT
+        ).show();
       }
 
       @Override
       public void onNext(Response response) {
+        progressDialog.dismiss();
         Toast.makeText(context, getString(R.string.development_plan_created), Toast.LENGTH_SHORT)
             .show();
       }

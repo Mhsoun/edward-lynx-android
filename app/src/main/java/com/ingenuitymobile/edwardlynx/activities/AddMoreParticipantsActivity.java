@@ -64,6 +64,11 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
       @Override
       public void onError(Throwable e) {
         LogUtil.e("AAA onError " + e);
+        Toast.makeText(
+            context,
+            context.getString(R.string.cant_connect),
+            Toast.LENGTH_SHORT
+        ).show();
       }
 
       @Override
@@ -95,7 +100,7 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
       InstantFeedbackBody body = new InstantFeedbackBody();
       body.recipients = recipients;
 
-      textView.setText(getString(R.string.loading));
+      progressDialog.show();
       subscription.add(
           Shared.apiClient.postInstantFeedbackParticipants(id, body, new Subscriber<Response>() {
             @Override
@@ -106,13 +111,19 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
 
             @Override
             public void onError(Throwable e) {
-              textView.setText(getString(R.string.add_participants_button));
+              progressDialog.dismiss();
               LogUtil.e("AAA onError " + e);
+              Toast.makeText(
+                  context,
+                  context.getString(R.string.cant_connect),
+                  Toast.LENGTH_SHORT
+              ).show();
             }
 
             @Override
             public void onNext(Response response) {
               LogUtil.e("AAA onNext");
+              progressDialog.dismiss();
               Toast.makeText(context, getString(R.string.added_more_particpants),
                   Toast.LENGTH_SHORT).show();
             }

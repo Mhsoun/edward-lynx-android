@@ -92,13 +92,13 @@ public class ChangePasswordFragment extends BaseFragment {
       }
 
       hideKeyboard();
-      saveText.setText(getString(R.string.loading));
 
       UserBody body = new UserBody();
       body.currentPassword = oldPassword;
       body.password = newPassword;
 
 
+      progressDialog.show();
       subscription.add(Shared.apiClient.updateUser(body, new Subscriber<User>() {
         @Override
         public void onCompleted() {
@@ -111,7 +111,7 @@ public class ChangePasswordFragment extends BaseFragment {
 
         @Override
         public void onError(Throwable e) {
-          saveText.setText(getString(R.string.save));
+          progressDialog.dismiss();
           if (!NetUtil.hasActiveConnection(getActivity())) {
             Toast.makeText(getActivity(), getString(R.string.no_internet_connection),
                 Toast.LENGTH_SHORT).show();
@@ -133,6 +133,7 @@ public class ChangePasswordFragment extends BaseFragment {
 
         @Override
         public void onNext(User userResponse) {
+          progressDialog.dismiss();
           Toast.makeText(getActivity(), getString(R.string.password_updated), Toast.LENGTH_SHORT)
               .show();
         }

@@ -122,17 +122,12 @@ public class SplashActivity extends BaseActivity {
       SessionStore.saveAccessToken(null, SplashActivity.this);
     }
 
-    runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
-        ViewUtil.showAlert(SplashActivity.this, "", getString(R.string.cant_connect),
-            new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialogInterface, int i) {
-                SplashActivity.this.finish();
-              }
-            });
-      }
-    });
+    ViewUtil.showAlert(SplashActivity.this, "", getString(R.string.cant_connect),
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialogInterface, int i) {
+            SplashActivity.this.finish();
+          }
+        });
   }
 }

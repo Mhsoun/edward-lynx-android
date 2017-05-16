@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -121,6 +122,11 @@ public class SurveyReportActivity extends BaseActivity {
       @Override
       public void onError(Throwable e) {
         LogUtil.e("AAA Survey details onError " + e);
+        Toast.makeText(
+            context,
+            context.getString(R.string.cant_connect),
+            Toast.LENGTH_SHORT
+        ).show();
       }
 
       @Override
@@ -154,6 +160,11 @@ public class SurveyReportActivity extends BaseActivity {
       @Override
       public void onError(Throwable e) {
         LogUtil.e("AAA questions onError " + e);
+        Toast.makeText(
+            context,
+            context.getString(R.string.cant_connect),
+            Toast.LENGTH_SHORT
+        ).show();
       }
 
       @Override

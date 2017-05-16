@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.ingenuitymobile.edwardlynx.R;
@@ -133,6 +134,14 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
       @Override
       public void onError(Throwable e) {
         LogUtil.e("AAA onError getData " + e);
+        if (dialog != null) {
+          dialog.dismiss();
+        }
+        Toast.makeText(
+            context,
+            context.getString(R.string.cant_connect),
+            Toast.LENGTH_SHORT
+        ).show();
       }
 
       @Override
@@ -196,7 +205,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
           public void onError(Throwable e) {
             LogUtil.e("AAA onError patchAction " + e);
             if (dialog != null) {
-              dialog.show();
+              dialog.dismiss();
             }
           }
 

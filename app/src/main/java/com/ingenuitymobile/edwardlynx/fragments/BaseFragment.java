@@ -1,9 +1,13 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.inputmethod.InputMethodManager;
 
+import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import rx.subscriptions.CompositeSubscription;
@@ -18,9 +22,20 @@ public class BaseFragment extends Fragment {
 
   protected String queryString;
 
+  protected ProgressDialog progressDialog;
+
   public BaseFragment() {
     subscription = new CompositeSubscription();
     queryString = "";
+  }
+
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    progressDialog = new ProgressDialog(getActivity());
+    progressDialog.setMessage(getString(R.string.loading));
+    progressDialog.setCancelable(false);
   }
 
   @Override

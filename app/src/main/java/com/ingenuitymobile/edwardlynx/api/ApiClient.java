@@ -1,5 +1,9 @@
 package com.ingenuitymobile.edwardlynx.api;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ActionParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
@@ -27,6 +31,7 @@ import com.squareup.okhttp.OkHttpClient;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -36,6 +41,7 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by mEmEnG-sKi on 19/12/2016.
@@ -45,24 +51,26 @@ public class ApiClient {
 
   public Service service;
 
-  private String consumerKey;
-  private String consumerSecret;
-  private String baseUrl;
-  private String username;
-  private String password;
+  private String  consumerKey;
+  private String  consumerSecret;
+  private String  baseUrl;
+  private String  username;
+  private String  password;
+  private Context context;
 
   private OnRefreshTokenListener refreshListener;
 
-  public ApiClient(String consumerKey, String consumerSecret, String baseUrl,
+  public ApiClient(Context context, String consumerKey, String consumerSecret, String baseUrl,
       OnRefreshTokenListener refreshListener) {
     this.consumerKey = consumerKey;
     this.consumerSecret = consumerSecret;
     this.baseUrl = baseUrl;
     this.refreshListener = refreshListener;
+    this.context = context;
   }
 
   public void setRefreshToken(String username, String password) {
-    this.username = password;
+    this.username = username;
     this.password = password;
   }
 
@@ -73,6 +81,9 @@ public class ApiClient {
 
   private Service createRetrofitService(final String accessToken) {
     OkHttpClient okHttpClient = new OkHttpClient();
+    okHttpClient.setReadTimeout(60, TimeUnit.SECONDS);
+    okHttpClient.setConnectTimeout(60, TimeUnit.SECONDS);
+
     return new RestAdapter.Builder()
         .setClient(new OkClient(okHttpClient))
         .setEndpoint(baseUrl)
@@ -398,25 +409,34 @@ public class ApiClient {
     public void onError(final Throwable e) {
       final retrofit.client.Response error = ((RetrofitError) e).getResponse();
       if (error != null && error.getStatus() == 401) {
-        LogUtil.e("AAA onError " + e);
-        try {
-          new Thread(new Runnable() {
-            @Override
-            public void run() {
-              try {
-                final Authentication authentication = postRefreshToken(username, password);
-                if (authentication != null) {
-                  refreshListener.onRefreshToken(authentication);
-                  listener.onPostAgain();
-                }
-              } catch (Exception ex) {
+        LogUtil.e("AAA RE LOGIN" + e);
+
+        Map<String, String> map = new HashMap<>();
+        map.put("grant_type", "password");
+        map.put("username", username);
+        map.put("password", password);
+        map.put("client_id", consumerKey);
+        map.put("client_secret", consumerSecret);
+
+        service.postLogin(map)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Subscriber<Authentication>() {
+              @Override
+              public void onCompleted() {
+                listener.onPostAgain();
+              }
+
+              @Override
+              public void onError(Throwable e) {
                 subscriber.onError(e);
               }
-            }
-          }).start();
-        } catch (Exception exception) {
-          subscriber.onError(e);
-        }
+
+              @Override
+              public void onNext(Authentication authentication) {
+                refreshListener.onRefreshToken(authentication);
+              }
+            });
       } else {
         subscriber.onError(e);
       }

@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
@@ -135,6 +136,11 @@ public class DevelopmenPlansFragment extends BaseFragment {
           public void onError(Throwable e) {
             LogUtil.e("AAA onError " + e);
             refreshLayout.setRefreshing(false);
+            Toast.makeText(
+                getActivity(),
+                getString(R.string.cant_connect),
+                Toast.LENGTH_SHORT
+            ).show();
           }
 
           @Override

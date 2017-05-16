@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
@@ -118,6 +119,11 @@ public class SurveyReportsFragment extends BaseFragment {
       public void onError(Throwable e) {
         LogUtil.e("AAA onError " + e);
         refreshLayout.setRefreshing(false);
+        Toast.makeText(
+            getActivity(),
+            getString(R.string.cant_connect),
+            Toast.LENGTH_SHORT
+        ).show();
       }
 
       @Override

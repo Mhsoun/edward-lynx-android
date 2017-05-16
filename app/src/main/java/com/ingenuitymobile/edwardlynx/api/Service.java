@@ -49,7 +49,7 @@ public interface Service {
 
   @FormUrlEncoded
   @POST("/oauth/token")
-  Authentication postRefreshToken(@FieldMap Map<String, String> names);
+  Authentication postRefreshToken(@FieldMap Map<String, String> map);
   // endregion
 
   // region Users

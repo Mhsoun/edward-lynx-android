@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
@@ -85,6 +86,11 @@ public class FeedbackRequestsActivity extends BaseActivity {
           @Override
           public void onError(Throwable e) {
             LogUtil.e("AAA onError " + e);
+            Toast.makeText(
+                context,
+                context.getString(R.string.cant_connect),
+                Toast.LENGTH_SHORT
+            ).show();
           }
 
           @Override

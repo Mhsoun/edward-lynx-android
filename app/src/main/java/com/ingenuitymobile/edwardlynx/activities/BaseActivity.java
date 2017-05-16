@@ -1,6 +1,7 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import rx.subscriptions.CompositeSubscription;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -26,6 +27,8 @@ public class BaseActivity extends AppCompatActivity {
   protected CompositeSubscription subscription;
   protected Context               context;
 
+  protected ProgressDialog progressDialog;
+
   public BaseActivity() {
     subscription = new CompositeSubscription();
   }
@@ -33,7 +36,11 @@ public class BaseActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    context = getApplicationContext();
+    context = this;
+
+    progressDialog = new ProgressDialog(this);
+    progressDialog.setMessage(getString(R.string.loading));
+    progressDialog.setCancelable(false);
   }
 
   @Override

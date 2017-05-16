@@ -16,6 +16,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
@@ -44,6 +45,7 @@ public class InviteBaseActivity extends BaseActivity {
   private SearchView searchView;
 
   protected ArrayList<String> ids;
+  protected ArrayList<String> deletedIds;
   protected ArrayList<User>   data;
   protected ArrayList<User>   recipients;
 
@@ -54,6 +56,7 @@ public class InviteBaseActivity extends BaseActivity {
     displayData = new ArrayList<>();
     recipients = new ArrayList<>();
     ids = new ArrayList<>();
+    deletedIds = new ArrayList<>();
   }
 
   @Override
@@ -99,6 +102,11 @@ public class InviteBaseActivity extends BaseActivity {
 
       @Override
       public void onError(Throwable e) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.cant_connect),
+            Toast.LENGTH_SHORT
+        ).show();
         LogUtil.e("AAA onError " + e);
       }
 

@@ -92,6 +92,11 @@ public class AnswerFeedbackActivity extends BaseActivity {
       @Override
       public void onError(Throwable e) {
         LogUtil.e("AAA onError " + e);
+        Toast.makeText(
+            context,
+            context.getString(R.string.cant_connect),
+            Toast.LENGTH_SHORT
+        ).show();
       }
 
       @Override
@@ -112,7 +117,7 @@ public class AnswerFeedbackActivity extends BaseActivity {
 
     LogUtil.e("AAA " + param.toString());
     LogUtil.e("AAA id + " + id);
-    textView.setText(getString(R.string.loading));
+    progressDialog.show();
     subscription.add(
         Shared.apiClient.postInstantFeedbackAnswers(id, param, new Subscriber<Response>() {
           @Override
@@ -123,13 +128,19 @@ public class AnswerFeedbackActivity extends BaseActivity {
 
           @Override
           public void onError(Throwable e) {
-            textView.setText(getString(R.string.submit));
+            progressDialog.dismiss();
             LogUtil.e("AAA onError " + e);
+            Toast.makeText(
+                context,
+                context.getString(R.string.cant_connect),
+                Toast.LENGTH_SHORT
+            ).show();
           }
 
           @Override
           public void onNext(Response response) {
             LogUtil.e("AAA onNext");
+            progressDialog.dismiss();
             Toast.makeText(AnswerFeedbackActivity.this, getString(R.string.instant_feed_submitted),
                 Toast.LENGTH_SHORT).show();
           }

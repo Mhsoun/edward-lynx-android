@@ -42,7 +42,6 @@ public class ShareReportActivity extends InviteBaseActivity {
 
 
   public void share(View v) {
-    final TextView textView = (TextView) v;
     if (ids.isEmpty()) {
       Toast.makeText(ShareReportActivity.this, getString(R.string.please_select_one),
           Toast.LENGTH_SHORT).show();
@@ -55,8 +54,8 @@ public class ShareReportActivity extends InviteBaseActivity {
       ShareParam param = new ShareParam();
       param.users = recipients;
       LogUtil.e("AAA " + param.toString());
-      textView.setText(getString(R.string.loading));
 
+      progressDialog.show();
       subscription.add(Shared.apiClient.postShareInstantFeedback(id, param,
           new Subscriber<Response>() {
             @Override
@@ -68,13 +67,19 @@ public class ShareReportActivity extends InviteBaseActivity {
 
             @Override
             public void onError(Throwable e) {
-              textView.setText(getString(R.string.share));
+              progressDialog.dismiss();
               LogUtil.e("AAA onError");
+              Toast.makeText(
+                  context,
+                  context.getString(R.string.cant_connect),
+                  Toast.LENGTH_SHORT
+              ).show();
             }
 
             @Override
             public void onNext(Response response) {
               LogUtil.e("AAA onNext");
+              progressDialog.dismiss();
               Toast.makeText(ShareReportActivity.this, getString(R.string.shared_to_other_people),
                   Toast.LENGTH_SHORT).show();
             }
