@@ -3,6 +3,7 @@ package com.ingenuitymobile.edwardlynx.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,35 +72,43 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
 
     holder.descriptionText.setText(reminder.name);
 
-    final boolean isGoal = reminder.type.equals(Reminder.Type.GOAL.toString());
-
-    holder.bodyLayout.setSelected(isGoal);
-    holder.typeText.setSelected(isGoal);
+    if (reminder.type.equals(Reminder.Type.GOAL.toString())) {
+      holder.bodyLayout.setBackgroundDrawable(
+          context.getResources().getDrawable(R.drawable.bg_rounded_reminder_goal));
+      holder.typeText.setTextColor(context.getResources().getColor(R.color.dev_plan_color));
+    } else if (reminder.type.equals(Reminder.Type.SURVEY.toString())) {
+      holder.bodyLayout.setBackgroundDrawable(
+          context.getResources().getDrawable(R.drawable.bg_rounded_reminder_survey));
+      holder.typeText.setTextColor(context.getResources().getColor(R.color.lynx_color));
+    } else {
+      holder.bodyLayout.setBackgroundDrawable(
+          context.getResources().getDrawable(R.drawable.bg_rounded_reminder_feedback));
+      holder.typeText.setTextColor(context.getResources().getColor(R.color.instant_feedback_color));
+    }
 
     holder.typeText.setText(reminder.getType(context));
-
 
     try {
       holder.dueDateLayout.setVisibility(View.GONE);
       holder.nowText.setVisibility(View.GONE);
 
-      Date date = format.parse(reminder.due);
-      long diff = date.getTime() - new Date().getTime();
+      if (!TextUtils.isEmpty(reminder.due)) {
+        Date date = format.parse(reminder.due);
+        long diff = date.getTime() - new Date().getTime();
 
-      long seconds = diff / 1000;
-      long minutes = seconds / 60;
-      long hours = minutes / 60;
-      long days = hours / 24;
-      if (days <= 0) {
-        holder.nowText.setVisibility(View.VISIBLE);
-      } else {
-        holder.dueDateLayout.setVisibility(View.VISIBLE);
-        holder.dueDateText.setText(
-            context.getResources().getString(days == 1 ? R.string.day : R.string.days, days));
+        long seconds = diff / 1000;
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+        long days = hours / 24;
+        if (days <= 0) {
+          holder.nowText.setVisibility(View.VISIBLE);
+        } else {
+          holder.dueDateLayout.setVisibility(View.VISIBLE);
+          holder.dueDateText.setText(
+              context.getResources().getString(days == 1 ? R.string.day : R.string.days, days));
+        }
       }
-    } catch (Exception e) {
-      LogUtil.e("Error", e);
-    }
+    } catch (Exception e) {}
 
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override

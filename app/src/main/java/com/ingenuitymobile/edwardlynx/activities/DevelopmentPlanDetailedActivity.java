@@ -2,7 +2,6 @@ package com.ingenuitymobile.edwardlynx.activities;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,12 +11,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.GoalAdapter;
@@ -28,11 +21,9 @@ import com.ingenuitymobile.edwardlynx.api.models.Goal;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.fragments.PopupDialogFragment;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
-import com.txusballesteros.widgets.FitChart;
-import com.txusballesteros.widgets.FitChartValue;
+import com.ingenuitymobile.edwardlynx.views.fitchart.FitChart;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import rx.Subscriber;
@@ -183,9 +174,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
       progress = ((progress) / (float) size) * 100;
     }
 
-    Collection<FitChartValue> values = new ArrayList<>();
-    values.add(new FitChartValue(progress, context.getResources().getColor(R.color.colorAccent)));
-    progressFitChart.setValues(values);
+    progressFitChart.setValue(progress);
     percentageText.setText(((int) progress) + "%");
     goalsText.setText(context.getString(R.string.goals_details, count, size));
   }

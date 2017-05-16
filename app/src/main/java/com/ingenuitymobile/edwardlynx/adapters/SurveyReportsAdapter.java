@@ -49,7 +49,9 @@ public class SurveyReportsAdapter extends RecyclerView.Adapter<SurveyReportsAdap
       reportType = (TextView) itemView.findViewById(R.id.text_report_type);
 
       reportType.setText(
-          itemView.getContext().getResources().getString(R.string.lynx_progress_bold));
+          itemView.getContext().getResources().getString(R.string.lynx_360_bold));
+      reportType.setBackgroundColor(
+          itemView.getContext().getResources().getColor(R.color.lynx_color));
     }
   }
 

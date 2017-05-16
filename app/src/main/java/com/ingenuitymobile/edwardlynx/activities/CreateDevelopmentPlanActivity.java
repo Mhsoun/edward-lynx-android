@@ -112,6 +112,8 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
     adapter = new CreateDevelopmentPlanAdapter(data, this);
     recyclerView.setAdapter(adapter);
     notifyAdapter();
+
+    findViewById(R.id.edit_text).setOnFocusChangeListener(onFocusChangeListener);
   }
 
   public void addGoal(View v) {

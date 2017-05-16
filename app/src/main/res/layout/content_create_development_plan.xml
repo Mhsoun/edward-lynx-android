@@ -31,6 +31,8 @@
       android:layout_height="match_parent"
       android:layout_above="@id/text_done"
       android:layout_margin="16dp"
+      android:clickable="true"
+      android:focusableInTouchMode="true"
       android:orientation="vertical">
 
     <TextView

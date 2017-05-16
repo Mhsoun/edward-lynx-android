@@ -28,7 +28,8 @@
           android:onClick="share"
           android:padding="12dp"
           android:src="@drawable/ic_download"
-          android:tint="@color/colorAccent"/>
+          android:tint="@color/colorAccent"
+          android:visibility="gone"/>
     </android.support.v7.widget.Toolbar>
 
 

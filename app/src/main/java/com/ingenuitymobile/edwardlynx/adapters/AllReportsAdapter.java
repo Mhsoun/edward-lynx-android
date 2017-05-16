@@ -87,7 +87,8 @@ public class AllReportsAdapter extends RecyclerView.Adapter<AllReportsAdapter.Vi
           context.startActivity(intent);
         }
       });
-      holder.reportType.setText(context.getResources().getString(R.string.lynx_progress_bold));
+      holder.reportType.setText(context.getResources().getString(R.string.lynx_360_bold));
+      holder.reportType.setBackgroundColor(context.getResources().getColor(R.color.lynx_color));
     } else {
       final Feedback feedback = allSurvey.feedback;
 
@@ -116,6 +117,8 @@ public class AllReportsAdapter extends RecyclerView.Adapter<AllReportsAdapter.Vi
         });
 
         holder.reportType.setText(context.getResources().getString(R.string.instant_feedback_bold));
+        holder.reportType.setBackgroundColor(
+            context.getResources().getColor(R.color.instant_feedback_color));
       }
     }
   }

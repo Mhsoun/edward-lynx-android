@@ -3,12 +3,10 @@ package com.ingenuitymobile.edwardlynx.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -25,13 +23,10 @@ import com.ingenuitymobile.edwardlynx.activities.DevelopmentPlanDetailedActivity
 import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
-import com.txusballesteros.widgets.FitChart;
-import com.txusballesteros.widgets.FitChartValue;
+import com.ingenuitymobile.edwardlynx.views.fitchart.FitChart;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -164,10 +159,9 @@ public class DevelopmentPlanAdapter extends
     holder.countText.setTextColor(context.getResources()
         .getColor(count == size ? R.color.colorAccent : R.color.dev_plan_color));
 
+    holder.progressFitChart.setValue(progress);
+    holder.progressFitChart.clearAnimation();
 
-    Collection<FitChartValue> values = new ArrayList<>();
-    values.add(new FitChartValue(progress, context.getResources().getColor(R.color.colorAccent)));
-    holder.progressFitChart.setValues(values);
     holder.percentageText.setText(((int) progress) + "%");
 
     holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -202,7 +196,7 @@ public class DevelopmentPlanAdapter extends
     holder.goalBarChart.setVisibleXRangeMaximum(10);
     holder.goalBarChart.setVisibleXRangeMinimum(10);
     holder.goalBarChart.setHighlightPerTapEnabled(false);
-    holder.goalBarChart.animateXY(1000, 1000);
+    holder.goalBarChart.clearAnimation();
   }
 
   @Override

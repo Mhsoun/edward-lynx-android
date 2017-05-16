@@ -15,33 +15,23 @@
       android:scaleType="centerCrop"
       android:src="@drawable/bg"/>
 
-  <TextView
-      android:id="@+id/text_done"
-      style="@style/orange_button"
-      android:layout_width="match_parent"
-      android:layout_alignParentBottom="true"
-      android:layout_marginBottom="16dp"
-      android:layout_marginLeft="16dp"
-      android:layout_marginRight="16dp"
-      android:onClick="save"
-      android:text="@string/save"/>
-
   <ScrollView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_above="@id/text_done"
       android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical"
         android:padding="16dp">
 
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="@string/name"
+          android:text="@string/goal_name"
           android:textColor="@color/white"/>
 
       <EditText
@@ -58,7 +48,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
-          android:text="@string/description"
+          android:text="@string/input_description"
           android:textColor="@color/white"/>
 
       <EditText
@@ -235,6 +225,17 @@
             android:layout_height="40dp"
             android:background="@null"/>
       </RelativeLayout>
+
+      <TextView
+          android:id="@+id/text_done"
+          style="@style/orange_button"
+          android:layout_width="match_parent"
+          android:layout_marginTop="16dp"
+          android:layout_marginBottom="16dp"
+          android:layout_marginLeft="16dp"
+          android:layout_marginRight="16dp"
+          android:onClick="save"
+          android:text="@string/save"/>
     </LinearLayout>
   </ScrollView>
 </RelativeLayout>

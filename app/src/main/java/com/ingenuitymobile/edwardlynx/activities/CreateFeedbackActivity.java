@@ -95,6 +95,7 @@ public class CreateFeedbackActivity extends BaseActivity {
 
     initViews();
     setPreview();
+    hideKeyboard();
   }
 
   @Override
@@ -115,6 +116,7 @@ public class CreateFeedbackActivity extends BaseActivity {
 
   private void initViews() {
     questionText = (EditText) findViewById(R.id.edit_question);
+    questionText.setOnFocusChangeListener(onFocusChangeListener);
     isAnonymousCheckbox = (CheckBox) findViewById(R.id.checkbox_is_anonymous);
     isNA = (CheckBox) findViewById(R.id.checkbox_is_na);
     isNALayout = (RelativeLayout) findViewById(R.id.layout_isNA);
@@ -163,6 +165,9 @@ public class CreateFeedbackActivity extends BaseActivity {
 
     adapter = new CustomScaleAdapter(options, listener);
     optionList.setAdapter(adapter);
+
+    questionText.setOnFocusChangeListener(onFocusChangeListener);
+    addOptionEdit.setOnFocusChangeListener(onFocusChangeListener);
   }
 
   public void invite(View v) {

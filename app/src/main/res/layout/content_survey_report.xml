@@ -76,6 +76,7 @@
       <com.github.mikephil.charting.charts.HorizontalBarChart
           android:id="@+id/mulitple_bar_chart"
           android:layout_width="match_parent"
+          android:minHeight="100dp"
           android:layout_height="wrap_content">
       </com.github.mikephil.charting.charts.HorizontalBarChart>
 

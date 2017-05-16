@@ -94,7 +94,7 @@
   <string name="answer_required_label">Answer type should be selected</string>
   <string name="custom_scale_required_label">Custom scale input is required</string>
   <string name="survey_answers_submitted">Survey answers submitted</string>
-  <string name="invite_info">You have to invite more than 3 people and more than 3 people have to answer before result can be viewed.</string>
+  <string name="invite_info">You have to invite at least 3 people and at least 3 people have to answer before result can be viewed.</string>
 
   // region forgot password
   <string name="email">Email</string>
@@ -125,7 +125,9 @@
 
   // region Create Development plan Detailed
   <string name="name">Name</string>
+  <string name="goal_name">Enter Goal Name</string>
   <string name="description">Description</string>
+  <string name="input_description">Enter Description</string>
   <string name="actions">Actions</string>
   <string name="due_date">Due Date</string>
   <string name="due_date_goal">Due Date: %1$s</string>
@@ -220,6 +222,7 @@
   <string name="contact_to_reactivate">Reactivate</string>
   <string name="lynx_measurement">LYNX MEASUREMENT</string>
   <string name="lynx_progress_bold">LYNX PROGRESS</string>
+  <string name="lynx_360_bold">LYNX 360</string>
   <string name="open_status_bold">OPEN</string>
   <string name="unfinished_status_bold">UNFINISHED</string>
   <string name="not_invited_status_bold">NOT INVITED</string>

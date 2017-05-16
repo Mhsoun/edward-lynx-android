@@ -109,10 +109,13 @@ public class SurveyReportActivity extends BaseActivity {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA Survey details onCompleted ");
-        getSurveyQuestions();
 
         detailsText.setText(getString(R.string.details_circle_chart, survey.stats.invited,
             survey.stats.answered));
+
+        if (survey.stats.answered != 0) {
+          getSurveyQuestions();
+        }
       }
 
       @Override
@@ -208,7 +211,6 @@ public class SurveyReportActivity extends BaseActivity {
         (ViewUtil.dpToPx(15, getResources()) * size) +
             ViewUtil.dpToPx(40, getResources());
     barChart.setLayoutParams(params);
-    barChart.animateXY(1000, 1000);
     barChart.invalidate();
   }
 
@@ -220,11 +222,10 @@ public class SurveyReportActivity extends BaseActivity {
     l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
     l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
     l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-    l.setDrawInside(true);
+    l.setDrawInside(false);
     l.setTextColor(Color.WHITE);
-    l.setYOffset(0f);
     l.setXOffset(20f);
-    l.setYEntrySpace(0f);
+    l.setYEntrySpace(5f);
     l.setTextSize(FONT_SIZE);
 
     ArrayList<BarEntry> self = new ArrayList<>();
@@ -270,7 +271,7 @@ public class SurveyReportActivity extends BaseActivity {
       }
     });
 
-    BarData barData = new BarData(set2, set1);
+    BarData barData = new BarData(set1, set2);
     barData.setBarWidth(0.4f);
 
     mulitpleBarChart.setData(barData);
@@ -290,8 +291,6 @@ public class SurveyReportActivity extends BaseActivity {
     mulitpleBarChart.setLayoutParams(params);
     mulitpleBarChart.getXAxis().setAxisMinimum(0f);
     mulitpleBarChart.groupBars(0, groupSpace, barSpace);
-    mulitpleBarChart.animateXY(1000, 1000);
-
     mulitpleBarChart.invalidate();
   }
 
@@ -302,12 +301,14 @@ public class SurveyReportActivity extends BaseActivity {
     horizontalBarChart.setPinchZoom(false);
     horizontalBarChart.setDrawGridBackground(false);
     horizontalBarChart.setDoubleTapToZoomEnabled(false);
+    horizontalBarChart.clearAnimation();
 
     XAxis xl = horizontalBarChart.getXAxis();
     xl.setPosition(XAxis.XAxisPosition.BOTTOM);
     xl.setDrawGridLines(false);
     xl.setDrawAxisLine(true);
     xl.setGranularity(1f);
+    xl.setCenterAxisLabels(false);
     xl.setGranularityEnabled(true);
     xl.setLabelCount(averages.size());
     xl.setTextColor(Color.WHITE);
@@ -332,15 +333,15 @@ public class SurveyReportActivity extends BaseActivity {
     yl.setDrawTopYLabelEntry(true);
     yl.setDrawLabels(false);
 
-    LimitLine limitLine = new LimitLine(70, "70%");
-    limitLine.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
+    LimitLine limitLine = new LimitLine(70, "");
+    limitLine.setLabelPosition(LimitLine.LimitLabelPosition.LEFT_BOTTOM);
     limitLine.setLineColor(getResources().getColor(R.color.survey_line));
     limitLine.setTextColor(getResources().getColor(R.color.white));
     limitLine.setTextSize(FONT_SIZE);
     yl.addLimitLine(limitLine);
 
-    limitLine = new LimitLine(100, "100%");
-    limitLine.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
+    limitLine = new LimitLine(100, "");
+    limitLine.setLabelPosition(LimitLine.LimitLabelPosition.LEFT_BOTTOM);
     limitLine.setLineColor(getResources().getColor(R.color.survey_line));
     limitLine.setTextSize(FONT_SIZE);
     limitLine.setTextColor(getResources().getColor(R.color.white));
@@ -349,6 +350,26 @@ public class SurveyReportActivity extends BaseActivity {
     YAxis yr = horizontalBarChart.getAxisRight();
     yr.setDrawGridLines(false);
     yr.setDrawAxisLine(false);
-    yr.setDrawLabels(false);
+    yr.setDrawLabels(true);
+    yr.setAxisMinimum(0f);
+    yr.setLabelCount(10);
+    yr.setAxisMaximum(112f);
+    yr.setTextColor(Color.WHITE);
+    yr.setTextSize(FONT_SIZE);
+    yr.setValueFormatter(new IAxisValueFormatter() {
+      @Override
+      public String getFormattedValue(float value, AxisBase axis) {
+        if ((int) value == 70) {
+          return "70%";
+        } else if ((int) value == 100) {
+          return "100%";
+        }
+        return "";
+      }
+    });
+
+
+    horizontalBarChart.getLegend().setEnabled(true);
+    horizontalBarChart.getLegend().setYEntrySpace(0f);
   }
 }

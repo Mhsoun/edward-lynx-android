@@ -4,7 +4,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="6dp"
-                android:background="@drawable/bg_rounded_reminder">
+                android:background="@drawable/bg_rounded_reminder_feedback">
 
   <View
       android:id="@+id/space"
@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="INVITE FEEDBACK"
-        android:textColor="@color/reminder_selector"/>
+        android:textColor="@color/instant_feedback_color"/>
 
     <TextView
         android:id="@+id/text_description"

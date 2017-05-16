@@ -200,6 +200,10 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
 
       }
     });
+
+    developmentNameEdit.setOnFocusChangeListener(onFocusChangeListener);
+    descriptionEdit.setOnFocusChangeListener(onFocusChangeListener);
+    addPlanEdit.setOnFocusChangeListener(onFocusChangeListener);
   }
 
   private void notifyAdapter() {

@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.ingenuitymobile.edwardlynx.Shared;
@@ -66,14 +67,29 @@ public class BaseActivity extends AppCompatActivity {
       InputMethodManager inputManager = (InputMethodManager) getSystemService(
           Activity.INPUT_METHOD_SERVICE);
       inputManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
-    } catch (Exception e) {
-      LogUtil.e("Error in hiding keyboard", e);
-    }
+    } catch (Exception e) {}
+  }
+
+  protected void hideKeyboard(View v) {
+    try {
+      InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(
+          Activity.INPUT_METHOD_SERVICE);
+      inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    } catch (Exception e) {}
   }
 
   private BroadcastReceiver notiffMain = new BroadcastReceiver() {
     @Override
     public void onReceive(Context context, Intent intent) {
+    }
+  };
+
+  protected View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+      if (!hasFocus) {
+        hideKeyboard(v);
+      }
     }
   };
 }

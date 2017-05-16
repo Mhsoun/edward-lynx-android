@@ -68,7 +68,7 @@
           android:layout_below="@id/text_overall"
           android:layout_marginTop="12dp">
 
-        <com.txusballesteros.widgets.FitChart
+        <com.ingenuitymobile.edwardlynx.views.fitchart.FitChart
             android:id="@+id/fitchart_progress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

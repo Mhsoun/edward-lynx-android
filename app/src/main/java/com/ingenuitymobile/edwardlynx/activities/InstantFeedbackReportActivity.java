@@ -124,7 +124,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     subscription.add(Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
       @Override
       public void onCompleted() {
-        if (feedback.stats.answered > 3) {
+        if (feedback.stats.answered >= 3) {
           getAnswers();
         }
         setDetails();
@@ -236,14 +236,14 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         yl.setDrawTopYLabelEntry(true);
         yl.setDrawLabels(false);
 
-        LimitLine limitLine = new LimitLine(70, "70%");
+        LimitLine limitLine = new LimitLine(70, "");
         limitLine.setLabelPosition(LimitLine.LimitLabelPosition.LEFT_BOTTOM);
         limitLine.setLineColor(getResources().getColor(R.color.survey_line));
         limitLine.setTextColor(getResources().getColor(R.color.white));
         limitLine.setTextSize(FONT_SIZE);
         yl.addLimitLine(limitLine);
 
-        limitLine = new LimitLine(100, "100%");
+        limitLine = new LimitLine(100, "");
         limitLine.setLabelPosition(LimitLine.LimitLabelPosition.LEFT_BOTTOM);
         limitLine.setLineColor(getResources().getColor(R.color.survey_line));
         limitLine.setTextSize(FONT_SIZE);
@@ -253,7 +253,23 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         YAxis yr = horizontalBarChart.getAxisRight();
         yr.setDrawGridLines(false);
         yr.setDrawAxisLine(false);
-        yr.setDrawLabels(false);
+        yr.setDrawLabels(true);
+        yr.setAxisMinimum(0f);
+        yr.setLabelCount(10);
+        yr.setAxisMaximum(112f);
+        yr.setTextColor(Color.WHITE);
+        yr.setTextSize(FONT_SIZE);
+        yr.setValueFormatter(new IAxisValueFormatter() {
+          @Override
+          public String getFormattedValue(float value, AxisBase axis) {
+            if ((int) value == 70) {
+              return "70%";
+            } else if ((int) value == 100) {
+              return "100%";
+            }
+            return "";
+          }
+        });
 
         ArrayList<BarEntry> yVals1 = new ArrayList<>();
 
@@ -293,8 +309,8 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         horizontalBarChart.setFitBars(false);
 
         horizontalBarChart.getLayoutParams().height = (110 * data.size());
-        horizontalBarChart.animateXY(1000, 1000);
         horizontalBarChart.invalidate();
+        horizontalBarChart.clearAnimation();
       }
     }
   }
