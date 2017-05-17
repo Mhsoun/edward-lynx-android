@@ -23,6 +23,7 @@ import com.ingenuitymobile.edwardlynx.activities.DevelopmentPlanDetailedActivity
 import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.views.fitchart.FitChart;
 
 import java.text.SimpleDateFormat;
@@ -90,8 +91,9 @@ public class DevelopmentPlanAdapter extends
 
       YAxis leftAxis = goalBarChart.getAxisLeft();
       leftAxis.setDrawGridLines(false);
-      leftAxis.setDrawAxisLine(false);
+      leftAxis.setDrawAxisLine(true);
       leftAxis.setAxisMinimum(0f);
+      leftAxis.setAxisLineColor(Color.BLACK);
       leftAxis.setAxisMaximum(100f);
 
       YAxis rightAxis = goalBarChart.getAxisRight();
@@ -119,7 +121,7 @@ public class DevelopmentPlanAdapter extends
     holder.nameText.setText(plan.name);
 
     try {
-      Date date = format.parse(plan.updatedAt);
+      Date date = format.parse(plan.createdAt);
       holder.dateText.setText(displayFormat.format(date));
     } catch (Exception e) {
       holder.dateText.setText("");
@@ -130,26 +132,31 @@ public class DevelopmentPlanAdapter extends
     final int size = plan.goals.size();
     int count = 0;
     float progress = 0;
+    int actionSize = 0;
     if (plan.goals != null) {
+
       for (Goal goal : plan.goals) {
         if (goal.checked == 1) {
           count++;
         }
 
-        if (goal.actions != null) {
-          final int actionSize = goal.actions.size();
-          int actionCount = 0;
+        int actionCount = 0;
+        if (goal.actions != null && !goal.actions.isEmpty()) {
+          actionSize = goal.actions.size();
           for (Action action : goal.actions) {
             if (action.checked == 1) {
               actionCount++;
             }
           }
 
-          final float actionProgress = ((float) (actionCount) / (float) actionSize);
-
-          progress = progress + actionProgress;
-          goalBars.add(new BarEntry(goalBars.size() + 1, actionProgress * 100));
         }
+
+        final float actionProgress =
+            (actionCount != 0 && actionSize != 0) ?
+                ((float) (actionCount) / (float) actionSize) : 0;
+
+        progress = progress + actionProgress;
+        goalBars.add(new BarEntry(goalBars.size() + 1, actionProgress * 100));
       }
 
       progress = ((progress) / (float) size) * 100;

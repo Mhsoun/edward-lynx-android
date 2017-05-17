@@ -31,6 +31,7 @@ import com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity;
 import com.ingenuitymobile.edwardlynx.activities.FeedbackRequestsActivity;
 import com.ingenuitymobile.edwardlynx.activities.ReportsActivity;
 import com.ingenuitymobile.edwardlynx.adapters.DevelopmentPlanAdapter;
+import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
 import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
@@ -154,27 +155,37 @@ public class DevelopmenPlansFragment extends BaseFragment {
                 for (Goal goal : plan.goals) {
                   if (goal.checked == 1) {
                     count++;
+                  } else {
+                    if (goal.actions != null) {
+                      for (Action action : goal.actions) {
+                        if (action.checked == 1) {
+                          unfinishedData.add(plan);
+                          break;
+                        }
+                      }
+                    }
                   }
                 }
               }
               if (count == size) {
                 completedData.add(plan);
-              } else {
-                try {
-                  final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
-                  final Date date = sdf.parse(plan.updatedAt);
-                  date.setHours(23);
-                  date.setMinutes(59);
-                  date.setSeconds(59);
-                  if (date.getTime() < System.currentTimeMillis()) {
-                    expiredData.add(plan);
-                  } else {
-                    unfinishedData.add(plan);
-                  }
-                } catch (Exception e) {
-                  LogUtil.e("AAA", e);
-                }
               }
+//              else {
+//                try {
+//                  final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
+//                  final Date date = sdf.parse(plan.updatedAt);
+//                  date.setHours(23);
+//                  date.setMinutes(59);
+//                  date.setSeconds(59);
+//                  if (date.getTime() < System.currentTimeMillis()) {
+//                    expiredData.add(plan);
+//                  } else {
+//                    unfinishedData.add(plan);
+//                  }
+//                } catch (Exception e) {
+//                  LogUtil.e("AAA", e);
+//                }
+//              }
 
             }
           }

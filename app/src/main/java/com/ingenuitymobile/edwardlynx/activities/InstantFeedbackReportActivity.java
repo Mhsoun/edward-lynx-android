@@ -285,9 +285,9 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         BarDataSet set1 = new BarDataSet(yVals1, "");
         set1.setDrawValues(true);
         set1.setValueTextSize(FONT_SIZE);
-        set1.setValueTextColor(context.getResources().getColor(R.color.lynx_color));
+        set1.setValueTextColor(context.getResources().getColor(R.color.instant_feedback_color));
         set1.setHighlightEnabled(false);
-        set1.setColor(context.getResources().getColor(R.color.lynx_color));
+        set1.setColor(context.getResources().getColor(R.color.instant_feedback_color));
         set1.setValueFormatter(new IValueFormatter() {
           @Override
           public String getFormattedValue(float value, Entry entry, int dataSetIndex,

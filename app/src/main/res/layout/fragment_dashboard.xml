@@ -127,7 +127,7 @@
           android:layout_height="42dp"
           android:layout_marginTop="12dp"
           android:orientation="horizontal"
-          android:weightSum="4">
+          android:weightSum="3">
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -176,6 +176,7 @@
             android:background="@drawable/bg_round_dashboard"
             android:gravity="center"
             android:text="@string/invite_dashboard"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="12sp"/>
 

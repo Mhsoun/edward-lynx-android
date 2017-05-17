@@ -22,6 +22,7 @@ import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.ArrayList;
 
+import retrofit.RetrofitError;
 import rx.Subscriber;
 
 /**
@@ -125,6 +126,10 @@ public class AnswerFeedbackActivity extends BaseActivity {
           public void onError(Throwable e) {
             progressDialog.dismiss();
             LogUtil.e("AAA onError " + e);
+            if (e != null && ((RetrofitError) e).getResponse().getStatus() == 422) {
+              Toast.makeText(context, getString(R.string.required_fields),
+                  Toast.LENGTH_SHORT).show();
+            }
           }
 
           @Override

@@ -28,7 +28,6 @@
   <string name="drawer_settings">Settings</string>
   <string name="drawer_logout">Logout</string>
 
-  <string name="title_key">title</string>
   <string name="dashboard_bold">DASHBOARD</string>
   <string name="surveys_bold">SURVEYS</string>
   <string name="change_password_bold">CHANGE PASSWORD</string>
@@ -197,7 +196,6 @@
   <string name="invite_dashboard">INVITE</string>
   <string name="create_dashboard">CREATE</string>
   <string name="create_new_dashboard">Create New</string>
-  <string name="goals_dashboard">Goals</string>
   <string name="reminders_dashboard">REMINDERS</string>
   <string name="no_reminders">No Reminders</string>
   <string name="see_more">See More</string>

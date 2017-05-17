@@ -228,7 +228,7 @@ public class DashboardFragment extends BaseFragment {
       case R.id.text_create:
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
         alertBuilder.setMessage(getString(R.string.create_new_dashboard));
-        alertBuilder.setNegativeButton(getString(R.string.goals_dashboard),
+        alertBuilder.setNegativeButton(getString(R.string.dev_plan_dashboard),
             new DialogInterface.OnClickListener() {
               public void onClick(DialogInterface dialog, int which) {
                 startActivity(new Intent(getActivity(), CreateDevelopmentPlanActivity.class));

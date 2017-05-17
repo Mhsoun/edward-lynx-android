@@ -116,7 +116,7 @@ public class AllReportsFragment extends BaseFragment {
   private void getInstantFeedbacks() {
     LogUtil.e("AAA getData FeedbackRequestsFragment");
     subscription.add(
-        Shared.apiClient.getInstantFeedbacks("to_answer", new Subscriber<FeedbacksResponse>() {
+        Shared.apiClient.getInstantFeedbacks("mine", new Subscriber<FeedbacksResponse>() {
           @Override
           public void onCompleted() {
             refreshLayout.setRefreshing(false);

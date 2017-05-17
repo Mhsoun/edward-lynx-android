@@ -159,7 +159,7 @@ public class MainActivity extends BaseActivity implements
   }
 
   private void changeFragment(Fragment fragment) {
-    toolbar.setTitle(fragment.getArguments().getString(getString(R.string.title_key)));
+    toolbar.setTitle(fragment.getArguments().getString("title"));
     FragmentManager fragmentManager = getSupportFragmentManager();
     fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
   }
