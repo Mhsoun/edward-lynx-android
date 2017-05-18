@@ -44,9 +44,6 @@ public class SurveyReportsAdapter extends RecyclerView.Adapter<SurveyReportsAdap
       nameText = (TextView) itemView.findViewById(R.id.text_name);
       countText = (TextView) itemView.findViewById(R.id.text_count);
       reportType = (TextView) itemView.findViewById(R.id.text_report_type);
-
-      reportType.setText(
-          itemView.getContext().getResources().getString(R.string.lynx_360_bold));
       reportType.setBackgroundColor(
           itemView.getContext().getResources().getColor(R.color.lynx_color));
     }
@@ -73,6 +70,7 @@ public class SurveyReportsAdapter extends RecyclerView.Adapter<SurveyReportsAdap
     holder.countText.setText(survey.stats.answered + "/" + survey.stats.invited);
     holder.nameText.setText(survey.name);
     holder.descriptionText.setText(survey.personsEvaluatedText);
+    holder.reportType.setText(survey.getType(context, true));
 
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override

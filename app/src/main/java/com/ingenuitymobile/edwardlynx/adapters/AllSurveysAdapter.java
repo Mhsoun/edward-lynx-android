@@ -138,8 +138,7 @@ public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
       final SurveyViewHolder holder = (SurveyViewHolder) view;
       final Survey survey = allSurvey.survey;
       holder.nameText.setText(survey.name);
-      holder.descriptionText.setText(
-          context.getResources().getString(R.string.lynx_progress_bold));
+      holder.descriptionText.setText(survey.getType(context, true));
       holder.evaluateText.setText(survey.personsEvaluatedText);
 
       try {

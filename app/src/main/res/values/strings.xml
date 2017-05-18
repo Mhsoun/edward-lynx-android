@@ -222,8 +222,6 @@
   // region survey
   <string name="contact_to_reactivate">Reactivate</string>
   <string name="lynx_measurement">LYNX MEASUREMENT</string>
-  <string name="lynx_progress_bold">LYNX PROGRESS</string>
-  <string name="lynx_360_bold">LYNX 360</string>
   <string name="open_status_bold">OPEN</string>
   <string name="unfinished_status_bold">UNFINISHED</string>
   <string name="not_invited_status_bold">NOT INVITED</string>
@@ -267,4 +265,12 @@
   <string name="search_reports">Search Reports</string>
   <string name="search_survey">Search Surveys</string>
   <string name="search_development_plans">Search Development Plans</string>
+
+  <string name="lynx_360">Lynx 360</string>
+  <string name="lynx_management">LMTT</string>
+  <string name="lynx_progress">Lynx Progress</string>
+  <string name="lynx_survey">Lynx Survey</string>
+  <string name="lynx_team_tool">LTT</string>
+
+  <string name="answer_survey">Answer Survey</string>
 </resources>

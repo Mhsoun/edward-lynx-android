@@ -25,6 +25,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Questions;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.fragments.PopupDialogFragment;
+import com.ingenuitymobile.edwardlynx.fragments.SurveyDetailedFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveyQuestionsFragment;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
@@ -51,6 +52,8 @@ public class SurveyQuestionsActivity extends BaseActivity {
   private ImageView previousImage;
   private ImageView nextImage;
 
+  private SurveyDetailedFragment surveyDetailedFragment;
+
   public SurveyQuestionsActivity() {
     data = new ArrayList<>();
     bodies = new ArrayList<>();
@@ -71,6 +74,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
     initViews();
     getData();
+    setTitle(getString(R.string.answer_survey));
   }
 
   @Override
@@ -94,6 +98,10 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
     previousImage.setOnClickListener(onClickListener);
     nextImage.setOnClickListener(onClickListener);
+
+    if (surveyDetailedFragment == null) {
+      surveyDetailedFragment = new SurveyDetailedFragment();
+    }
   }
 
   private void getData() {
@@ -112,9 +120,9 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
       @Override
       public void onNext(Survey surveyResponse) {
+        LogUtil.e("AAA Survey details onNext ");
         survey = surveyResponse;
-        setTitle(surveyResponse.name);
-        saveDraftsText.setVisibility(survey.status == Survey.COMPLETED ? View.GONE : View.VISIBLE);
+        surveyDetailedFragment.setSurvey(survey);
       }
     }));
   }
@@ -129,7 +137,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
         viewPager.setOnPageChangeListener(pageChangeListener);
         viewPager.setAdapter(adapter);
         circleIndicator.setViewPager(viewPager);
-        setNavigation();
+        setNavigation(0);
         submitText.setVisibility(survey.status == Survey.COMPLETED || data.size() != 1
             ? View.GONE : View.VISIBLE);
       }
@@ -164,12 +172,17 @@ public class SurveyQuestionsActivity extends BaseActivity {
     }));
   }
 
-  private void setNavigation() {
-    findViewById(R.id.layout_navigation).setVisibility(data.size() == 1 ? View.GONE : View.VISIBLE);
+  private void setNavigation(int position) {
+    findViewById(R.id.layout_navigation).setVisibility(View.VISIBLE);
 
     previousImage.setVisibility(viewPager.getCurrentItem() == 0 ? View.INVISIBLE : View.VISIBLE);
     nextImage.setVisibility(
-        viewPager.getCurrentItem() == data.size() - 1 ? View.INVISIBLE : View.VISIBLE);
+        (viewPager.getCurrentItem() - 1) == data.size() - 1 ? View.INVISIBLE : View.VISIBLE);
+
+    if (survey.status != Survey.COMPLETED) {
+      submitText.setVisibility((position - 1) != data.size() - 1 ? View.GONE : View.VISIBLE);
+      saveDraftsText.setVisibility(position == 0 ? View.GONE : View.VISIBLE);
+    }
   }
 
   public void submit(View v) {
@@ -256,11 +269,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
     @Override
     public void onPageSelected(int position) {
       LogUtil.e("AAA onPageSelected " + position);
-      setNavigation();
-      if (survey.status != Survey.COMPLETED) {
-        submitText.setVisibility(position != data.size() - 1
-            ? View.GONE : View.VISIBLE);
-      }
+      setNavigation(position);
     }
 
     @Override
@@ -297,19 +306,24 @@ public class SurveyQuestionsActivity extends BaseActivity {
     // Returns total number of pages
     @Override
     public int getCount() {
-      return data.size();
+      return data.size() + 1;
     }
 
     // Returns the fragment to display for that page
     @Override
     public Fragment getItem(int position) {
-      SurveyQuestionsFragment fragment = new SurveyQuestionsFragment();
-      fragment.setData(
-          data.get(position).questions,
-          bodies,
-          listener,
-          survey.status != Survey.COMPLETED);
-      return fragment;
+      switch (position) {
+      case 0:
+        return surveyDetailedFragment;
+      default:
+        SurveyQuestionsFragment fragment = new SurveyQuestionsFragment();
+        fragment.setData(
+            data.get(position - 1).questions,
+            bodies,
+            listener,
+            survey.status != Survey.COMPLETED);
+        return fragment;
+      }
     }
 
     // Returns the page title for the top indicator

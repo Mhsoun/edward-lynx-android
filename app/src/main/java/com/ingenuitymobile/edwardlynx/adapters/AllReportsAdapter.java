@@ -84,7 +84,7 @@ public class AllReportsAdapter extends RecyclerView.Adapter<AllReportsAdapter.Vi
           context.startActivity(intent);
         }
       });
-      holder.reportType.setText(context.getResources().getString(R.string.lynx_360_bold));
+      holder.reportType.setText(survey.getType(context, true));
       holder.reportType.setBackgroundColor(context.getResources().getColor(R.color.lynx_color));
     } else {
       final Feedback feedback = allSurvey.feedback;

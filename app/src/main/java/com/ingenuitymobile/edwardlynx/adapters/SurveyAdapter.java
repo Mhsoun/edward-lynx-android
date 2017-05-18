@@ -73,8 +73,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
     final Context context = holder.itemView.getContext();
     final Survey survey = data.get(position);
     holder.nameText.setText(survey.name);
-    holder.descriptionText.setText(
-        context.getResources().getString(R.string.lynx_progress_bold));
+    holder.descriptionText.setText(survey.getType(context, true));
     holder.evaluateText.setText(survey.personsEvaluatedText);
 
     try {

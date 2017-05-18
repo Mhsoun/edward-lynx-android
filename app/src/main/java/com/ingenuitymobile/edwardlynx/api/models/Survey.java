@@ -1,6 +1,9 @@
 package com.ingenuitymobile.edwardlynx.api.models;
 
+import android.content.Context;
+
 import com.google.gson.annotations.SerializedName;
+import com.ingenuitymobile.edwardlynx.R;
 
 /**
  * Created by mEmEnG-sKi on 09/01/2017.
@@ -48,4 +51,29 @@ public class Survey {
 
   @SerializedName("key")
   public String key;
+
+  public String getType(Context ctx, boolean isUpperCase) {
+    String string = "";
+    switch (type) {
+    case 0:
+      string = ctx.getResources().getString(R.string.lynx_360);
+      break;
+    case 1:
+      string = ctx.getResources().getString(R.string.lynx_management);
+      break;
+    case 2:
+      string = ctx.getResources().getString(R.string.lynx_progress);
+      break;
+    case 3:
+      string = ctx.getResources().getString(R.string.lynx_survey);
+      break;
+    case 4:
+      string = ctx.getResources().getString(R.string.lynx_team_tool);
+      break;
+    default:
+      return string;
+    }
+    string = isUpperCase ? string.toUpperCase() : string;
+    return string;
+  }
 }
