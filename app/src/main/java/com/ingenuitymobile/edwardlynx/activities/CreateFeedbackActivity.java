@@ -222,8 +222,8 @@ public class CreateFeedbackActivity extends BaseActivity {
       if (type == Answer.CUSTOM_SCALE) {
         strings = options;
       } else if (type == Answer.YES_OR_NO) {
-        strings.add("Yes");
         strings.add("No");
+        strings.add("Yes");
       } else if (type == Answer.NUMERIC_1_10_SCALE) {
         strings.add("1");
         strings.add("2");

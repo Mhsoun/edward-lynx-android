@@ -73,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:animationMode="overdraw"
-            app:backStrokeColor="@color/black"
+            app:backStrokeColor="@color/colorPrimaryDark"
             app:strokeSize="12dp"
             app:valueStrokeColor="@color/colorAccent"/>
 

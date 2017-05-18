@@ -66,10 +66,16 @@
           android:textColor="@color/white"
           android:textSize="20sp"/>
 
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="0.5dp"
+          android:layout_marginTop="16dp"
+          android:background="@color/white"/>
+
       <LinearLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="16dp"
+          android:layout_marginTop="8dp"
           android:orientation="horizontal">
 
         <TextView
@@ -84,7 +90,8 @@
             android:layout_gravity="center"
             android:layout_marginLeft="8dp"
             android:src="@drawable/ic_help"
-            android:tint="@color/white"/>
+            android:tint="@color/white"
+            android:visibility="gone"/>
       </LinearLayout>
 
       <RelativeLayout
@@ -141,10 +148,16 @@
           android:src="@drawable/ic_add_goal"
           android:tint="@android:color/transparent"/>
 
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="0.5dp"
+          android:layout_marginTop="12dp"
+          android:background="@color/white"/>
+
       <RelativeLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="32dp">
+          android:layout_marginTop="16dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -230,12 +243,12 @@
           android:id="@+id/text_done"
           style="@style/orange_button"
           android:layout_width="match_parent"
-          android:layout_marginTop="16dp"
           android:layout_marginBottom="16dp"
           android:layout_marginLeft="16dp"
           android:layout_marginRight="16dp"
+          android:layout_marginTop="16dp"
           android:onClick="save"
-          android:text="@string/save"/>
+          android:text="@string/add_goal"/>
     </LinearLayout>
   </ScrollView>
 </RelativeLayout>

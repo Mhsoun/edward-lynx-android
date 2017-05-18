@@ -38,7 +38,6 @@ public class ProfileFragment extends BaseFragment {
   private EditText   departmentEdit;
   private EditText   roleEdit;
   private RadioGroup genderRadiogroup;
-  private EditText   genderEdit;
   private EditText   countryEdit;
   private EditText   cityEdit;
   private TextView   editText;
@@ -107,7 +106,6 @@ public class ProfileFragment extends BaseFragment {
     departmentEdit = (EditText) mainView.findViewById(R.id.edit_department);
     roleEdit = (EditText) mainView.findViewById(R.id.edit_role);
     genderRadiogroup = (RadioGroup) mainView.findViewById(R.id.radiogroup_gender);
-    genderEdit = (EditText) mainView.findViewById(R.id.edit_gender);
     countryEdit = (EditText) mainView.findViewById(R.id.edit_country);
     cityEdit = (EditText) mainView.findViewById(R.id.edit_city);
     editText = (TextView) mainView.findViewById(R.id.text_edit);
@@ -121,9 +119,6 @@ public class ProfileFragment extends BaseFragment {
       public void onCheckedChanged(RadioGroup radioGroup, int i) {
         RadioButton radioButton = (RadioButton) radioGroup.findViewById(i);
         gender = (String) radioButton.getTag();
-
-        genderEdit.setVisibility(
-            gender.equals(getString(R.string.other)) ? View.VISIBLE : View.GONE);
       }
     });
   }
@@ -138,21 +133,14 @@ public class ProfileFragment extends BaseFragment {
     countryEdit.setText(Shared.user.country);
     cityEdit.setText(Shared.user.city);
 
-    genderEdit.setVisibility(View.GONE);
-
     if (Shared.user.gender.toLowerCase().equals(getString(R.string.male))) {
       genderRadiogroup.check(R.id.radiobutton_male);
     } else if (Shared.user.gender.toLowerCase().equals(getString(R.string.female))) {
       genderRadiogroup.check(R.id.radiobutton_female);
-    } else {
-      genderRadiogroup.check(R.id.radiobutton_other);
-
-      genderEdit.setVisibility(View.VISIBLE);
-      genderEdit.setText(Shared.user.gender);
     }
 
     for (int i = 0; i < genderRadiogroup.getChildCount(); i++) {
-      genderRadiogroup.getChildAt(i).setEnabled(false);
+      genderRadiogroup.getChildAt(i).setClickable(false);
     }
   }
 
@@ -193,20 +181,7 @@ public class ProfileFragment extends BaseFragment {
       body.city = city;
     }
 
-    if (!gender.toLowerCase().equals(getString(R.string.male)) &&
-        !gender.toLowerCase().equals(getString(R.string.female))) {
-      final String genderFromEdit = genderEdit.getText().toString();
-
-      if (TextUtils.isEmpty(genderFromEdit)) {
-        genderEdit.setError(getString(R.string.gender_required));
-        genderEdit.requestFocus();
-        return;
-      }
-
-      body.gender = genderFromEdit;
-    } else {
-      body.gender = gender;
-    }
+    body.gender = gender;
 
     hideKeyboard();
 
@@ -251,15 +226,13 @@ public class ProfileFragment extends BaseFragment {
     departmentEdit.setSelection(departmentEdit.getText().length());
     roleEdit.setEnabled(isEdit);
     roleEdit.setSelection(roleEdit.getText().length());
-    genderEdit.setEnabled(isEdit);
-    genderEdit.setSelection(genderEdit.getText().length());
     countryEdit.setEnabled(isEdit);
     countryEdit.setSelection(countryEdit.getText().length());
     cityEdit.setEnabled(isEdit);
     cityEdit.setSelection(cityEdit.getText().length());
 
     for (int i = 0; i < genderRadiogroup.getChildCount(); i++) {
-      genderRadiogroup.getChildAt(i).setEnabled(isEdit);
+      genderRadiogroup.getChildAt(i).setClickable(isEdit);
     }
   }
 

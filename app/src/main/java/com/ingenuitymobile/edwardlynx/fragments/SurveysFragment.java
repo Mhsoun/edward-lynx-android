@@ -82,7 +82,7 @@ public class SurveysFragment extends BaseFragment {
 
   private void initViews() {
     final SearchView searchView = (SearchView) mainView.findViewById(R.id.searchview);
-    searchView.setQueryHint("Search Survey");
+    searchView.setQueryHint(getString(R.string.search_survey));
     searchView.setOnQueryTextListener(onQueryTextListener);
 
     viewPager = (ViewPager) mainView.findViewById(R.id.viewpager);

@@ -14,6 +14,7 @@ import com.ingenuitymobile.edwardlynx.api.models.AllSurveys;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.Question;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
+import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.text.SimpleDateFormat;
@@ -26,7 +27,6 @@ import java.util.List;
 
 public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-  private SimpleDateFormat format      = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
   private SimpleDateFormat monthFormat = new SimpleDateFormat("MMM");
   private SimpleDateFormat dateFormat  = new SimpleDateFormat("dd");
   private SimpleDateFormat yearFormat  = new SimpleDateFormat("yyyy");
@@ -114,7 +114,7 @@ public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
           context.getResources().getString(R.string.instant_feedback_bold));
 
       try {
-        Date date = format.parse(feedback.createdAt);
+        Date date = DateUtil.getAPIFormat().parse(feedback.createdAt);
         holder.monthText.setText(monthFormat.format(date));
         holder.dateTExt.setText(dateFormat.format(date));
         holder.yearText.setText(yearFormat.format(date));
@@ -143,7 +143,7 @@ public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
       holder.evaluateText.setText(survey.personsEvaluatedText);
 
       try {
-        Date date = format.parse(survey.endDate);
+        Date date = DateUtil.getAPIFormat().parse(survey.endDate);
         holder.monthText.setText(monthFormat.format(date));
         holder.dateTExt.setText(dateFormat.format(date));
         holder.yearText.setText(yearFormat.format(date));

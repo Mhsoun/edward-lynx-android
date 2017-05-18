@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
+import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.text.SimpleDateFormat;
@@ -23,7 +24,6 @@ import java.util.List;
 
 public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder> {
 
-  private SimpleDateFormat format      = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
   private SimpleDateFormat monthFormat = new SimpleDateFormat("MMM");
   private SimpleDateFormat dateFormat  = new SimpleDateFormat("dd");
   private SimpleDateFormat yearFormat  = new SimpleDateFormat("yyyy");
@@ -78,7 +78,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
     holder.evaluateText.setText(survey.personsEvaluatedText);
 
     try {
-      Date date = format.parse(survey.endDate);
+      Date date = DateUtil.getAPIFormat().parse(survey.endDate);
       holder.monthText.setText(monthFormat.format(date));
       holder.dateTExt.setText(dateFormat.format(date));
       holder.yearText.setText(yearFormat.format(date));

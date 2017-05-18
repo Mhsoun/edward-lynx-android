@@ -103,7 +103,7 @@ public class DevelopmenPlansFragment extends BaseFragment {
 
   private void initViews() {
     final SearchView searchView = (SearchView) mainView.findViewById(R.id.searchview);
-    searchView.setQueryHint("Search Development Plan");
+    searchView.setQueryHint(getString(R.string.search_development_plans));
     searchView.setOnQueryTextListener(onQueryTextListener);
 
     viewPager = (ViewPager) mainView.findViewById(R.id.viewpager);

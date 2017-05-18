@@ -43,13 +43,15 @@
             android:textSize="22sp"/>
 
         <TextView
+            fontPath="fonts/Lato-Italic.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="4dp"
             android:text="@string/shows_averages"
             android:textColor="@color/survey_line"
             android:textSize="10sp"
-            android:textStyle="italic"/>
+            android:textStyle="italic"
+            tools:ignore="MissingPrefix"/>
 
         <!--<TextView-->
         <!--android:layout_width="wrap_content"-->

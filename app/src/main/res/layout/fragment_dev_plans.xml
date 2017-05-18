@@ -15,8 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="@drawable/bg_rounded_input_field"
-        app:defaultQueryHint="Search Survey">
+        android:background="@drawable/bg_rounded_input_field">
     </android.support.v7.widget.SearchView>
 
     <android.support.design.widget.TabLayout

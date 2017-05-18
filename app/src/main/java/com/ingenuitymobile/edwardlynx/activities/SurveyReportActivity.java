@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -28,10 +27,10 @@ import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.api.models.Average;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
+import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -96,7 +95,13 @@ public class SurveyReportActivity extends BaseActivity {
 
   private void initViews() {
     barChart = (HorizontalBarChart) findViewById(R.id.bar_chart);
+    barChart.setNoDataText(getString(R.string.no_chart_data_available));
+    barChart.invalidate();
+
     mulitpleBarChart = (HorizontalBarChart) findViewById(R.id.mulitple_bar_chart);
+    mulitpleBarChart.setNoDataText(getString(R.string.no_chart_data_available));
+    mulitpleBarChart.invalidate();
+
     dateText = (TextView) findViewById(R.id.text_date);
     detailsText = (TextView) findViewById(R.id.text_date_details);
 
@@ -126,15 +131,13 @@ public class SurveyReportActivity extends BaseActivity {
 
       @Override
       public void onNext(Survey surveyResponse) {
-        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
-        final SimpleDateFormat displayFormat = new SimpleDateFormat("MMM dd, yyyy");
 
         survey = surveyResponse;
         setTitle(surveyResponse.name);
 
         try {
-          Date date = format.parse(survey.endDate);
-          dateText.setText(displayFormat.format(date));
+          Date date = DateUtil.getAPIFormat().parse(survey.endDate);
+          dateText.setText(DateUtil.getDisplayFormat().format(date));
         } catch (Exception e) {
           dateText.setText("");
         }

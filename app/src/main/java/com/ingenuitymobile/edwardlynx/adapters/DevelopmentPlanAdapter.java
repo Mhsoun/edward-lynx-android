@@ -23,10 +23,9 @@ import com.ingenuitymobile.edwardlynx.activities.DevelopmentPlanDetailedActivity
 import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.views.fitchart.FitChart;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,9 +36,6 @@ import java.util.List;
 
 public class DevelopmentPlanAdapter extends
     RecyclerView.Adapter<DevelopmentPlanAdapter.ViewHolder> {
-
-  private SimpleDateFormat format        = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
-  private SimpleDateFormat displayFormat = new SimpleDateFormat("MMM dd, yyyy");
 
   private List<DevelopmentPlan> data;
 
@@ -121,8 +117,8 @@ public class DevelopmentPlanAdapter extends
     holder.nameText.setText(plan.name);
 
     try {
-      Date date = format.parse(plan.createdAt);
-      holder.dateText.setText(displayFormat.format(date));
+      Date date = DateUtil.getAPIFormat().parse(plan.createdAt);
+      holder.dateText.setText(DateUtil.getDisplayFormat().format(date));
     } catch (Exception e) {
       holder.dateText.setText("");
     }

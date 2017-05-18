@@ -83,7 +83,6 @@ public class ReportsActivity extends BaseActivity {
 
   private void initViews() {
     final SearchView searchView = (SearchView) findViewById(R.id.searchview);
-    searchView.setQueryHint("Search Reports");
     searchView.setOnQueryTextListener(onQueryTextListener);
 
     viewPager = (ViewPager) findViewById(R.id.viewpager);

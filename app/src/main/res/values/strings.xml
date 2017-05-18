@@ -87,7 +87,6 @@
   <string name="add_na_option">Add a N/A option</string>
   <string name="custom_scale_hit">Input option, and press Done</string>
   <string name="invite">Invite</string>
-  <string name="search">Search</string>
   <string name="add_participants">Add Participants</string>
   <string name="question_required_label">Question can\t be blank</string>
   <string name="answer_required_label">Answer type should be selected</string>
@@ -119,6 +118,7 @@
   <string name="development_plan_created">Development plan created</string>
   <string name="goals">Goals</string>
   <string name="done">Done</string>
+  <string name="create">Create</string>
   <string name="no_actions_added">No Actions added</string>
   <string name="no_goals_added">No Goals added</string>
 
@@ -132,6 +132,7 @@
   <string name="due_date_goal">Due Date: %1$s</string>
   <string name="link_to_categroy">Link to a category</string>
   <string name="save">Save</string>
+  <string name="add_goal">Add Goal</string>
   <string name="edit">Edit</string>
   <string name="submit">Submit</string>
 
@@ -177,7 +178,9 @@
   <string name="user_updated">User updated</string>
   <string name="male">male</string>
   <string name="female">female</string>
-  <string name="position">Position</string>
+  <string name="male_camel">Male</string>
+  <string name="female_camel">Female</string>
+  <string name="about">About</string>
   <string name="department">Department</string>
   <string name="role">Role</string>
   <string name="gender">Gender</string>
@@ -227,6 +230,8 @@
   <string name="save_to_drafts">Save to Drafts</string>
 
   <string name="no_data_found">No data found</string>
+  <string name="no_development_plans">No Development Plans</string>
+  <string name="no_chart_data_available">No chart data available</string>
   <string name="question_label">Question: </string>
   <string name="add_more_participants">Add more participants</string>
 
@@ -257,4 +262,9 @@
   // reminder
   <string name="goal_bold">GOAL</string>
   <string name="survey_bold">SURVEY</string>
+
+  <string name="search">Search</string>
+  <string name="search_reports">Search Reports</string>
+  <string name="search_survey">Search Surveys</string>
+  <string name="search_development_plans">Search Development Plans</string>
 </resources>

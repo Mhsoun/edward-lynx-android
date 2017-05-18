@@ -10,9 +10,9 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.Question;
+import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -22,9 +22,6 @@ import java.util.List;
 
 public class FeedbackReportsAdapter extends
     RecyclerView.Adapter<FeedbackReportsAdapter.ViewHolder> {
-
-  private SimpleDateFormat format        = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
-  private SimpleDateFormat displayFormat = new SimpleDateFormat("MMM dd, yyyy");
 
   private List<Feedback>           data;
   private OnSelectFeedbackListener listener;
@@ -62,8 +59,8 @@ public class FeedbackReportsAdapter extends
     final Context context = holder.itemView.getContext();
 
     try {
-      Date date = format.parse(feedback.createdAt);
-      holder.dateText.setText(displayFormat.format(date));
+      Date date = DateUtil.getAPIFormat().parse(feedback.createdAt);
+      holder.dateText.setText(DateUtil.getDisplayFormat().format(date));
     } catch (Exception e) {
       LogUtil.e("AAA " + e);
     }

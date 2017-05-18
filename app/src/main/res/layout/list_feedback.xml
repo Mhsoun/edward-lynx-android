@@ -46,12 +46,13 @@
 
   <TextView
       android:id="@+id/text_status"
-      android:layout_width="wrap_content"
+      android:layout_width="70dp"
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
       android:layout_centerVertical="true"
       android:layout_marginRight="12dp"
       android:background="@color/unfinished_status"
+      android:gravity="center"
       android:padding="2dp"
       android:text="@string/open_status_bold"
       android:textColor="@color/white"

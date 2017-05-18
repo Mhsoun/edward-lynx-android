@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.Question;
+import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.text.SimpleDateFormat;
@@ -22,7 +23,6 @@ import java.util.List;
 
 public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHolder> {
 
-  private SimpleDateFormat format      = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
   private SimpleDateFormat monthFormat = new SimpleDateFormat("MMM");
   private SimpleDateFormat dateFormat  = new SimpleDateFormat("dd");
   private SimpleDateFormat yearFormat  = new SimpleDateFormat("yyyy");
@@ -68,7 +68,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
         context.getResources().getString(R.string.instant_feedback_bold));
 
     try {
-      Date date = format.parse(feedback.createdAt);
+      Date date = DateUtil.getAPIFormat().parse(feedback.createdAt);
       holder.monthText.setText(monthFormat.format(date));
       holder.dateTExt.setText(dateFormat.format(date));
       holder.yearText.setText(yearFormat.format(date));

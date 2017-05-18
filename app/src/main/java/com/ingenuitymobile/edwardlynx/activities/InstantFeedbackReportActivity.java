@@ -9,9 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -33,10 +31,9 @@ import com.ingenuitymobile.edwardlynx.api.models.Answer;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.FeedbackFrequency;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
+import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
-import com.txusballesteros.widgets.FitChart;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -168,14 +165,11 @@ public class InstantFeedbackReportActivity extends BaseActivity {
   }
 
   private void setDetails() {
-    final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
-    final SimpleDateFormat displayFormat = new SimpleDateFormat("MMM dd, yyyy");
-
     questionText.setText(feedback.questions.get(0).text);
 
     try {
-      Date date = format.parse(feedback.createdAt);
-      dateText.setText(displayFormat.format(date));
+      Date date = DateUtil.getAPIFormat().parse(feedback.createdAt);
+      dateText.setText(DateUtil.getDisplayFormat().format(date));
     } catch (Exception e) {
       dateText.setText("");
     }
@@ -211,6 +205,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         horizontalBarChart.setPinchZoom(false);
         horizontalBarChart.setDrawGridBackground(false);
         horizontalBarChart.setDoubleTapToZoomEnabled(false);
+        horizontalBarChart.setNoDataText(getString(R.string.no_chart_data_available));
 
         XAxis xl = horizontalBarChart.getXAxis();
         xl.setPosition(XAxis.XAxisPosition.BOTTOM);

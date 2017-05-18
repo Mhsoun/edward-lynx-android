@@ -34,9 +34,9 @@ import com.ingenuitymobile.edwardlynx.adapters.CreateActionPlanAdapter;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ActionParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.GoalParam;
 import com.ingenuitymobile.edwardlynx.api.models.Category;
+import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -46,8 +46,6 @@ import java.util.List;
  */
 
 public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
-
-  private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
 
   private EditText                developmentNameEdit;
   private EditText                descriptionEdit;
@@ -152,7 +150,7 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     Calendar calendar = Calendar.getInstance();
     try {
       if (isRemind) {
-        calendar.setTime(format.parse(param.dueDate));
+        calendar.setTime(DateUtil.getAPIFormat().parse(param.dueDate));
       }
     } catch (Exception e) {LogUtil.e("AAA ", e);}
     calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
@@ -231,7 +229,8 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     }
 
     param.title = developmentPlan;
-    param.dueDate = remindCheckbox.isChecked() ? format.format(datePicker.getDate()) : null;
+    param.dueDate = remindCheckbox.isChecked() ?
+        DateUtil.getAPIFormat().format(datePicker.getDate()) : null;
     param.categoryId = linkCategoryCheckbox.isChecked() ? param.categoryId : 0L;
     if (!TextUtils.isEmpty(description)) {
       param.description = description;

@@ -3,12 +3,10 @@ package com.ingenuitymobile.edwardlynx.adapters;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,10 +18,9 @@ import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
+import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
-import com.ingenuitymobile.edwardlynx.utils.StringUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -33,9 +30,6 @@ import java.util.List;
 
 public class GoalAdapter extends
     ExpandableRecyclerAdapter<GoalAdapter.ParentView, GoalAdapter.ChildView> {
-
-  private SimpleDateFormat format        = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
-  private SimpleDateFormat displayFormat = new SimpleDateFormat("MMM dd, yyyy");
 
   private OnSelectActionListener listener;
 
@@ -110,9 +104,12 @@ public class GoalAdapter extends
       holder.dateText.setText(context.getResources().getString(R.string.completed_text));
     } else {
       try {
-        Date date = format.parse(goal.dueDate);
+        Date date = DateUtil.getAPIFormat().parse(goal.dueDate);
         holder.dateText.setText(
-            context.getResources().getString(R.string.due_date_goal, displayFormat.format(date)));
+            context
+                .getResources()
+                .getString(R.string.due_date_goal,
+                    DateUtil.getDisplayFormat().format(date)));
       } catch (Exception e) {
         LogUtil.e("AAA " + e);
         holder.dateText.setText("");

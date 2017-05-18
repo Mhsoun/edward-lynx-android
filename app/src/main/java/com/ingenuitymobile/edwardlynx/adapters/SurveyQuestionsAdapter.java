@@ -1,6 +1,8 @@
 package com.ingenuitymobile.edwardlynx.adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -102,7 +104,7 @@ public class SurveyQuestionsAdapter extends
         if (question.value != null) {
           listener.onAnswer(question.id, String.valueOf((double) question.value));
           for (int i = 0; i < holder.radioGroup.getChildCount(); i++) {
-            holder.radioGroup.getChildAt(i).setEnabled(isEnabled);
+            holder.radioGroup.getChildAt(i).setClickable(isEnabled);
 
             if (holder.radioGroup.getChildAt(i).getTag().equals(
                 String.valueOf((int) (double) question.value))) {
@@ -165,7 +167,7 @@ public class SurveyQuestionsAdapter extends
 
   private void createRadioButton(final RadioGroup radioGroup, final Context context,
       final String description, int value) {
-    final RadioButton radioButton = new RadioButton(context);
+    final AppCompatRadioButton radioButton = new AppCompatRadioButton(context);
     final LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.WRAP_CONTENT,
         LinearLayout.LayoutParams.WRAP_CONTENT);

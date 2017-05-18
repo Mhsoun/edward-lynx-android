@@ -27,8 +27,8 @@
 
       <EditText
           android:id="@+id/edit_name"
-          android:layout_width="match_parent"
           style="@style/edit_text"
+          android:layout_width="match_parent"
           android:layout_marginTop="4dp"
           android:enabled="false"
           android:imeOptions="actionNext"
@@ -38,13 +38,63 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="12dp"
-          android:text="@string/position"
+          android:text="@string/gender"
+          android:textColor="@color/white"/>
+
+      <RadioGroup
+          android:id="@+id/radiogroup_gender"
+          style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:weightSum="3">
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/radiobutton_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:tag="male"
+            android:text="@string/male_camel"
+            android:textColor="@color/white"/>
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/radiobutton_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:tag="female"
+            android:text="@string/female_camel"
+            android:textColor="@color/white"/>
+      </RadioGroup>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="12dp"
+          android:text="@string/about"
           android:textColor="@color/white"/>
 
       <EditText
           android:id="@+id/edit_info"
-          android:layout_width="match_parent"
           style="@style/edit_text"
+          android:layout_width="match_parent"
+          android:layout_marginTop="4dp"
+          android:enabled="false"
+          android:imeOptions="actionDone"
+          android:inputType="textPersonName"/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="12dp"
+          android:text="@string/role"
+          android:textColor="@color/white"/>
+
+      <EditText
+          android:id="@+id/edit_role"
+          style="@style/edit_text"
+          android:layout_width="match_parent"
           android:layout_marginTop="4dp"
           android:enabled="false"
           android:imeOptions="actionDone"
@@ -59,84 +109,12 @@
 
       <EditText
           android:id="@+id/edit_department"
+          style="@style/edit_text"
           android:layout_width="match_parent"
           android:layout_marginTop="4dp"
           android:enabled="false"
-          style="@style/edit_text"
           android:imeOptions="actionNext"
           android:inputType="textPersonName"/>
-
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="12dp"
-          android:text="@string/role"
-          android:textColor="@color/white"/>
-
-      <EditText
-          android:id="@+id/edit_role"
-          android:layout_width="match_parent"
-          android:layout_marginTop="4dp"
-          style="@style/edit_text"
-          android:enabled="false"
-          android:imeOptions="actionDone"
-          android:inputType="textPersonName"/>
-
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="12dp"
-          android:text="@string/gender"
-          android:textColor="@color/white"/>
-
-      <RadioGroup
-          android:id="@+id/radiogroup_gender"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:weightSum="3">
-
-        <android.support.v7.widget.AppCompatRadioButton
-            android:id="@+id/radiobutton_male"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="@color/white"
-            android:tag="male"
-            android:text="@string/male"
-            android:textColor="@color/white"/>
-
-        <android.support.v7.widget.AppCompatRadioButton
-            android:id="@+id/radiobutton_female"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="@color/white"
-            android:tag="female"
-            android:text="@string/female"
-            android:textColor="@color/white"/>
-
-        <android.support.v7.widget.AppCompatRadioButton
-            android:id="@+id/radiobutton_other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="@color/white"
-            android:tag="other"
-            android:text="@string/other"
-            android:textColor="@color/white"/>
-      </RadioGroup>
-
-      <EditText
-          android:id="@+id/edit_gender"
-          android:layout_width="match_parent"
-          android:layout_marginTop="4dp"
-          style="@style/edit_text"
-          android:enabled="false"
-          android:hint="@string/input_gender"
-          android:imeOptions="actionNext"
-          android:inputType="textPersonName"
-          android:visibility="gone"/>
 
       <LinearLayout
           android:layout_width="match_parent"
@@ -159,9 +137,9 @@
 
           <EditText
               android:id="@+id/edit_country"
+              style="@style/edit_text"
               android:layout_width="match_parent"
               android:layout_marginRight="4dp"
-              style="@style/edit_text"
               android:layout_marginTop="4dp"
               android:enabled="false"
               android:imeOptions="actionNext"
@@ -183,11 +161,11 @@
 
           <EditText
               android:id="@+id/edit_city"
+              style="@style/edit_text"
               android:layout_width="match_parent"
               android:layout_marginRight="4dp"
               android:layout_marginTop="4dp"
               android:enabled="false"
-              style="@style/edit_text"
               android:imeOptions="actionDone"
               android:inputType="textPersonName"/>
         </LinearLayout>
@@ -196,8 +174,8 @@
 
     <TextView
         android:id="@+id/text_edit"
-        android:layout_width="match_parent"
         style="@style/orange_button"
+        android:layout_width="match_parent"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:onClick="save"
@@ -206,11 +184,14 @@
     <TextView
         android:id="@+id/text_cancel"
         android:layout_width="match_parent"
-        style="@style/orange_button"
+        android:layout_height="48dp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_rounded_save_drafts"
         android:gravity="center"
         android:onClick="cancel"
         android:text="@string/cancel"
+        android:textColor="@color/common_text_color"
+        android:textSize="18sp"
         android:visibility="gone"/>
   </LinearLayout>
 

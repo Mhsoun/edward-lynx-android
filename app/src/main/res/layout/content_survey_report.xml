@@ -43,12 +43,14 @@
             android:textSize="22sp"/>
 
         <TextView
+            fontPath="fonts/Lato-Italic.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/shows_averages"
             android:textColor="@color/survey_line"
             android:textSize="10sp"
-            android:textStyle="italic"/>
+            android:textStyle="italic"
+            tools:ignore="MissingPrefix"/>
       </LinearLayout>
 
       <com.github.mikephil.charting.charts.HorizontalBarChart
@@ -66,18 +68,20 @@
           android:textSize="22sp"/>
 
       <TextView
+          fontPath="fonts/Lato-Italic.ttf"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/index_over_competencies_details"
           android:textColor="@color/survey_line"
           android:textSize="10sp"
-          android:textStyle="italic"/>
+          android:textStyle="italic"
+          tools:ignore="MissingPrefix"/>
 
       <com.github.mikephil.charting.charts.HorizontalBarChart
           android:id="@+id/mulitple_bar_chart"
           android:layout_width="match_parent"
-          android:minHeight="100dp"
-          android:layout_height="wrap_content">
+          android:layout_height="wrap_content"
+          android:minHeight="100dp">
       </com.github.mikephil.charting.charts.HorizontalBarChart>
 
       <TextView

@@ -56,11 +56,6 @@ public class DevelopmentPlanListFragment extends BaseFragment {
     return mainView;
   }
 
-  @Override
-  public void onResume() {
-    super.onResume();
-  }
-
   private void initViews() {
     final RecyclerView surveyList = (RecyclerView) mainView.findViewById(R.id.list_survey);
     emptyText = (TextView) mainView.findViewById(R.id.text_empty_state);
@@ -73,7 +68,6 @@ public class DevelopmentPlanListFragment extends BaseFragment {
 
     adapter = new DevelopmentPlanAdapter(displayData);
     surveyList.setAdapter(adapter);
-    setDisplayData();
   }
 
   public void setData(List<DevelopmentPlan> data) {

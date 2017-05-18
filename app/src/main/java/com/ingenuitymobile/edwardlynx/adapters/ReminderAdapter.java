@@ -17,9 +17,8 @@ import com.ingenuitymobile.edwardlynx.activities.DevelopmentPlanDetailedActivity
 import com.ingenuitymobile.edwardlynx.activities.MainActivity;
 import com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity;
 import com.ingenuitymobile.edwardlynx.api.models.Reminder;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -28,8 +27,6 @@ import java.util.List;
  */
 
 public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHolder> {
-
-  private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
 
   private List<Reminder>                        data;
   private MainActivity.OnChangeFragmentListener listener;
@@ -93,7 +90,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
       holder.nowText.setVisibility(View.GONE);
 
       if (!TextUtils.isEmpty(reminder.due)) {
-        Date date = format.parse(reminder.due);
+        Date date = DateUtil.getAPIFormat().parse(reminder.due);
         long diff = date.getTime() - new Date().getTime();
 
         long seconds = diff / 1000;
