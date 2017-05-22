@@ -214,6 +214,17 @@ public class ApiClient {
         }));
   }
 
+  public Subscription getSurveyId(final String key, final Subscriber<Response> subscriber) {
+    return service.getSurveyId(key)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getSurveyId(key, subscriber);
+          }
+        }));
+  }
+
   public Subscription getSurveyQuestions(final long id, final Subscriber<Questions> subscriber) {
     return service.getSurveyQuestions(id)
         .observeOn(AndroidSchedulers.mainThread())
@@ -449,8 +460,11 @@ public class ApiClient {
                   }
                 });
           } else {
-            Throwable throwable = e;
-            if (((RetrofitError) e).getResponse().getStatus() != 422) {
+            Throwable throwable;
+            if (((RetrofitError) e).getResponse().getStatus() == 422 ||
+                ((RetrofitError) e).getResponse().getStatus() == 404) {
+              throwable = e;
+            } else {
               Toast.makeText(
                   context,
                   context.getString(NetUtil.hasActiveConnection(context) ?

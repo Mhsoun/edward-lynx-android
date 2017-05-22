@@ -15,5 +15,8 @@ public class Response {
   @SerializedName("validation_errors")
   public ValidationErrors errors;
 
+  @SerializedName("survey_id")
+  public long surveyId;
+
   public boolean isNotAuthenticated;
 }

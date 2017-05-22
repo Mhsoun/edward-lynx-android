@@ -112,16 +112,46 @@ public class SplashActivity extends BaseActivity {
     Uri data = getIntent().getData();
     if (data != null) {
       Bundle bundle = new Bundle();
-      List<String> segments = data.getPathSegments();
+      final List<String> segments = data.getPathSegments();
       LogUtil.e("AAA " + segments.get(0));
       if (segments.get(0).equals(Shared.SURVEY)) {
-        //TODO
+        subscription.add(Shared.apiClient.getSurveyId(segments.get(2),
+            new Subscriber<Response>() {
+              @Override
+              public void onCompleted() {
+                openMainPage();
+              }
+
+              @Override
+              public void onError(Throwable e) {
+                if (e != null) {
+                  final retrofit.client.Response error = ((RetrofitError) e).getResponse();
+                  if (error != null && error.getStatus() == 404) {
+                    ViewUtil.showAlert(SplashActivity.this, "", getString(R.string.no_access),
+                        new DialogInterface.OnClickListener() {
+                          @Override
+                          public void onClick(DialogInterface dialogInterface, int i) {
+                            openMainPage();
+                          }
+                        });
+                  }
+                }
+              }
+
+              @Override
+              public void onNext(Response response) {
+                Bundle surveyBundle = new Bundle();
+                surveyBundle.putString("type", segments.get(0));
+                surveyBundle.putString("id", String.valueOf(response.surveyId));
+                getIntent().putExtras(surveyBundle);
+              }
+            }));
       } if (segments.get(0).equals(Shared.INSTANT_FEEDBACK_REQUEST)) {
         bundle.putString("type", segments.get(0));
         bundle.putString("id", segments.get(2));
         getIntent().putExtras(bundle);
+        openMainPage();
       }
-      openMainPage();
     } else {
       openMainPage();
     }

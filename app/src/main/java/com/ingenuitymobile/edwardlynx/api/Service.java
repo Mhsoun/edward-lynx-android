@@ -81,6 +81,9 @@ public interface Service {
   @GET("/api/v1/surveys/{id}")
   Observable<Survey> getSurvey(@Path("id") long id);
 
+  @GET("/api/v1/surveys/exchange/{key}")
+  Observable<Response> getSurveyId(@Path("key") String key);
+
   @Headers("Content-Type: application/json")
   @POST("/api/v1/surveys/{id}/answers")
   Observable<Response> postAnswerSurvey(@Path("id") long id, @Body AnswerParam param);
