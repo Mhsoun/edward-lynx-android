@@ -173,11 +173,11 @@
         <ImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:visibility="gone"
             android:layout_alignParentRight="true"
             android:layout_gravity="center"
             android:src="@drawable/ic_help"
-            android:tint="@color/white"/>
+            android:tint="@color/white"
+            android:visibility="gone"/>
       </RelativeLayout>
 
       <LinearLayout
@@ -209,12 +209,13 @@
         <EditText
             android:id="@+id/free_text_edit"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="80dp"
             android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp"
             android:background="@color/text_input_field"
             android:gravity="top"
             android:inputType="textMultiLine"
+            android:text="@string/type_here_label"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:visibility="gone"/>

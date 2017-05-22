@@ -208,6 +208,8 @@ public class SurveyQuestionsActivity extends BaseActivity {
                   getString(R.string.survey_completed), getString(R.string.label_popup));
               dialogFragment.show(getSupportFragmentManager(), "Popup");
             } else {
+              Toast.makeText(SurveyQuestionsActivity.this,
+                  getString(R.string.survey_answers_submitted), Toast.LENGTH_SHORT).show();
               finish();
             }
           }
@@ -228,8 +230,6 @@ public class SurveyQuestionsActivity extends BaseActivity {
           public void onNext(Response response) {
             LogUtil.e("AAA onNext");
             progressDialog.dismiss();
-            Toast.makeText(SurveyQuestionsActivity.this,
-                getString(R.string.survey_answers_submitted), Toast.LENGTH_SHORT).show();
           }
         }));
   }
