@@ -77,6 +77,7 @@ public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     TextView yearText;
     TextView descriptionText;
     TextView nameText;
+    TextView createdText;
 
     FeedbackViewHolder(View itemView) {
       super(itemView);
@@ -85,6 +86,7 @@ public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
       yearText = (TextView) itemView.findViewById(R.id.text_year);
       descriptionText = (TextView) itemView.findViewById(R.id.text_description);
       nameText = (TextView) itemView.findViewById(R.id.text_name);
+      createdText = (TextView) itemView.findViewById(R.id.text_evaluate);
     }
   }
 
@@ -112,6 +114,8 @@ public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
       holder.descriptionText.setText(
           context.getResources().getString(R.string.instant_feedback_bold));
+      holder.createdText.setText(
+          context.getResources().getString(R.string.created_by, feedback.author.name));
 
       try {
         Date date = DateUtil.getAPIFormat().parse(feedback.createdAt);

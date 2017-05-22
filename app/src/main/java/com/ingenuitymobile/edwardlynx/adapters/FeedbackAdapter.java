@@ -42,6 +42,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
     TextView yearText;
     TextView descriptionText;
     TextView nameText;
+    TextView createdText;
 
     ViewHolder(View itemView) {
       super(itemView);
@@ -50,6 +51,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
       yearText = (TextView) itemView.findViewById(R.id.text_year);
       descriptionText = (TextView) itemView.findViewById(R.id.text_description);
       nameText = (TextView) itemView.findViewById(R.id.text_name);
+      createdText = (TextView) itemView.findViewById(R.id.text_evaluate);
     }
   }
 
@@ -66,6 +68,8 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
 
     holder.descriptionText.setText(
         context.getResources().getString(R.string.instant_feedback_bold));
+    holder.createdText.setText(
+        context.getResources().getString(R.string.created_by, feedback.author.name));
 
     try {
       Date date = DateUtil.getAPIFormat().parse(feedback.createdAt);

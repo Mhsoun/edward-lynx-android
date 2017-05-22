@@ -274,4 +274,5 @@
   <string name="lynx_team_tool">LTT</string>
 
   <string name="answer_survey">Answer Survey</string>
+  <string name="created_by">Created by: %1$s</string>
 </resources>

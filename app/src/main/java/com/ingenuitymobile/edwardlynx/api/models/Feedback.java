@@ -33,6 +33,8 @@ public class Feedback extends Response {
   public String         key;
   @SerializedName("stats")
   public Stats          stats;
+  @SerializedName("author")
+  public User           author;
 
   @SerializedName("recipients")
   public List<User> recipients;
