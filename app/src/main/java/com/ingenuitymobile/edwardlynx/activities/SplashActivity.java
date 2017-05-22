@@ -2,6 +2,7 @@ package com.ingenuitymobile.edwardlynx.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -15,6 +16,8 @@ import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.StringUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
+
+import java.util.List;
 
 import retrofit.RetrofitError;
 import rx.Subscriber;
@@ -87,7 +90,7 @@ public class SplashActivity extends BaseActivity {
               StringUtil.getDeviceId(SplashActivity.this)), new Subscriber<Response>() {
             @Override
             public void onCompleted() {
-              openMainPage();
+              checkIntent();
             }
 
             @Override
@@ -100,6 +103,25 @@ public class SplashActivity extends BaseActivity {
               LogUtil.e("AAA onNext postTokenDevice");
             }
           }));
+    } else {
+      checkIntent();
+    }
+  }
+
+  private void checkIntent() {
+    Uri data = getIntent().getData();
+    if (data != null) {
+      Bundle bundle = new Bundle();
+      List<String> segments = data.getPathSegments();
+      LogUtil.e("AAA " + segments.get(0));
+      if (segments.get(0).equals(Shared.SURVEY)) {
+        //TODO
+      } if (segments.get(0).equals(Shared.INSTANT_FEEDBACK_REQUEST)) {
+        bundle.putString("type", segments.get(0));
+        bundle.putString("id", segments.get(2));
+        getIntent().putExtras(bundle);
+      }
+      openMainPage();
     } else {
       openMainPage();
     }
