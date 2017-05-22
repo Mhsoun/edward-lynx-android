@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -69,6 +70,8 @@ public class DevelopmenPlansFragment extends BaseFragment {
   private ArrayList<DevelopmentPlan> completedData;
   private ArrayList<DevelopmentPlan> expiredData;
 
+  private int position;
+
   public static DevelopmenPlansFragment newInstance(Context ctx) {
     DevelopmenPlansFragment fragment = new DevelopmenPlansFragment();
     Bundle bundle = new Bundle();
@@ -120,6 +123,8 @@ public class DevelopmenPlansFragment extends BaseFragment {
 
     final ImageView imageView = (ImageView) mainView.findViewById(R.id.image_create_dev_plan);
     imageView.setOnClickListener(onClickListener);
+
+    viewPager.setCurrentItem(position);
   }
 
   private void getData() {
@@ -218,6 +223,19 @@ public class DevelopmenPlansFragment extends BaseFragment {
       }
       expiredFragment.setData(expiredData);
       break;
+    }
+  }
+
+  public void setPosition(final int position) {
+    this.position = position;
+    if (viewPager != null) {
+      new Handler().postDelayed(new Runnable() {
+        @Override
+        public void run() {
+          viewPager.setCurrentItem(position);
+        }
+      }, 100);
+      LogUtil.e("AAA setPosition " + position);
     }
   }
 

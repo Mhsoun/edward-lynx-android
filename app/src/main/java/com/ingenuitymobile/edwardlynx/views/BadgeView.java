@@ -36,7 +36,7 @@ public class BadgeView extends AppCompatTextView {
   public static final int POSITION_CENTER       = 5;
 
   private static final int DEFAULT_MARGIN_DIP        = 0;
-  private static final int DEFAULT_LR_PADDING_DIP    = 4;
+  private static final int DEFAULT_LR_PADDING_DIP    = 6;
   private static final int DEFAULT_TB_PADDING_DIP    = 2;
   private static final int DEFAULT_CORNER_RADIUS_DIP = 10;
   private static final int DEFAULT_POSITION          = POSITION_TOP_RIGHT;

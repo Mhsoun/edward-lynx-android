@@ -106,29 +106,30 @@ public class SurveysListFragment extends BaseFragment {
     }
 
     LogUtil.e("AAA getData survey");
-    subscription.add(Shared.apiClient.getSurveys(page, NUM, new Subscriber<Surveys>() {
-      @Override
-      public void onCompleted() {
-        LogUtil.e("AAA onCompleted ");
-        refreshLayout.setRefreshing(false);
-        setData();
-      }
+    subscription.add(
+        Shared.apiClient.getSurveys(page, NUM, "answerable", new Subscriber<Surveys>() {
+          @Override
+          public void onCompleted() {
+            LogUtil.e("AAA onCompleted ");
+            refreshLayout.setRefreshing(false);
+            setData();
+          }
 
-      @Override
-      public void onError(Throwable e) {
-        LogUtil.e("AAA onError " + e);
-        refreshLayout.setRefreshing(false);
-      }
+          @Override
+          public void onError(Throwable e) {
+            LogUtil.e("AAA onError " + e);
+            refreshLayout.setRefreshing(false);
+          }
 
-      @Override
-      public void onNext(final Surveys surveys) {
-        LogUtil.e("AAA onNext ");
-        if (isRefresh) {
-          data.clear();
-        }
-        data.addAll(surveys.items);
-      }
-    }));
+          @Override
+          public void onNext(final Surveys surveys) {
+            LogUtil.e("AAA onNext ");
+            if (isRefresh) {
+              data.clear();
+            }
+            data.addAll(surveys.items);
+          }
+        }));
   }
 
   private void setData() {

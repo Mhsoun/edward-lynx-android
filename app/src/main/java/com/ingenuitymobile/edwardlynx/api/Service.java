@@ -73,7 +73,8 @@ public interface Service {
 
   // region Surveys
   @GET("/api/v1/surveys")
-  Observable<Surveys> getSurveys(@Query("page") int page, @Query("num") int num);
+  Observable<Surveys> getSurveys(@Query("page") int page, @Query("num") int num,
+      @Query("filter") String filter);
 
   @GET("/api/v1/categories")
   Observable<CategoriesResponse> getCategories();

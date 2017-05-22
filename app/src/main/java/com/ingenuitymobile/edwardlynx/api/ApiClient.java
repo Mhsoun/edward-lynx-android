@@ -179,14 +179,14 @@ public class ApiClient {
         }));
   }
 
-  public Subscription getSurveys(final int page, final int num,
+  public Subscription getSurveys(final int page, final int num, final String filter,
       final Subscriber<Surveys> subscriber) {
-    return service.getSurveys(page, num)
+    return service.getSurveys(page, num, filter)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
           public void onPostAgain() {
-            getSurveys(page, num, subscriber);
+            getSurveys(page, num, filter, subscriber);
           }
         }));
   }

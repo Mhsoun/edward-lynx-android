@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.Option;
 import com.ingenuitymobile.edwardlynx.api.models.Question;
 
@@ -29,24 +30,28 @@ public class FeedbackQuestionsAdapter extends
   private List<Question>       data;
   private boolean              isEnabled;
   private OnAnswerItemListener listener;
+  private Feedback             feedback;
 
   public FeedbackQuestionsAdapter(List<Question> data, OnAnswerItemListener listener) {
     super();
     this.data = data;
     this.listener = listener;
     isEnabled = true;
+    feedback = new Feedback();
   }
 
   class ViewHolder extends RecyclerView.ViewHolder {
     TextView   questionText;
     RadioGroup radioGroup;
     EditText   editText;
+    TextView   anonymousText;
 
     ViewHolder(View itemView) {
       super(itemView);
       questionText = (TextView) itemView.findViewById(R.id.text_question);
       radioGroup = (RadioGroup) itemView.findViewById(R.id.group_button);
       editText = (EditText) itemView.findViewById(R.id.edit_text);
+      anonymousText = (TextView) itemView.findViewById(R.id.text_anonymous);
     }
   }
 
@@ -61,6 +66,7 @@ public class FeedbackQuestionsAdapter extends
     final Context context = holder.itemView.getContext();
     final Question question = data.get(position);
     holder.questionText.setText(question.text);
+    holder.anonymousText.setVisibility(feedback.anonymous == 1 ? View.VISIBLE : View.GONE);
     holder.editText.setVisibility(View.GONE);
     if (question.answer.options != null) {
       holder.radioGroup.removeAllViews();
@@ -147,5 +153,9 @@ public class FeedbackQuestionsAdapter extends
 
   public interface OnAnswerItemListener {
     void onAnswer(long id, String value);
+  }
+
+  public void setFeedback(Feedback feedback) {
+    this.feedback = feedback;
   }
 }

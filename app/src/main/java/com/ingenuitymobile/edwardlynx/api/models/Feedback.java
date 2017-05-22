@@ -21,7 +21,7 @@ public class Feedback extends Response {
   public String         lang;
   @SerializedName("closed")
   public int            closed;
-  @SerializedName("anonynous")
+  @SerializedName("anonymous")
   public int            anonymous;
   @SerializedName("createdAt")
   public String         createdAt;

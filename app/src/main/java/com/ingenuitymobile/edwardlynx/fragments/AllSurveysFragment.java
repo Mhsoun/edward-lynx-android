@@ -93,7 +93,7 @@ public class AllSurveysFragment extends BaseFragment {
   }
 
   private void getSurveys() {
-    subscription.add(Shared.apiClient.getSurveys(1, NUM, new Subscriber<Surveys>() {
+    subscription.add(Shared.apiClient.getSurveys(1, NUM, "answerable", new Subscriber<Surveys>() {
       @Override
       public void onCompleted() {
         adapter.notifyDataSetChanged();

@@ -43,6 +43,15 @@
             android:textSize="22sp"/>
 
         <TextView
+            android:id="@+id/text_anonymous"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/anonymous_feedback"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+
+        <TextView
             fontPath="fonts/Lato-Italic.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

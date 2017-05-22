@@ -18,6 +18,17 @@
       android:textColor="@color/white"
       android:textSize="22sp"/>
 
+  <TextView
+      android:id="@+id/text_anonymous"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:text="@string/anonymous_feedback"
+      android:textColor="@color/white"
+      android:textSize="14sp"
+      android:visibility="gone"/>
+
   <RadioGroup
       android:id="@+id/group_button"
       style="@style/Widget.AppCompat.CompoundButton.RadioButton"

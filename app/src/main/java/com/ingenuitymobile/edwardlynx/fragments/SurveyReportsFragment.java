@@ -107,7 +107,7 @@ public class SurveyReportsFragment extends BaseFragment {
       page++;
     }
 
-    subscription.add(Shared.apiClient.getSurveys(page, NUM, new Subscriber<Surveys>() {
+    subscription.add(Shared.apiClient.getSurveys(page, NUM, null, new Subscriber<Surveys>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA onCompleted ");

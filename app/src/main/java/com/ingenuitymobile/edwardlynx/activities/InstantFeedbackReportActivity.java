@@ -7,8 +7,11 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -58,6 +61,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
   private TextView           emptyText;
   private TextView           dateText;
   private TextView           detailsText;
+  private TextView           anonymousText;
 
   public InstantFeedbackReportActivity() {
     data = new ArrayList<>();
@@ -70,12 +74,6 @@ public class InstantFeedbackReportActivity extends BaseActivity {
 
     final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
-    toolbar.findViewById(R.id.image_share).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        share(v);
-      }
-    });
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     id = getIntent().getLongExtra("id", 0L);
@@ -90,19 +88,37 @@ public class InstantFeedbackReportActivity extends BaseActivity {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == android.R.id.home) {
+    switch (item.getItemId()) {
+    case R.id.share_people:
+      share();
+      return true;
+    case R.id.add_more:
+      addMore();
+      return true;
+    case android.R.id.home:
       finish();
+      return true;
+    default:
+      return super.onContextItemSelected(item);
     }
-    return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.menu_feedback_option, menu);
+    return true;
   }
 
   private void initViews() {
     questionText = (TextView) findViewById(R.id.text_question);
     emptyText = (TextView) findViewById(R.id.text_empty_state);
     feedbackList = (RecyclerView) findViewById(R.id.list_answers);
-    horizontalBarChart = (HorizontalBarChart) findViewById(R.id.horizontal_bar_chart);
     dateText = (TextView) findViewById(R.id.text_date);
     detailsText = (TextView) findViewById(R.id.text_date_details);
+    anonymousText = (TextView) findViewById(R.id.text_anonymous);
+    horizontalBarChart = (HorizontalBarChart) findViewById(R.id.horizontal_bar_chart);
+    horizontalBarChart.setNoDataText(getString(R.string.no_chart_data_available));
 
     final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
         LinearLayoutManager.VERTICAL);
@@ -122,7 +138,14 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     subscription.add(Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
       @Override
       public void onCompleted() {
-        if (feedback.stats.answered >= 3) {
+        if (feedback.anonymous == 1) {
+          if (feedback.stats.answered >= 3) {
+            getAnswers();
+          } else {
+            horizontalBarChart.setNoDataText(getString(R.string.minimum_chart));
+            horizontalBarChart.invalidate();
+          }
+        } else if (feedback.stats.answered != 0) {
           getAnswers();
         }
         setDetails();
@@ -177,6 +200,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     detailsText.setText(getString(R.string.details_circle_chart,
         feedback.stats.invited,
         feedback.stats.answered));
+    anonymousText.setVisibility(feedback.anonymous == 1 ? View.VISIBLE : View.GONE);
   }
 
   private void setData() {
@@ -205,7 +229,6 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         horizontalBarChart.setPinchZoom(false);
         horizontalBarChart.setDrawGridBackground(false);
         horizontalBarChart.setDoubleTapToZoomEnabled(false);
-        horizontalBarChart.setNoDataText(getString(R.string.no_chart_data_available));
 
         XAxis xl = horizontalBarChart.getXAxis();
         xl.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -311,13 +334,13 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     }
   }
 
-  public void share(View v) {
+  private void share() {
     Intent intent = new Intent(InstantFeedbackReportActivity.this, ShareReportActivity.class);
     intent.putExtra("id", id);
     startActivity(intent);
   }
 
-  public void addMore(View v) {
+  private void addMore() {
     Intent intent = new Intent(InstantFeedbackReportActivity.this,
         AddMoreParticipantsActivity.class);
     intent.putExtra("id", id);

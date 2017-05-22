@@ -100,13 +100,13 @@ public class AnswerFeedbackActivity extends BaseActivity {
         LogUtil.e("AAA onNext ");
         data.clear();
         data.addAll(feedback.questions);
+        adapter.setFeedback(feedback);
         key = feedback.key;
       }
     }));
   }
 
   public void submit(View v) {
-    final TextView textView = (TextView) v;
     AnswerParam param = new AnswerParam();
     param.answers = bodies;
     param.key = key;

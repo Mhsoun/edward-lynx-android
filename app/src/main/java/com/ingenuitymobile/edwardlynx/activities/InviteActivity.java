@@ -53,8 +53,6 @@ public class InviteActivity extends InviteBaseActivity {
   public void create(View v) {
     if (ids.isEmpty()) {
       Toast.makeText(context, getString(R.string.select_atleast_one), Toast.LENGTH_SHORT).show();
-    } else if (ids.size() < 3) {
-      ViewUtil.showAlert(this, null, getString(R.string.invite_info));
     } else {
       deletedIds.clear();
       List<Id> recipients = new ArrayList<>();

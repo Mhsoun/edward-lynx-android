@@ -42,11 +42,12 @@
   <string name="goals_details_bold">GOALS DETAILS</string>
   <string name="instant_feedback_bold">INSTANT FEEDBACK</string>
   <string name="instant_feedback_answers_bold">FEEDBACK REPORT</string>
+  <string name="anonymous_feedback">Anonymous Feedback</string>
   <string name="survey_report_bold">SURVEY REPORT</string>
   <string name="share_report_bold">SHARE REPORT</string>
   <string name="create_development_plan_bold">CREATE DEVELOPMENT PLAN</string>
   <string name="details_bold">DETAILS</string>
-  <string name="development_plan_bold">DEVELOPMENT PLAN</string>
+  <string name="development_plan_bold">DEVELOPMENT PLANS</string>
   <string name="add_more_participants_bold">ADD MORE PARTICIPANTS</string>
   <string name="free_text_description">Text</string>
   <string name="optional">(optional)</string>
@@ -231,6 +232,7 @@
   <string name="no_data_found">No data found</string>
   <string name="no_development_plans">No Development Plans</string>
   <string name="no_chart_data_available">No chart data available</string>
+  <string name="minimum_chart">Minimum of 3 people to view this chart</string>
   <string name="question_label">Question: </string>
   <string name="add_more_participants">Add more participants</string>
 
