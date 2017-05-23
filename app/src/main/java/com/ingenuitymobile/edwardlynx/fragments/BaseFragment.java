@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.ingenuitymobile.edwardlynx.R;
@@ -56,6 +57,14 @@ public class BaseFragment extends Fragment {
     }
   }
 
+  protected void hideKeyboard(View v) {
+    try {
+      InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(
+          Activity.INPUT_METHOD_SERVICE);
+      inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    } catch (Exception e) {}
+  }
+
   protected void showKeyboard() {
     try {
       InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(
@@ -66,4 +75,13 @@ public class BaseFragment extends Fragment {
       LogUtil.e("Error in hiding keyboard", e);
     }
   }
+
+  protected View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+      if (!hasFocus) {
+        hideKeyboard(v);
+      }
+    }
+  };
 }

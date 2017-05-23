@@ -170,6 +170,11 @@ public class CreateFeedbackActivity extends BaseActivity {
     addOptionEdit.setOnFocusChangeListener(onFocusChangeListener);
   }
 
+  public void add(View v) {
+    addOptionEdit.onEditorAction(EditorInfo.IME_ACTION_DONE);
+  }
+
+
   public void invite(View v) {
     final String question = questionText.getText().toString();
 

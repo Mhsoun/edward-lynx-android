@@ -159,6 +159,7 @@ public class MainActivity extends BaseActivity implements
   }
 
   private void changeFragment(Fragment fragment) {
+    hideKeyboard();
     toolbar.setTitle(fragment.getArguments().getString("title"));
     FragmentManager fragmentManager = getSupportFragmentManager();
     fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();

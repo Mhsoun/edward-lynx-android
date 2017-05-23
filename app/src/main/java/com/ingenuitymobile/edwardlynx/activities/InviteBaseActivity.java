@@ -70,6 +70,7 @@ public class InviteBaseActivity extends BaseActivity {
   protected void initViews() {
     final RecyclerView usersList = (RecyclerView) findViewById(R.id.list_users);
     searchView = (SearchView) findViewById(R.id.searchview);
+    searchView.setOnFocusChangeListener(onFocusChangeListener);
 
     countText = (TextView) findViewById(R.id.text_count);
     selectText = (TextView) findViewById(R.id.text_select_all);

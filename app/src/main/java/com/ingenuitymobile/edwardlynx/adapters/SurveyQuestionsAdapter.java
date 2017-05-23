@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatRadioButton;
@@ -9,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -146,6 +148,19 @@ public class SurveyQuestionsAdapter extends
           @Override
           public void afterTextChanged(Editable editable) {
             listener.onAnswer(question.id, holder.editText.getText().toString());
+          }
+        });
+
+        holder.editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+          @Override
+          public void onFocusChange(View v, boolean hasFocus) {
+            if (!hasFocus) {
+              try {
+                InputMethodManager inputMethodManager = (InputMethodManager)
+                    context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+              } catch (Exception e) {}
+            }
           }
         });
       }

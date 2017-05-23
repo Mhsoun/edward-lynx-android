@@ -5,14 +5,16 @@
               android:layout_marginBottom="4dp"
               android:layout_marginLeft="54dp"
               android:layout_marginRight="36dp"
+              android:clickable="true"
+              android:focusableInTouchMode="true"
               android:orientation="vertical">
 
   <TextView
       android:id="@+id/text_question"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="22dp"
       android:layout_marginBottom="12dp"
+      android:layout_marginTop="22dp"
       android:textColor="@color/white"
       android:textSize="16sp"/>
 

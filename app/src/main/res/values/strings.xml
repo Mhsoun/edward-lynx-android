@@ -218,6 +218,7 @@
   <string name="logout_confirmation_message">Are you sure you want to log out? Your credentials will be required to open the app again.</string>
   <string name="logout">Logout</string>
   <string name="cancel">Cancel</string>
+  <string name="add">Add</string>
 
   <string name="confirmation">Confirmation</string>
   <string name="complete_action_message">Complete the action, %1$s?</string>

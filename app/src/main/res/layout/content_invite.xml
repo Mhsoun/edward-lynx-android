@@ -111,6 +111,8 @@
       android:id="@+id/list_users"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:clickable="true"
+      android:focusableInTouchMode="true"
       android:layout_above="@id/text_button_bottom"
       android:layout_below="@id/layout_header"
       android:layout_marginTop="4dp"/>
