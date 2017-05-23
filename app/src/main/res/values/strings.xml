@@ -193,6 +193,7 @@
   <string name="city">City</string>
 
   // Dashboard
+
   <string name="status">STATUS</string>
   <string name="shortcuts">SHORTCUTS</string>
   <string name="dev_plan_dashboard">Development\nPlan</string>
@@ -237,7 +238,6 @@
   <string name="no_chart_data_available">No chart data available</string>
   <string name="minimum_chart">Minimum of 3 people to view this chart</string>
   <string name="question_label">Question: </string>
-  <string name="add_more_participants">Add more participants</string>
 
   // region survey reports
   <string name="average_values">Average values</string>
@@ -280,4 +280,7 @@
 
   <string name="answer_survey">Answer Survey</string>
   <string name="created_by">Created by: %1$s</string>
+
+  <string name="share_report">Share Report</string>
+  <string name="add_more_participants">Add More Participants</string>
 </resources>

@@ -44,12 +44,12 @@
 
         <TextView
             android:id="@+id/text_anonymous"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/anonymous_feedback"
             android:textColor="@color/white"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:visibility="gone"/>
 
         <TextView
             fontPath="fonts/Lato-Italic.ttf"
@@ -61,15 +61,6 @@
             android:textSize="10sp"
             android:textStyle="italic"
             tools:ignore="MissingPrefix"/>
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:onClick="addMore"-->
-        <!--android:paddingBottom="4dp"-->
-        <!--android:text="@string/add_more_participants"-->
-        <!--android:textColor="@color/colorAccent"-->
-        <!--android:textSize="12sp"/>-->
       </LinearLayout>
 
       <RelativeLayout

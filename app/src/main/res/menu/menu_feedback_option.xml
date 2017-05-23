@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
   <item
       android:id="@+id/share_people"
-      android:title="Share Report">
+      android:title="@string/search_reports">
   </item>
 
   <item
       android:id="@+id/add_more"
-      android:title="Add More Participants">
+      android:title="@string/add_more_participants">
   </item>
 </menu>

@@ -17,6 +17,7 @@ import com.ingenuitymobile.edwardlynx.activities.AnswerFeedbackActivity;
 import com.ingenuitymobile.edwardlynx.activities.DevelopmentPlanDetailedActivity;
 import com.ingenuitymobile.edwardlynx.activities.SplashActivity;
 import com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity;
+import com.ingenuitymobile.edwardlynx.utils.BadgeUtils;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import static android.app.Notification.PRIORITY_MAX;
@@ -80,6 +81,8 @@ public class MyGcmListenerService extends FirebaseMessagingService {
           pendingIntent, title, message);
 
       notificationManager.notify(0, notificationBuilder.build());
+
+      BadgeUtils.setBadge(MyGcmListenerService.this, 1);
     }
   }
 
