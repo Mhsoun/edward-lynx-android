@@ -295,7 +295,8 @@ public class CreateFeedbackActivity extends BaseActivity {
     @Override
     public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
       if (actionId == EditorInfo.IME_ACTION_DONE) {
-        hideKeyboard();
+        hideKeyboard(textView);
+        addOptionEdit.clearFocus();
 
         final String string = addOptionEdit.getText().toString();
         if (!TextUtils.isEmpty(string)) {

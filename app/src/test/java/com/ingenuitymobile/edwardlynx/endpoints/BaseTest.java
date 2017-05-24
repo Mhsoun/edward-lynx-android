@@ -33,7 +33,7 @@ class BaseTest {
     testSubscriber.assertNoErrors();
     testSubscriber.assertCompleted();
     List<Authentication> authentications = testSubscriber.getOnNextEvents();
-    client.setRefreshToken(authentications.get(0).refresh_token);
+    client.setRefreshToken("admin@edwardlynx.com","password");
     client.setAccessToken(authentications.get(0).accessToken);
 //    System.out.println("AAA accesstoken " + authentications.get(0).accessToken);
 //    System.out.println("AAA refreshtoken " + authentications.get(0).accessToken);

@@ -20,6 +20,7 @@ import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.activities.CreateDevelopmentPlanActivity;
 import com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity;
 import com.ingenuitymobile.edwardlynx.activities.FeedbackRequestsActivity;
+import com.ingenuitymobile.edwardlynx.activities.InviteSurveyActivity;
 import com.ingenuitymobile.edwardlynx.activities.MainActivity.ChangeFragment;
 import com.ingenuitymobile.edwardlynx.activities.MainActivity.OnChangeFragmentListener;
 import com.ingenuitymobile.edwardlynx.activities.ReportsActivity;
@@ -224,6 +225,7 @@ public class DashboardFragment extends BaseFragment {
         startActivity(new Intent(getActivity(), ReportsActivity.class));
         break;
       case R.id.text_invite:
+        startActivity(new Intent(getActivity(), InviteSurveyActivity.class));
         break;
       case R.id.text_create:
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());

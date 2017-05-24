@@ -9,6 +9,7 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.ActionParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.InviteUserParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.TokenParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
@@ -256,6 +257,18 @@ public class ApiClient {
           @Override
           public void onPostAgain() {
             postAnswerSurvey(id, param, subscriber);
+          }
+        }));
+  }
+
+  public Subscription postSurveyRecipient(final long id, final InviteUserParam param,
+      final Subscriber<Response> subscriber) {
+    return service.postSurveyRecipients(id, param)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            postSurveyRecipient(id, param, subscriber);
           }
         }));
   }

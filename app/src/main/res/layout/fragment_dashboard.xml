@@ -127,13 +127,13 @@
           android:layout_height="42dp"
           android:layout_marginTop="12dp"
           android:orientation="horizontal"
-          android:weightSum="3">
+          android:weightSum="4">
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginRight="5dp"
+            android:layout_weight="1"
             android:background="@drawable/bg_round_dashboard">
 
           <RelativeLayout
@@ -176,9 +176,9 @@
             android:background="@drawable/bg_round_dashboard"
             android:gravity="center"
             android:text="@string/invite_dashboard"
-            android:visibility="gone"
             android:textColor="@color/white"
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            android:visibility="visible"/>
 
         <TextView
             android:id="@+id/text_create"
@@ -224,8 +224,8 @@
 
       <RelativeLayout
           android:layout_width="match_parent"
-          android:layout_marginTop="12dp"
-          android:layout_height="wrap_content">
+          android:layout_height="wrap_content"
+          android:layout_marginTop="12dp">
 
         <TextView
             android:layout_width="wrap_content"

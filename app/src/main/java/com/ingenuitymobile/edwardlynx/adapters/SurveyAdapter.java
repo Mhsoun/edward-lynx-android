@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.activities.InvitePeopleActivity;
 import com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.utils.DateUtil;
@@ -28,11 +29,14 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
   private SimpleDateFormat dateFormat  = new SimpleDateFormat("dd");
   private SimpleDateFormat yearFormat  = new SimpleDateFormat("yyyy");
 
+  private boolean isInvite;
+
   private List<Survey> data;
 
   public SurveyAdapter(List<Survey> data) {
     super();
     this.data = data;
+    isInvite = false;
   }
 
   class ViewHolder extends RecyclerView.ViewHolder {
@@ -101,9 +105,17 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
         if (holder.isExpired) {
           LogUtil.e("AAA Expired");
         } else {
-          Intent intent = new Intent(context, SurveyQuestionsActivity.class);
-          intent.putExtra("id", survey.id);
-          context.startActivity(intent);
+          if (isInvite) {
+            Intent intent = new Intent(context, InvitePeopleActivity.class);
+            intent.putExtra("id", survey.id);
+            intent.putExtra("title", survey.name);
+            intent.putExtra("evaluate", survey.personsEvaluatedText);
+            context.startActivity(intent);
+          } else {
+            Intent intent = new Intent(context, SurveyQuestionsActivity.class);
+            intent.putExtra("id", survey.id);
+            context.startActivity(intent);
+          }
         }
       }
     });
@@ -157,5 +169,9 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
   @Override
   public int getItemCount() {
     return data.size();
+  }
+
+  public void setIsnvite(boolean isInvite) {
+    this.isInvite = isInvite;
   }
 }

@@ -19,14 +19,7 @@ public class APIClientFactory {
   }
 
   private ApiClient createClient(String acessToken) {
-    ApiClient client = new ApiClient(CONSUMER_KEY, CONSUMER_SECRET, BASE_URL,
-        new ApiClient.OnRefreshTokenListener() {
-          @Override
-          public void onRefreshToken(Authentication authentication) {
-
-          }
-        });
-    client.setAccessToken(acessToken);
-    return client;
+    ApiClient client;
+    return null;
   }
 }
