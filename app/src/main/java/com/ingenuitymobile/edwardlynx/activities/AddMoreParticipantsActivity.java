@@ -75,6 +75,7 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
       public void onNext(Feedback feedback) {
         recipients.clear();
         recipients.addAll(feedback.recipients);
+        invited = feedback.stats.invited;
       }
     }));
   }

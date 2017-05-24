@@ -49,7 +49,8 @@ public class InviteBaseActivity extends BaseActivity {
   protected ArrayList<User>   data;
   protected ArrayList<User>   recipients;
 
-  private UsersAdapter adapter;
+  private   UsersAdapter adapter;
+  protected int          invited;
 
   public InviteBaseActivity() {
     data = new ArrayList<>();
@@ -57,6 +58,7 @@ public class InviteBaseActivity extends BaseActivity {
     recipients = new ArrayList<>();
     ids = new ArrayList<>();
     deletedIds = new ArrayList<>();
+    invited = 0;
   }
 
   @Override
@@ -132,7 +134,7 @@ public class InviteBaseActivity extends BaseActivity {
   }
 
   private void updateUI() {
-    if (ids.size() != 0 && ids.size() >= adapter.getItemCount()) {
+    if (ids.size() != 0 && ids.size() + invited >= adapter.getItemCount()) {
       selectText.setText(getString(R.string.deselect_all));
     } else {
       selectText.setText(getString(R.string.select_all));

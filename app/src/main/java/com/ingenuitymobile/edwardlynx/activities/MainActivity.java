@@ -25,6 +25,7 @@ import com.ingenuitymobile.edwardlynx.fragments.DashboardFragment;
 import com.ingenuitymobile.edwardlynx.fragments.DevelopmenPlansFragment;
 import com.ingenuitymobile.edwardlynx.fragments.ProfileFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveysFragment;
+import com.ingenuitymobile.edwardlynx.services.DeleteTokenService;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import net.hockeyapp.android.CrashManager;
@@ -188,6 +189,8 @@ public class MainActivity extends BaseActivity implements
           public void onClick(DialogInterface dialog, int which) {
             SessionStore.saveAccessToken(null, context);
             SessionStore.saveRefreshToken(null, context);
+            Intent intentService = new Intent(context, DeleteTokenService.class);
+            startService(intentService);
             Intent intent = new Intent(context, SplashActivity.class);
             startActivity(intent);
             finish();

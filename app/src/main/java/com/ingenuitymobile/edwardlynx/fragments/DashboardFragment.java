@@ -185,7 +185,7 @@ public class DashboardFragment extends BaseFragment {
             devPlanData.clear();
             if (response.developmentPlans.size() > 2) {
               devPlanData.add(response.developmentPlans.get(0));
-              devPlanData.add(response.developmentPlans.get(2));
+              devPlanData.add(response.developmentPlans.get(1));
             } else {
               devPlanData.addAll(response.developmentPlans);
             }
