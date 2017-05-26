@@ -4,7 +4,6 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
-import com.ingenuitymobile.edwardlynx.activities.LoginActivity;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ActionParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
@@ -478,6 +477,8 @@ public class ApiClient {
                 ((RetrofitError) e).getResponse().getStatus() == 404) {
               throwable = e;
             } else {
+              LogUtil.e("AAA " + e);
+              LogUtil.e("AAA " + ((RetrofitError) e).getUrl());
               Toast.makeText(
                   context,
                   context.getString(NetUtil.hasActiveConnection(context) ?

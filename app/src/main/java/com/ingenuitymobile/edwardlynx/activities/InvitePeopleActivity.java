@@ -13,7 +13,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -166,6 +165,9 @@ public class InvitePeopleActivity extends BaseActivity {
     spinner.setSelection(0);
 
     notifyAdapter();
+    hideKeyboard();
+    nameEdit.clearFocus();
+    emailEdit.clearFocus();
   }
 
   public void sendInvites(View v) {

@@ -156,7 +156,8 @@
         android:name=".activities.InvitePeopleActivity"
         android:label="@string/invite_people_bold"
         android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="adjustPan">
     </activity>
 
 
