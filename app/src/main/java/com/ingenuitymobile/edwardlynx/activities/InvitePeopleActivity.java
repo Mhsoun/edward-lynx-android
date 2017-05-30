@@ -177,6 +177,7 @@ public class InvitePeopleActivity extends BaseActivity {
       InviteUserParam inviteUserParam = new InviteUserParam();
       inviteUserParam.recipients = userParams;
 
+      LogUtil.e("AAA " + inviteUserParam.toString());
       progressDialog.show();
       subscription.add(
           Shared.apiClient.postSurveyRecipient(id, inviteUserParam, new Subscriber<Response>() {

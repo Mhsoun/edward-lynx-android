@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.activities.LoginActivity;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ActionParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
@@ -29,6 +30,7 @@ import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.NetUtil;
+import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.HashMap;
@@ -53,22 +55,22 @@ public class ApiClient {
 
   public Service service;
 
-  private String  consumerKey;
-  private String  consumerSecret;
-  private String  baseUrl;
-  private String  username;
-  private String  password;
-  private Context context;
+  private String consumerKey;
+  private String consumerSecret;
+  private String baseUrl;
+  private String username;
+  private String password;
 
   private OnRefreshTokenListener refreshListener;
+  private OnDisplayErrorListener displayErrorListener;
 
-  public ApiClient(Context context, String consumerKey, String consumerSecret, String baseUrl,
-      OnRefreshTokenListener refreshListener) {
+  public ApiClient(String consumerKey, String consumerSecret, String baseUrl,
+      OnRefreshTokenListener refreshListener, OnDisplayErrorListener displayErrorListener) {
     this.consumerKey = consumerKey;
     this.consumerSecret = consumerSecret;
     this.baseUrl = baseUrl;
     this.refreshListener = refreshListener;
-    this.context = context;
+    this.displayErrorListener = displayErrorListener;
   }
 
   public void setRefreshToken(String username, String password) {
@@ -432,66 +434,53 @@ public class ApiClient {
 
     @Override
     public void onError(final Throwable e) {
-      if (!NetUtil.hasActiveConnection(context)) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.no_internet_connection),
-            Toast.LENGTH_SHORT
-        ).show();
-        subscriber.onError(null);
-      } else {
-        final retrofit.client.Response error = ((RetrofitError) e).getResponse();
-        if (error != null) {
-          if (error.getStatus() == 401) {
-            LogUtil.e("AAA RE LOGIN" + e);
+      final retrofit.client.Response error = ((RetrofitError) e).getResponse();
+      if (error != null) {
+        if (error.getStatus() == 401) {
+          LogUtil.e("AAA RE LOGIN" + e);
 
-            Map<String, String> map = new HashMap<>();
-            map.put("grant_type", "password");
-            map.put("username", username);
-            map.put("password", password);
-            map.put("client_id", consumerKey);
-            map.put("client_secret", consumerSecret);
+          Map<String, String> map = new HashMap<>();
+          map.put("grant_type", "password");
+          map.put("username", username);
+          map.put("password", password);
+          map.put("client_id", consumerKey);
+          map.put("client_secret", consumerSecret);
 
-            service.postLogin(map)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Authentication>() {
-                  @Override
-                  public void onCompleted() {
-                    listener.onPostAgain();
-                  }
+          service.postLogin(map)
+              .subscribeOn(Schedulers.newThread())
+              .observeOn(AndroidSchedulers.mainThread())
+              .subscribe(new Subscriber<Authentication>() {
+                @Override
+                public void onCompleted() {
+                  listener.onPostAgain();
+                }
 
-                  @Override
-                  public void onError(Throwable e) {
-                    subscriber.onError(e);
-                  }
+                @Override
+                public void onError(Throwable e) {
+                  subscriber.onError(e);
+                }
 
-                  @Override
-                  public void onNext(Authentication authentication) {
-                    refreshListener.onRefreshToken(authentication);
-                  }
-                });
-          } else {
-            Throwable throwable;
-            if (((RetrofitError) e).getResponse().getStatus() == 422 ||
-                ((RetrofitError) e).getResponse().getStatus() == 404) {
-              throwable = e;
-            } else {
-              LogUtil.e("AAA " + e);
-              LogUtil.e("AAA " + ((RetrofitError) e).getUrl());
-              Toast.makeText(
-                  context,
-                  context.getString(NetUtil.hasActiveConnection(context) ?
-                      R.string.cant_connect : R.string.no_internet_connection),
-                  Toast.LENGTH_SHORT
-              ).show();
-              throwable = null;
-            }
-            subscriber.onError(throwable);
-          }
+                @Override
+                public void onNext(Authentication authentication) {
+                  refreshListener.onRefreshToken(authentication);
+                }
+              });
         } else {
-          subscriber.onError(e);
+          LogUtil.e("AAA " + ((RetrofitError) e).getUrl());
+          Throwable throwable;
+          if (((RetrofitError) e).getResponse().getStatus() == 422 ||
+              ((RetrofitError) e).getResponse().getStatus() == 404) {
+            throwable = e;
+          } else {
+            LogUtil.e("AAA " + e);
+            displayErrorListener.onDisplayError(e);
+            throwable = null;
+          }
+          subscriber.onError(throwable);
         }
+      } else {
+        displayErrorListener.onDisplayError(e);
+        subscriber.onError(e);
       }
     }
 
@@ -507,5 +496,9 @@ public class ApiClient {
 
   public interface OnRefreshTokenListener {
     void onRefreshToken(Authentication authentication);
+  }
+
+  public interface OnDisplayErrorListener {
+    void onDisplayError(Throwable e);
   }
 }

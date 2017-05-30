@@ -22,7 +22,7 @@ public class SurveysTest extends BaseTest {
   public void test1GetSurveys() throws Exception {
     client = login();
     TestSubscriber<Surveys> testSubscriber = new TestSubscriber<>();
-    client.service.getSurveys(1, 1)
+    client.service.getSurveys(1, 1, "to_answer")
         .first()
         .toBlocking()
         .subscribe(testSubscriber);

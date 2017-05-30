@@ -14,9 +14,9 @@
   <string name="loading">Processing. . .</string>
 
   // region Login
-  <string name="username">Username</string>
+  <string name="username">Username/Email</string>
   <string name="password">Password</string>
-  <string name="login">Login</string>
+  <string name="login">LOGIN</string>
   <string name="username_required">Username is required</string>
   <string name="password_required">Password is required</string>
   <string name="forgot_password">Forgot Password?</string>
@@ -70,7 +70,7 @@
   <string name="yes_or_no_description">Yes or no answer.</string>
   <string name="text_description">The question is answered with text.</string>
   <string name="custom_scale_description">Custom scale.</string>
-  <string name="numeric_1_10_description">A numeric scale from 1-10 where 1 means the lowest and 10 is the highest.</string>
+  <string name="numeric_1_10_description">A numeric scale from 1&#8211;10 where 1 means the lowest and 10 is the highest.</string>
 
   // region answer feedback
   <string name="instant_feed_submitted">Instant Feedback submitted</string>
@@ -118,7 +118,7 @@
 
   // region Create Development plan
   <string name="create_development_plan_name">Enter Development Plan Name</string>
-  <string name="action_plan_required">Action plan name can\'t be blank</string>
+  <string name="action_plan_required" translatable="false">Action plan name can\'t be blank</string>
   <string name="goal_action_added">No goal action added</string>
   <string name="development_plan_created">Successfully created development plan</string>
   <string name="goals">Goals</string>
@@ -137,7 +137,7 @@
   <string name="due_date_goal">Due Date: %1$s</string>
   <string name="link_to_categroy">Link to a category</string>
   <string name="save">Save</string>
-  <string name="add_goal">Add Goal</string>
+  <string name="add_goal" translatable="false">Add Goal</string>
   <string name="edit">Edit</string>
   <string name="submit">Submit</string>
 
@@ -164,7 +164,7 @@
   <string name="invite_by_email">Invite people by email address</string>
   <string name="enter_email">Enter Name and Email address</string>
   <string name="email_address">Email address</string>
-  <string name="add_email">Add email</string>
+  <string name="add_email" translatable="false">Add email</string>
   <string name="select_atleast_one">No users selected</string>
   <string name="instant_feedback_created">Successfully invited participants</string>
   <string name="added_more_particpants">Added Participants</string>
@@ -184,7 +184,7 @@
   <string name="female">female</string>
   <string name="male_camel">Male</string>
   <string name="female_camel">Female</string>
-  <string name="about">About</string>
+  <string name="about" translatable="false">About</string>
   <string name="department">Department</string>
   <string name="role">Role</string>
   <string name="gender">Gender</string>
@@ -193,7 +193,6 @@
   <string name="city">City</string>
 
   // Dashboard
-
   <string name="status">STATUS</string>
   <string name="shortcuts">SHORTCUTS</string>
   <string name="dev_plan_dashboard">Development\nPlan</string>
@@ -219,7 +218,7 @@
   <string name="logout_confirmation_message">Are you sure you want to log out? Your credentials will be required to open the app again.</string>
   <string name="logout">Logout</string>
   <string name="cancel">Cancel</string>
-  <string name="add">Add</string>
+  <string name="add" translatable="false">Add</string>
 
   <string name="confirmation">Confirmation</string>
   <string name="complete_action_message">Complete the action, %1$s?</string>
@@ -243,11 +242,11 @@
   <string name="average_values">Average values</string>
   <string name="index_over_competencies">Index over competencies</string>
   <string name="self">Candidates</string>
-  <string name="others_ombined">Others Combined</string>
+  <string name="others_combined">Others Combined</string>
   <string name="index_over_competencies_details">Shows the overall values for each area of competence (the average of all the answers from those who responded to your feedback request.) Your own personal assessment is shown in a separate bar.</string>
 
   // popup
-  <string name="goal_completed">Goal Completed</string>
+  <string name="goal_completed">Goal Completed!</string>
   <string name="survey_completed">Survey Completed!</string>
   <string name="label_popup">You\'ve got the right mix of dedication and\nenthusiasm. Keep it up!</string>
   <string name="thanks">Thanks</string>
@@ -255,7 +254,7 @@
 
   // date
   <string name="just_now">just now</string>
-  <string name="a_minute_ago">a minute ago</string>
+  <string name="a_minute_ago" translatable="false">a minute ago</string>
   <string name="minutes_ago">%1$d minutes ago</string>
   <string name="an_hour_ago">an hour ago</string>
   <string name="hours_ago">%1$d hours ago</string>
@@ -267,11 +266,13 @@
   <string name="goal_bold">GOAL</string>
   <string name="survey_bold">SURVEY</string>
 
+  // Search
   <string name="search">Search</string>
   <string name="search_reports">Search Reports</string>
   <string name="search_survey">Search Surveys</string>
   <string name="search_development_plans">Search Development Plans</string>
 
+  // lynx type
   <string name="lynx_360">Lynx 360</string>
   <string name="lynx_management">LMTT</string>
   <string name="lynx_progress">Lynx Progress</string>
@@ -284,17 +285,18 @@
   <string name="share_report">Share Report</string>
   <string name="add_more_participants">Add More Participants</string>
 
-
   <string name="invite_people_to_rate_you">Invite people to rate you in a survey</string>
   <string name="enter_name_participant">Enter the name of the participant.</string>
   <string name="enter_email_participant">Enter the email of the participant.</string>
   <string name="users_to_invite">Users to invite</string>
+  <string name="add_user">Add User</string>
+  <string name="no_users">No Users</string>
+
+  // user type
   <string name="colleague">Colleague</string>
   <string name="manager">Manager</string>
   <string name="customer">Customer</string>
   <string name="matrix_manager">Matrix Manager</string>
   <string name="other_stakeholder">Other Stakeholder</string>
   <string name="direct_report">Direct Report</string>
-  <string name="add_user">Add User</string>
-  <string name="no_users">No Users</string>
 </resources>

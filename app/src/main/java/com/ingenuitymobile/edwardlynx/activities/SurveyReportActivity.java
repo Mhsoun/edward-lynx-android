@@ -261,7 +261,7 @@ public class SurveyReportActivity extends BaseActivity {
       }
     });
 
-    BarDataSet set2 = new BarDataSet(others, getString(R.string.others_ombined));
+    BarDataSet set2 = new BarDataSet(others, getString(R.string.others_combined));
     set2.setDrawValues(true);
     set2.setValueTextSize(FONT_SIZE);
     set2.setValueTextColor(context.getResources().getColor(R.color.colorAccent));
