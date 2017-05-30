@@ -1,5 +1,7 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -75,6 +77,11 @@ public class SurveyQuestionsActivity extends BaseActivity {
     initViews();
     getData();
     setTitle(getString(R.string.answer_survey));
+
+    NotificationManager notificationManager =
+        (NotificationManager) getApplicationContext()
+            .getSystemService(Context.NOTIFICATION_SERVICE);
+    notificationManager.cancel((int) id);
   }
 
   @Override

@@ -104,8 +104,6 @@ public class LoginActivity extends BaseActivity {
 
           @Override
           public void onNext(Authentication authentication) {
-            LogUtil.e("AAA " + usernameGroup.getEditTextSting());
-            LogUtil.e("AAA " + passwordGroup.getEditTextSting());
             SessionStore.saveUsername(usernameGroup.getEditTextSting(), LoginActivity.this);
             SessionStore.savePassword(passwordGroup.getEditTextSting(), LoginActivity.this);
             SessionStore.saveRefreshToken(authentication.refresh_token, LoginActivity.this);
