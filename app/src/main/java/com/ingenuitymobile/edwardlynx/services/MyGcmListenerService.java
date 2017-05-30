@@ -80,8 +80,7 @@ public class MyGcmListenerService extends FirebaseMessagingService {
       final NotificationCompat.Builder notificationBuilder = getNotificationBuilder(isActive,
           pendingIntent, title, message);
 
-      notificationManager.notify(0, notificationBuilder.build());
-
+      notificationManager.notify(Integer.parseInt(id), notificationBuilder.build());
       BadgeUtils.setBadge(MyGcmListenerService.this, 1);
     }
   }

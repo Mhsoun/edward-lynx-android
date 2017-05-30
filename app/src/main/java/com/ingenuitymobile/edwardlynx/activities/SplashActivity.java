@@ -1,5 +1,7 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -35,11 +37,15 @@ public class SplashActivity extends BaseActivity {
     setContentView(R.layout.activity_splash);
 
     Shared.init(this);
-
     BadgeUtils.clearBadge(this);
 
     if (SessionStore.restoreAccessToken(this) != null) {
       LogUtil.e("AAA " + SessionStore.restoreAccessToken(this));
+
+      NotificationManager notificationManager =
+          (NotificationManager) getApplicationContext()
+              .getSystemService(Context.NOTIFICATION_SERVICE);
+      notificationManager.cancel(0);
       getUser();
 //      Intent intent = new Intent(this, SurveyReportActivity.class);
 //      intent.putExtra("id", 58L);

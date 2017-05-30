@@ -1,6 +1,8 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -67,6 +69,11 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     id = getIntent().getLongExtra("id", 0L);
     LogUtil.e("AAA id" + id);
     initViews();
+
+    NotificationManager notificationManager =
+        (NotificationManager) getApplicationContext()
+            .getSystemService(Context.NOTIFICATION_SERVICE);
+    notificationManager.cancel((int) id);
   }
 
   @Override

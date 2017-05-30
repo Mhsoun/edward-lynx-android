@@ -1,10 +1,13 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -57,6 +60,11 @@ public class AnswerFeedbackActivity extends BaseActivity {
 
     initViews();
     getData();
+
+    NotificationManager notificationManager =
+        (NotificationManager) getApplicationContext()
+            .getSystemService(Context.NOTIFICATION_SERVICE);
+    notificationManager.cancel((int) id);
   }
 
   @Override
@@ -107,6 +115,11 @@ public class AnswerFeedbackActivity extends BaseActivity {
   }
 
   public void submit(View v) {
+    if (TextUtils.isEmpty(key)) {
+      Toast.makeText(context, getString(R.string.no_access), Toast.LENGTH_SHORT).show();
+      return;
+    }
+
     AnswerParam param = new AnswerParam();
     param.answers = bodies;
     param.key = key;
