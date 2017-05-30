@@ -15,96 +15,78 @@
       android:scaleType="centerCrop"
       android:src="@drawable/bg"/>
 
-  <ScrollView
+  <LinearLayout
+      android:id="@+id/layout_bottom"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_marginLeft="12dp"
+      android:layout_marginRight="12dp"
+      android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="January, 3, 2015"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/text_date_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/details_circle_chart"
+        android:textColor="@color/white"/>
+
+    <RelativeLayout
+        android:id="@+id/layout_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:visibility="invisible">
+
+      <ImageView
+          android:id="@+id/image_previous"
+          android:layout_width="48dp"
+          android:layout_height="match_parent"
+          android:layout_alignParentLeft="true"
+          android:layout_centerVertical="true"
+          android:src="@drawable/ic_previous"
+          android:tint="@color/colorAccent"/>
+
+      <ImageView
+          android:id="@+id/image_next"
+          android:layout_width="48dp"
+          android:layout_height="match_parent"
+          android:layout_alignParentRight="true"
+          android:layout_centerVertical="true"
+          android:src="@drawable/ic_next"
+          android:tint="@color/colorAccent"/>
+
+      <me.relex.circleindicator.CircleIndicator
+          android:id="@+id/indicator"
+          android:layout_width="match_parent"
+          android:layout_height="48dp"
+          android:layout_toLeftOf="@id/image_next"
+          android:layout_toRightOf="@id/image_previous"/>
+    </RelativeLayout>
+  </LinearLayout>
+
+  <android.support.v4.view.ViewPager
+      android:id="@+id/viewpager"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:scrollbars="none">
+      android:layout_above="@id/layout_bottom"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical">
-
-      <LinearLayout
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentLeft="true"
-          android:layout_toLeftOf="@id/layout_right"
-          android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/average_values"
-            android:textColor="@color/white"
-            android:textSize="22sp"/>
-
-        <TextView
-            fontPath="fonts/Lato-Italic.ttf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/shows_averages"
-            android:textColor="@color/survey_line"
-            android:textSize="10sp"
-            android:textStyle="italic"
-            tools:ignore="MissingPrefix"/>
-      </LinearLayout>
-
-      <com.github.mikephil.charting.charts.HorizontalBarChart
-          android:id="@+id/bar_chart"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
-      </com.github.mikephil.charting.charts.HorizontalBarChart>
-
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="12dp"
-          android:text="@string/index_over_competencies"
-          android:textColor="@color/white"
-          android:textSize="22sp"/>
-
-      <TextView
-          fontPath="fonts/Lato-Italic.ttf"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/index_over_competencies_details"
-          android:textColor="@color/survey_line"
-          android:textSize="10sp"
-          android:textStyle="italic"
-          tools:ignore="MissingPrefix"/>
-
-      <com.github.mikephil.charting.charts.HorizontalBarChart
-          android:id="@+id/mulitple_bar_chart"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:minHeight="100dp">
-      </com.github.mikephil.charting.charts.HorizontalBarChart>
-
-      <TextView
-          android:id="@+id/text_date"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center_horizontal"
-          android:layout_marginTop="12dp"
-          android:text="January, 3, 2015"
-          android:textColor="@color/white"
-          android:textSize="16sp"/>
-
-      <TextView
-          android:id="@+id/text_date_details"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center_horizontal"
-          android:text="@string/details_circle_chart"
-          android:textColor="@color/white"/>
-
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="12dp"/>
-    </LinearLayout>
-  </ScrollView>
+  <TextView
+      android:id="@+id/text_empty"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:text="@string/no_chart_data_available"
+      android:textColor="@color/colorAccent"
+      android:visibility="gone"/>
 </RelativeLayout>

@@ -17,7 +17,7 @@ public class Average {
   @SerializedName("average")
   public float  average;
 
+  // ioc, and radar diagram
   @SerializedName("roles")
   public List<Average> roles;
-
 }

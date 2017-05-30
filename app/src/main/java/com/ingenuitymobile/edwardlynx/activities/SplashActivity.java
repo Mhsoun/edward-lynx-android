@@ -41,6 +41,10 @@ public class SplashActivity extends BaseActivity {
     if (SessionStore.restoreAccessToken(this) != null) {
       LogUtil.e("AAA " + SessionStore.restoreAccessToken(this));
       getUser();
+//      Intent intent = new Intent(this, SurveyReportActivity.class);
+//      intent.putExtra("id", 58L);
+//      startActivity(intent);
+//      finish();
     } else {
       Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
       startActivity(intent);
