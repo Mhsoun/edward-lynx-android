@@ -251,6 +251,8 @@
   <string name="participants_comments">Participant\'s Comments</string>
   <string name="breakdown_title">Breakdown of answers by participant type</string>
   <string name="breakdown_details">The diagrams show an average of the answers of the competence areas for each participant category.</string>
+  <string name="response_rate">Response Rate</string>
+  <string name="response_rate_details">The following chart indicates the number of individuals that responded to your feedback, broken down by category of feedback provider.</string>
 
   // popup
   <string name="goal_completed">Goal Completed!</string>

@@ -8,8 +8,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class BreakdownItem {
 
-  public static final String OTHERS = "orangeColor";
-  public static final String SELF   = "selfColor";
+  public static final String ORANGE_COLOR = "orangeColor";
+  public static final String SELF_COLOR   = "selfColor";
+  public static final String OTHERS_COLOR = "otherColor";
 
   @SerializedName("title")
   public String title;

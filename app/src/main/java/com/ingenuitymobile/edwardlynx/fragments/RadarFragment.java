@@ -106,16 +106,14 @@ public class RadarFragment extends BaseFragment {
     set1.setDrawFilled(false);
     set1.setLineWidth(2f);
     set1.setDrawHighlightCircleEnabled(true);
-    set1.setHighlightCircleInnerRadius(10f);
-    set1.setDrawHighlightIndicators(true);
+    set1.setDrawHighlightIndicators(false);
 
     RadarDataSet set2 = new RadarDataSet(others, getString(R.string.others_combined));
-    set2.setColor(context.getResources().getColor(R.color.colorAccent));
+    set2.setColor(context.getResources().getColor(R.color.lynx_red_color));
     set2.setDrawFilled(false);
     set2.setLineWidth(2f);
     set2.setDrawHighlightCircleEnabled(true);
-    set1.setHighlightCircleInnerRadius(10f);
-    set2.setDrawHighlightIndicators(true);
+    set2.setDrawHighlightIndicators(false);
 
     RadarData data = new RadarData(set1, set2);
     data.setDrawValues(false);

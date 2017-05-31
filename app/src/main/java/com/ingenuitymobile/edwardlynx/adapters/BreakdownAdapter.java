@@ -23,6 +23,7 @@ import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Breakdown;
 import com.ingenuitymobile.edwardlynx.api.models.BreakdownItem;
+import com.ingenuitymobile.edwardlynx.views.CustomBarDataSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,16 +82,11 @@ public class BreakdownAdapter extends RecyclerView.Adapter<BreakdownAdapter.View
       yVals1.add(barEntry);
     }
 
-    final MyBarDataSet set = new MyBarDataSet(yVals1, "");
+    final CustomBarDataSet set = new CustomBarDataSet(context, yVals1, "");
     set.setDrawValues(true);
     set.setValueTextSize(FONT_SIZE);
     set.setValueTextColor(context.getResources().getColor(R.color.white));
     set.setHighlightEnabled(false);
-    set.setHighlightEnabled(false);
-    set.setColors(new int[]{
-        context.getResources().getColor(R.color.colorAccent),
-        context.getResources().getColor(R.color.lynx_color),
-    });
     set.setValueFormatter(new IValueFormatter() {
       @Override
       public String getFormattedValue(float value, Entry entry, int dataSetIndex,
@@ -171,33 +167,10 @@ public class BreakdownAdapter extends RecyclerView.Adapter<BreakdownAdapter.View
         return "";
       }
     });
-
-
   }
 
   @Override
   public int getItemCount() {
     return data.size();
-  }
-
-  public class MyBarDataSet extends BarDataSet {
-
-    private List<BarEntry> yVals;
-
-
-    public MyBarDataSet(List<BarEntry> yVals, String label) {
-      super(yVals, label);
-      this.yVals = yVals;
-    }
-
-    @Override
-    public int getColor(int index) {
-      final String role = (String) yVals.get(index).getData();
-      if (role.equals(BreakdownItem.OTHERS)) {
-        return mColors.get(0);
-      } else {
-        return mColors.get(1);
-      }
-    }
   }
 }

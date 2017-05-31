@@ -24,6 +24,7 @@ import com.ingenuitymobile.edwardlynx.fragments.AveragesFragment;
 import com.ingenuitymobile.edwardlynx.fragments.BreakdownFragments;
 import com.ingenuitymobile.edwardlynx.fragments.CommentsFragment;
 import com.ingenuitymobile.edwardlynx.fragments.RadarFragment;
+import com.ingenuitymobile.edwardlynx.fragments.ResponseRateFragment;
 import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
@@ -51,10 +52,11 @@ public class SurveyReportActivity extends BaseActivity {
   private TextView dateText;
   private TextView detailsText;
 
-  private AveragesFragment   averagesFragment;
-  private RadarFragment      radarFragment;
-  private CommentsFragment   commentsFragment;
-  private BreakdownFragments breakdownFragments;
+  private ResponseRateFragment responseRateFragment;
+  private AveragesFragment     averagesFragment;
+  private RadarFragment        radarFragment;
+  private CommentsFragment     commentsFragment;
+  private BreakdownFragments   breakdownFragments;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +107,10 @@ public class SurveyReportActivity extends BaseActivity {
 
     dateText.setText("");
     detailsText.setText(getString(R.string.details_circle_chart, 0, 0));
+
+    if (responseRateFragment == null) {
+      responseRateFragment = new ResponseRateFragment();
+    }
 
     if (averagesFragment == null) {
       averagesFragment = new AveragesFragment();
@@ -182,6 +188,7 @@ public class SurveyReportActivity extends BaseActivity {
 
       @Override
       public void onNext(SurveyResultsResponse response) {
+        responseRateFragment.setDataSet(response.responseRates);
         averagesFragment.setDataSet(response.averages, response.ioc);
         radarFragment.setDataSet(response.radarDiagrams);
         commentsFragment.setDataSet(response.comments);
@@ -238,7 +245,7 @@ public class SurveyReportActivity extends BaseActivity {
   };
 
   private class MyPagerAdapter extends FragmentPagerAdapter {
-    static final int SIZE = 4;
+    static final int SIZE = 5;
 
     MyPagerAdapter(FragmentManager fragmentManager) {
       super(fragmentManager);
@@ -255,12 +262,14 @@ public class SurveyReportActivity extends BaseActivity {
     public Fragment getItem(int position) {
       switch (position) {
       case 0:
-        return averagesFragment;
+        return responseRateFragment;
       case 1:
-        return radarFragment;
+        return averagesFragment;
       case 2:
-        return commentsFragment;
+        return radarFragment;
       case 3:
+        return commentsFragment;
+      case 4:
         return breakdownFragments;
       default:
         return null;

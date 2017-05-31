@@ -187,9 +187,9 @@ public class AveragesFragment extends BaseFragment {
     BarDataSet set2 = new BarDataSet(others, getString(R.string.others_combined));
     set2.setDrawValues(true);
     set2.setValueTextSize(FONT_SIZE);
-    set2.setValueTextColor(context.getResources().getColor(R.color.colorAccent));
+    set2.setValueTextColor(context.getResources().getColor(R.color.lynx_red_color));
     set2.setHighlightEnabled(false);
-    set2.setColor(context.getResources().getColor(R.color.colorAccent));
+    set2.setColor(context.getResources().getColor(R.color.lynx_red_color));
     set2.setValueFormatter(new IValueFormatter() {
       @Override
       public String getFormattedValue(float value, Entry entry, int dataSetIndex,
@@ -199,7 +199,7 @@ public class AveragesFragment extends BaseFragment {
     });
 
     BarData barData = new BarData(set1, set2);
-    barData.setBarWidth(0.4f);
+    barData.setBarWidth(0.38f);
 
     mulitpleBarChart.setData(barData);
 

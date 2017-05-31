@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ingenuitymobile.edwardlynx.api.models.Average;
 import com.ingenuitymobile.edwardlynx.api.models.BlindSpot;
 import com.ingenuitymobile.edwardlynx.api.models.Breakdown;
+import com.ingenuitymobile.edwardlynx.api.models.BreakdownItem;
 import com.ingenuitymobile.edwardlynx.api.models.Comment;
 import com.ingenuitymobile.edwardlynx.api.models.Links;
 import com.ingenuitymobile.edwardlynx.api.models.SurveyFrequency;
@@ -20,6 +21,8 @@ public class SurveyResultsResponse extends Response {
   public Links                 links;
   @SerializedName("frequencies")
   public List<SurveyFrequency> frequencies;
+  @SerializedName("response_rate")
+  public List<BreakdownItem>   responseRates;
   @SerializedName("average")
   public List<Average>         averages;
   @SerializedName("ioc")
