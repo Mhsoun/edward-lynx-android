@@ -12,11 +12,10 @@
       android:textColor="@color/white"
       android:textSize="16sp"/>
 
-  <com.github.mikephil.charting.charts.HorizontalBarChart
-      android:id="@+id/horizontal_bar_chart"
+  <com.github.mikephil.charting.charts.BarChart
+      android:id="@+id/bar_chart"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
       android:layout_marginBottom="12dp"
-      android:minHeight="48dp">
-  </com.github.mikephil.charting.charts.HorizontalBarChart>
+      android:layout_height="140dp">
+  </com.github.mikephil.charting.charts.BarChart>
 </LinearLayout>

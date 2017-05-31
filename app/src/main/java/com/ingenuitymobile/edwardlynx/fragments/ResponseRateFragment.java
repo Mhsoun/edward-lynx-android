@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -16,7 +15,6 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.ingenuitymobile.edwardlynx.R;
-import com.ingenuitymobile.edwardlynx.api.models.Average;
 import com.ingenuitymobile.edwardlynx.api.models.BreakdownItem;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.views.CustomBarDataSet;
@@ -123,6 +121,7 @@ public class ResponseRateFragment extends BaseFragment {
     xAxis.setDrawLabels(true);
     xAxis.setTextColor(Color.WHITE);
     xAxis.setGranularity(1f);
+    xAxis.setTextSize(FONT_SIZE);
     xAxis.setValueFormatter(new IAxisValueFormatter() {
       @Override
       public String getFormattedValue(float value, AxisBase axis) {
@@ -144,6 +143,7 @@ public class ResponseRateFragment extends BaseFragment {
     leftAxis.setAxisMaximum(highest);
     leftAxis.setTextColor(Color.WHITE);
     leftAxis.setDrawAxisLine(false);
+    leftAxis.setTextSize(FONT_SIZE);
     leftAxis.setAxisLineColor(getResources().getColor(R.color.survey_line));
 
 

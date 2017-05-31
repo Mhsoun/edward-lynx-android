@@ -23,6 +23,7 @@ import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.fragments.AveragesFragment;
 import com.ingenuitymobile.edwardlynx.fragments.BreakdownFragments;
 import com.ingenuitymobile.edwardlynx.fragments.CommentsFragment;
+import com.ingenuitymobile.edwardlynx.fragments.DetailedSummaryFragment;
 import com.ingenuitymobile.edwardlynx.fragments.RadarFragment;
 import com.ingenuitymobile.edwardlynx.fragments.ResponseRateFragment;
 import com.ingenuitymobile.edwardlynx.utils.DateUtil;
@@ -52,11 +53,12 @@ public class SurveyReportActivity extends BaseActivity {
   private TextView dateText;
   private TextView detailsText;
 
-  private ResponseRateFragment responseRateFragment;
-  private AveragesFragment     averagesFragment;
-  private RadarFragment        radarFragment;
-  private CommentsFragment     commentsFragment;
-  private BreakdownFragments   breakdownFragments;
+  private ResponseRateFragment    responseRateFragment;
+  private AveragesFragment        averagesFragment;
+  private RadarFragment           radarFragment;
+  private CommentsFragment        commentsFragment;
+  private BreakdownFragments      breakdownFragments;
+  private DetailedSummaryFragment detailedSummaryFragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +130,10 @@ public class SurveyReportActivity extends BaseActivity {
     if (breakdownFragments == null) {
       breakdownFragments = new BreakdownFragments();
     }
+
+    if (detailedSummaryFragment == null) {
+      detailedSummaryFragment = new DetailedSummaryFragment();
+    }
   }
 
   private void getData() {
@@ -193,6 +199,7 @@ public class SurveyReportActivity extends BaseActivity {
         radarFragment.setDataSet(response.radarDiagrams);
         commentsFragment.setDataSet(response.comments);
         breakdownFragments.setDataSet(response.breakdown);
+        detailedSummaryFragment.setDataSet(response.detailedSummaries);
       }
     }));
   }
@@ -245,7 +252,7 @@ public class SurveyReportActivity extends BaseActivity {
   };
 
   private class MyPagerAdapter extends FragmentPagerAdapter {
-    static final int SIZE = 5;
+    static final int SIZE = 6;
 
     MyPagerAdapter(FragmentManager fragmentManager) {
       super(fragmentManager);
@@ -271,6 +278,8 @@ public class SurveyReportActivity extends BaseActivity {
         return commentsFragment;
       case 4:
         return breakdownFragments;
+      case 5:
+        return detailedSummaryFragment;
       default:
         return null;
       }

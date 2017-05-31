@@ -6,6 +6,7 @@ import com.ingenuitymobile.edwardlynx.api.models.BlindSpot;
 import com.ingenuitymobile.edwardlynx.api.models.Breakdown;
 import com.ingenuitymobile.edwardlynx.api.models.BreakdownItem;
 import com.ingenuitymobile.edwardlynx.api.models.Comment;
+import com.ingenuitymobile.edwardlynx.api.models.DetailedSummary;
 import com.ingenuitymobile.edwardlynx.api.models.Links;
 import com.ingenuitymobile.edwardlynx.api.models.SurveyFrequency;
 
@@ -35,4 +36,6 @@ public class SurveyResultsResponse extends Response {
   public BlindSpot             blindspot;
   @SerializedName("breakdown")
   public List<Breakdown>       breakdown;
+  @SerializedName("detailed_answer_summary")
+  public List<DetailedSummary> detailedSummaries;
 }
