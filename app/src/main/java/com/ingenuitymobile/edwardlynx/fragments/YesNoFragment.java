@@ -9,26 +9,28 @@ import android.view.ViewGroup;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.adapters.DetailedSummaryAdapter;
+import com.ingenuitymobile.edwardlynx.adapters.YesNoAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.DetailedSummary;
+import com.ingenuitymobile.edwardlynx.api.models.YesNo;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by memengski on 5/31/17.
+ * Created by memengski on 6/1/17.
  */
 
-public class DetailedSummaryFragment extends BaseFragment {
+public class YesNoFragment extends BaseFragment {
 
   private View mainView;
 
-  private List<DetailedSummary> detailedSummaries;
+  private List<YesNo> yesNos;
 
-  private DetailedSummaryAdapter adapter;
+  private YesNoAdapter adapter;
 
-  public DetailedSummaryFragment() {
-    detailedSummaries = new ArrayList<>();
+  public YesNoFragment() {
+    yesNos = new ArrayList<>();
   }
 
   @Override
@@ -45,7 +47,7 @@ public class DetailedSummaryFragment extends BaseFragment {
       return mainView;
     }
 
-    mainView = inflater.inflate(R.layout.fragment_detailed_summary, container, false);
+    mainView = inflater.inflate(R.layout.fragment_yes_no, container, false);
     LogUtil.e("AAA onCreateView DetailedSummaryFragment");
     initViews();
     setData();
@@ -58,12 +60,12 @@ public class DetailedSummaryFragment extends BaseFragment {
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    adapter = new DetailedSummaryAdapter(detailedSummaries);
+    adapter = new YesNoAdapter(yesNos);
     recyclerView.setAdapter(adapter);
   }
 
-  public void setDataSet(List<DetailedSummary> detailedSummaries) {
-    this.detailedSummaries = detailedSummaries;
+  public void setDataSet(List<YesNo> yesNos) {
+    this.yesNos = yesNos;
     if (mainView != null) {
       setData();
     }
@@ -72,6 +74,7 @@ public class DetailedSummaryFragment extends BaseFragment {
   private void setData() {
     adapter.notifyDataSetChanged();
     mainView.findViewById(R.id.text_empty).setVisibility(
-        detailedSummaries.isEmpty() ? View.VISIBLE : View.GONE);
+        yesNos.isEmpty() ? View.VISIBLE : View.GONE);
   }
+
 }

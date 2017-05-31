@@ -26,6 +26,7 @@ import com.ingenuitymobile.edwardlynx.fragments.CommentsFragment;
 import com.ingenuitymobile.edwardlynx.fragments.DetailedSummaryFragment;
 import com.ingenuitymobile.edwardlynx.fragments.RadarFragment;
 import com.ingenuitymobile.edwardlynx.fragments.ResponseRateFragment;
+import com.ingenuitymobile.edwardlynx.fragments.YesNoFragment;
 import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
@@ -59,6 +60,7 @@ public class SurveyReportActivity extends BaseActivity {
   private CommentsFragment        commentsFragment;
   private BreakdownFragments      breakdownFragments;
   private DetailedSummaryFragment detailedSummaryFragment;
+  private YesNoFragment           yesNoFragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +136,10 @@ public class SurveyReportActivity extends BaseActivity {
     if (detailedSummaryFragment == null) {
       detailedSummaryFragment = new DetailedSummaryFragment();
     }
+
+    if (yesNoFragment == null) {
+      yesNoFragment = new YesNoFragment();
+    }
   }
 
   private void getData() {
@@ -200,6 +206,7 @@ public class SurveyReportActivity extends BaseActivity {
         commentsFragment.setDataSet(response.comments);
         breakdownFragments.setDataSet(response.breakdown);
         detailedSummaryFragment.setDataSet(response.detailedSummaries);
+        yesNoFragment.setDataSet(response.yesNos);
       }
     }));
   }
@@ -252,7 +259,7 @@ public class SurveyReportActivity extends BaseActivity {
   };
 
   private class MyPagerAdapter extends FragmentPagerAdapter {
-    static final int SIZE = 6;
+    static final int SIZE = 7;
 
     MyPagerAdapter(FragmentManager fragmentManager) {
       super(fragmentManager);
@@ -280,6 +287,8 @@ public class SurveyReportActivity extends BaseActivity {
         return breakdownFragments;
       case 5:
         return detailedSummaryFragment;
+      case 6:
+        return yesNoFragment;
       default:
         return null;
       }

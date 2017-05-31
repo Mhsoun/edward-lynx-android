@@ -254,6 +254,9 @@
   <string name="response_rate">Response Rate</string>
   <string name="response_rate_details">The following chart indicates the number of individuals that responded to your feedback, broken down by category of feedback provider.</string>
   <string name="detailed_summary">Detailed answer summary per category</string>
+  <string name="yes_no">Yes/No Questions</string>
+  <string name="yes">Yes</string>
+  <string name="no">No</string>
 
   // popup
   <string name="goal_completed">Goal Completed!</string>

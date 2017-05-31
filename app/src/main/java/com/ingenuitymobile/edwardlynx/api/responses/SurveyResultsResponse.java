@@ -9,6 +9,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Comment;
 import com.ingenuitymobile.edwardlynx.api.models.DetailedSummary;
 import com.ingenuitymobile.edwardlynx.api.models.Links;
 import com.ingenuitymobile.edwardlynx.api.models.SurveyFrequency;
+import com.ingenuitymobile.edwardlynx.api.models.YesNo;
 
 import java.util.List;
 
@@ -38,4 +39,6 @@ public class SurveyResultsResponse extends Response {
   public List<Breakdown>       breakdown;
   @SerializedName("detailed_answer_summary")
   public List<DetailedSummary> detailedSummaries;
+  @SerializedName("yes_or_no")
+  public List<YesNo>           yesNos;
 }
