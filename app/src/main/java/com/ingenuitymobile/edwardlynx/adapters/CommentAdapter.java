@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Comment;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.List;
 
@@ -53,7 +52,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     final Context context = holder.itemView.getContext();
     final Comment comment = data.get(position);
 
-    holder.titleText.setText(comment.title);
+    holder.titleText.setText(comment.question);
     final CommentItemAdapter adapter = new CommentItemAdapter(comment.answer);
     holder.recyclerView.setAdapter(adapter);
     adapter.notifyDataSetChanged();

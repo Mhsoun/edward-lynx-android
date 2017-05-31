@@ -48,7 +48,7 @@ public class SplashActivity extends BaseActivity {
       notificationManager.cancel(0);
 //      getUser();
       Intent intent = new Intent(this, SurveyReportActivity.class);
-      intent.putExtra("id", 41L);
+      intent.putExtra("id", 65L);
       startActivity(intent);
       finish();
     } else {

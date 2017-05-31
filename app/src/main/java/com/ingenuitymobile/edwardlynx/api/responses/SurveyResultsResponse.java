@@ -3,6 +3,7 @@ package com.ingenuitymobile.edwardlynx.api.responses;
 import com.google.gson.annotations.SerializedName;
 import com.ingenuitymobile.edwardlynx.api.models.Average;
 import com.ingenuitymobile.edwardlynx.api.models.BlindSpot;
+import com.ingenuitymobile.edwardlynx.api.models.Breakdown;
 import com.ingenuitymobile.edwardlynx.api.models.Comment;
 import com.ingenuitymobile.edwardlynx.api.models.Links;
 import com.ingenuitymobile.edwardlynx.api.models.SurveyFrequency;
@@ -29,5 +30,6 @@ public class SurveyResultsResponse extends Response {
   public List<Comment>         comments;
   @SerializedName("blindspot")
   public BlindSpot             blindspot;
-
+  @SerializedName("breakdown")
+  public List<Breakdown>       breakdown;
 }

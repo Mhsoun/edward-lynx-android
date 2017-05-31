@@ -15,11 +15,13 @@ import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.api.models.Breakdown;
 import com.ingenuitymobile.edwardlynx.api.models.Comment;
 import com.ingenuitymobile.edwardlynx.api.models.CommentItem;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.fragments.AveragesFragment;
+import com.ingenuitymobile.edwardlynx.fragments.BreakdownFragments;
 import com.ingenuitymobile.edwardlynx.fragments.CommentsFragment;
 import com.ingenuitymobile.edwardlynx.fragments.RadarFragment;
 import com.ingenuitymobile.edwardlynx.utils.DateUtil;
@@ -36,9 +38,6 @@ import rx.Subscriber;
  */
 
 public class SurveyReportActivity extends BaseActivity {
-
-  private static final int SIZE = 3;
-
   private long   id;
   private Survey survey;
 
@@ -52,9 +51,10 @@ public class SurveyReportActivity extends BaseActivity {
   private TextView dateText;
   private TextView detailsText;
 
-  private AveragesFragment averagesFragment;
-  private RadarFragment    radarFragment;
-  private CommentsFragment commentsFragment;
+  private AveragesFragment   averagesFragment;
+  private RadarFragment      radarFragment;
+  private CommentsFragment   commentsFragment;
+  private BreakdownFragments breakdownFragments;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +117,10 @@ public class SurveyReportActivity extends BaseActivity {
 
     if (commentsFragment == null) {
       commentsFragment = new CommentsFragment();
+    }
+
+    if (breakdownFragments == null) {
+      breakdownFragments = new BreakdownFragments();
     }
   }
 
@@ -181,6 +185,7 @@ public class SurveyReportActivity extends BaseActivity {
         averagesFragment.setDataSet(response.averages, response.ioc);
         radarFragment.setDataSet(response.radarDiagrams);
         commentsFragment.setDataSet(response.comments);
+        breakdownFragments.setDataSet(response.breakdown);
       }
     }));
   }
@@ -190,7 +195,7 @@ public class SurveyReportActivity extends BaseActivity {
 
     previousImage.setVisibility(viewPager.getCurrentItem() == 0 ? View.INVISIBLE : View.VISIBLE);
     nextImage.setVisibility(
-        viewPager.getCurrentItem() == SIZE - 1 ? View.INVISIBLE : View.VISIBLE);
+        viewPager.getCurrentItem() == MyPagerAdapter.SIZE - 1 ? View.INVISIBLE : View.VISIBLE);
   }
 
   private ViewPager.OnPageChangeListener pageChangeListener =
@@ -233,6 +238,7 @@ public class SurveyReportActivity extends BaseActivity {
   };
 
   private class MyPagerAdapter extends FragmentPagerAdapter {
+    static final int SIZE = 4;
 
     MyPagerAdapter(FragmentManager fragmentManager) {
       super(fragmentManager);
@@ -254,6 +260,8 @@ public class SurveyReportActivity extends BaseActivity {
         return radarFragment;
       case 2:
         return commentsFragment;
+      case 3:
+        return breakdownFragments;
       default:
         return null;
       }

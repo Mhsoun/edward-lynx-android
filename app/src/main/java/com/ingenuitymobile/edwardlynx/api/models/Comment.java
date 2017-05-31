@@ -12,8 +12,8 @@ public class Comment {
 
   @SerializedName("id")
   public long   id;
-  @SerializedName("title")
-  public String title;
+  @SerializedName("question")
+  public String question;
 
   @SerializedName("answer")
   public List<CommentItem> answer;

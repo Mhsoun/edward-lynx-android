@@ -236,6 +236,7 @@
   <string name="no_development_plans">No Development Plans</string>
   <string name="no_chart_data_available">No chart data available</string>
   <string name="no_comments">No Comments available</string>
+  <string name="no_breakdown">No Comments available</string>
   <string name="minimum_chart">Minimum of 3 people to view this chart</string>
   <string name="question_label">Question: </string>
 
@@ -248,6 +249,8 @@
   <string name="radar_diagram">Radar Diagram</string>
   <string name="radar_diagram_details">Shows an overview of the results from the feedback survey, compare with your own personal assessment. The points where the radius of the circle is largest show where your strong points are (according to you or the feedback group).</string>
   <string name="participants_comments">Participant\'s Comments</string>
+  <string name="breakdown_title">Breakdown of answers by participant type</string>
+  <string name="breakdown_details">The diagrams show an average of the answers of the competence areas for each participant category.</string>
 
   // popup
   <string name="goal_completed">Goal Completed!</string>
