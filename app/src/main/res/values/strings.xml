@@ -235,6 +235,7 @@
   <string name="no_data_found">No data found</string>
   <string name="no_development_plans">No Development Plans</string>
   <string name="no_chart_data_available">No chart data available</string>
+  <string name="no_comments">No Comments available</string>
   <string name="minimum_chart">Minimum of 3 people to view this chart</string>
   <string name="question_label">Question: </string>
 
@@ -246,6 +247,7 @@
   <string name="index_over_competencies_details">Shows the overall values for each area of competence (the average of all the answers from those who responded to your feedback request.) Your own personal assessment is shown in a separate bar.</string>
   <string name="radar_diagram">Radar Diagram</string>
   <string name="radar_diagram_details">Shows an overview of the results from the feedback survey, compare with your own personal assessment. The points where the radius of the circle is largest show where your strong points are (according to you or the feedback group).</string>
+  <string name="participants_comments">Participant\'s Comments</string>
 
   // popup
   <string name="goal_completed">Goal Completed!</string>

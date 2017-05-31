@@ -15,13 +15,17 @@ import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.api.models.Comment;
+import com.ingenuitymobile.edwardlynx.api.models.CommentItem;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.fragments.AveragesFragment;
+import com.ingenuitymobile.edwardlynx.fragments.CommentsFragment;
 import com.ingenuitymobile.edwardlynx.fragments.RadarFragment;
 import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -50,11 +54,7 @@ public class SurveyReportActivity extends BaseActivity {
 
   private AveragesFragment averagesFragment;
   private RadarFragment    radarFragment;
-  private AveragesFragment fragment2;
-
-
-  public SurveyReportActivity() {
-  }
+  private CommentsFragment commentsFragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -115,8 +115,8 @@ public class SurveyReportActivity extends BaseActivity {
       radarFragment = new RadarFragment();
     }
 
-    if (fragment2 == null) {
-      fragment2 = new AveragesFragment();
+    if (commentsFragment == null) {
+      commentsFragment = new CommentsFragment();
     }
   }
 
@@ -180,6 +180,7 @@ public class SurveyReportActivity extends BaseActivity {
       public void onNext(SurveyResultsResponse response) {
         averagesFragment.setDataSet(response.averages, response.ioc);
         radarFragment.setDataSet(response.radarDiagrams);
+        commentsFragment.setDataSet(response.comments);
       }
     }));
   }
@@ -252,7 +253,7 @@ public class SurveyReportActivity extends BaseActivity {
       case 1:
         return radarFragment;
       case 2:
-        return fragment2;
+        return commentsFragment;
       default:
         return null;
       }

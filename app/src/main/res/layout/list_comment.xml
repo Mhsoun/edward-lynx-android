@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+  <TextView
+      android:id="@+id/text_title"
+      fontPath="fonts/Lato-Italic.ttf"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      android:textStyle="bold"
+      tools:ignore="MissingPrefix"/>
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/recycler"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="38dp"
+      android:layout_marginRight="38dp">
+  </android.support.v7.widget.RecyclerView>
+</LinearLayout>
