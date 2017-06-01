@@ -18,5 +18,8 @@ public class Response {
   @SerializedName("survey_id")
   public long surveyId;
 
+  @SerializedName("instant_feedback_id")
+  public long feedbackId;
+
   public boolean isNotAuthenticated;
 }

@@ -121,6 +121,9 @@ public interface Service {
   @GET("/api/v1/instant-feedbacks/{id}")
   Observable<Feedback> getInstantFeedback(@Path("id") long id);
 
+  @GET("/api/v1/instant-feedbacks/exchange/{key}")
+  Observable<Response> getFeedbackId(@Path("key") String key);
+
   @Headers("Content-Type: application/json")
   @POST("/api/v1/instant-feedbacks/{id}/answers")
   Observable<Response> postInstantFeedbackAnswers(@Path("id") long id, @Body AnswerParam param);

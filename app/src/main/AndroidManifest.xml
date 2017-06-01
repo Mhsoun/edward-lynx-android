@@ -42,7 +42,7 @@
 
         <data
             android:host="edwardlynx.ingenuity.ph"
-            android:pathPrefix="/instant-request/answer"
+            android:pathPrefix="/instant-feedbacks/answer"
             android:scheme="https"/>
       </intent-filter>
     </activity>

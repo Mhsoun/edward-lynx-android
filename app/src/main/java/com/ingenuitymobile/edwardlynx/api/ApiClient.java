@@ -333,6 +333,17 @@ public class ApiClient {
         }));
   }
 
+  public Subscription getFeedbackId(final String key, final Subscriber<Response> subscriber) {
+    return service.getFeedbackId(key)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getFeedbackId(key, subscriber);
+          }
+        }));
+  }
+
   public Subscription postInstantFeedbackAnswers(final long id, final AnswerParam param,
       final Subscriber<Response> subscriber) {
     return service.postInstantFeedbackAnswers(id, param)
