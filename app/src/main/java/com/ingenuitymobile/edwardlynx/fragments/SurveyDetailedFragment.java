@@ -1,6 +1,7 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,6 @@ public class SurveyDetailedFragment extends BaseFragment {
   private void setData() {
     titleText.setText(survey.getType(getActivity(), false) + ": " + survey.name);
     evaluatedText.setText(survey.personsEvaluatedText);
-    descriptionText.setText(survey.description);
+    descriptionText.setText(Html.fromHtml(survey.description));
   }
 }
