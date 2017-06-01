@@ -1,7 +1,7 @@
 <resources>
   <string name="app_name">Edward Lynx</string>
-  <string name="live_url">http://edwardlynx.ingenuity.ph</string>
-  <string name="staging_url">http://edwardlynx.ingenuity.ph</string>
+  <string name="live_url">https://edwardlynx.ingenuity.ph</string>
+  <string name="staging_url">https://edwardlynx.ingenuity.ph</string>
   <string name="client_id">2</string>
   <string name="client_secret">jNl8Akpv79hORetW7jCMCQnKQjwiB6XerZxIxcsy</string>
   <string name="hockey_app_id">1b9084aaa22c4395a83bedd31b305831</string>

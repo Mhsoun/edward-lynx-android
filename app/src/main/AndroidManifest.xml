@@ -31,7 +31,7 @@
         <data
             android:host="edwardlynx.ingenuity.ph"
             android:pathPrefix="/survey/answer"
-            android:scheme="http"/>
+            android:scheme="https"/>
       </intent-filter>
 
       <intent-filter>
@@ -43,7 +43,7 @@
         <data
             android:host="edwardlynx.ingenuity.ph"
             android:pathPrefix="/instant-request/answer"
-            android:scheme="http"/>
+            android:scheme="https"/>
       </intent-filter>
     </activity>
     <activity
