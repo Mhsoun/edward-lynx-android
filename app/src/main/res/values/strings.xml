@@ -39,13 +39,13 @@
   <string name="create_instant_feedback_bold">CREATE INSTANT FEEDBACK</string>
   <string name="invite_people_bold">INVITE PEOPLE</string>
   <string name="instant_feedback_requests_bold">INSTANT FEEDBACK REQUESTS</string>
-  <string name="reports_bold">REPORTS</string>
+  <string name="results_bold">RESULTS</string>
   <string name="goals_details_bold">GOALS DETAILS</string>
   <string name="instant_feedback_bold">INSTANT FEEDBACK</string>
-  <string name="instant_feedback_answers_bold">FEEDBACK REPORT</string>
+  <string name="instant_feedback_answers_bold">FEEDBACK RESULT</string>
   <string name="anonymous_feedback">Anonymous Feedback</string>
-  <string name="survey_report_bold">SURVEY REPORT</string>
-  <string name="share_report_bold">SHARE REPORT</string>
+  <string name="survey_report_bold">SURVEY RESULT</string>
+  <string name="share_report_bold">SHARE RESULT</string>
   <string name="create_development_plan_bold">CREATE DEVELOPMENT PLAN</string>
   <string name="details_bold">DETAILS</string>
   <string name="development_plan_bold">DEVELOPMENT PLANS</string>
@@ -268,7 +268,7 @@
 
   // Search
   <string name="search">Search</string>
-  <string name="search_reports">Search Reports</string>
+  <string name="search_reports">Search Results</string>
   <string name="search_survey">Search Surveys</string>
   <string name="search_development_plans">Search Development Plans</string>
 
@@ -282,7 +282,7 @@
   <string name="answer_survey">Answer Survey</string>
   <string name="created_by">Created by: %1$s</string>
 
-  <string name="share_report">Share Report</string>
+  <string name="share_report">Share Result</string>
   <string name="add_more_participants">Add More Participants</string>
 
   <string name="invite_people_to_rate_you">Invite people to rate you in a survey</string>
