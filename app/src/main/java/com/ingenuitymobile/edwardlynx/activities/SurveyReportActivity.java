@@ -21,6 +21,7 @@ import com.ingenuitymobile.edwardlynx.api.models.CommentItem;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.fragments.AveragesFragment;
+import com.ingenuitymobile.edwardlynx.fragments.BlindspotFragment;
 import com.ingenuitymobile.edwardlynx.fragments.BreakdownFragments;
 import com.ingenuitymobile.edwardlynx.fragments.CommentsFragment;
 import com.ingenuitymobile.edwardlynx.fragments.DetailedSummaryFragment;
@@ -58,6 +59,8 @@ public class SurveyReportActivity extends BaseActivity {
   private AveragesFragment        averagesFragment;
   private RadarFragment           radarFragment;
   private CommentsFragment        commentsFragment;
+  private BlindspotFragment       overBlindspotFragment;
+  private BlindspotFragment       underBlindspotFragment;
   private BreakdownFragments      breakdownFragments;
   private DetailedSummaryFragment detailedSummaryFragment;
   private YesNoFragment           yesNoFragment;
@@ -140,6 +143,14 @@ public class SurveyReportActivity extends BaseActivity {
     if (yesNoFragment == null) {
       yesNoFragment = new YesNoFragment();
     }
+
+    if (overBlindspotFragment == null) {
+      overBlindspotFragment = new BlindspotFragment();
+    }
+
+    if (underBlindspotFragment == null) {
+      underBlindspotFragment = new BlindspotFragment();
+    }
   }
 
   private void getData() {
@@ -204,6 +215,16 @@ public class SurveyReportActivity extends BaseActivity {
         averagesFragment.setDataSet(response.averages, response.ioc);
         radarFragment.setDataSet(response.radarDiagrams);
         commentsFragment.setDataSet(response.comments);
+        overBlindspotFragment.setDataSet(
+            response.blindspot.overestimated,
+            getString(R.string.overestimated_attributes),
+            getString(R.string.overestimated_attributes_details)
+        );
+        underBlindspotFragment.setDataSet(
+            response.blindspot.underestimated,
+            getString(R.string.underestimated_attributes),
+            getString(R.string.underestimated_attributes_details)
+        );
         breakdownFragments.setDataSet(response.breakdown);
         detailedSummaryFragment.setDataSet(response.detailedSummaries);
         yesNoFragment.setDataSet(response.yesNos);
@@ -259,7 +280,7 @@ public class SurveyReportActivity extends BaseActivity {
   };
 
   private class MyPagerAdapter extends FragmentPagerAdapter {
-    static final int SIZE = 7;
+    static final int SIZE = 9;
 
     MyPagerAdapter(FragmentManager fragmentManager) {
       super(fragmentManager);
@@ -284,10 +305,14 @@ public class SurveyReportActivity extends BaseActivity {
       case 3:
         return commentsFragment;
       case 4:
-        return breakdownFragments;
+        return overBlindspotFragment;
       case 5:
-        return detailedSummaryFragment;
+        return underBlindspotFragment;
       case 6:
+        return breakdownFragments;
+      case 7:
+        return detailedSummaryFragment;
+      case 8:
         return yesNoFragment;
       default:
         return null;

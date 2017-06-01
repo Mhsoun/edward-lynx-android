@@ -22,8 +22,10 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Average;
+import com.ingenuitymobile.edwardlynx.api.models.BreakdownItem;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
+import com.ingenuitymobile.edwardlynx.views.CustomBarDataSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,15 +105,15 @@ public class AveragesFragment extends BaseFragment {
 
     for (int i = 0; i < size; i++) {
       float val = averages.get(i).average * 100f;
-      yVals1.add(new BarEntry(i, val));
+      BarEntry barEntry = new BarEntry(i, val);
+      barEntry.setData(BreakdownItem.SELF_COLOR);
+      yVals1.add(barEntry);
     }
 
-    BarDataSet set1 = new BarDataSet(yVals1, "");
+    CustomBarDataSet set1 = new CustomBarDataSet(getActivity(), yVals1, "");
     set1.setDrawValues(true);
     set1.setValueTextSize(FONT_SIZE);
-    set1.setValueTextColor(context.getResources().getColor(R.color.lynx_color));
     set1.setHighlightEnabled(false);
-    set1.setColor(context.getResources().getColor(R.color.lynx_color));
     set1.setValueFormatter(new IValueFormatter() {
       @Override
       public String getFormattedValue(float value, Entry entry, int dataSetIndex,
@@ -161,21 +163,23 @@ public class AveragesFragment extends BaseFragment {
     for (int i = 0; i < size; i++) {
       Average average = ioc.get(i);
       float val = average.roles.get(0).average * 100f;
-      others.add(new BarEntry(i, val));
+      BarEntry barEntry = new BarEntry(i, val);
+      barEntry.setData(BreakdownItem.OTHERS_COLOR);
+      others.add(barEntry);
 
       float selfValue = 0;
       if (average.roles.size() >= 2) {
         selfValue = average.roles.get(1).average * 100f;
       }
-      self.add(new BarEntry(i, selfValue));
+      barEntry = new BarEntry(i, selfValue);
+      barEntry.setData(BreakdownItem.SELF_COLOR);
+      self.add(barEntry);
     }
 
-    BarDataSet set1 = new BarDataSet(self, getString(R.string.self));
+    CustomBarDataSet set1 = new CustomBarDataSet(getActivity(), self, getString(R.string.self));
     set1.setDrawValues(true);
     set1.setValueTextSize(FONT_SIZE);
-    set1.setValueTextColor(context.getResources().getColor(R.color.lynx_color));
     set1.setHighlightEnabled(false);
-    set1.setColor(context.getResources().getColor(R.color.lynx_color));
     set1.setValueFormatter(new IValueFormatter() {
       @Override
       public String getFormattedValue(float value, Entry entry, int dataSetIndex,
@@ -184,12 +188,14 @@ public class AveragesFragment extends BaseFragment {
       }
     });
 
-    BarDataSet set2 = new BarDataSet(others, getString(R.string.others_combined));
+    CustomBarDataSet set2 = new CustomBarDataSet(
+        getActivity(),
+        others,
+        getString(R.string.others_combined)
+    );
     set2.setDrawValues(true);
     set2.setValueTextSize(FONT_SIZE);
-    set2.setValueTextColor(context.getResources().getColor(R.color.lynx_red_color));
     set2.setHighlightEnabled(false);
-    set2.setColor(context.getResources().getColor(R.color.lynx_red_color));
     set2.setValueFormatter(new IValueFormatter() {
       @Override
       public String getFormattedValue(float value, Entry entry, int dataSetIndex,

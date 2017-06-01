@@ -21,8 +21,10 @@ import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.api.models.BreakdownItem;
 import com.ingenuitymobile.edwardlynx.api.models.DetailedSummary;
 import com.ingenuitymobile.edwardlynx.api.models.DetailedSummaryItem;
+import com.ingenuitymobile.edwardlynx.views.CustomBarDataSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,15 +84,16 @@ public class DetailedSummaryAdapter extends
     ArrayList<BarEntry> goalBars = new ArrayList<>();
 
     for (DetailedSummaryItem detailedSummaryItem : item.dataPoints) {
-      goalBars.add(new BarEntry(goalBars.size() + 1, detailedSummaryItem.value));
+
+      BarEntry entry = new BarEntry(goalBars.size() + 1, detailedSummaryItem.value);
+      entry.setData(BreakdownItem.SELF_COLOR);
+      goalBars.add(entry);
     }
 
-    final BarDataSet set = new BarDataSet(goalBars, "");
+    final CustomBarDataSet set = new CustomBarDataSet(context, goalBars, "");
     set.setDrawValues(true);
     set.setValueTextSize(FONT_SIZE);
-    set.setValueTextColor(context.getResources().getColor(R.color.lynx_color));
     set.setHighlightEnabled(false);
-    set.setColor(context.getResources().getColor(R.color.lynx_color));
     set.setValueFormatter(new IValueFormatter() {
       @Override
       public String getFormattedValue(float value, Entry entry, int dataSetIndex,

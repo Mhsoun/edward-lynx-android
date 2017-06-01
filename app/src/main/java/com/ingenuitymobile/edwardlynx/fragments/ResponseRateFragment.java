@@ -88,7 +88,7 @@ public class ResponseRateFragment extends BaseFragment {
     float highest = 0f;
 
     for (BreakdownItem item : responseRates) {
-      BarEntry entry = new BarEntry(goalBars.size() + 1, item.percentage);
+      BarEntry entry = new BarEntry(goalBars.size(), item.percentage);
       entry.setData(item.roleStyle);
       goalBars.add(entry);
 
@@ -125,7 +125,7 @@ public class ResponseRateFragment extends BaseFragment {
     xAxis.setValueFormatter(new IAxisValueFormatter() {
       @Override
       public String getFormattedValue(float value, AxisBase axis) {
-        final int index = (((int) value) - 1);
+        final int index = (((int) value));
         if (index >= 0) {
           return responseRates.get(index).title;
         }
