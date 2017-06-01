@@ -7,6 +7,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Breakdown;
 import com.ingenuitymobile.edwardlynx.api.models.BreakdownItem;
 import com.ingenuitymobile.edwardlynx.api.models.Comment;
 import com.ingenuitymobile.edwardlynx.api.models.DetailedSummary;
+import com.ingenuitymobile.edwardlynx.api.models.IndividualRate;
 import com.ingenuitymobile.edwardlynx.api.models.Links;
 import com.ingenuitymobile.edwardlynx.api.models.SurveyFrequency;
 import com.ingenuitymobile.edwardlynx.api.models.YesNo;
@@ -33,6 +34,8 @@ public class SurveyResultsResponse extends Response {
   public List<Average>         radarDiagrams;
   @SerializedName("comments")
   public List<Comment>         comments;
+  @SerializedName("highestLowestIndividual")
+  public IndividualRate        rate;
   @SerializedName("blindspot")
   public BlindSpot             blindspot;
   @SerializedName("breakdown")

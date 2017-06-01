@@ -20,9 +20,8 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.ingenuitymobile.edwardlynx.R;
-import com.ingenuitymobile.edwardlynx.api.models.BlindSpotItem;
 import com.ingenuitymobile.edwardlynx.api.models.BreakdownItem;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+import com.ingenuitymobile.edwardlynx.api.models.QuestionRate;
 import com.ingenuitymobile.edwardlynx.views.CustomBarDataSet;
 
 import java.util.ArrayList;
@@ -32,11 +31,10 @@ import java.util.List;
  * Created by memengski on 6/1/17.
  */
 
-public class BlindspotAdapter extends RecyclerView.Adapter<BlindspotAdapter.ViewHolder> {
+public class QuestionRateAdapter extends RecyclerView.Adapter<QuestionRateAdapter.ViewHolder> {
+  private List<QuestionRate> data;
 
-  private List<BlindSpotItem> data;
-
-  public BlindspotAdapter(List<BlindSpotItem> data) {
+  public QuestionRateAdapter(List<QuestionRate> data) {
     super();
     this.data = data;
   }
@@ -72,22 +70,24 @@ public class BlindspotAdapter extends RecyclerView.Adapter<BlindspotAdapter.View
   @Override
   public void onBindViewHolder(ViewHolder holder, int position) {
     final Context context = holder.itemView.getContext();
-    final BlindSpotItem item = data.get(position);
+    final QuestionRate rate = data.get(position);
 
-    holder.titleText.setText(item.category);
-    holder.questionText.setText(item.title);
+
+    holder.titleText.setText(rate.category);
+    holder.questionText.setText(rate.question);
+
 
     final float FONT_SIZE = 11;
     final int size = 2;
 
     ArrayList<BarEntry> yVals1 = new ArrayList<>();
 
-    BarEntry barEntry = new BarEntry(0, item.self);
+    BarEntry barEntry = new BarEntry(0, rate.candidates);
     barEntry.setData(BreakdownItem.SELF_COLOR);
     yVals1.add(barEntry);
 
-    BarEntry entry = new BarEntry(1, item.others);
-    entry.setData(BreakdownItem.OTHERS_COLOR);
+    BarEntry entry = new BarEntry(1, rate.others);
+    entry.setData(rate.roleStyle);
     yVals1.add(entry);
 
     CustomBarDataSet set = new CustomBarDataSet(context, yVals1, "");
@@ -132,7 +132,7 @@ public class BlindspotAdapter extends RecyclerView.Adapter<BlindspotAdapter.View
       public String getFormattedValue(float value, AxisBase axis) {
         final int index = (((int) value));
         if (index >= 0) {
-          return context.getString(index == 0 ? R.string.self : R.string.others_combined);
+          return index == 0 ? context.getString(R.string.self) : rate.name;
         }
         return "";
       }
@@ -146,7 +146,7 @@ public class BlindspotAdapter extends RecyclerView.Adapter<BlindspotAdapter.View
     yl.setAxisMinimum(0f);
     yl.setAxisMaximum(100f);
 
-    if (item.answerType.isNumeric) {
+    if (rate.answerType.isNumeric) {
       LimitLine limitLine = new LimitLine(70, "");
       limitLine.setLabelPosition(LimitLine.LimitLabelPosition.LEFT_BOTTOM);
       limitLine.setLineColor(context.getResources().getColor(R.color.survey_line));
@@ -167,11 +167,11 @@ public class BlindspotAdapter extends RecyclerView.Adapter<BlindspotAdapter.View
     YAxis yr = holder.horizontalBarChart.getAxisRight();
     yr.setDrawAxisLine(false);
     yr.setDrawLabels(true);
-    yr.setDrawGridLines(!item.answerType.isNumeric);
-    yr.setDrawLimitLinesBehindData(!item.answerType.isNumeric);
+    yr.setDrawGridLines(!rate.answerType.isNumeric);
+    yr.setDrawLimitLinesBehindData(!rate.answerType.isNumeric);
     yr.setLabelCount(
-        item.answerType.isNumeric ? 10 : item.answerType.options.size(),
-        !item.answerType.isNumeric
+        rate.answerType.isNumeric ? 10 : rate.answerType.options.size(),
+        !rate.answerType.isNumeric
     );
 
     yr.setAxisMinimum(0f);
@@ -181,7 +181,7 @@ public class BlindspotAdapter extends RecyclerView.Adapter<BlindspotAdapter.View
     yr.setValueFormatter(new IAxisValueFormatter() {
       @Override
       public String getFormattedValue(float value, AxisBase axis) {
-        if (item.answerType.isNumeric) {
+        if (rate.answerType.isNumeric) {
           if ((int) value == 70) {
             return "70%";
           } else if ((int) value == 100) {
@@ -190,9 +190,9 @@ public class BlindspotAdapter extends RecyclerView.Adapter<BlindspotAdapter.View
         } else {
           int index = 0;
           if (value != 0) {
-            index = (int) value / (100 / (item.answerType.options.size() - 1));
+            index = (int) value / (100 / (rate.answerType.options.size() - 1));
           }
-          return item.answerType.options.get(index).description;
+          return rate.answerType.options.get(index).description;
         }
 
         return "";

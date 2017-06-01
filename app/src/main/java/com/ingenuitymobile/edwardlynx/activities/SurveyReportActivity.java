@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,9 +16,8 @@ import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
-import com.ingenuitymobile.edwardlynx.api.models.Breakdown;
-import com.ingenuitymobile.edwardlynx.api.models.Comment;
-import com.ingenuitymobile.edwardlynx.api.models.CommentItem;
+import com.ingenuitymobile.edwardlynx.adapters.QuestionRateFragment;
+import com.ingenuitymobile.edwardlynx.api.models.QuestionRate;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.fragments.AveragesFragment;
@@ -55,15 +55,11 @@ public class SurveyReportActivity extends BaseActivity {
   private TextView dateText;
   private TextView detailsText;
 
-  private ResponseRateFragment    responseRateFragment;
-  private AveragesFragment        averagesFragment;
-  private RadarFragment           radarFragment;
-  private CommentsFragment        commentsFragment;
-  private BlindspotFragment       overBlindspotFragment;
-  private BlindspotFragment       underBlindspotFragment;
-  private BreakdownFragments      breakdownFragments;
-  private DetailedSummaryFragment detailedSummaryFragment;
-  private YesNoFragment           yesNoFragment;
+  private ArrayList<Fragment> fragments;
+
+  public SurveyReportActivity() {
+    fragments = new ArrayList<>();
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -114,43 +110,6 @@ public class SurveyReportActivity extends BaseActivity {
 
     dateText.setText("");
     detailsText.setText(getString(R.string.details_circle_chart, 0, 0));
-
-    if (responseRateFragment == null) {
-      responseRateFragment = new ResponseRateFragment();
-    }
-
-    if (averagesFragment == null) {
-      averagesFragment = new AveragesFragment();
-    }
-
-
-    if (radarFragment == null) {
-      radarFragment = new RadarFragment();
-    }
-
-    if (commentsFragment == null) {
-      commentsFragment = new CommentsFragment();
-    }
-
-    if (breakdownFragments == null) {
-      breakdownFragments = new BreakdownFragments();
-    }
-
-    if (detailedSummaryFragment == null) {
-      detailedSummaryFragment = new DetailedSummaryFragment();
-    }
-
-    if (yesNoFragment == null) {
-      yesNoFragment = new YesNoFragment();
-    }
-
-    if (overBlindspotFragment == null) {
-      overBlindspotFragment = new BlindspotFragment();
-    }
-
-    if (underBlindspotFragment == null) {
-      underBlindspotFragment = new BlindspotFragment();
-    }
   }
 
   private void getData() {
@@ -211,23 +170,7 @@ public class SurveyReportActivity extends BaseActivity {
 
       @Override
       public void onNext(SurveyResultsResponse response) {
-        responseRateFragment.setDataSet(response.responseRates);
-        averagesFragment.setDataSet(response.averages, response.ioc);
-        radarFragment.setDataSet(response.radarDiagrams);
-        commentsFragment.setDataSet(response.comments);
-        overBlindspotFragment.setDataSet(
-            response.blindspot.overestimated,
-            getString(R.string.overestimated_attributes),
-            getString(R.string.overestimated_attributes_details)
-        );
-        underBlindspotFragment.setDataSet(
-            response.blindspot.underestimated,
-            getString(R.string.underestimated_attributes),
-            getString(R.string.underestimated_attributes_details)
-        );
-        breakdownFragments.setDataSet(response.breakdown);
-        detailedSummaryFragment.setDataSet(response.detailedSummaries);
-        yesNoFragment.setDataSet(response.yesNos);
+        setData(response);
       }
     }));
   }
@@ -237,7 +180,135 @@ public class SurveyReportActivity extends BaseActivity {
 
     previousImage.setVisibility(viewPager.getCurrentItem() == 0 ? View.INVISIBLE : View.VISIBLE);
     nextImage.setVisibility(
-        viewPager.getCurrentItem() == MyPagerAdapter.SIZE - 1 ? View.INVISIBLE : View.VISIBLE);
+        viewPager.getCurrentItem() == fragments.size() - 1 ? View.INVISIBLE : View.VISIBLE);
+  }
+
+  private void setData(SurveyResultsResponse response) {
+    if (response == null) {
+      return;
+    }
+
+    if (response.responseRates != null && !response.responseRates.isEmpty()) {
+      final ResponseRateFragment responseRateFragment = new ResponseRateFragment();
+      responseRateFragment.setDataSet(response.responseRates);
+      fragments.add(responseRateFragment);
+    }
+
+    final AveragesFragment averagesFragment = new AveragesFragment();
+    averagesFragment.setDataSet(response.averages, response.ioc);
+    fragments.add(averagesFragment);
+
+    if (response.radarDiagrams != null && !response.radarDiagrams.isEmpty()) {
+      final RadarFragment radarFragment = new RadarFragment();
+      radarFragment.setDataSet(response.radarDiagrams);
+      fragments.add(radarFragment);
+    }
+
+    if (response.comments != null && !response.comments.isEmpty()) {
+      final CommentsFragment commentsFragment = new CommentsFragment();
+      commentsFragment.setDataSet(response.comments);
+      fragments.add(commentsFragment);
+    }
+
+    QuestionRateFragment highestManagerFragment = null;
+    QuestionRateFragment highestOthersFragment = null;
+    QuestionRateFragment lowerstManagerFragment = null;
+    QuestionRateFragment lowestOthersFragment = null;
+    if (response.rate != null) {
+      if (response.rate.highest != null) {
+        if (response.rate.highest.managers != null && !response.rate.highest.managers.isEmpty()) {
+          LogUtil.e("AAA " + response.rate.highest.managers.isEmpty());
+          highestManagerFragment = new QuestionRateFragment();
+          highestManagerFragment.setDataSet(
+              response.rate.highest.managers,
+              getString(R.string.highest_rate_manager)
+          );
+        }
+
+        if (response.rate.highest.others != null && !response.rate.highest.others.isEmpty()) {
+          highestOthersFragment = new QuestionRateFragment();
+          highestOthersFragment.setDataSet(
+              response.rate.highest.others,
+              getString(R.string.highest_rate_others)
+          );
+        }
+      }
+
+      if (response.rate.lowest != null) {
+        if (response.rate.lowest.managers != null && !response.rate.lowest.managers.isEmpty()) {
+          lowerstManagerFragment = new QuestionRateFragment();
+          lowerstManagerFragment.setDataSet(
+              response.rate.lowest.managers,
+              getString(R.string.lowest_rate_manager)
+          );
+        }
+
+        if (response.rate.lowest.others != null && !response.rate.lowest.others.isEmpty()) {
+          lowestOthersFragment = new QuestionRateFragment();
+          lowestOthersFragment.setDataSet(
+              response.rate.lowest.others,
+              getString(R.string.lowest_rate_others)
+          );
+        }
+      }
+    }
+
+    if (highestManagerFragment != null) {
+      fragments.add(highestManagerFragment);
+    }
+
+    if (lowerstManagerFragment != null) {
+      fragments.add(lowerstManagerFragment);
+    }
+
+    if (highestOthersFragment != null) {
+      fragments.add(highestOthersFragment);
+    }
+
+    if (lowestOthersFragment != null) {
+      fragments.add(lowestOthersFragment);
+    }
+
+    if (response.blindspot != null) {
+      if (response.blindspot.overestimated != null && !response.blindspot.overestimated.isEmpty()) {
+        final BlindspotFragment overBlindspotFragment = new BlindspotFragment();
+        overBlindspotFragment.setDataSet(
+            response.blindspot.overestimated,
+            getString(R.string.overestimated_attributes),
+            getString(R.string.overestimated_attributes_details)
+        );
+        fragments.add(overBlindspotFragment);
+      }
+
+      if (response.blindspot.underestimated != null &&
+          !response.blindspot.underestimated.isEmpty()) {
+        final BlindspotFragment underBlindspotFragment = new BlindspotFragment();
+        underBlindspotFragment.setDataSet(
+            response.blindspot.underestimated,
+            getString(R.string.underestimated_attributes),
+            getString(R.string.underestimated_attributes_details)
+        );
+
+        fragments.add(underBlindspotFragment);
+      }
+    }
+
+    if (response.breakdown != null && !response.breakdown.isEmpty()) {
+      final BreakdownFragments breakdownFragments = new BreakdownFragments();
+      breakdownFragments.setDataSet(response.breakdown);
+      fragments.add(breakdownFragments);
+    }
+    if (response.detailedSummaries != null && !response.detailedSummaries.isEmpty()) {
+      DetailedSummaryFragment detailedSummaryFragment = new DetailedSummaryFragment();
+      detailedSummaryFragment.setDataSet(response.detailedSummaries);
+      fragments.add(detailedSummaryFragment);
+    }
+
+    if (response.yesNos != null && !response.yesNos.isEmpty()) {
+      YesNoFragment yesNoFragment = new YesNoFragment();
+      yesNoFragment.setDataSet(response.yesNos);
+      fragments.add(yesNoFragment);
+    }
   }
 
   private ViewPager.OnPageChangeListener pageChangeListener =
@@ -280,7 +351,6 @@ public class SurveyReportActivity extends BaseActivity {
   };
 
   private class MyPagerAdapter extends FragmentPagerAdapter {
-    static final int SIZE = 9;
 
     MyPagerAdapter(FragmentManager fragmentManager) {
       super(fragmentManager);
@@ -289,34 +359,13 @@ public class SurveyReportActivity extends BaseActivity {
     // Returns total number of pages
     @Override
     public int getCount() {
-      return SIZE;
+      return fragments.size();
     }
 
     // Returns the fragment to display for that page
     @Override
     public Fragment getItem(int position) {
-      switch (position) {
-      case 0:
-        return responseRateFragment;
-      case 1:
-        return averagesFragment;
-      case 2:
-        return radarFragment;
-      case 3:
-        return commentsFragment;
-      case 4:
-        return overBlindspotFragment;
-      case 5:
-        return underBlindspotFragment;
-      case 6:
-        return breakdownFragments;
-      case 7:
-        return detailedSummaryFragment;
-      case 8:
-        return yesNoFragment;
-      default:
-        return null;
-      }
+      return fragments.get(position);
     }
 
     // Returns the page title for the top indicator

@@ -176,9 +176,11 @@ public class AveragesFragment extends BaseFragment {
       self.add(barEntry);
     }
 
-    CustomBarDataSet set1 = new CustomBarDataSet(getActivity(), self, getString(R.string.self));
+    BarDataSet set1 = new BarDataSet(self, getString(R.string.self));
     set1.setDrawValues(true);
     set1.setValueTextSize(FONT_SIZE);
+    set1.setColor(getActivity().getResources().getColor(R.color.lynx_color));
+    set1.setValueTextColor(Color.WHITE);
     set1.setHighlightEnabled(false);
     set1.setValueFormatter(new IValueFormatter() {
       @Override
@@ -188,13 +190,11 @@ public class AveragesFragment extends BaseFragment {
       }
     });
 
-    CustomBarDataSet set2 = new CustomBarDataSet(
-        getActivity(),
-        others,
-        getString(R.string.others_combined)
-    );
+    BarDataSet set2 = new BarDataSet(others, getString(R.string.others_combined));
     set2.setDrawValues(true);
     set2.setValueTextSize(FONT_SIZE);
+    set2.setColor(getActivity().getResources().getColor(R.color.lynx_red_color));
+    set2.setValueTextColor(Color.WHITE);
     set2.setHighlightEnabled(false);
     set2.setValueFormatter(new IValueFormatter() {
       @Override

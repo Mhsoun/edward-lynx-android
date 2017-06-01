@@ -240,6 +240,7 @@
   <string name="no_summary">No Summary available</string>
   <string name="no_yes_no">No Yes/No available</string>
   <string name="no_blindspot">No Blindspots available</string>
+  <string name="no_rated_questions">No Rated Questions available</string>
   <string name="minimum_chart">Minimum of 3 people to view this chart</string>
   <string name="question_label">Question: </string>
 
@@ -260,10 +261,14 @@
   <string name="yes_no">Yes/No Questions</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
-  <string name="overestimated_attributes">Overestimated Attributes</string>
+  <string name="overestimated_attributes">Blindspot (Overestimated)</string>
   <string name="overestimated_attributes_details">Questions where others have rated you lower than you rated yourself. Shows areas where there are areas for improvement.</string>
-  <string name="underestimated_attributes">Underestimated Attributes</string>
+  <string name="underestimated_attributes">Blindspot (Underestimated)</string>
   <string name="underestimated_attributes_details">Questions where others have rated you higher than you rated yourself. Shows the attributes you have that others appreciate.</string>
+  <string name="highest_rate_manager">Five Highest Rated Questions (Manager)</string>
+  <string name="lowest_rate_manager">Five Lowest Rated Questions (Manager)</string>
+  <string name="highest_rate_others">Five Highest Rated Questions (Others combined)</string>
+  <string name="lowest_rate_others">Five Lowest Rated Questions (Others combined)</string>
 
   // popup
   <string name="goal_completed">Goal Completed!</string>
