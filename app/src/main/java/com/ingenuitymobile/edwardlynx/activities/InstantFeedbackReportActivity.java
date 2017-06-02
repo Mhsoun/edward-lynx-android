@@ -220,7 +220,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         adapter.setType(type);
         adapter.setTotalAnswers(feedbackResponse.totalAnswers);
       } else {
-        final float FONT_SIZE = 11;
+        final float FONT_SIZE = 10;
         horizontalBarChart.setVisibility(View.VISIBLE);
 
         horizontalBarChart.setMaxVisibleValueCount(15);

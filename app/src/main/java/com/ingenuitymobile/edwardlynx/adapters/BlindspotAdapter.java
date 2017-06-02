@@ -58,7 +58,8 @@ public class BlindspotAdapter extends RecyclerView.Adapter<BlindspotAdapter.View
       horizontalBarChart.setPinchZoom(false);
       horizontalBarChart.setDrawGridBackground(false);
       horizontalBarChart.setDoubleTapToZoomEnabled(false);
-      horizontalBarChart.setExtraRightOffset(30f);
+      horizontalBarChart.setExtraRightOffset(25f);
+      horizontalBarChart.setExtraLeftOffset(-10f);
       horizontalBarChart.invalidate();
     }
   }
@@ -77,7 +78,7 @@ public class BlindspotAdapter extends RecyclerView.Adapter<BlindspotAdapter.View
     holder.titleText.setText(item.category);
     holder.questionText.setText(item.title);
 
-    final float FONT_SIZE = 11;
+    final float FONT_SIZE = 10;
     final int size = 2;
 
     ArrayList<BarEntry> yVals1 = new ArrayList<>();
@@ -177,7 +178,7 @@ public class BlindspotAdapter extends RecyclerView.Adapter<BlindspotAdapter.View
     yr.setAxisMinimum(0f);
     yr.setAxisMaximum(100f);
     yr.setTextColor(Color.WHITE);
-    yr.setTextSize(8.5f);
+    yr.setTextSize(8f);
     yr.setValueFormatter(new IAxisValueFormatter() {
       @Override
       public String getFormattedValue(float value, AxisBase axis) {

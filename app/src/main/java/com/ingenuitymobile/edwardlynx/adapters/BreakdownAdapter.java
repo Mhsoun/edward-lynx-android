@@ -55,7 +55,8 @@ public class BreakdownAdapter extends RecyclerView.Adapter<BreakdownAdapter.View
       horizontalBarChart.setPinchZoom(false);
       horizontalBarChart.setDrawGridBackground(false);
       horizontalBarChart.setDoubleTapToZoomEnabled(false);
-      horizontalBarChart.setExtraRightOffset(30f);
+      horizontalBarChart.setExtraRightOffset(25f);
+      horizontalBarChart.setExtraLeftOffset(-10f);
       horizontalBarChart.invalidate();
     }
   }
@@ -72,7 +73,7 @@ public class BreakdownAdapter extends RecyclerView.Adapter<BreakdownAdapter.View
     final Breakdown breakdown = data.get(position);
 
     holder.titleText.setText(breakdown.category);
-    final float FONT_SIZE = 11;
+    final float FONT_SIZE = 10;
 
     ArrayList<BarEntry> yVals1 = new ArrayList<>();
 
@@ -83,7 +84,8 @@ public class BreakdownAdapter extends RecyclerView.Adapter<BreakdownAdapter.View
       yVals1.add(barEntry);
     }
 
-    final CustomBarDataSet set = new CustomBarDataSet(context, yVals1, holder.horizontalBarChart, "");
+    final CustomBarDataSet set = new CustomBarDataSet(context, yVals1, holder.horizontalBarChart,
+        "");
     set.setDrawValues(true);
     set.setValueTextSize(FONT_SIZE);
     set.setHighlightEnabled(false);

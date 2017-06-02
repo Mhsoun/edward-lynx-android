@@ -36,7 +36,7 @@ import java.util.List;
 public class DetailedSummaryAdapter extends
     RecyclerView.Adapter<DetailedSummaryAdapter.ViewHolder> {
 
-  private static final float FONT_SIZE = 11;
+  private static final float FONT_SIZE = 10;
 
   private List<DetailedSummary> data;
 

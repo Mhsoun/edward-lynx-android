@@ -28,7 +28,7 @@ import java.util.List;
 
 public class RadarFragment extends BaseFragment {
 
-  private static final float FONT_SIZE = 11;
+  private static final float FONT_SIZE = 10;
 
   private View mainView;
 

@@ -56,7 +56,8 @@ public class QuestionRateAdapter extends RecyclerView.Adapter<QuestionRateAdapte
       horizontalBarChart.setPinchZoom(false);
       horizontalBarChart.setDrawGridBackground(false);
       horizontalBarChart.setDoubleTapToZoomEnabled(false);
-      horizontalBarChart.setExtraRightOffset(30f);
+      horizontalBarChart.setExtraRightOffset(25f);
+      horizontalBarChart.setExtraLeftOffset(-10f);
       horizontalBarChart.invalidate();
     }
   }
@@ -77,7 +78,7 @@ public class QuestionRateAdapter extends RecyclerView.Adapter<QuestionRateAdapte
     holder.questionText.setText(rate.question);
 
 
-    final float FONT_SIZE = 11;
+    final float FONT_SIZE = 10;
     final int size = 2;
 
     ArrayList<BarEntry> yVals1 = new ArrayList<>();
@@ -177,7 +178,7 @@ public class QuestionRateAdapter extends RecyclerView.Adapter<QuestionRateAdapte
     yr.setAxisMinimum(0f);
     yr.setAxisMaximum(100f);
     yr.setTextColor(Color.WHITE);
-    yr.setTextSize(8.5f);
+    yr.setTextSize(8f);
     yr.setValueFormatter(new IAxisValueFormatter() {
       @Override
       public String getFormattedValue(float value, AxisBase axis) {

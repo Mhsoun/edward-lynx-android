@@ -28,8 +28,6 @@ import java.util.List;
 
 public class YesNoAdapter extends RecyclerView.Adapter<YesNoAdapter.ViewHolder> {
 
-  private static final float FONT_SIZE = 11;
-
   private List<YesNo> data;
 
   public YesNoAdapter(List<YesNo> data) {
