@@ -110,7 +110,7 @@ public class AveragesFragment extends BaseFragment {
       yVals1.add(barEntry);
     }
 
-    CustomBarDataSet set1 = new CustomBarDataSet(getActivity(), yVals1, "");
+    CustomBarDataSet set1 = new CustomBarDataSet(getActivity(), yVals1, barChart, "");
     set1.setDrawValues(true);
     set1.setValueTextSize(FONT_SIZE);
     set1.setHighlightEnabled(false);
@@ -180,7 +180,7 @@ public class AveragesFragment extends BaseFragment {
     set1.setDrawValues(true);
     set1.setValueTextSize(FONT_SIZE);
     set1.setColor(getActivity().getResources().getColor(R.color.lynx_color));
-    set1.setValueTextColor(Color.WHITE);
+    set1.setValueTextColor(getActivity().getResources().getColor(R.color.lynx_color));
     set1.setHighlightEnabled(false);
     set1.setValueFormatter(new IValueFormatter() {
       @Override
@@ -194,7 +194,7 @@ public class AveragesFragment extends BaseFragment {
     set2.setDrawValues(true);
     set2.setValueTextSize(FONT_SIZE);
     set2.setColor(getActivity().getResources().getColor(R.color.lynx_red_color));
-    set2.setValueTextColor(Color.WHITE);
+    set2.setValueTextColor(getActivity().getResources().getColor(R.color.lynx_red_color));
     set2.setHighlightEnabled(false);
     set2.setValueFormatter(new IValueFormatter() {
       @Override

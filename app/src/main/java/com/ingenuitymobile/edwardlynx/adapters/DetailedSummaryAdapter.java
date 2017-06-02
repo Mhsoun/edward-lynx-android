@@ -90,7 +90,7 @@ public class DetailedSummaryAdapter extends
       goalBars.add(entry);
     }
 
-    final CustomBarDataSet set = new CustomBarDataSet(context, goalBars, "");
+    final CustomBarDataSet set = new CustomBarDataSet(context, goalBars, holder.barChart, "");
     set.setDrawValues(true);
     set.setValueTextSize(FONT_SIZE);
     set.setHighlightEnabled(false);

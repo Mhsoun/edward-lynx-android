@@ -97,7 +97,7 @@ public class ResponseRateFragment extends BaseFragment {
       }
     }
 
-    final CustomBarDataSet set = new CustomBarDataSet(getActivity(), goalBars, "");
+    final CustomBarDataSet set = new CustomBarDataSet(getActivity(), goalBars, barChart, "");
     set.setHighlightEnabled(false);
 
     final ArrayList<IBarDataSet> dataSets = new ArrayList<>();

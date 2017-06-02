@@ -188,6 +188,12 @@ public class SurveyReportActivity extends BaseActivity {
       return;
     }
 
+    if (response.breakdown != null && !response.breakdown.isEmpty()) {
+      final BreakdownFragments breakdownFragments = new BreakdownFragments();
+      breakdownFragments.setDataSet(response.breakdown);
+      fragments.add(breakdownFragments);
+    }
+
     if (response.responseRates != null && !response.responseRates.isEmpty()) {
       final ResponseRateFragment responseRateFragment = new ResponseRateFragment();
       responseRateFragment.setDataSet(response.responseRates);
@@ -293,11 +299,12 @@ public class SurveyReportActivity extends BaseActivity {
       }
     }
 
-    if (response.breakdown != null && !response.breakdown.isEmpty()) {
-      final BreakdownFragments breakdownFragments = new BreakdownFragments();
-      breakdownFragments.setDataSet(response.breakdown);
-      fragments.add(breakdownFragments);
-    }
+//    if (response.breakdown != null && !response.breakdown.isEmpty()) {
+//      final BreakdownFragments breakdownFragments = new BreakdownFragments();
+//      breakdownFragments.setDataSet(response.breakdown);
+//      fragments.add(breakdownFragments);
+//    }
+
     if (response.detailedSummaries != null && !response.detailedSummaries.isEmpty()) {
       DetailedSummaryFragment detailedSummaryFragment = new DetailedSummaryFragment();
       detailedSummaryFragment.setDataSet(response.detailedSummaries);

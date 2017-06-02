@@ -83,7 +83,7 @@ public class BreakdownAdapter extends RecyclerView.Adapter<BreakdownAdapter.View
       yVals1.add(barEntry);
     }
 
-    final CustomBarDataSet set = new CustomBarDataSet(context, yVals1, "");
+    final CustomBarDataSet set = new CustomBarDataSet(context, yVals1, holder.horizontalBarChart, "");
     set.setDrawValues(true);
     set.setValueTextSize(FONT_SIZE);
     set.setHighlightEnabled(false);

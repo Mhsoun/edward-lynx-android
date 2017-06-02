@@ -90,7 +90,7 @@ public class QuestionRateAdapter extends RecyclerView.Adapter<QuestionRateAdapte
     entry.setData(rate.roleStyle);
     yVals1.add(entry);
 
-    CustomBarDataSet set = new CustomBarDataSet(context, yVals1, "");
+    CustomBarDataSet set = new CustomBarDataSet(context, yVals1, holder.horizontalBarChart, "");
     set.setDrawValues(true);
     set.setValueTextSize(FONT_SIZE);
     set.setHighlightEnabled(false);

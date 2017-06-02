@@ -90,7 +90,7 @@ public class BlindspotAdapter extends RecyclerView.Adapter<BlindspotAdapter.View
     entry.setData(BreakdownItem.OTHERS_COLOR);
     yVals1.add(entry);
 
-    CustomBarDataSet set = new CustomBarDataSet(context, yVals1, "");
+    CustomBarDataSet set = new CustomBarDataSet(context, yVals1, holder.horizontalBarChart, "");
     set.setDrawValues(true);
     set.setValueTextSize(FONT_SIZE);
     set.setHighlightEnabled(false);
