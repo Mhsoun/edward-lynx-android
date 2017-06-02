@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.QuestionRateFragment;
-import com.ingenuitymobile.edwardlynx.api.models.QuestionRate;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.fragments.AveragesFragment;
@@ -30,11 +28,11 @@ import com.ingenuitymobile.edwardlynx.fragments.ResponseRateFragment;
 import com.ingenuitymobile.edwardlynx.fragments.YesNoFragment;
 import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import me.relex.circleindicator.CircleIndicator;
 import rx.Subscriber;
 
 /**
@@ -45,8 +43,8 @@ public class SurveyReportActivity extends BaseActivity {
   private long   id;
   private Survey survey;
 
-  private PagerAdapter    adapter;
-  private CircleIndicator circleIndicator;
+  private PagerAdapter        adapter;
+  private CirclePageIndicator circleIndicator;
 
   private ViewPager viewPager;
   private ImageView previousImage;
@@ -103,7 +101,7 @@ public class SurveyReportActivity extends BaseActivity {
 
     viewPager = (ViewPager) findViewById(R.id.viewpager);
     adapter = new MyPagerAdapter(getSupportFragmentManager());
-    circleIndicator = (CircleIndicator) findViewById(R.id.indicator);
+    circleIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
 
     previousImage.setOnClickListener(onClickListener);
     nextImage.setOnClickListener(onClickListener);
@@ -157,10 +155,10 @@ public class SurveyReportActivity extends BaseActivity {
       public void onCompleted() {
         LogUtil.e("AAA questions onCompleted ");
 
-        viewPager.setOnPageChangeListener(pageChangeListener);
         viewPager.setAdapter(adapter);
         circleIndicator.setViewPager(viewPager);
-        setNavigation();
+        circleIndicator.setOnPageChangeListener(pageChangeListener);
+        setNavigation(0);
       }
 
       @Override
@@ -175,23 +173,16 @@ public class SurveyReportActivity extends BaseActivity {
     }));
   }
 
-  private void setNavigation() {
+  private void setNavigation(int index) {
     findViewById(R.id.layout_navigation).setVisibility(View.VISIBLE);
 
-    previousImage.setVisibility(viewPager.getCurrentItem() == 0 ? View.INVISIBLE : View.VISIBLE);
-    nextImage.setVisibility(
-        viewPager.getCurrentItem() == fragments.size() - 1 ? View.INVISIBLE : View.VISIBLE);
+    previousImage.setVisibility(index == 0 ? View.INVISIBLE : View.VISIBLE);
+    nextImage.setVisibility(index == fragments.size() - 1 ? View.INVISIBLE : View.VISIBLE);
   }
 
   private void setData(SurveyResultsResponse response) {
     if (response == null) {
       return;
-    }
-
-    if (response.breakdown != null && !response.breakdown.isEmpty()) {
-      final BreakdownFragments breakdownFragments = new BreakdownFragments();
-      breakdownFragments.setDataSet(response.breakdown);
-      fragments.add(breakdownFragments);
     }
 
     if (response.responseRates != null && !response.responseRates.isEmpty()) {
@@ -299,11 +290,11 @@ public class SurveyReportActivity extends BaseActivity {
       }
     }
 
-//    if (response.breakdown != null && !response.breakdown.isEmpty()) {
-//      final BreakdownFragments breakdownFragments = new BreakdownFragments();
-//      breakdownFragments.setDataSet(response.breakdown);
-//      fragments.add(breakdownFragments);
-//    }
+    if (response.breakdown != null && !response.breakdown.isEmpty()) {
+      final BreakdownFragments breakdownFragments = new BreakdownFragments();
+      breakdownFragments.setDataSet(response.breakdown);
+      fragments.add(breakdownFragments);
+    }
 
     if (response.detailedSummaries != null && !response.detailedSummaries.isEmpty()) {
       DetailedSummaryFragment detailedSummaryFragment = new DetailedSummaryFragment();
@@ -326,7 +317,7 @@ public class SurveyReportActivity extends BaseActivity {
         @Override
         public void onPageSelected(int position) {
           LogUtil.e("AAA onPageSelected " + position);
-          setNavigation();
+          setNavigation(position);
         }
 
         @Override

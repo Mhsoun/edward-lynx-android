@@ -31,11 +31,11 @@ import com.ingenuitymobile.edwardlynx.fragments.PopupDialogFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveyDetailedFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveyQuestionsFragment;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import me.relex.circleindicator.CircleIndicator;
 import retrofit.RetrofitError;
 import rx.Subscriber;
 
@@ -44,12 +44,12 @@ public class SurveyQuestionsActivity extends BaseActivity {
   private TextView submitText;
   private TextView saveDraftsText;
 
-  private long             id;
-  private PagerAdapter     adapter;
-  private CircleIndicator  circleIndicator;
-  private List<Category>   data;
-  private List<AnswerBody> bodies;
-  private Survey           survey;
+  private long                id;
+  private PagerAdapter        adapter;
+  private CirclePageIndicator circleIndicator;
+  private List<Category>      data;
+  private List<AnswerBody>    bodies;
+  private Survey              survey;
 
   private ViewPager viewPager;
   private ImageView previousImage;
@@ -102,7 +102,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
     viewPager = (ViewPager) findViewById(R.id.viewpager);
     adapter = new MyPagerAdapter(getSupportFragmentManager());
-    circleIndicator = (CircleIndicator) findViewById(R.id.indicator);
+    circleIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
 
     previousImage.setOnClickListener(onClickListener);
     nextImage.setOnClickListener(onClickListener);
@@ -142,9 +142,9 @@ public class SurveyQuestionsActivity extends BaseActivity {
       public void onCompleted() {
         LogUtil.e("AAA questions onCompleted ");
 
-        viewPager.setOnPageChangeListener(pageChangeListener);
         viewPager.setAdapter(adapter);
         circleIndicator.setViewPager(viewPager);
+        circleIndicator.setOnPageChangeListener(pageChangeListener);
         setNavigation(0);
         submitText.setVisibility(survey.status == Survey.COMPLETED || data.size() != 1
             ? View.GONE : View.VISIBLE);
@@ -183,9 +183,8 @@ public class SurveyQuestionsActivity extends BaseActivity {
   private void setNavigation(int position) {
     findViewById(R.id.layout_navigation).setVisibility(View.VISIBLE);
 
-    previousImage.setVisibility(viewPager.getCurrentItem() == 0 ? View.INVISIBLE : View.VISIBLE);
-    nextImage.setVisibility(
-        (viewPager.getCurrentItem() - 1) == data.size() - 1 ? View.INVISIBLE : View.VISIBLE);
+    previousImage.setVisibility(position == 0 ? View.INVISIBLE : View.VISIBLE);
+    nextImage.setVisibility((position - 1) == data.size() - 1 ? View.INVISIBLE : View.VISIBLE);
 
     if (survey.status != Survey.COMPLETED) {
       submitText.setVisibility((position - 1) != data.size() - 1 ? View.GONE : View.VISIBLE);

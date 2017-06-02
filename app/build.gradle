@@ -71,10 +71,10 @@ dependencies {
   compile 'com.txusballesteros:FitChart:1.0'
   // https://github.com/PhilJay/MPAndroidChart
   compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-  // https://github.com/ongakuer/CircleIndicator
-  compile 'me.relex:circleindicator:1.2.2@aar'
   // https://support.hockeyapp.net/kb/client-integration-android/hockeyapp-for-android-sdk
   compile 'net.hockeyapp.android:HockeySDK:4.0.0'
+  // viewpagerindicator
+  compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
 
   // tests
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

@@ -48,12 +48,18 @@
           android:src="@drawable/ic_next"
           android:tint="@color/colorAccent"/>
 
-      <me.relex.circleindicator.CircleIndicator
+      <com.viewpagerindicator.CirclePageIndicator
           android:id="@+id/indicator"
-          android:layout_width="match_parent"
-          android:layout_height="48dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
           android:layout_toLeftOf="@id/image_next"
-          android:layout_toRightOf="@id/image_previous"/>
+          android:layout_toRightOf="@id/image_previous"
+          android:padding="4dip"
+          app:fillColor="@color/colorAccent"
+          app:strokeWidth="0dp"
+          app:pageColor="@color/white"
+          app:radius="5dp"/>
     </RelativeLayout>
 
     <TextView
