@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -193,6 +194,11 @@ public class SurveyQuestionsActivity extends BaseActivity {
   }
 
   public void submit(View v) {
+    if (TextUtils.isEmpty(survey.key)) {
+      Toast.makeText(context, getString(R.string.no_access), Toast.LENGTH_SHORT).show();
+      return;
+    }
+
     final TextView textView = (TextView) v;
     AnswerParam param = new AnswerParam();
     param.answers = bodies;
