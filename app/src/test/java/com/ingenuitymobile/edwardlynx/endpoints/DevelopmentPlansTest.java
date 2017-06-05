@@ -1,8 +1,6 @@
 package com.ingenuitymobile.edwardlynx.endpoints;
 
-import com.ingenuitymobile.edwardlynx.api.bodyparams.ActionParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
-import com.ingenuitymobile.edwardlynx.api.bodyparams.GoalParam;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;

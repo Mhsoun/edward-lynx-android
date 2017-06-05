@@ -1,11 +1,13 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,9 +33,9 @@ import com.google.gson.Gson;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.CreateActionPlanAdapter;
-import com.ingenuitymobile.edwardlynx.api.bodyparams.ActionParam;
-import com.ingenuitymobile.edwardlynx.api.bodyparams.GoalParam;
+import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.Category;
+import com.ingenuitymobile.edwardlynx.api.models.Goal;
 import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
@@ -54,16 +56,17 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
   private RelativeLayout          spinnerLayout;
   private Spinner                 spinner;
   private SingleDateAndTimePicker datePicker;
-  private int                     index;
   private EditText                addPlanEdit;
   private RelativeLayout          addPlanLayout;
-
-  private GoalParam param;
 
   private CreateActionPlanAdapter adapter;
 
   public TextView emptyText;
 
+  private Goal param;
+  private int  index;
+  private long planId;
+  private long goalId;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +82,11 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
 
     final String json = getIntent().getStringExtra("goal_param_body");
     param = !TextUtils.isEmpty(json) ?
-        new Gson().fromJson(json, GoalParam.class) : new GoalParam();
+        new Gson().fromJson(json, Goal.class) : new Goal();
     index = getIntent().getIntExtra("index", -1);
+
+    planId = getIntent().getLongExtra("planId", 0L);
+    goalId = getIntent().getLongExtra("goalId", 0L);
 
     initViews();
   }
@@ -263,8 +269,28 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
       .OnDeleteListener() {
     @Override
     public void onDelete(int position) {
-      param.actions.remove(position);
-      notifyAdapter();
+      Action action = param.actions.get(position);
+      if (action.id != 0L) {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+        alertBuilder.setTitle(getString(R.string.confirmation));
+        alertBuilder.setMessage(getString(R.string.delte_action_message, action.title));
+        alertBuilder.setPositiveButton(getString(R.string.delete_text),
+            new DialogInterface.OnClickListener() {
+              public void onClick(DialogInterface dialog, int which) {
+                // TODO
+              }
+            });
+        alertBuilder.setNegativeButton(getString(R.string.cancel),
+            new DialogInterface.OnClickListener() {
+              public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+              }
+            });
+        alertBuilder.create().show();
+      } else {
+        param.actions.remove(position);
+        notifyAdapter();
+      }
     }
   };
 
@@ -275,7 +301,7 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
       if (actionId == EditorInfo.IME_ACTION_DONE) {
         final String name = addPlanEdit.getText().toString();
         if (!TextUtils.isEmpty(name)) {
-          ActionParam actionParam = new ActionParam();
+          Action actionParam = new Action();
           actionParam.title = name;
           param.actions.add(actionParam);
           hideKeyboard();

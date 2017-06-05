@@ -2,6 +2,7 @@ package com.ingenuitymobile.edwardlynx.api.bodyparams;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import com.ingenuitymobile.edwardlynx.api.models.Goal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +14,9 @@ import java.util.List;
 public class CreateDevelopmentPlanParam {
 
   @SerializedName("name")
-  public String          name;
+  public String     name;
   @SerializedName("goals")
-  public List<GoalParam> goals;
+  public List<Goal> goals;
 
   public CreateDevelopmentPlanParam() {
     goals = new ArrayList<>();

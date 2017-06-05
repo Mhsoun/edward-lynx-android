@@ -222,8 +222,11 @@
   <string name="add" translatable="false">Add</string>
 
   <string name="confirmation">Confirmation</string>
-  <string name="complete_action_message">Complete the action, %1$s?</string>
+  <string name="complete_action_message">Complete this action, %1$s?</string>
   <string name="complete">Complete</string>
+  <string name="delte_action_message">Delete this action, %1$s?</string>
+  <string name="delete_text">Delete</string>
+  <string name="delete_goal_message">Delete this goal, %1$s?</string>
 
   // region survey
   <string name="contact_to_reactivate">Reactivate</string>
@@ -325,4 +328,7 @@
   <string name="matrix_manager">Matrix Manager</string>
   <string name="other_stakeholder">Other Stakeholder</string>
   <string name="direct_report">Direct Report</string>
+
+  <string name="update_goal">Update Goal</string>
+  <string name="delete_goal">Delete Goal</string>
 </resources>

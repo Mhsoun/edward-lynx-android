@@ -3,7 +3,9 @@ package com.ingenuitymobile.edwardlynx.adapters;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -45,6 +47,7 @@ public class GoalAdapter extends
     TextView       countText;
     TextView       dateText;
     ProgressBar    progressBar;
+    ImageView      optionImage;
 
 
     ParentView(View itemView) {
@@ -55,6 +58,7 @@ public class GoalAdapter extends
       countText = (TextView) itemView.findViewById(R.id.text_count);
       dateText = (TextView) itemView.findViewById(R.id.text_date);
       progressBar = (ProgressBar) itemView.findViewById(R.id.progress_development);
+      optionImage = (ImageView) itemView.findViewById(R.id.image_option);
     }
 
     @Override
@@ -92,7 +96,7 @@ public class GoalAdapter extends
   }
 
   @Override
-  public void onBindParentViewHolder(ParentView holder, int position,
+  public void onBindParentViewHolder(final ParentView holder, int position,
       ParentListItem parentListItem) {
     final Goal goal = (Goal) parentListItem;
     final Context context = holder.itemView.getContext();
@@ -136,6 +140,29 @@ public class GoalAdapter extends
         .setColorFilter(context.getResources()
                 .getColor(count == size ? R.color.colorAccent : R.color.dev_plan_color),
             PorterDuff.Mode.SRC_IN);
+
+    holder.optionImage.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        PopupMenu popup = new PopupMenu(context, holder.optionImage);
+        popup.inflate(R.menu.menu_option_goal);
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+          @Override
+          public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()) {
+            case R.id.update_goal:
+              listener.onSelectedGoal(goal);
+              break;
+            case R.id.delete_goal:
+              listener.onDeleteGoal(goal);
+              break;
+            }
+            return false;
+          }
+        });
+        popup.show();
+      }
+    });
   }
 
   @Override
@@ -150,17 +177,7 @@ public class GoalAdapter extends
     holder.imageView.setColorFilter(
         ContextCompat.getColor(context, action.checked == 1 ? R.color.done_color : R.color.white));
 
-    final int size = action.goal.actions.size();
-    int count = 0;
-    if (action.goal.actions != null) {
-      for (Action actionGoal : action.goal.actions) {
-        if (actionGoal.checked == 1) {
-          count++;
-        }
-      }
-    }
-
-    holder.bodyLayout.setSelected(count == size);
+    holder.bodyLayout.setSelected(action.isCompleted);
     holder.bodyLayout.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -173,5 +190,9 @@ public class GoalAdapter extends
 
   public interface OnSelectActionListener {
     void onSelectedAction(Action action);
+
+    void onSelectedGoal(Goal goal);
+
+    void onDeleteGoal(Goal goal);
   }
 }

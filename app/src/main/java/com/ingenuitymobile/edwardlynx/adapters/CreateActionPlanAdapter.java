@@ -6,10 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
-import com.ingenuitymobile.edwardlynx.api.bodyparams.ActionParam;
+import com.ingenuitymobile.edwardlynx.api.models.Action;
 
 import java.util.List;
 
@@ -20,10 +19,10 @@ import java.util.List;
 public class CreateActionPlanAdapter extends
     RecyclerView.Adapter<CreateActionPlanAdapter.ViewHolder> {
 
-  private List<ActionParam> data;
-  private OnDeleteListener  listener;
+  private List<Action>     data;
+  private OnDeleteListener listener;
 
-  public CreateActionPlanAdapter(List<ActionParam> data, OnDeleteListener listener) {
+  public CreateActionPlanAdapter(List<Action> data, OnDeleteListener listener) {
     super();
     this.data = data;
     this.listener = listener;
@@ -48,7 +47,7 @@ public class CreateActionPlanAdapter extends
 
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
-    final ActionParam param = data.get(position);
+    final Action param = data.get(position);
     holder.nameText.setText(param.title);
     holder.closeImage.setOnClickListener(new View.OnClickListener() {
       @Override

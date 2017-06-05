@@ -1,11 +1,5 @@
 package com.ingenuitymobile.edwardlynx.api;
 
-import android.content.Context;
-import android.widget.Toast;
-
-import com.ingenuitymobile.edwardlynx.R;
-import com.ingenuitymobile.edwardlynx.activities.LoginActivity;
-import com.ingenuitymobile.edwardlynx.api.bodyparams.ActionParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
@@ -13,6 +7,7 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.InviteUserParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.TokenParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
+import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.Questions;
@@ -29,8 +24,6 @@ import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
-import com.ingenuitymobile.edwardlynx.utils.NetUtil;
-import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.HashMap;
@@ -416,7 +409,7 @@ public class ApiClient {
   }
 
   public Subscription updateActionPlan(final long planId, final long goalId, final long actionId,
-      final ActionParam param, final Subscriber<Response> subscriber) {
+      final Action param, final Subscriber<Response> subscriber) {
     return service.updateActionPlan(planId, goalId, actionId, param)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {

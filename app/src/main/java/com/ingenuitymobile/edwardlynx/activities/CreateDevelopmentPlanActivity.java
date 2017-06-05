@@ -23,7 +23,7 @@ import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.CreateDevelopmentPlanAdapter;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
-import com.ingenuitymobile.edwardlynx.api.bodyparams.GoalParam;
+import com.ingenuitymobile.edwardlynx.api.models.Goal;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
@@ -40,7 +40,7 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
 
   public final int REQUEST_CODE = 0;
 
-  private List<GoalParam>              data;
+  private List<Goal>                   data;
   public  CreateDevelopmentPlanAdapter adapter;
 
   public TextView emptyText;
@@ -77,8 +77,8 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
 
     if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
       final int index = data.getIntExtra("index", -1);
-      final GoalParam param = new Gson().fromJson(data.getStringExtra("goal_param_body"),
-          GoalParam.class);
+      final Goal param = new Gson().fromJson(data.getStringExtra("goal_param_body"),
+          Goal.class);
       LogUtil.e("AAA " + param.toString());
       if (index == -1) {
         this.data.add(param);

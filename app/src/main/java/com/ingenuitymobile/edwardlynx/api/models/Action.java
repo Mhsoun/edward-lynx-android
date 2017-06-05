@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.api.models;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -17,5 +18,10 @@ public class Action extends Model {
   @SerializedName("position")
   public int    position;
 
-  public Goal goal;
+  public boolean isCompleted;
+
+  @Override
+  public String toString() {
+    return new Gson().toJson(this);
+  }
 }

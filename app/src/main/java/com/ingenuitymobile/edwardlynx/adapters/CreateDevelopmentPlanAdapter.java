@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.activities.CreateDetailedDevelopmentPlanActivity;
 import com.ingenuitymobile.edwardlynx.activities.CreateDevelopmentPlanActivity;
-import com.ingenuitymobile.edwardlynx.api.bodyparams.GoalParam;
+import com.ingenuitymobile.edwardlynx.api.models.Goal;
 
 import java.util.List;
 
@@ -21,10 +21,10 @@ import java.util.List;
 public class CreateDevelopmentPlanAdapter extends
     RecyclerView.Adapter<CreateDevelopmentPlanAdapter.ViewHolder> {
 
-  private List<GoalParam>               data;
+  private List<Goal>                    data;
   private CreateDevelopmentPlanActivity activity;
 
-  public CreateDevelopmentPlanAdapter(List<GoalParam> data,
+  public CreateDevelopmentPlanAdapter(List<Goal> data,
       CreateDevelopmentPlanActivity activity) {
     super();
     this.data = data;
@@ -50,7 +50,7 @@ public class CreateDevelopmentPlanAdapter extends
 
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
-    final GoalParam param = data.get(position);
+    final Goal param = data.get(position);
     holder.nameText.setText(param.title);
     holder.numberText.setText(position + 1 + ". ");
 

@@ -1,6 +1,5 @@
 package com.ingenuitymobile.edwardlynx.api;
 
-import com.ingenuitymobile.edwardlynx.api.bodyparams.ActionParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
@@ -8,6 +7,7 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.InviteUserParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.TokenParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
+import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.Questions;
@@ -150,6 +150,6 @@ public interface Service {
   @Headers("Content-Type: application/json")
   @PATCH("/api/v1/dev-plans/{planId}/goals/{goalId}/actions/{actionId}")
   Observable<Response> updateActionPlan(@Path("planId") long planId, @Path("goalId") long goalId,
-      @Path("actionId") long actionId, @Body ActionParam body);
+      @Path("actionId") long actionId, @Body Action body);
   // endregion
 }

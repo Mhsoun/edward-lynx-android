@@ -4,20 +4,20 @@ import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.GoalAdapter;
-import com.ingenuitymobile.edwardlynx.api.bodyparams.ActionParam;
 import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
@@ -108,8 +108,17 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
   private List<ParentListItem> generateCategories(List<Goal> goals) {
     List<ParentListItem> parentListItems = new ArrayList<>();
     for (Goal goal : goals) {
+      final int size = goal.actions.size();
+
+      int count = 0;
+      for (Action actionGoal : goal.actions) {
+        if (actionGoal.checked == 1) {
+          count++;
+        }
+      }
+
       for (Action action : goal.actions) {
-        action.goal = goal;
+        action.isCompleted = count == size;
       }
       parentListItems.add(goal);
     }
@@ -190,7 +199,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     goalsText.setText(context.getString(R.string.goals_details, count, size));
   }
 
-  private void patchAction(long goalId, long actionId, ActionParam param) {
+  private void patchAction(long goalId, long actionId, Action param) {
     this.goalId = goalId;
     dialog = ProgressDialog.show(context, "", getString(R.string.loading));
 
@@ -230,7 +239,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
             alertBuilder.setPositiveButton(getString(R.string.complete),
                 new DialogInterface.OnClickListener() {
                   public void onClick(DialogInterface dialog, int which) {
-                    ActionParam param = new ActionParam();
+                    Action param = new Action();
                     param.checked = 1;
                     param.position = action.position;
                     patchAction(goal.id, action.id, param);
@@ -248,5 +257,39 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         }
       }
     }
+
+    @Override
+    public void onSelectedGoal(Goal goal) {
+      Intent intent = new Intent(context, CreateDetailedDevelopmentPlanActivity.class);
+      intent.putExtra("goal_param_body", goal.toString());
+      intent.putExtra("planId", id);
+      startActivity(intent);
+    }
+
+    @Override
+    public void onDeleteGoal(Goal goal) {
+      AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+      alertBuilder.setTitle(getString(R.string.confirmation));
+      alertBuilder.setMessage(getString(R.string.delete_goal_message, goal.title));
+      alertBuilder.setPositiveButton(getString(R.string.delete_text),
+          new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              // TODO
+            }
+          });
+      alertBuilder.setNegativeButton(getString(R.string.cancel),
+          new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              dialog.dismiss();
+            }
+          });
+      alertBuilder.create().show();
+    }
   };
+
+  public void addGoal(View v) {
+    Intent intent = new Intent(context, CreateDetailedDevelopmentPlanActivity.class);
+    intent.putExtra("planId", id);
+    startActivity(intent);
+  }
 }
