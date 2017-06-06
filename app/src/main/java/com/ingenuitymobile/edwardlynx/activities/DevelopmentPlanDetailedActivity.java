@@ -227,6 +227,31 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         }));
   }
 
+  private void deleteGoal(long goalId) {
+    progressDialog.show();
+    subscription.add(Shared.apiClient.deleteDevelopmentPlanGoal(id, goalId,
+        new Subscriber<Response>() {
+          @Override
+          public void onCompleted() {
+            progressDialog.dismiss();
+            onResume();
+          }
+
+          @Override
+          public void onError(Throwable e) {
+            LogUtil.e("AAA onError patchAction " + e);
+            if (progressDialog != null) {
+              progressDialog.dismiss();
+            }
+          }
+
+          @Override
+          public void onNext(Response response) {
+
+          }
+        }));
+  }
+
   private GoalAdapter.OnSelectActionListener listener = new GoalAdapter.OnSelectActionListener() {
     @Override
     public void onSelectedAction(final Action action) {
@@ -267,14 +292,14 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     }
 
     @Override
-    public void onDeleteGoal(Goal goal) {
+    public void onDeleteGoal(final Goal goal) {
       AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
       alertBuilder.setTitle(getString(R.string.confirmation));
       alertBuilder.setMessage(getString(R.string.delete_goal_message, goal.title));
       alertBuilder.setPositiveButton(getString(R.string.delete_text),
           new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-              // TODO
+              deleteGoal(goal.id);
             }
           });
       alertBuilder.setNegativeButton(getString(R.string.cancel),

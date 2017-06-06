@@ -69,7 +69,6 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
   private Goal param;
   private int  index;
   private long planId;
-  private long goalId;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -89,12 +88,15 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     index = getIntent().getIntExtra("index", -1);
 
     planId = getIntent().getLongExtra("planId", 0L);
-    goalId = getIntent().getLongExtra("goalId", 0L);
 
-    if (planId != 0L) {
+
+    initViews();
+
+    if (planId != 0L && param.id != 0L) {
+      ((TextView) findViewById(R.id.text_done)).setText(getString(R.string.update_goal));
+    } else if (planId != 0L) {
       param.position = getIntent().getIntExtra("position", 0);
     }
-    initViews();
   }
 
   @Override
@@ -260,10 +262,10 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
 
     LogUtil.e("AAA " + param.toString());
 
-    if (planId != 0L) {
-      addGoal();
-    } else if (goalId != 0L) {
+    if (planId != 0L && param.id != 0L) {
 
+    } else if (planId != 0L) {
+      addGoal();
     } else {
       Intent intent = new Intent();
       intent.putExtra("goal_param_body", param.toString());

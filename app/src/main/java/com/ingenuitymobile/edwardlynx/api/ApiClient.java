@@ -421,6 +421,18 @@ public class ApiClient {
         }));
   }
 
+  public Subscription deleteDevelopmentPlanGoal(final long planId, final long goalId,
+      final Subscriber<Response> subscriber) {
+    return service.deleteDevelopmentPlanGoal(planId, goalId)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            deleteDevelopmentPlanGoal(planId, goalId, subscriber);
+          }
+        }));
+  }
+
   public Subscription updateActionPlan(final long planId, final long goalId, final long actionId,
       final Action param, final Subscriber<Response> subscriber) {
     return service.updateActionPlan(planId, goalId, actionId, param)

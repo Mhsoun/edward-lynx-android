@@ -28,6 +28,7 @@ import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
 import java.util.Map;
 
 import retrofit.http.Body;
+import retrofit.http.DELETE;
 import retrofit.http.FieldMap;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -151,6 +152,13 @@ public interface Service {
   @Headers("Content-Type: application/json")
   @POST("/api/v1/dev-plans/{id}/goals")
   Observable<Response> postDevelopmentPlanGoal(@Path("id") long id, @Body Goal body);
+
+  @Headers("Content-Type: application/json")
+  @DELETE("/api/v1/dev-plans/{planId}/goals/{goalId}")
+  Observable<Response> deleteDevelopmentPlanGoal(
+      @Path("planId") long planId,
+      @Path("goalId") long goalId
+  );
 
   @Headers("Content-Type: application/json")
   @PATCH("/api/v1/dev-plans/{planId}/goals/{goalId}/actions/{actionId}")

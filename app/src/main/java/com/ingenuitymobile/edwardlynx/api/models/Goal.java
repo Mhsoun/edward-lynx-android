@@ -32,6 +32,7 @@ public class Goal extends Model implements ParentListItem {
 
   public Goal() {
     actions = new ArrayList<>();
+    id = 0L;
   }
 
   @Override
