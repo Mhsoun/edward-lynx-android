@@ -10,6 +10,7 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
 import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
+import com.ingenuitymobile.edwardlynx.api.models.Goal;
 import com.ingenuitymobile.edwardlynx.api.models.Questions;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
@@ -404,6 +405,18 @@ public class ApiClient {
           @Override
           public void onPostAgain() {
             postDevelopmentPlans(param, subscriber);
+          }
+        }));
+  }
+
+  public Subscription postDevelopmentPlanGoal(final long id, final Goal param,
+      final Subscriber<Response> subscriber) {
+    return service.postDevelopmentPlanGoal(id, param)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            postDevelopmentPlanGoal(id, param, subscriber);
           }
         }));
   }

@@ -290,6 +290,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
   public void addGoal(View v) {
     Intent intent = new Intent(context, CreateDetailedDevelopmentPlanActivity.class);
     intent.putExtra("planId", id);
+    intent.putExtra("position", (data.size() + 1));
     startActivity(intent);
   }
 }

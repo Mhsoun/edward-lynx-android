@@ -36,12 +36,15 @@ import com.ingenuitymobile.edwardlynx.adapters.CreateActionPlanAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.Category;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
+import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 31/01/2017.
@@ -88,6 +91,9 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     planId = getIntent().getLongExtra("planId", 0L);
     goalId = getIntent().getLongExtra("goalId", 0L);
 
+    if (planId != 0L) {
+      param.position = getIntent().getIntExtra("position", 0);
+    }
     initViews();
   }
 
@@ -254,15 +260,47 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
 
     LogUtil.e("AAA " + param.toString());
 
-    Intent intent = new Intent();
-    intent.putExtra("goal_param_body", param.toString());
-    intent.putExtra("index", index);
-    if (!TextUtils.isEmpty(description)) {
-      intent.putExtra("description", description);
-    }
+    if (planId != 0L) {
+      addGoal();
+    } else if (goalId != 0L) {
 
-    setResult(RESULT_OK, intent);
-    finish();
+    } else {
+      Intent intent = new Intent();
+      intent.putExtra("goal_param_body", param.toString());
+      intent.putExtra("index", index);
+      if (!TextUtils.isEmpty(description)) {
+        intent.putExtra("description", description);
+      }
+
+      setResult(RESULT_OK, intent);
+      finish();
+    }
+  }
+
+  private void addGoal() {
+    hideKeyboard();
+    progressDialog.show();
+
+    subscription.add(Shared.apiClient.postDevelopmentPlanGoal(planId, param,
+        new Subscriber<Response>() {
+          @Override
+          public void onCompleted() {
+            finish();
+          }
+
+          @Override
+          public void onError(Throwable e) {
+            LogUtil.e("AAA " + e);
+            progressDialog.dismiss();
+          }
+
+          @Override
+          public void onNext(Response response) {
+            progressDialog.dismiss();
+            Toast.makeText(context, getString(R.string.goal_created), Toast.LENGTH_SHORT)
+                .show();
+          }
+        }));
   }
 
   private CreateActionPlanAdapter.OnDeleteListener listener = new CreateActionPlanAdapter

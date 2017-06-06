@@ -10,6 +10,7 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
 import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
+import com.ingenuitymobile.edwardlynx.api.models.Goal;
 import com.ingenuitymobile.edwardlynx.api.models.Questions;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
@@ -146,6 +147,10 @@ public interface Service {
   @Headers("Content-Type: application/json")
   @POST("/api/v1/dev-plans")
   Observable<Response> postDevelopmentPlans(@Body CreateDevelopmentPlanParam body);
+
+  @Headers("Content-Type: application/json")
+  @POST("/api/v1/dev-plans/{id}/goals")
+  Observable<Response> postDevelopmentPlanGoal(@Path("id") long id, @Body Goal body);
 
   @Headers("Content-Type: application/json")
   @PATCH("/api/v1/dev-plans/{planId}/goals/{goalId}/actions/{actionId}")
