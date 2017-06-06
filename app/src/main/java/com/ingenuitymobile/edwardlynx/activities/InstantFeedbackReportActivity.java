@@ -294,9 +294,10 @@ public class InstantFeedbackReportActivity extends BaseActivity {
 
         for (int i = 0; i < data.size(); i++) {
           FeedbackFrequency frequency = data.get(i);
-          final float val = frequency.count != 0 ?
-              (((float) (frequency.count) /
-                  (float) feedbackResponse.totalAnswers) * 100) : 0;
+          final float val =
+              frequency.count != 0 ?
+                  (((float) (frequency.count) / (float) feedback.stats.invited) * 100)
+                  : 0;
           yVals1.add(new BarEntry(i, val));
         }
 
@@ -310,7 +311,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
           @Override
           public String getFormattedValue(float value, Entry entry, int dataSetIndex,
               ViewPortHandler viewPortHandler) {
-            return String.valueOf((int) value) + "%";
+            return String.valueOf((int) value);
           }
         });
 
