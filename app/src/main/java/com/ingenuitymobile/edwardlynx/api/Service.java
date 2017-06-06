@@ -161,8 +161,36 @@ public interface Service {
   );
 
   @Headers("Content-Type: application/json")
+  @PATCH("/api/v1/dev-plans/{planId}/goals/{goalId}")
+  Observable<Response> updateGoal(
+      @Path("planId") long planId,
+      @Path("goalId") long goalId,
+      @Body Goal body
+  );
+
+  @Headers("Content-Type: application/json")
+  @PATCH("/api/v1/dev-plans/{planId}/goals/{goalId}/actions")
+  Observable<Response> postActionPlan(
+      @Path("planId") long planId,
+      @Path("goalId") long goalId,
+      @Body Action body
+  );
+
+  @Headers("Content-Type: application/json")
   @PATCH("/api/v1/dev-plans/{planId}/goals/{goalId}/actions/{actionId}")
-  Observable<Response> updateActionPlan(@Path("planId") long planId, @Path("goalId") long goalId,
-      @Path("actionId") long actionId, @Body Action body);
+  Observable<Response> updateActionPlan(
+      @Path("planId") long planId,
+      @Path("goalId") long goalId,
+      @Path("actionId") long actionId,
+      @Body Action body
+  );
+
+  @Headers("Content-Type: application/json")
+  @DELETE("/api/v1/dev-plans/{planId}/goals/{goalId}/actions/{actionId}")
+  Observable<Response> deleteActionPlan(
+      @Path("planId") long planId,
+      @Path("goalId") long goalId,
+      @Path("actionId") long actionId
+  );
   // endregion
 }

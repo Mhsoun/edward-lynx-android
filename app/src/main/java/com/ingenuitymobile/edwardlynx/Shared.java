@@ -8,6 +8,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Category;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.NetUtil;
 
 import java.util.ArrayList;
@@ -87,6 +88,7 @@ public class Shared {
     public void onRefreshToken(Authentication authentication) {
       SessionStore.saveRefreshToken(authentication.refresh_token, context);
       SessionStore.saveAccessToken(authentication.accessToken, context);
+      LogUtil.e("AAA " + authentication.accessToken);
     }
   }
 }

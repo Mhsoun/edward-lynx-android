@@ -151,8 +151,7 @@ public class ApiClient {
         }));
   }
 
-  public Subscription updateUser(final UserBody body,
-      final Subscriber<User> subscriber) {
+  public Subscription updateUser(final UserBody body, final Subscriber<User> subscriber) {
     return service.updateProfile(body)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -163,8 +162,10 @@ public class ApiClient {
         }));
   }
 
-  public Subscription postTokenDevice(final TokenParam param,
+  public Subscription postTokenDevice(
+      final TokenParam param,
       final Subscriber<Response> subscriber) {
+
     return service.postTokenDevice(param)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -175,8 +176,12 @@ public class ApiClient {
         }));
   }
 
-  public Subscription getSurveys(final int page, final int num, final String filter,
+  public Subscription getSurveys(
+      final int page,
+      final int num,
+      final String filter,
       final Subscriber<Surveys> subscriber) {
+
     return service.getSurveys(page, num, filter)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -232,8 +237,10 @@ public class ApiClient {
         }));
   }
 
-  public Subscription getSurveyResults(final long id,
+  public Subscription getSurveyResults(
+      final long id,
       final Subscriber<SurveyResultsResponse> subscriber) {
+
     return service.getSurveyResults(id)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -244,8 +251,11 @@ public class ApiClient {
         }));
   }
 
-  public Subscription postAnswerSurvey(final long id, final AnswerParam param,
+  public Subscription postAnswerSurvey(
+      final long id,
+      final AnswerParam param,
       final Subscriber<Response> subscriber) {
+
     return service.postAnswerSurvey(id, param)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -256,8 +266,11 @@ public class ApiClient {
         }));
   }
 
-  public Subscription postSurveyRecipient(final long id, final InviteUserParam param,
+  public Subscription postSurveyRecipient(
+      final long id,
+      final InviteUserParam param,
       final Subscriber<Response> subscriber) {
+
     return service.postSurveyRecipients(id, param)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -268,8 +281,11 @@ public class ApiClient {
         }));
   }
 
-  public Subscription updateAnswerSurvey(final long id, final AnswerParam param,
+  public Subscription updateAnswerSurvey(
+      final long id,
+      final AnswerParam param,
       final Subscriber<Response> subscriber) {
+
     return service.updateAnswerSurvey(id, param)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -280,8 +296,11 @@ public class ApiClient {
         }));
   }
 
-  public Subscription postInstantFeedbackParticipants(final long id, final InstantFeedbackBody body,
+  public Subscription postInstantFeedbackParticipants(
+      final long id,
+      final InstantFeedbackBody body,
       final Subscriber<Response> subscriber) {
+
     return service.postInstantFeedbackParticipants(id, body)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -292,8 +311,10 @@ public class ApiClient {
         }));
   }
 
-  public Subscription postInstantFeedback(final InstantFeedbackBody body,
+  public Subscription postInstantFeedback(
+      final InstantFeedbackBody body,
       final Subscriber<Response> subscriber) {
+
     return service.postInstantFeedback(body)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -304,8 +325,10 @@ public class ApiClient {
         }));
   }
 
-  public Subscription getInstantFeedbacks(final String filter,
+  public Subscription getInstantFeedbacks(
+      final String filter,
       final Subscriber<FeedbacksResponse> subscriber) {
+
     return service.getInstantFeedbacks(filter)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -316,7 +339,10 @@ public class ApiClient {
         }));
   }
 
-  public Subscription getInstantFeedback(final long id, final Subscriber<Feedback> subscriber) {
+  public Subscription getInstantFeedback(
+      final long id,
+      final Subscriber<Feedback> subscriber) {
+
     return service.getInstantFeedback(id)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -327,7 +353,10 @@ public class ApiClient {
         }));
   }
 
-  public Subscription getFeedbackId(final String key, final Subscriber<Response> subscriber) {
+  public Subscription getFeedbackId(
+      final String key,
+      final Subscriber<Response> subscriber) {
+
     return service.getFeedbackId(key)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -338,8 +367,11 @@ public class ApiClient {
         }));
   }
 
-  public Subscription postInstantFeedbackAnswers(final long id, final AnswerParam param,
+  public Subscription postInstantFeedbackAnswers(
+      final long id,
+      final AnswerParam param,
       final Subscriber<Response> subscriber) {
+
     return service.postInstantFeedbackAnswers(id, param)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -350,8 +382,10 @@ public class ApiClient {
         }));
   }
 
-  public Subscription getInstantFeedbackAnswers(final long id,
+  public Subscription getInstantFeedbackAnswers(
+      final long id,
       final Subscriber<FeedbackAnswerResponse> subscriber) {
+
     return service.getInstantFeedbackAnswers(id)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -362,8 +396,11 @@ public class ApiClient {
         }));
   }
 
-  public Subscription postShareInstantFeedback(final long id, final ShareParam param,
+  public Subscription postShareInstantFeedback(
+      final long id,
+      final ShareParam param,
       final Subscriber<Response> subscriber) {
+
     return service.postShareInstantFeedback(id, param)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -385,8 +422,10 @@ public class ApiClient {
         }));
   }
 
-  public Subscription getDevelopmentPlan(final long id,
+  public Subscription getDevelopmentPlan(
+      final long id,
       final Subscriber<DevelopmentPlan> subscriber) {
+
     return service.getDevelopmentPlan(id)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -397,8 +436,10 @@ public class ApiClient {
         }));
   }
 
-  public Subscription postDevelopmentPlans(final CreateDevelopmentPlanParam param,
+  public Subscription postDevelopmentPlans(
+      final CreateDevelopmentPlanParam param,
       final Subscriber<Response> subscriber) {
+
     return service.postDevelopmentPlans(param)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -409,8 +450,11 @@ public class ApiClient {
         }));
   }
 
-  public Subscription postDevelopmentPlanGoal(final long id, final Goal param,
+  public Subscription postDevelopmentPlanGoal(
+      final long id,
+      final Goal param,
       final Subscriber<Response> subscriber) {
+
     return service.postDevelopmentPlanGoal(id, param)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -421,8 +465,11 @@ public class ApiClient {
         }));
   }
 
-  public Subscription deleteDevelopmentPlanGoal(final long planId, final long goalId,
+  public Subscription deleteDevelopmentPlanGoal(
+      final long planId,
+      final long goalId,
       final Subscriber<Response> subscriber) {
+
     return service.deleteDevelopmentPlanGoal(planId, goalId)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -433,8 +480,61 @@ public class ApiClient {
         }));
   }
 
-  public Subscription updateActionPlan(final long planId, final long goalId, final long actionId,
-      final Action param, final Subscriber<Response> subscriber) {
+  public Subscription updateGoal(
+      final long planId,
+      final long goalId,
+      final Goal body,
+      final Subscriber<Response> subscriber) {
+
+    return service.updateGoal(planId, goalId, body)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            updateGoal(planId, goalId, body, subscriber);
+          }
+        }));
+  }
+
+  public Subscription deleteActionPlan(
+      final long planId,
+      final long goalId,
+      final long actionId,
+      final Subscriber<Response> subscriber) {
+
+    return service.deleteActionPlan(planId, goalId, actionId)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            deleteActionPlan(planId, goalId, actionId, subscriber);
+          }
+        }));
+  }
+
+  public Subscription postActionPlan(
+      final long planId,
+      final long goalId,
+      final Action param,
+      final Subscriber<Response> subscriber) {
+
+    return service.postActionPlan(planId, goalId, param)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            postActionPlan(planId, goalId, param, subscriber);
+          }
+        }));
+  }
+
+  public Subscription updateActionPlan(
+      final long planId,
+      final long goalId,
+      final long actionId,
+      final Action param,
+      final Subscriber<Response> subscriber) {
+
     return service.updateActionPlan(planId, goalId, actionId, param)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
@@ -464,6 +564,8 @@ public class ApiClient {
     @Override
     public void onError(final Throwable e) {
       final retrofit.client.Response error = ((RetrofitError) e).getResponse();
+      LogUtil.e("AAA " + ((RetrofitError) e).getUrl());
+
       if (error != null) {
         if (error.getStatus() == 401) {
           LogUtil.e("AAA RE LOGIN" + e);
@@ -495,7 +597,6 @@ public class ApiClient {
                 }
               });
         } else {
-          LogUtil.e("AAA " + ((RetrofitError) e).getUrl());
           Throwable throwable;
           if (((RetrofitError) e).getResponse().getStatus() == 422 ||
               ((RetrofitError) e).getResponse().getStatus() == 404) {
