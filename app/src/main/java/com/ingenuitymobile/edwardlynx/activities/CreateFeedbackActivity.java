@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,8 @@ import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
 import java.util.ArrayList;
 
+import info.hoang8f.android.segmented.SegmentedGroup;
+
 /**
  * Created by mEmEnG-sKi on 10/01/2017.
  */
@@ -65,9 +68,10 @@ public class CreateFeedbackActivity extends BaseActivity {
 
   private String[] answerTypes;
 
-  private TextView   questionPreviewText;
-  private RadioGroup previewRadiogroup;
-  private EditText   freeTextEdit;
+  private TextView       questionPreviewText;
+  private SegmentedGroup segmentedGroup;
+  private RadioGroup     previewRadiogroup;
+  private EditText       freeTextEdit;
 
   public CreateFeedbackActivity() {
     type = -1;
@@ -123,6 +127,7 @@ public class CreateFeedbackActivity extends BaseActivity {
     spinner = (Spinner) findViewById(R.id.spinner);
 
     questionPreviewText = (TextView) findViewById(R.id.text_question);
+    segmentedGroup = (SegmentedGroup) findViewById(R.id.segmented_group);
     previewRadiogroup = (RadioGroup) findViewById(R.id.radiogroup);
     freeTextEdit = (EditText) findViewById(R.id.free_text_edit);
 
@@ -217,10 +222,13 @@ public class CreateFeedbackActivity extends BaseActivity {
       freeTextEdit.setVisibility(View.VISIBLE);
       freeTextEdit.setEnabled(false);
     } else {
-      previewRadiogroup.setVisibility(View.VISIBLE);
       freeTextEdit.setVisibility(View.GONE);
 
+      previewRadiogroup.setVisibility(type == Answer.NUMERIC_1_10_SCALE ? View.GONE : View.VISIBLE);
+      segmentedGroup.setVisibility(type == Answer.NUMERIC_1_10_SCALE ? View.VISIBLE : View.GONE);
+
       previewRadiogroup.removeAllViews();
+      segmentedGroup.removeAllViews();
 
       ArrayList<String> strings = new ArrayList<>();
 
@@ -243,11 +251,19 @@ public class CreateFeedbackActivity extends BaseActivity {
       }
 
       for (String string : strings) {
-        createRadioButton(previewRadiogroup, this, string);
+        if (type == Answer.NUMERIC_1_10_SCALE) {
+          createSegmentedButton(segmentedGroup, this, string);
+        } else {
+          createRadioButton(previewRadiogroup, this, string);
+        }
       }
 
       if (isNA.isChecked()) {
-        createRadioButton(previewRadiogroup, this, context.getString(R.string.not_available));
+        if (type == Answer.NUMERIC_1_10_SCALE) {
+          createSegmentedButton(segmentedGroup, this, context.getString(R.string.not_available));
+        } else {
+          createRadioButton(previewRadiogroup, this, context.getString(R.string.not_available));
+        }
       }
     }
   }
@@ -263,6 +279,21 @@ public class CreateFeedbackActivity extends BaseActivity {
     radioButton.setTextColor(context.getResources().getColor(R.color.white));
     radioButton.setText(description);
     radioGroup.addView(radioButton);
+  }
+
+  private void createSegmentedButton(final SegmentedGroup radioGroup, final Context context,
+      final String description) {
+
+    final RadioButton radioButton = (RadioButton) LayoutInflater
+        .from(context)
+        .inflate(R.layout.radio_button_item,
+            null
+        );
+
+    radioButton.setText(description);
+    radioButton.setEnabled(false);
+    radioGroup.addView(radioButton);
+    radioGroup.updateBackground();
   }
 
   private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton

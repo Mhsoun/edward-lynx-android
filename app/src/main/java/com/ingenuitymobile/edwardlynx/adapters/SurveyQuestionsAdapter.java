@@ -20,8 +20,11 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Option;
 import com.ingenuitymobile.edwardlynx.api.models.Question;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.List;
+
+import info.hoang8f.android.segmented.SegmentedGroup;
 
 /**
  * Created by mEmEnG-sKi on 10/01/2017.
@@ -54,13 +57,16 @@ public class SurveyQuestionsAdapter extends
   }
 
   private class DataViewHolder extends RecyclerView.ViewHolder {
-    TextView   questionText;
-    RadioGroup radioGroup;
-    EditText   editText;
+    TextView       questionText;
+    SegmentedGroup segmentedGroup;
+    RadioGroup     radioGroup;
+    EditText       editText;
+
 
     DataViewHolder(View itemView) {
       super(itemView);
       questionText = (TextView) itemView.findViewById(R.id.text_question);
+      segmentedGroup = (SegmentedGroup) itemView.findViewById(R.id.segmented_group);
       radioGroup = (RadioGroup) itemView.findViewById(R.id.group_button);
       editText = (EditText) itemView.findViewById(R.id.edit_text);
     }
@@ -92,16 +98,34 @@ public class SurveyQuestionsAdapter extends
           context.getResources().getString(R.string.optional) : ""));
       holder.editText.setVisibility(View.GONE);
 
+      holder.radioGroup.setVisibility(question.answer.isNumeric ? View.GONE : View.VISIBLE);
+      holder.segmentedGroup.setVisibility(question.answer.isNumeric ? View.VISIBLE : View.GONE);
+
       if (question.answer.options != null) {
         holder.radioGroup.removeAllViews();
+        holder.segmentedGroup.removeAllViews();
         for (Option option : question.answer.options) {
-          createRadioButton(holder.radioGroup, context, option.description, option.value);
+          if (question.answer.isNumeric) {
+            createSegmentedButton(holder.segmentedGroup,
+                context, option.description, option.value);
+          } else {
+            createRadioButton(holder.radioGroup,
+                context, option.description, option.value);
+          }
+
         }
 
         if (question.isNA == 1) {
-          createRadioButton(holder.radioGroup, context, context.getString(R.string.not_available),
-              -1);
+          if (question.answer.isNumeric) {
+            createSegmentedButton(holder.segmentedGroup, context,
+                context.getString(R.string.not_available), -1);
+          } else {
+            createRadioButton(holder.radioGroup, context,
+                context.getString(R.string.not_available), -1);
+          }
         }
+
+        holder.radioGroup = question.answer.isNumeric ? holder.segmentedGroup : holder.radioGroup;
 
         if (question.value != null) {
           listener.onAnswer(question.id, String.valueOf((double) question.value));
@@ -116,6 +140,7 @@ public class SurveyQuestionsAdapter extends
           }
         }
 
+
         holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
           @Override
           public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -123,8 +148,6 @@ public class SurveyQuestionsAdapter extends
             listener.onAnswer(question.id, (String) radioButton.getTag());
           }
         });
-
-
       } else if (question.answer.decscription.equals(
           context.getResources().getString(R.string.free_text_description))) {
         holder.editText.setVisibility(View.VISIBLE);
@@ -193,6 +216,21 @@ public class SurveyQuestionsAdapter extends
     radioButton.setText(description);
     radioButton.setTextSize(14);
     radioGroup.addView(radioButton);
+  }
+
+  private void createSegmentedButton(final SegmentedGroup radioGroup, final Context context,
+      final String description, int value) {
+
+    final RadioButton radioButton = (RadioButton) LayoutInflater
+        .from(context)
+        .inflate(R.layout.radio_button_item,
+            null
+        );
+
+    radioButton.setTag(String.valueOf(value));
+    radioButton.setText(description);
+    radioGroup.addView(radioButton);
+    radioGroup.updateBackground();
   }
 
   public void isEnabled(boolean isEnabled) {

@@ -75,6 +75,8 @@ dependencies {
   compile 'net.hockeyapp.android:HockeySDK:4.0.0'
   // viewpagerindicator
   compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
+  // https://github.com/Kaopiz/android-segmented-control
+  compile 'info.hoang8f:android-segmented:1.0.6'
 
   // tests
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
