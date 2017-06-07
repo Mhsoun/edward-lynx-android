@@ -169,7 +169,7 @@ public interface Service {
   );
 
   @Headers("Content-Type: application/json")
-  @PATCH("/api/v1/dev-plans/{planId}/goals/{goalId}/actions")
+  @POST("/api/v1/dev-plans/{planId}/goals/{goalId}/actions")
   Observable<Response> postActionPlan(
       @Path("planId") long planId,
       @Path("goalId") long goalId,

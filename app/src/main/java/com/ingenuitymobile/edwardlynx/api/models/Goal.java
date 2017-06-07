@@ -37,7 +37,13 @@ public class Goal extends Model implements ParentListItem {
 
   @Override
   public List<?> getChildItemList() {
-    return actions;
+    List<Action> temp = new ArrayList<>(actions);
+    Action action = new Action();
+    action.id = this.id;
+    action.position = actions.size() + 1;
+    action.isAddAction = true;
+    temp.add(action);
+    return temp;
   }
 
   @Override

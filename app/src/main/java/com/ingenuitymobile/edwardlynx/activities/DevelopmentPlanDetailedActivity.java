@@ -171,7 +171,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         data.clear();
         data.addAll(developmentPlan.goals);
         recyclerView.setAdapter(null);
-        adapter = new GoalAdapter(generateCategories(data), listener);
+        adapter = new GoalAdapter(generateCategories(new ArrayList<>(data)), listener);
         recyclerView.setAdapter(adapter);
         setData(developmentPlan);
       }
@@ -208,8 +208,36 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     goalsText.setText(context.getString(R.string.goals_details, count, size));
   }
 
-  private void patchAction(long goalId, long actionId, Action param) {
-    this.goalId = goalId;
+  private void addAction(long goalId, Action param) {
+    dialog = ProgressDialog.show(context, "", getString(R.string.loading));
+
+    LogUtil.e("AAA " + param.toString());
+    subscription.add(Shared.apiClient.postActionPlan(id, goalId, param,
+        new Subscriber<Response>() {
+          @Override
+          public void onCompleted() {
+            LogUtil.e("AAA onCompleted patchAction");
+            getData();
+          }
+
+          @Override
+          public void onError(Throwable e) {
+            LogUtil.e("AAA onError patchAction " + e);
+            if (dialog != null) {
+              dialog.dismiss();
+            }
+          }
+
+          @Override
+          public void onNext(Response response) {
+            LogUtil.e("AAA onNext patchAction");
+          }
+        }));
+  }
+
+  private void patchAction(long goalId, long actionId, Action param, boolean isComplete) {
+    this.goalId = isComplete ? goalId : 0L;
+
     dialog = ProgressDialog.show(context, "", getString(R.string.loading));
 
     LogUtil.e("AAA " + param.toString());
@@ -309,7 +337,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
               Action param = new Action();
               param.checked = 1;
               param.position = action.position;
-              patchAction(getGoalId(action), action.id, param);
+              patchAction(getGoalId(action), action.id, param, true);
             }
           });
       alertBuilder.setNegativeButton(getString(R.string.cancel),
@@ -323,22 +351,21 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
     @Override
     public void onUpdateAction(final Action action) {
-      LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-          LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-
       LinearLayout layout = new LinearLayout(context);
       layout.setOrientation(LinearLayout.VERTICAL);
 
       final EditText nameEdit = new EditText(context);
       nameEdit.setHint(getString(R.string.name));
+      nameEdit.setText(action.title);
       nameEdit.setTextColor(getResources().getColor(R.color.black));
       nameEdit.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
       nameEdit.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+      nameEdit.setSelection(nameEdit.getText().length());
       layout.addView(nameEdit);
 
       final AlertDialog alertDialog = new AlertDialog.Builder(context)
           .setTitle(getString(R.string.update_action))
-          .setMessage(getString(R.string.enter_new_name_for, action.title))
+          .setMessage(getString(R.string.enter_new_name_for))
           .setPositiveButton(getString(R.string.update), null)
           .setNegativeButton(getString(R.string.cancel), null)
           .setView(layout,
@@ -364,7 +391,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
                     param.title = name;
                     param.checked = action.checked;
                     param.position = action.position;
-                    patchAction(getGoalId(action), action.id, param);
+                    patchAction(getGoalId(action), action.id, param, false);
                   }
                 }
               });
@@ -391,6 +418,56 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
             }
           });
       alertBuilder.create().show();
+    }
+
+    @Override
+    public void onAddGoal(final Action action) {
+      LinearLayout layout = new LinearLayout(context);
+      layout.setOrientation(LinearLayout.VERTICAL);
+
+      final EditText nameEdit = new EditText(context);
+      nameEdit.setHint(getString(R.string.name));
+      nameEdit.setTextColor(getResources().getColor(R.color.black));
+      nameEdit.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+      nameEdit.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+      nameEdit.setSelection(nameEdit.getText().length());
+      layout.addView(nameEdit);
+
+      final AlertDialog alertDialog = new AlertDialog.Builder(context)
+          .setTitle(getString(R.string.create_action))
+          .setMessage(getString(R.string.enter_new_action))
+          .setPositiveButton(getString(R.string.add_action), null)
+          .setNegativeButton(getString(R.string.cancel), null)
+          .setView(layout,
+              ViewUtil.dpToPx(16, getResources()), 0, ViewUtil.dpToPx(16, getResources()), 0)
+          .create();
+
+      alertDialog.setCanceledOnTouchOutside(false);
+      alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        @Override
+        public void onShow(final DialogInterface dialogInterface) {
+          alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
+              new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                  final String name = nameEdit.getText().toString();
+
+                  if (TextUtils.isEmpty(name)) {
+                    nameEdit.setError(getString(R.string.name_required));
+                  } else {
+                    dialogInterface.dismiss();
+
+                    Action param = new Action();
+                    param.title = name;
+                    param.checked = 0;
+                    param.position = action.position;
+                    addAction(action.id, param);
+                  }
+                }
+              });
+        }
+      });
+      alertDialog.show();
     }
 
     @Override

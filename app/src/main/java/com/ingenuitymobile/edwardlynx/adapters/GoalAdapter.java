@@ -75,6 +75,8 @@ public class GoalAdapter extends
     TextView       nameText;
     ImageView      imageView;
     ImageView      optionImage;
+    TextView       addText;
+    RelativeLayout detailsLayout;
 
     ChildView(View itemView) {
       super(itemView);
@@ -82,6 +84,8 @@ public class GoalAdapter extends
       nameText = (TextView) itemView.findViewById(R.id.text_name);
       imageView = (ImageView) itemView.findViewById(R.id.image_circle);
       optionImage = (ImageView) itemView.findViewById(R.id.image_option);
+      detailsLayout = (RelativeLayout) itemView.findViewById(R.id.layout_details);
+      addText = (TextView) itemView.findViewById(R.id.text_add);
     }
   }
 
@@ -173,6 +177,9 @@ public class GoalAdapter extends
     final Action action = (Action) childListItem;
     final Context context = holder.itemView.getContext();
 
+    holder.addText.setVisibility(action.isAddAction ? View.VISIBLE : View.GONE);
+    holder.detailsLayout.setVisibility(action.isAddAction ? View.GONE : View.VISIBLE);
+
     holder.nameText.setText(action.title);
     holder.imageView.setImageDrawable(holder.imageView.getContext().getResources()
         .getDrawable(action.checked == 1 ? R.drawable.ic_check : R.drawable.ic_circle));
@@ -184,7 +191,9 @@ public class GoalAdapter extends
     holder.bodyLayout.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if (action.checked == 0) {
+        if (action.isAddAction) {
+          listener.onAddGoal(action);
+        } else if (action.checked == 0) {
           listener.onSelectedAction(action);
         }
       }
@@ -224,5 +233,7 @@ public class GoalAdapter extends
     void onUpdateAction(Action action);
 
     void onDeleteAction(Action action);
+
+    void onAddGoal(Action action);
   }
 }

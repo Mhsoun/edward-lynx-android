@@ -19,6 +19,7 @@ public class Action extends Model {
   public int    position;
 
   public boolean isCompleted;
+  public boolean isAddAction;
 
   @Override
   public String toString() {
