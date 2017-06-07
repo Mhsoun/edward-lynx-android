@@ -264,7 +264,7 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     LogUtil.e("AAA " + param.toString());
 
     if (planId != 0L && param.id != 0L) {
-
+      updateGoal();
     } else if (planId != 0L) {
       addGoal();
     } else {
@@ -301,6 +301,32 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
           public void onNext(Response response) {
             progressDialog.dismiss();
             Toast.makeText(context, getString(R.string.goal_created), Toast.LENGTH_SHORT)
+                .show();
+          }
+        }));
+  }
+
+  private void updateGoal() {
+    hideKeyboard();
+    progressDialog.show();
+
+    subscription.add(Shared.apiClient.updateGoal(planId, param.id, param,
+        new Subscriber<Response>() {
+          @Override
+          public void onCompleted() {
+            finish();
+          }
+
+          @Override
+          public void onError(Throwable e) {
+            LogUtil.e("AAA " + e);
+            progressDialog.dismiss();
+          }
+
+          @Override
+          public void onNext(Response response) {
+            progressDialog.dismiss();
+            Toast.makeText(context, getString(R.string.goal_updated), Toast.LENGTH_SHORT)
                 .show();
           }
         }));

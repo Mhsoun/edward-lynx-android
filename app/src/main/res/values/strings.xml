@@ -123,6 +123,7 @@
   <string name="goal_action_added">No goal action added</string>
   <string name="development_plan_created">Successfully created development plan</string>
   <string name="goal_created">Successfully added goal</string>
+  <string name="goal_updated">Successfully updated goal</string>
   <string name="goals">Goals</string>
   <string name="done">Done</string>
   <string name="create">Create</string>

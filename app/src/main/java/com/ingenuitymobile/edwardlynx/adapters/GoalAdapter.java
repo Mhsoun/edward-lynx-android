@@ -106,7 +106,17 @@ public class GoalAdapter extends
     holder.nameText.setText(goal.title);
     holder.descriptionText.setText(goal.description);
 
-    if (goal.checked == 1) {
+    final int size = goal.actions.size();
+    int count = 0;
+    if (goal.actions != null) {
+      for (Action action : goal.actions) {
+        if (action.checked == 1) {
+          count++;
+        }
+      }
+    }
+
+    if (count != 0 && count == size) {
       holder.dateText.setText(context.getResources().getString(R.string.completed_text));
     } else {
       try {
@@ -122,25 +132,16 @@ public class GoalAdapter extends
       }
     }
 
-    final int size = goal.actions.size();
-    int count = 0;
-    if (goal.actions != null) {
-      for (Action action : goal.actions) {
-        if (action.checked == 1) {
-          count++;
-        }
-      }
-    }
-
     holder.countText.setText(context.getString(R.string.completed_details, count, size));
-    holder.bodyLayout.setSelected(count == size);
+    holder.bodyLayout.setSelected(count != 0 && count == size);
 
     holder.progressBar.setProgress((int) (((float) (count) / (float) size) * 100));
     holder.progressBar.setScaleY(3f);
     holder.progressBar
         .getProgressDrawable()
         .setColorFilter(context.getResources()
-                .getColor(count == size ? R.color.colorAccent : R.color.dev_plan_color),
+                .getColor(count != 0 && count == size
+                    ? R.color.colorAccent : R.color.dev_plan_color),
             PorterDuff.Mode.SRC_IN);
 
     holder.optionImage.setOnClickListener(new View.OnClickListener() {
