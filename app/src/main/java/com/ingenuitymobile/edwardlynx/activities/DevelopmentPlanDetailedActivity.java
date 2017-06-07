@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
+import com.github.mikephil.charting.data.BarEntry;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.GoalAdapter;
@@ -182,23 +183,28 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     final int size = plan.goals.size();
     int count = 0;
     float progress = 0;
+    int actionSize = 0;
     if (plan.goals != null) {
       for (Goal goal : plan.goals) {
         if (goal.checked == 1) {
           count++;
         }
 
-        if (goal.actions != null) {
-          final int actionSize = goal.actions.size();
-          int actionCount = 0;
+        int actionCount = 0;
+        if (goal.actions != null && !goal.actions.isEmpty()) {
+          actionSize = goal.actions.size();
           for (Action action : goal.actions) {
             if (action.checked == 1) {
               actionCount++;
             }
           }
-
-          progress = progress + ((float) (actionCount) / (float) actionSize);
         }
+
+        final float actionProgress =
+            (actionCount != 0 && actionSize != 0) ?
+                ((float) (actionCount) / (float) actionSize) : 0;
+
+        progress = progress + actionProgress;
       }
       progress = ((progress) / (float) size) * 100;
     }
