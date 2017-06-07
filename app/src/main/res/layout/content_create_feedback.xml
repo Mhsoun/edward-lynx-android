@@ -232,23 +232,17 @@
             android:visibility="gone">
         </RadioGroup>
 
-        <HorizontalScrollView
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/segmented_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none">
-
-          <info.hoang8f.android.segmented.SegmentedGroup
-              android:id="@+id/segmented_group"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginBottom="4dp"
-              android:layout_marginTop="4dp"
-              android:orientation="horizontal"
-              android:visibility="gone"
-              segmentedgroup:sc_checked_text_color="@color/colorPrimaryDark"
-              segmentedgroup:sc_tint_color="@color/white">
-          </info.hoang8f.android.segmented.SegmentedGroup>
-        </HorizontalScrollView>
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            segmentedgroup:sc_checked_text_color="@color/colorPrimaryDark"
+            segmentedgroup:sc_tint_color="@color/white">
+        </info.hoang8f.android.segmented.SegmentedGroup>
 
         <EditText
             android:id="@+id/free_text_edit"

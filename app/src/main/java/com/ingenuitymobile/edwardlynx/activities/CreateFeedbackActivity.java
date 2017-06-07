@@ -2,6 +2,7 @@ package com.ingenuitymobile.edwardlynx.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -281,19 +283,26 @@ public class CreateFeedbackActivity extends BaseActivity {
     radioGroup.addView(radioButton);
   }
 
-  private void createSegmentedButton(final SegmentedGroup radioGroup, final Context context,
+  private void createSegmentedButton(
+      final SegmentedGroup radioGroup,
+      final Context context,
       final String description) {
 
-    final RadioButton radioButton = (RadioButton) LayoutInflater
-        .from(context)
-        .inflate(R.layout.radio_button_item,
-            null
-        );
+    final RadioButton radioButton = new RadioButton(context);
+    final RadioGroup.LayoutParams lparam = new RadioGroup.LayoutParams(
+        0,
+        LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
 
+    lparam.gravity = Gravity.CENTER;
+    radioButton.setLayoutParams(lparam);
+    radioButton.setMinimumHeight(ViewUtil.dpToPx(40, context.getResources()));
     radioButton.setText(description);
-    radioButton.setEnabled(false);
+    radioButton.setGravity(Gravity.CENTER);
+    radioButton.setButtonDrawable(new StateListDrawable());
+    radioButton.setTextSize(11);
     radioGroup.addView(radioButton);
     radioGroup.updateBackground();
+    radioGroup.invalidate();
   }
 
   private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton
