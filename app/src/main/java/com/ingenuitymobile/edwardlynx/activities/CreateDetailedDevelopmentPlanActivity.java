@@ -245,7 +245,7 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
 
     param.title = developmentPlan;
     param.dueDate = remindCheckbox.isChecked() ?
-        DateUtil.getAPIFormat().format(datePicker.getDate()) : null;
+        DateUtil.getAPIFormat().format(datePicker.getDate()) : "";
     param.categoryId = linkCategoryCheckbox.isChecked() ? param.categoryId : 0L;
     if (!TextUtils.isEmpty(description)) {
       param.description = description;

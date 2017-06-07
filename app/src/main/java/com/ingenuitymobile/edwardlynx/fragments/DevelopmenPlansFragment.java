@@ -1,7 +1,6 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,37 +10,22 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.activities.CreateDevelopmentPlanActivity;
-import com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity;
-import com.ingenuitymobile.edwardlynx.activities.FeedbackRequestsActivity;
-import com.ingenuitymobile.edwardlynx.activities.ReportsActivity;
-import com.ingenuitymobile.edwardlynx.adapters.DevelopmentPlanAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
 import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import rx.Subscriber;
 
@@ -175,23 +159,6 @@ public class DevelopmenPlansFragment extends BaseFragment {
               if (count == size) {
                 completedData.add(plan);
               }
-//              else {
-//                try {
-//                  final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
-//                  final Date date = sdf.parse(plan.updatedAt);
-//                  date.setHours(23);
-//                  date.setMinutes(59);
-//                  date.setSeconds(59);
-//                  if (date.getTime() < System.currentTimeMillis()) {
-//                    expiredData.add(plan);
-//                  } else {
-//                    unfinishedData.add(plan);
-//                  }
-//                } catch (Exception e) {
-//                  LogUtil.e("AAA", e);
-//                }
-//              }
-
             }
           }
         }));

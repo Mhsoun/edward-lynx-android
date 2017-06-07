@@ -15,7 +15,6 @@ import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -24,10 +23,6 @@ import java.util.List;
  */
 
 public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder> {
-
-  private SimpleDateFormat monthFormat = new SimpleDateFormat("MMM");
-  private SimpleDateFormat dateFormat  = new SimpleDateFormat("dd");
-  private SimpleDateFormat yearFormat  = new SimpleDateFormat("yyyy");
 
   private boolean isInvite;
 
@@ -82,9 +77,9 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
 
     try {
       Date date = DateUtil.getAPIFormat().parse(survey.endDate);
-      holder.monthText.setText(monthFormat.format(date));
-      holder.dateTExt.setText(dateFormat.format(date));
-      holder.yearText.setText(yearFormat.format(date));
+      holder.monthText.setText(DateUtil.getMonthFormat().format(date));
+      holder.dateTExt.setText(DateUtil.getDayFormat().format(date));
+      holder.yearText.setText(DateUtil.getYearFormat().format(date));
       holder.isExpired = new Date().after(date);
 
       long diff = date.getTime() - new Date().getTime();

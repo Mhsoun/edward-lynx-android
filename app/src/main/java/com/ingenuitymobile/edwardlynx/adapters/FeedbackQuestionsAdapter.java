@@ -2,13 +2,16 @@ package com.ingenuitymobile.edwardlynx.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.StateListDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -19,6 +22,7 @@ import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.Option;
 import com.ingenuitymobile.edwardlynx.api.models.Question;
+import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
 import java.util.List;
 
@@ -101,6 +105,7 @@ public class FeedbackQuestionsAdapter extends
       }
 
       holder.radioGroup = question.answer.isNumeric ? holder.segmentedGroup : holder.radioGroup;
+      holder.radioGroup.invalidate();
 
       if (question.value != null) {
         listener.onAnswer(question.id, String.valueOf((double) question.value));
@@ -173,8 +178,12 @@ public class FeedbackQuestionsAdapter extends
     return super.getItemViewType(position);
   }
 
-  private void createRadioButton(final RadioGroup radioGroup, final Context context,
-      final String description, int value) {
+  private void createRadioButton(
+      final RadioGroup radioGroup,
+      final Context context,
+      final String description,
+      int value) {
+
     final RadioButton radioButton = new RadioButton(context);
     final LayoutParams lparam = new LayoutParams(LayoutParams.WRAP_CONTENT,
         LayoutParams.WRAP_CONTENT);
@@ -187,19 +196,28 @@ public class FeedbackQuestionsAdapter extends
     radioGroup.addView(radioButton);
   }
 
-  private void createSegmentedButton(final SegmentedGroup radioGroup, final Context context,
-      final String description, int value) {
+  private void createSegmentedButton(
+      final SegmentedGroup radioGroup,
+      final Context context,
+      final String description,
+      int value) {
 
-    final RadioButton radioButton = (RadioButton) LayoutInflater
-        .from(context)
-        .inflate(R.layout.radio_button_item,
-            null
-        );
+    final RadioButton radioButton = new RadioButton(context);
+    final RadioGroup.LayoutParams lparam = new RadioGroup.LayoutParams(
+        0,
+        LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
 
+    lparam.gravity = Gravity.CENTER;
+    radioButton.setLayoutParams(lparam);
+    radioButton.setMinimumHeight(ViewUtil.dpToPx(40, context.getResources()));
     radioButton.setTag(String.valueOf(value));
     radioButton.setText(description);
+    radioButton.setGravity(Gravity.CENTER);
+    radioButton.setButtonDrawable(new StateListDrawable());
+    radioButton.setTextSize(11);
     radioGroup.addView(radioButton);
     radioGroup.updateBackground();
+    radioGroup.invalidate();
   }
 
   public interface OnAnswerItemListener {
