@@ -118,7 +118,7 @@ public class AveragesFragment extends BaseFragment {
       @Override
       public String getFormattedValue(float value, Entry entry, int dataSetIndex,
           ViewPortHandler viewPortHandler) {
-        return String.valueOf((int) value) + "%";
+        return String.valueOf((int) value);
       }
     });
 
@@ -186,7 +186,7 @@ public class AveragesFragment extends BaseFragment {
       @Override
       public String getFormattedValue(float value, Entry entry, int dataSetIndex,
           ViewPortHandler viewPortHandler) {
-        return String.valueOf((int) value) + "%";
+        return String.valueOf((int) value);
       }
     });
 
@@ -200,7 +200,7 @@ public class AveragesFragment extends BaseFragment {
       @Override
       public String getFormattedValue(float value, Entry entry, int dataSetIndex,
           ViewPortHandler viewPortHandler) {
-        return String.valueOf((int) value) + "%";
+        return String.valueOf((int) value);
       }
     });
 

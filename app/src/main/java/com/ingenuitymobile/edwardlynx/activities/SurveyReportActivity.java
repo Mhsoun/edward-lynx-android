@@ -185,6 +185,7 @@ public class SurveyReportActivity extends BaseActivity {
       return;
     }
 
+    fragments.clear();
     if (response.responseRates != null && !response.responseRates.isEmpty()) {
       final ResponseRateFragment responseRateFragment = new ResponseRateFragment();
       responseRateFragment.setDataSet(response.responseRates);
