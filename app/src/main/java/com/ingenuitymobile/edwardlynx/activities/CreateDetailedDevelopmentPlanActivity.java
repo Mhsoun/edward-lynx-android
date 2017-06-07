@@ -94,6 +94,7 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
 
     if (planId != 0L && param.id != 0L) {
       ((TextView) findViewById(R.id.text_done)).setText(getString(R.string.update_goal));
+      findViewById(R.id.layout_actions).setVisibility(View.GONE);
     } else if (planId != 0L) {
       param.position = getIntent().getIntExtra("position", 0);
     }

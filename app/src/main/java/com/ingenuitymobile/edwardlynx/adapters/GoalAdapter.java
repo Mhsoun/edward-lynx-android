@@ -74,12 +74,14 @@ public class GoalAdapter extends
     RelativeLayout bodyLayout;
     TextView       nameText;
     ImageView      imageView;
+    ImageView      optionImage;
 
     ChildView(View itemView) {
       super(itemView);
       bodyLayout = (RelativeLayout) itemView.findViewById(R.id.layout_body);
       nameText = (TextView) itemView.findViewById(R.id.text_name);
       imageView = (ImageView) itemView.findViewById(R.id.image_circle);
+      optionImage = (ImageView) itemView.findViewById(R.id.image_option);
     }
   }
 
@@ -166,10 +168,10 @@ public class GoalAdapter extends
   }
 
   @Override
-  public void onBindChildViewHolder(ChildView holder, int position,
-      Object childListItem) {
+  public void onBindChildViewHolder(final ChildView holder, int position, Object childListItem) {
     final Action action = (Action) childListItem;
     final Context context = holder.itemView.getContext();
+
     holder.nameText.setText(action.title);
     holder.imageView.setImageDrawable(holder.imageView.getContext().getResources()
         .getDrawable(action.checked == 1 ? R.drawable.ic_check : R.drawable.ic_circle));
@@ -186,13 +188,40 @@ public class GoalAdapter extends
         }
       }
     });
+
+    holder.optionImage.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        PopupMenu popup = new PopupMenu(context, holder.optionImage);
+        popup.inflate(R.menu.menu_option_action);
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+          @Override
+          public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()) {
+            case R.id.update_action:
+              listener.onUpdateAction(action);
+              break;
+            case R.id.delete_action:
+              listener.onDeleteAction(action);
+              break;
+            }
+            return false;
+          }
+        });
+        popup.show();
+      }
+    });
   }
 
   public interface OnSelectActionListener {
-    void onSelectedAction(Action action);
-
     void onSelectedGoal(Goal goal);
 
     void onDeleteGoal(Goal goal);
+
+    void onSelectedAction(Action action);
+
+    void onUpdateAction(Action action);
+
+    void onDeleteAction(Action action);
   }
 }

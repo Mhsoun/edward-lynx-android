@@ -332,4 +332,10 @@
 
   <string name="update_goal">Update Goal</string>
   <string name="delete_goal">Delete Goal</string>
+
+  <string name="update_action">Update Action</string>
+  <string name="delete_action">Delete Action</string>
+
+  <string name="enter_new_name_for">Enter new name for %1$s</string>
+  <string name="update">Update</string>
 </resources>
