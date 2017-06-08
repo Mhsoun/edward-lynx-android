@@ -182,9 +182,6 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     int actionSize = 0;
     if (plan.goals != null) {
       for (Goal goal : plan.goals) {
-        if (goal.checked == 1) {
-          count++;
-        }
 
         int actionCount = 0;
         if (goal.actions != null && !goal.actions.isEmpty()) {
@@ -194,6 +191,10 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
               actionCount++;
             }
           }
+        }
+
+        if (actionCount != 0 && actionCount == actionSize) {
+          count++;
         }
 
         final float actionProgress =
