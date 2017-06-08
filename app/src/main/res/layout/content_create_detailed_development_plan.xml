@@ -196,6 +196,16 @@
           tools:picker_cyclic="true"
           tools:picker_visibleItemCount="7"/>
 
+      <TextView
+          android:id="@+id/text_due_date_error"
+          android:visibility="gone"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:text="@string/due_date_error"
+          android:textColor="@color/white"
+          android:textSize="15sp"/>
+
       <RelativeLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"

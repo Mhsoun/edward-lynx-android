@@ -42,6 +42,7 @@ import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import rx.Subscriber;
@@ -170,7 +171,6 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     } catch (Exception e) {LogUtil.e("AAA ", e);}
     calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
 
-    datePicker.setMustBeOnFuture(true);
     datePicker.setStepMinutes(15);
     datePicker.selectDate(calendar);
 
@@ -244,8 +244,17 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     }
 
     param.title = developmentPlan;
-    param.dueDate = remindCheckbox.isChecked() ?
-        DateUtil.getAPIFormat().format(datePicker.getDate()) : "";
+    param.dueDate = "";
+    if (remindCheckbox.isChecked()) {
+      if (new Date().before(datePicker.getDate())) {
+        param.dueDate = DateUtil.getAPIFormat().format(datePicker.getDate());
+        findViewById(R.id.text_due_date_error).setVisibility(View.GONE);
+      } else {
+        findViewById(R.id.text_due_date_error).setVisibility(View.VISIBLE);
+        return;
+      }
+    }
+
     param.categoryId = linkCategoryCheckbox.isChecked() ? param.categoryId : 0L;
     if (!TextUtils.isEmpty(description)) {
       param.description = description;
