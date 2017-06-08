@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -55,6 +56,9 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
   private TextView percentageText;
   private TextView goalsText;
 
+  private PopupMenu popupGoal;
+  private PopupMenu popupAction;
+
   public DevelopmentPlanDetailedActivity() {
     data = new ArrayList<>();
     goalId = 0L;
@@ -94,6 +98,18 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
   protected void onResume() {
     super.onResume();
     getData();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    if (popupGoal != null) {
+      popupGoal.dismiss();
+    }
+
+    if (popupAction != null) {
+      popupAction.dismiss();
+    }
   }
 
   protected void initViews() {
@@ -328,7 +344,146 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     return 0L;
   }
 
+  private void editGoal(Goal goal) {
+    Intent intent = new Intent(context, CreateDetailedDevelopmentPlanActivity.class);
+    intent.putExtra("goal_param_body", goal.toString());
+    intent.putExtra("planId", id);
+    startActivity(intent);
+  }
+
+  private void deleteGoal(final Goal goal) {
+    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+    alertBuilder.setTitle(getString(R.string.confirmation));
+    alertBuilder.setMessage(getString(R.string.delete_goal_message, goal.title));
+    alertBuilder.setPositiveButton(getString(R.string.delete_text),
+        new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            deleteGoal(goal.id);
+          }
+        });
+    alertBuilder.setNegativeButton(getString(R.string.cancel),
+        new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.dismiss();
+          }
+        });
+    alertBuilder.create().show();
+  }
+
+  public void updateAction(final Action action) {
+    LinearLayout layout = new LinearLayout(context);
+    layout.setOrientation(LinearLayout.VERTICAL);
+
+    final EditText nameEdit = new EditText(context);
+    nameEdit.setHint(getString(R.string.name));
+    nameEdit.setText(action.title);
+    nameEdit.setTextColor(getResources().getColor(R.color.black));
+    nameEdit.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+    nameEdit.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+    nameEdit.setSelection(nameEdit.getText().length());
+    layout.addView(nameEdit);
+
+    final AlertDialog alertDialog = new AlertDialog.Builder(context)
+        .setTitle(getString(R.string.update_action))
+        .setMessage(getString(R.string.enter_new_name_for))
+        .setPositiveButton(getString(R.string.update), null)
+        .setNegativeButton(getString(R.string.cancel), null)
+        .setView(layout,
+            ViewUtil.dpToPx(16, getResources()), 0, ViewUtil.dpToPx(16, getResources()), 0)
+        .create();
+
+    alertDialog.setCanceledOnTouchOutside(false);
+    alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+      @Override
+      public void onShow(final DialogInterface dialogInterface) {
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                final String name = nameEdit.getText().toString();
+
+                if (TextUtils.isEmpty(name)) {
+                  nameEdit.setError(getString(R.string.name_required));
+                } else {
+                  dialogInterface.dismiss();
+
+                  Action param = new Action();
+                  param.title = name;
+                  param.checked = action.checked;
+                  param.position = action.position;
+                  patchAction(getGoalId(action), action.id, param, false);
+                }
+              }
+            });
+      }
+    });
+    alertDialog.show();
+  }
+
+  public void deleteAction(final Action action) {
+    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+    alertBuilder.setTitle(getString(R.string.confirmation));
+    alertBuilder.setMessage(getString(R.string.delte_action_message, action.title));
+    alertBuilder.setPositiveButton(getString(R.string.delete_text),
+        new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            deleteAction(getGoalId(action), action.id);
+          }
+        });
+    alertBuilder.setNegativeButton(getString(R.string.cancel),
+        new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.dismiss();
+          }
+        });
+    alertBuilder.create().show();
+  }
+
+
   private GoalAdapter.OnSelectActionListener listener = new GoalAdapter.OnSelectActionListener() {
+
+    @Override
+    public void onPopupGoal(final Goal goal, View view) {
+      popupGoal = new PopupMenu(context, view);
+      popupGoal.inflate(R.menu.menu_option_goal);
+      popupGoal.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+          switch (item.getItemId()) {
+          case R.id.update_goal:
+            editGoal(goal);
+            break;
+          case R.id.delete_goal:
+            deleteGoal(goal);
+            break;
+          }
+          return false;
+        }
+      });
+      popupGoal.show();
+    }
+
+    @Override
+    public void onPopupAction(final Action action, View view) {
+      popupAction = new PopupMenu(context, view);
+      popupAction.inflate(R.menu.menu_option_action);
+      popupAction.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+          switch (item.getItemId()) {
+          case R.id.update_action:
+            updateAction(action);
+            break;
+          case R.id.delete_action:
+            deleteAction(action);
+            break;
+          }
+          return false;
+        }
+      });
+      popupAction.show();
+    }
+
     @Override
     public void onSelectedAction(final Action action) {
       AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
@@ -341,77 +496,6 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
               param.checked = 1;
               param.position = action.position;
               patchAction(getGoalId(action), action.id, param, true);
-            }
-          });
-      alertBuilder.setNegativeButton(getString(R.string.cancel),
-          new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-              dialog.dismiss();
-            }
-          });
-      alertBuilder.create().show();
-    }
-
-    @Override
-    public void onUpdateAction(final Action action) {
-      LinearLayout layout = new LinearLayout(context);
-      layout.setOrientation(LinearLayout.VERTICAL);
-
-      final EditText nameEdit = new EditText(context);
-      nameEdit.setHint(getString(R.string.name));
-      nameEdit.setText(action.title);
-      nameEdit.setTextColor(getResources().getColor(R.color.black));
-      nameEdit.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
-      nameEdit.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-      nameEdit.setSelection(nameEdit.getText().length());
-      layout.addView(nameEdit);
-
-      final AlertDialog alertDialog = new AlertDialog.Builder(context)
-          .setTitle(getString(R.string.update_action))
-          .setMessage(getString(R.string.enter_new_name_for))
-          .setPositiveButton(getString(R.string.update), null)
-          .setNegativeButton(getString(R.string.cancel), null)
-          .setView(layout,
-              ViewUtil.dpToPx(16, getResources()), 0, ViewUtil.dpToPx(16, getResources()), 0)
-          .create();
-
-      alertDialog.setCanceledOnTouchOutside(false);
-      alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-        @Override
-        public void onShow(final DialogInterface dialogInterface) {
-          alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
-              new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                  final String name = nameEdit.getText().toString();
-
-                  if (TextUtils.isEmpty(name)) {
-                    nameEdit.setError(getString(R.string.name_required));
-                  } else {
-                    dialogInterface.dismiss();
-
-                    Action param = new Action();
-                    param.title = name;
-                    param.checked = action.checked;
-                    param.position = action.position;
-                    patchAction(getGoalId(action), action.id, param, false);
-                  }
-                }
-              });
-        }
-      });
-      alertDialog.show();
-    }
-
-    @Override
-    public void onDeleteAction(final Action action) {
-      AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
-      alertBuilder.setTitle(getString(R.string.confirmation));
-      alertBuilder.setMessage(getString(R.string.delte_action_message, action.title));
-      alertBuilder.setPositiveButton(getString(R.string.delete_text),
-          new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-              deleteAction(getGoalId(action), action.id);
             }
           });
       alertBuilder.setNegativeButton(getString(R.string.cancel),
@@ -471,34 +555,6 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         }
       });
       alertDialog.show();
-    }
-
-    @Override
-    public void onSelectedGoal(Goal goal) {
-      Intent intent = new Intent(context, CreateDetailedDevelopmentPlanActivity.class);
-      intent.putExtra("goal_param_body", goal.toString());
-      intent.putExtra("planId", id);
-      startActivity(intent);
-    }
-
-    @Override
-    public void onDeleteGoal(final Goal goal) {
-      AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
-      alertBuilder.setTitle(getString(R.string.confirmation));
-      alertBuilder.setMessage(getString(R.string.delete_goal_message, goal.title));
-      alertBuilder.setPositiveButton(getString(R.string.delete_text),
-          new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-              deleteGoal(goal.id);
-            }
-          });
-      alertBuilder.setNegativeButton(getString(R.string.cancel),
-          new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-              dialog.dismiss();
-            }
-          });
-      alertBuilder.create().show();
     }
   };
 

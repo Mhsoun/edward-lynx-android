@@ -151,23 +151,7 @@ public class GoalAdapter extends
     holder.optionImage.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        PopupMenu popup = new PopupMenu(context, holder.optionImage);
-        popup.inflate(R.menu.menu_option_goal);
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-          @Override
-          public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getItemId()) {
-            case R.id.update_goal:
-              listener.onSelectedGoal(goal);
-              break;
-            case R.id.delete_goal:
-              listener.onDeleteGoal(goal);
-              break;
-            }
-            return false;
-          }
-        });
-        popup.show();
+        listener.onPopupGoal(goal, holder.optionImage);
       }
     });
   }
@@ -202,37 +186,17 @@ public class GoalAdapter extends
     holder.optionImage.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        PopupMenu popup = new PopupMenu(context, holder.optionImage);
-        popup.inflate(R.menu.menu_option_action);
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-          @Override
-          public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getItemId()) {
-            case R.id.update_action:
-              listener.onUpdateAction(action);
-              break;
-            case R.id.delete_action:
-              listener.onDeleteAction(action);
-              break;
-            }
-            return false;
-          }
-        });
-        popup.show();
+        listener.onPopupAction(action, holder.optionImage);
       }
     });
   }
 
   public interface OnSelectActionListener {
-    void onSelectedGoal(Goal goal);
+    void onPopupGoal(Goal goal, View view);
 
-    void onDeleteGoal(Goal goal);
+    void onPopupAction(Action action, View view);
 
     void onSelectedAction(Action action);
-
-    void onUpdateAction(Action action);
-
-    void onDeleteAction(Action action);
 
     void onAddGoal(Action action);
   }
