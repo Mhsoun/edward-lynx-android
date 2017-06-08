@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,6 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.QuestionBody;
 import com.ingenuitymobile.edwardlynx.api.models.Answer;
 import com.ingenuitymobile.edwardlynx.utils.AnswerTypeUtil;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
 import java.util.ArrayList;

@@ -179,10 +179,8 @@ public class DevelopmentPlanAdapter extends
 
     final MyBarDataSet set = new MyBarDataSet(goalBars, "");
     set.setHighlightEnabled(false);
-    set.setColors(new int[]{
-        context.getResources().getColor(R.color.colorAccent),
-        context.getResources().getColor(R.color.dev_plan_color),
-    });
+    set.setColors(context.getResources().getColor(R.color.colorAccent),
+        context.getResources().getColor(R.color.dev_plan_color));
 
     final ArrayList<IBarDataSet> dataSets = new ArrayList<>();
     dataSets.add(set);

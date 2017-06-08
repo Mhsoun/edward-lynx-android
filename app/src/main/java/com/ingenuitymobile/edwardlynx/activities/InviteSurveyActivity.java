@@ -1,10 +1,7 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +13,6 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.SurveyAdapter;
-import com.ingenuitymobile.edwardlynx.adapters.SurveyReportsAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;

@@ -3,7 +3,6 @@ package com.ingenuitymobile.edwardlynx.activities;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;

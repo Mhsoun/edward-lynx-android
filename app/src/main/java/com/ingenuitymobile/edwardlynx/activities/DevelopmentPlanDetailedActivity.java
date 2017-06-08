@@ -20,24 +20,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
-import com.github.mikephil.charting.data.BarEntry;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.GoalAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
-import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.fragments.PopupDialogFragment;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
-import com.ingenuitymobile.edwardlynx.utils.StringUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 import com.ingenuitymobile.edwardlynx.views.fitchart.FitChart;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import rx.Subscriber;
 

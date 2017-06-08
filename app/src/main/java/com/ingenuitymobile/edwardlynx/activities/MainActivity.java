@@ -26,7 +26,6 @@ import com.ingenuitymobile.edwardlynx.fragments.DevelopmenPlansFragment;
 import com.ingenuitymobile.edwardlynx.fragments.ProfileFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveysFragment;
 import com.ingenuitymobile.edwardlynx.services.DeleteTokenService;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import net.hockeyapp.android.CrashManager;
 import net.hockeyapp.android.CrashManagerListener;
@@ -44,7 +43,7 @@ public class MainActivity extends BaseActivity implements
     SURVEYS_LYNX,
     DEVPLANS,
     PROFILE,
-    CHANGE_PASSWORD;
+    CHANGE_PASSWORD
   }
 
   private Toolbar                 toolbar;

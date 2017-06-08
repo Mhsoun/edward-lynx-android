@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.google.gson.annotations.SerializedName;
 import com.ingenuitymobile.edwardlynx.R;
-import com.ingenuitymobile.edwardlynx.api.models.Answer;
 
 /**
  * Created by memengski on 5/24/17.

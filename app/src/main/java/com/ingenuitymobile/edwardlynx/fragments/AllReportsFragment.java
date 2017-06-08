@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
@@ -18,7 +17,6 @@ import com.ingenuitymobile.edwardlynx.api.models.AllSurveys;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
-import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 

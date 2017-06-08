@@ -1,8 +1,6 @@
 package com.ingenuitymobile.edwardlynx.views;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -10,7 +8,6 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.BreakdownItem;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;

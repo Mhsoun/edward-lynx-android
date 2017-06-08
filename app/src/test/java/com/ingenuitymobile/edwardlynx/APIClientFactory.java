@@ -2,7 +2,6 @@ package com.ingenuitymobile.edwardlynx;
 
 
 import com.ingenuitymobile.edwardlynx.api.ApiClient;
-import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
 
 /**
  * Created by mEmEnG-sKi on 14/10/2016.

@@ -3,7 +3,6 @@ package com.ingenuitymobile.edwardlynx.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.StateListDrawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Option;
 import com.ingenuitymobile.edwardlynx.api.models.Question;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
 import java.util.List;

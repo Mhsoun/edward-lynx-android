@@ -51,6 +51,8 @@
   <string name="details_bold">DETAILS</string>
   <string name="development_plan_bold">DEVELOPMENT PLANS</string>
   <string name="add_more_participants_bold">ADD MORE PARTICIPANTS</string>
+
+
   <string name="free_text_description">Text</string>
   <string name="optional">(optional)</string>
   <string name="required_fields">Please fill up all required questions</string>
@@ -119,7 +121,7 @@
 
   // region Create Development plan
   <string name="create_development_plan_name">Enter Development Plan Name</string>
-  <string name="action_plan_required" translatable="false">Action plan name can\'t be blank</string>
+  <string name="action_plan_required">Action plan name can\'t be blank</string>
   <string name="goal_action_added">No goal action added</string>
   <string name="development_plan_created">Successfully created development plan</string>
   <string name="goal_created">Successfully added goal</string>
@@ -167,7 +169,7 @@
   <string name="invite_by_email">Invite people by email address</string>
   <string name="enter_email">Enter Name and Email address</string>
   <string name="email_address">Email address</string>
-  <string name="add_email" translatable="false">Add email</string>
+  <string name="add_email">Add email</string>
   <string name="select_atleast_one">No users selected</string>
   <string name="instant_feedback_created">Successfully invited participants</string>
   <string name="added_more_particpants">Added Participants</string>
@@ -187,7 +189,7 @@
   <string name="female">female</string>
   <string name="male_camel">Male</string>
   <string name="female_camel">Female</string>
-  <string name="about" translatable="false">About</string>
+  <string name="about">About</string>
   <string name="department">Department</string>
   <string name="role">Role</string>
   <string name="gender">Gender</string>
@@ -221,7 +223,7 @@
   <string name="logout_confirmation_message">Are you sure you want to log out? Your credentials will be required to open the app again.</string>
   <string name="logout">Logout</string>
   <string name="cancel">Cancel</string>
-  <string name="add" translatable="false">Add</string>
+  <string name="add">Add</string>
 
   <string name="confirmation">Confirmation</string>
   <string name="complete_action_message">Complete this action, %1$s?</string>
@@ -283,16 +285,6 @@
   <string name="thanks">Thanks</string>
   <string name="close">Close</string>
 
-  // date
-  <string name="just_now">just now</string>
-  <string name="a_minute_ago" translatable="false">a minute ago</string>
-  <string name="minutes_ago">%1$d minutes ago</string>
-  <string name="an_hour_ago">an hour ago</string>
-  <string name="hours_ago">%1$d hours ago</string>
-  <string name="yesterday">yesterday</string>
-  <string name="today">today</string>
-  <string name="days_ago">%1$d days ago</string>
-
   // reminder
   <string name="goal_bold">GOAL</string>
   <string name="survey_bold">SURVEY</string>
@@ -343,5 +335,4 @@
 
   <string name="create_action">Create Action</string>
   <string name="enter_new_action">Enter new action</string>
-
 </resources>

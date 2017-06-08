@@ -1,18 +1,9 @@
 package com.ingenuitymobile.edwardlynx.endpoints;
 
 
-import com.ingenuitymobile.edwardlynx.APIClientFactory;
-import com.ingenuitymobile.edwardlynx.api.ApiClient;
-import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
-
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by mEmEnG-sKi on 17/10/2016.

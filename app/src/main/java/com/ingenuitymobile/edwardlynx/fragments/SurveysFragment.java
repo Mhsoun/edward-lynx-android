@@ -1,7 +1,6 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,32 +9,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
-import com.ingenuitymobile.edwardlynx.Shared;
-import com.ingenuitymobile.edwardlynx.activities.CreateDevelopmentPlanActivity;
 import com.ingenuitymobile.edwardlynx.activities.CreateFeedbackActivity;
-import com.ingenuitymobile.edwardlynx.adapters.SurveyAdapter;
-import com.ingenuitymobile.edwardlynx.api.models.AllSurveys;
-import com.ingenuitymobile.edwardlynx.api.models.Survey;
-import com.ingenuitymobile.edwardlynx.api.models.Surveys;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
-
-import java.util.ArrayList;
-
-import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 04/01/2017.

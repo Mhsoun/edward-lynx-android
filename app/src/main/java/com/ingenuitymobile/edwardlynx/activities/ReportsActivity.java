@@ -1,41 +1,20 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
-import com.ingenuitymobile.edwardlynx.Shared;
-import com.ingenuitymobile.edwardlynx.adapters.FeedbackAdapter;
-import com.ingenuitymobile.edwardlynx.api.models.Feedback;
-import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.fragments.AllReportsFragment;
-import com.ingenuitymobile.edwardlynx.fragments.AllSurveysFragment;
-import com.ingenuitymobile.edwardlynx.fragments.BaseFragment;
 import com.ingenuitymobile.edwardlynx.fragments.FeedbackReportsFragment;
-import com.ingenuitymobile.edwardlynx.fragments.FeedbackRequestsFragment;
 import com.ingenuitymobile.edwardlynx.fragments.SurveyReportsFragment;
-import com.ingenuitymobile.edwardlynx.fragments.SurveysFragment;
-import com.ingenuitymobile.edwardlynx.fragments.SurveysListFragment;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
-
-import java.util.ArrayList;
-
-import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 16/01/2017.

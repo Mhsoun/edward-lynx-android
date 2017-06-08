@@ -22,7 +22,6 @@ import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.BlindSpotItem;
 import com.ingenuitymobile.edwardlynx.api.models.BreakdownItem;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.views.CustomBarDataSet;
 
 import java.util.ArrayList;

@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ingenuitymobile.edwardlynx.R;
-import com.ingenuitymobile.edwardlynx.adapters.DetailedSummaryAdapter;
 import com.ingenuitymobile.edwardlynx.adapters.YesNoAdapter;
-import com.ingenuitymobile.edwardlynx.api.models.DetailedSummary;
 import com.ingenuitymobile.edwardlynx.api.models.YesNo;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 

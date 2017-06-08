@@ -20,7 +20,6 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
-import com.ingenuitymobile.edwardlynx.utils.NetUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
 import retrofit.RetrofitError;

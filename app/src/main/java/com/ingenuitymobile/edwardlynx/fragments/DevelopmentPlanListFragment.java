@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.adapters.DevelopmentPlanAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
-import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.ArrayList;
