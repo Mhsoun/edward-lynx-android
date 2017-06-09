@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.api;
 
+import com.google.gson.GsonBuilder;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
@@ -35,6 +36,7 @@ import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.OkClient;
+import retrofit.converter.GsonConverter;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -94,6 +96,13 @@ public class ApiClient {
             }
           }
         })
+        .setConverter(
+            new GsonConverter(
+                new GsonBuilder()
+                    .registerTypeAdapter(Goal.class, new Goal.GoalSerializer())
+                    .create()
+            )
+        )
         .build()
         .create(Service.class);
   }
