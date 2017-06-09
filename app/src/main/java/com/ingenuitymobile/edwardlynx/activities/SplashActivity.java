@@ -169,6 +169,7 @@ public class SplashActivity extends BaseActivity {
         bundle.putString("type", Shared.DEV_PLAN);
         bundle.putString("id", segments.get(1));
         getIntent().putExtras(bundle);
+        openMainPage();
       }
     } else {
       openMainPage();
