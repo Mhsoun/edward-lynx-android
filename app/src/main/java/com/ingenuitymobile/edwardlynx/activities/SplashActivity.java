@@ -160,10 +160,15 @@ public class SplashActivity extends BaseActivity {
               public void onNext(Response response) {
                 Bundle bundle = new Bundle();
                 bundle.putString("type", Shared.INSTANT_FEEDBACK_REQUEST);
-                bundle.putString("id", segments.get(2));
+                bundle.putString("id", String.valueOf(response.feedbackId));
                 getIntent().putExtras(bundle);
               }
             }));
+      } else if (segments.get(0).equals(Shared.DEV_PLAN)) {
+        Bundle bundle = new Bundle();
+        bundle.putString("type", Shared.DEV_PLAN);
+        bundle.putString("id", segments.get(1));
+        getIntent().putExtras(bundle);
       }
     } else {
       openMainPage();
@@ -202,7 +207,9 @@ public class SplashActivity extends BaseActivity {
     if (e != null) {
       final retrofit.client.Response error = ((RetrofitError) e).getResponse();
       if (error != null && error.getStatus() == 404) {
-        ViewUtil.showAlert(SplashActivity.this, "",
+        ViewUtil.showAlert(
+            SplashActivity.this,
+            "",
             getString(isFeedback ? R.string.no_access_feedback : R.string.no_access),
             new DialogInterface.OnClickListener() {
               @Override

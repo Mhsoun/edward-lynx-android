@@ -69,7 +69,6 @@ public class MyGcmListenerService extends FirebaseMessagingService {
       }
 
       intent.putExtras(bundle);
-      intent.putExtra("id", Long.parseLong(id));
 
       final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
           isActive ? PendingIntent.FLAG_CANCEL_CURRENT : PendingIntent.FLAG_ONE_SHOT);

@@ -37,6 +37,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal"
+      android:layout_marginTop="32dp"
       android:orientation="horizontal"
       segmentedgroup:sc_checked_text_color="@color/colorPrimaryDark"
       segmentedgroup:sc_tint_color="@color/white">
