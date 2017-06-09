@@ -53,6 +53,8 @@ public class MainActivity extends BaseActivity implements
   private ProfileFragment         profileFragment;
   private ChangePasswordFragment  changePasswordFragment;
 
+  private Fragment fragment;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -89,6 +91,7 @@ public class MainActivity extends BaseActivity implements
     unregisterManagers();
   }
 
+
   public void autoUploadCrashes() {
     if (!TextUtils.isEmpty(getString(R.string.hockey_app_id))) {
       CrashManager.register(this, getResources().getString(R.string.hockey_app_id),
@@ -124,7 +127,11 @@ public class MainActivity extends BaseActivity implements
     if (drawer.isDrawerOpen(GravityCompat.START)) {
       drawer.closeDrawer(GravityCompat.START);
     } else {
-      super.onBackPressed();
+      if (fragment != dashboardFragment) {
+        changeToDashboard();
+      } else {
+        super.onBackPressed();
+      }
     }
   }
 
@@ -162,7 +169,13 @@ public class MainActivity extends BaseActivity implements
     hideKeyboard();
     toolbar.setTitle(fragment.getArguments().getString("title"));
     FragmentManager fragmentManager = getSupportFragmentManager();
-    fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+
+    fragmentManager
+        .beginTransaction()
+        .replace(R.id.content_main, fragment)
+        .commit();
+
+    this.fragment = fragment;
   }
 
   private void initViews() {
