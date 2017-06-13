@@ -128,7 +128,7 @@
   <string name="goal_updated">Successfully updated goal</string>
   <string name="goal_delete">Successfully deleted goal</string>
   <string name="action_added">Successfully added goal action</string>
-  <string name="action_updated">Successfully updated goal</string>
+  <string name="action_updated">Successfully updated goal action</string>
   <string name="action_delete">Successfully deleted goal action</string>
   <string name="goals">Goals</string>
   <string name="done">Done</string>

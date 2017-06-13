@@ -39,6 +39,8 @@ public class Goal extends Model implements ParentListItem {
   @SerializedName("actions")
   public List<Action> actions;
 
+  public boolean isInitiallyExpanded;
+
   public Goal() {
     actions = new ArrayList<>();
     id = 0L;
@@ -57,7 +59,7 @@ public class Goal extends Model implements ParentListItem {
 
   @Override
   public boolean isInitiallyExpanded() {
-    return false;
+    return isInitiallyExpanded;
   }
 
   @Override

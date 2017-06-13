@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
@@ -45,8 +46,9 @@ import rx.Subscriber;
 
 public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
-  private long id;
-  private long goalId;
+  private long              id;
+  private long              goalId;
+  private ArrayList<String> expandedIds;
 
   private RecyclerView    recyclerView;
   private GoalAdapter     adapter;
@@ -63,6 +65,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
   public DevelopmentPlanDetailedActivity() {
     data = new ArrayList<>();
     goalId = 0L;
+    expandedIds = new ArrayList<>();
   }
 
   @Override
@@ -143,6 +146,8 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
       for (Action action : goal.actions) {
         action.isCompleted = count == size;
       }
+      goal.isInitiallyExpanded = expandedIds.contains(String.valueOf(goal.id));
+
       parentListItems.add(goal);
     }
     return parentListItems;
@@ -186,6 +191,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         data.addAll(developmentPlan.goals);
         recyclerView.setAdapter(null);
         adapter = new GoalAdapter(generateCategories(new ArrayList<>(data)), listener);
+        adapter.setExpandCollapseListener(collapseListener);
         recyclerView.setAdapter(adapter);
         setData(developmentPlan);
       }
@@ -451,123 +457,137 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
   }
 
 
-  private GoalAdapter.OnSelectActionListener listener = new GoalAdapter.OnSelectActionListener() {
-
-    @Override
-    public void onPopupGoal(final Goal goal, View view) {
-      popupGoal = new PopupMenu(context, view);
-      popupGoal.inflate(R.menu.menu_option_goal);
-      popupGoal.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+  private ExpandableRecyclerAdapter.ExpandCollapseListener collapseListener =
+      new ExpandableRecyclerAdapter.ExpandCollapseListener() {
         @Override
-        public boolean onMenuItemClick(MenuItem item) {
-          switch (item.getItemId()) {
-          case R.id.update_goal:
-            editGoal(goal);
-            break;
-          case R.id.delete_goal:
-            deleteGoal(goal);
-            break;
-          }
-          return false;
+        public void onListItemExpanded(int position) {
+          expandedIds.add(String.valueOf(data.get(position).id));
         }
-      });
-      popupGoal.show();
-    }
 
-    @Override
-    public void onPopupAction(final Action action, View view) {
-      popupAction = new PopupMenu(context, view);
-      popupAction.inflate(R.menu.menu_option_action);
-      popupAction.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
         @Override
-        public boolean onMenuItemClick(MenuItem item) {
-          switch (item.getItemId()) {
-          case R.id.update_action:
-            updateAction(action);
-            break;
-          case R.id.delete_action:
-            deleteAction(action);
-            break;
-          }
-          return false;
+        public void onListItemCollapsed(int position) {
+          expandedIds.remove(String.valueOf(data.get(position).id));
         }
-      });
-      popupAction.show();
-    }
+      };
 
-    @Override
-    public void onSelectedAction(final Action action) {
-      AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
-      alertBuilder.setTitle(getString(R.string.confirmation));
-      alertBuilder.setMessage(getString(R.string.complete_action_message, action.title));
-      alertBuilder.setPositiveButton(getString(R.string.complete),
-          new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-              Action param = new Action();
-              param.checked = 1;
-              param.position = action.position;
-              patchAction(getGoalId(action), action.id, param, true);
+  private GoalAdapter.OnSelectActionListener listener =
+      new GoalAdapter.OnSelectActionListener() {
+
+        @Override
+        public void onPopupGoal(final Goal goal, View view) {
+          popupGoal = new PopupMenu(context, view);
+          popupGoal.inflate(R.menu.menu_option_goal);
+          popupGoal.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+              switch (item.getItemId()) {
+              case R.id.update_goal:
+                editGoal(goal);
+                break;
+              case R.id.delete_goal:
+                deleteGoal(goal);
+                break;
+              }
+              return false;
             }
           });
-      alertBuilder.setNegativeButton(getString(R.string.cancel),
-          new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-              dialog.dismiss();
+          popupGoal.show();
+        }
+
+        @Override
+        public void onPopupAction(final Action action, View view) {
+          popupAction = new PopupMenu(context, view);
+          popupAction.inflate(R.menu.menu_option_action);
+          popupAction.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+              switch (item.getItemId()) {
+              case R.id.update_action:
+                updateAction(action);
+                break;
+              case R.id.delete_action:
+                deleteAction(action);
+                break;
+              }
+              return false;
             }
           });
-      alertBuilder.create().show();
-    }
+          popupAction.show();
+        }
 
-    @Override
-    public void onAddGoal(final Action action) {
-      LinearLayout layout = new LinearLayout(context);
-      layout.setOrientation(LinearLayout.VERTICAL);
-
-      final EditText nameEdit = new EditText(context);
-      nameEdit.setHint(getString(R.string.name));
-      nameEdit.setTextColor(getResources().getColor(R.color.black));
-      nameEdit.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
-      nameEdit.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-      nameEdit.setSelection(nameEdit.getText().length());
-      layout.addView(nameEdit);
-
-      final AlertDialog alertDialog = new AlertDialog.Builder(context)
-          .setTitle(getString(R.string.create_action))
-          .setMessage(getString(R.string.enter_new_action))
-          .setPositiveButton(getString(R.string.add_action), null)
-          .setNegativeButton(getString(R.string.cancel), null)
-          .setView(layout,
-              ViewUtil.dpToPx(16, getResources()), 0, ViewUtil.dpToPx(16, getResources()), 0)
-          .create();
-
-      alertDialog.setCanceledOnTouchOutside(false);
-      alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
         @Override
-        public void onShow(final DialogInterface dialogInterface) {
-          alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
-              new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                  final String name = nameEdit.getText().toString();
-
-                  if (TextUtils.isEmpty(name)) {
-                    nameEdit.setError(getString(R.string.name_required));
-                  } else {
-                    dialogInterface.dismiss();
-
-                    Action param = new Action();
-                    param.title = name;
-                    param.checked = 0;
-                    param.position = action.position;
-                    addAction(action.id, param);
-                  }
+        public void onSelectedAction(final Action action) {
+          AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+          alertBuilder.setTitle(getString(R.string.confirmation));
+          alertBuilder.setMessage(getString(R.string.complete_action_message, action.title));
+          alertBuilder.setPositiveButton(getString(R.string.complete),
+              new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                  Action param = new Action();
+                  param.checked = 1;
+                  param.position = action.position;
+                  patchAction(getGoalId(action), action.id, param, true);
                 }
               });
+          alertBuilder.setNegativeButton(getString(R.string.cancel),
+              new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                  dialog.dismiss();
+                }
+              });
+          alertBuilder.create().show();
         }
-      });
-      alertDialog.show();
-    }
-  };
+
+        @Override
+        public void onAddGoal(final Action action) {
+          LinearLayout layout = new LinearLayout(context);
+          layout.setOrientation(LinearLayout.VERTICAL);
+
+          final EditText nameEdit = new EditText(context);
+          nameEdit.setHint(getString(R.string.name));
+          nameEdit.setTextColor(getResources().getColor(R.color.black));
+          nameEdit.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+          nameEdit.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+          nameEdit.setSelection(nameEdit.getText().length());
+          layout.addView(nameEdit);
+
+          final AlertDialog alertDialog = new AlertDialog.Builder(context)
+              .setTitle(getString(R.string.create_action))
+              .setMessage(getString(R.string.enter_new_action))
+              .setPositiveButton(getString(R.string.add_action), null)
+              .setNegativeButton(getString(R.string.cancel), null)
+              .setView(layout,
+                  ViewUtil.dpToPx(16, getResources()), 0, ViewUtil.dpToPx(16, getResources()), 0)
+              .create();
+
+          alertDialog.setCanceledOnTouchOutside(false);
+          alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(final DialogInterface dialogInterface) {
+              alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
+                  new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                      final String name = nameEdit.getText().toString();
+
+                      if (TextUtils.isEmpty(name)) {
+                        nameEdit.setError(getString(R.string.name_required));
+                      } else {
+                        dialogInterface.dismiss();
+
+                        Action param = new Action();
+                        param.title = name;
+                        param.checked = 0;
+                        param.position = action.position;
+                        addAction(action.id, param);
+                      }
+                    }
+                  });
+            }
+          });
+          alertDialog.show();
+        }
+      };
 
   public void addGoal(View v) {
     Intent intent = new Intent(context, CreateDetailedDevelopmentPlanActivity.class);
