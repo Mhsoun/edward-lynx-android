@@ -19,6 +19,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.ingenuitymobile.edwardlynx.R;
@@ -249,12 +250,14 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
           @Override
           public void onNext(Response response) {
-            LogUtil.e("AAA onNext patchAction");
+            Toast.makeText(context,
+                getString(R.string.action_added), Toast.LENGTH_SHORT)
+                .show();
           }
         }));
   }
 
-  private void patchAction(long goalId, long actionId, Action param, boolean isComplete) {
+  private void patchAction(long goalId, long actionId, Action param, final boolean isComplete) {
     this.goalId = isComplete ? goalId : 0L;
 
     dialog = ProgressDialog.show(context, "", getString(R.string.loading));
@@ -278,7 +281,11 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
           @Override
           public void onNext(Response response) {
-            LogUtil.e("AAA onNext patchAction");
+            if (!isComplete) {
+              Toast.makeText(context,
+                  getString(R.string.action_updated), Toast.LENGTH_SHORT)
+                  .show();
+            }
           }
         }));
   }
@@ -303,7 +310,9 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
           @Override
           public void onNext(Response response) {
-
+            Toast.makeText(context,
+                getString(R.string.goal_delete), Toast.LENGTH_SHORT)
+                .show();
           }
         }));
   }
@@ -328,7 +337,9 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
           @Override
           public void onNext(Response response) {
-
+            Toast.makeText(context,
+                getString(R.string.action_delete), Toast.LENGTH_SHORT)
+                .show();
           }
         }));
   }
