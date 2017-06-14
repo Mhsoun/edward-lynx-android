@@ -50,10 +50,11 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
   private long              goalId;
   private ArrayList<String> expandedIds;
 
-  private RecyclerView    recyclerView;
-  private GoalAdapter     adapter;
-  private ArrayList<Goal> data;
-  private ProgressDialog  dialog;
+  private RecyclerView        recyclerView;
+  private LinearLayoutManager manager;
+  private GoalAdapter         adapter;
+  private ArrayList<Goal>     data;
+  private ProgressDialog      dialog;
 
   private FitChart progressFitChart;
   private TextView percentageText;
@@ -125,7 +126,8 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     progressFitChart.setMinValue(0f);
     progressFitChart.setMaxValue(100f);
 
-    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    manager = new LinearLayoutManager(this);
+    recyclerView.setLayoutManager(manager);
 
     goalsText.setText(context.getString(R.string.goals_details, 0, 0));
     percentageText.setText(0 + "%");
@@ -462,6 +464,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         @Override
         public void onListItemExpanded(int position) {
           expandedIds.add(String.valueOf(data.get(position).id));
+          manager.scrollToPositionWithOffset(position, 0);
         }
 
         @Override
