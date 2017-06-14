@@ -129,19 +129,17 @@ public class SurveyQuestionsAdapter extends
         holder.radioGroup = question.answer.isNumeric ? holder.segmentedGroup : holder.radioGroup;
         holder.radioGroup.invalidate();
 
-        if (question.value != null) {
-          listener.onAnswer(question.id, String.valueOf((double) question.value));
-          for (int i = 0; i < holder.radioGroup.getChildCount(); i++) {
-            holder.radioGroup.getChildAt(i).setClickable(isEnabled);
+        holder.radioGroup.setClickable(isEnabled);
 
-            if (holder.radioGroup.getChildAt(i).getTag().equals(
-                String.valueOf((int) (double) question.value))) {
-              ((RadioButton) holder.radioGroup.getChildAt(i)).setChecked(true);
-              listener.onAnswer(question.id, (String) holder.radioGroup.getChildAt(i).getTag());
-            }
+        for (int i = 0; i < holder.radioGroup.getChildCount(); i++) {
+          holder.radioGroup.getChildAt(i).setClickable(isEnabled);
+
+          if (question.value != null && holder.radioGroup.getChildAt(i).getTag().equals(
+              String.valueOf((int) (double) question.value))) {
+            ((RadioButton) holder.radioGroup.getChildAt(i)).setChecked(true);
+            listener.onAnswer(question.id, (String) holder.radioGroup.getChildAt(i).getTag());
           }
         }
-
 
         holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
           @Override
