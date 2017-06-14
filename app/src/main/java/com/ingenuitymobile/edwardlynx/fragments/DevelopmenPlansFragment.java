@@ -144,9 +144,20 @@ public class DevelopmenPlansFragment extends BaseFragment {
             for (DevelopmentPlan plan : data) {
               final int size = plan.goals.size();
               int count = 0;
+              int actionSize = 0;
               if (plan.goals != null) {
                 for (Goal goal : plan.goals) {
-                  if (goal.checked == 1) {
+                  int actionCount = 0;
+                  if (goal.actions != null && !goal.actions.isEmpty()) {
+                    actionSize = goal.actions.size();
+                    for (Action action : goal.actions) {
+                      if (action.checked == 1) {
+                        actionCount++;
+                      }
+                    }
+                  }
+
+                  if (actionCount != 0 && actionCount == actionSize) {
                     count++;
                   } else {
                     if (goal.actions != null) {
@@ -160,7 +171,8 @@ public class DevelopmenPlansFragment extends BaseFragment {
                   }
                 }
               }
-              if (count == size) {
+
+              if (count != 0 && count == size) {
                 completedData.add(plan);
               }
             }
