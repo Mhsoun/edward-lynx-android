@@ -54,6 +54,8 @@ public class DevelopmenPlansFragment extends BaseFragment {
   private ArrayList<DevelopmentPlan> completedData;
   private ArrayList<DevelopmentPlan> expiredData;
 
+  private SearchView searchView;
+
   private int position;
 
   public static DevelopmenPlansFragment newInstance(Context ctx) {
@@ -84,12 +86,14 @@ public class DevelopmenPlansFragment extends BaseFragment {
   @Override
   public void onResume() {
     super.onResume();
+    searchView.setQuery("", false);
+    searchView.setIconified(true);
     getData();
-    LogUtil.e("AAA onResume survey");
+    LogUtil.e("AAA onResume DevelopmenPlansFragment");
   }
 
   private void initViews() {
-    final SearchView searchView = (SearchView) mainView.findViewById(R.id.searchview);
+    searchView = (SearchView) mainView.findViewById(R.id.searchview);
     searchView.setQueryHint(getString(R.string.search_development_plans));
     searchView.setOnQueryTextListener(onQueryTextListener);
 

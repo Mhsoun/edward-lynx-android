@@ -83,6 +83,10 @@ public class MyGcmListenerService extends FirebaseMessagingService {
       notificationManager.notify(Integer.parseInt(id), notificationBuilder.build());
       BadgeUtils.setBadge(MyGcmListenerService.this, 1);
     }
+
+    if (remoteMessage.getNotification() != null) {
+      LogUtil.e("AAA Message Notification Body: " + remoteMessage.getNotification().getBody());
+    }
   }
 
   public NotificationCompat.Builder getNotificationBuilder(boolean isActive,

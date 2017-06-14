@@ -37,6 +37,8 @@ public class SurveysFragment extends BaseFragment {
   private FeedbackRequestsFragment feedbackFragment;
   private SurveysListFragment      lynxFragment;
 
+  private SearchView searchView;
+
   private int position;
 
   public SurveysFragment() {
@@ -58,12 +60,20 @@ public class SurveysFragment extends BaseFragment {
 
     mainView = inflater.inflate(R.layout.fragment_surveys, container, false);
     initViews();
-    LogUtil.e("AAA onCreateView survey2");
+    LogUtil.e("AAA onCreateView SurveysFragment");
     return mainView;
   }
 
+  @Override
+  public void onResume() {
+    super.onResume();
+    LogUtil.e("AAA onResume SurveysFragment");
+    searchView.setQuery("", false);
+    searchView.setIconified(true);
+  }
+
   private void initViews() {
-    final SearchView searchView = (SearchView) mainView.findViewById(R.id.searchview);
+    searchView = (SearchView) mainView.findViewById(R.id.searchview);
     searchView.setQueryHint(getString(R.string.search_survey));
     searchView.setOnQueryTextListener(onQueryTextListener);
 

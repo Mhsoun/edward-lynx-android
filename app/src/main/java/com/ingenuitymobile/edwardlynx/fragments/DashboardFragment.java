@@ -106,7 +106,7 @@ public class DashboardFragment extends BaseFragment {
   @Override
   public void onResume() {
     super.onResume();
-    LogUtil.e("AAA on Resume Dashboard");
+    LogUtil.e("AAA onResume Dashboard");
     getDasboard();
   }
 
