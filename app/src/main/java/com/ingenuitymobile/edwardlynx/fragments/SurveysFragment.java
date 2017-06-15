@@ -89,16 +89,17 @@ public class SurveysFragment extends BaseFragment {
     createImage.setOnClickListener(onClickListener);
 
     viewPager.setCurrentItem(position);
+    createImage.setVisibility(position == FEEDBACK ? View.VISIBLE : View.GONE);
   }
 
   public void setPosition(final int position) {
-    LogUtil.e("AAA setPosition");
     this.position = position;
     if (viewPager != null) {
       new Handler().postDelayed(new Runnable() {
         @Override
         public void run() {
           viewPager.setCurrentItem(position);
+          createImage.setVisibility(position == FEEDBACK ? View.VISIBLE : View.GONE);
         }
       }, 100);
       LogUtil.e("AAA setPosition " + position);
