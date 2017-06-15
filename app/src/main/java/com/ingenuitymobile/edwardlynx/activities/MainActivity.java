@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -94,8 +95,16 @@ public class MainActivity extends BaseActivity implements
   }
 
   private void enableNotificationAccess() {
-    if (!Settings.Secure.getString(this.getContentResolver(), "enabled_notification_listeners")
-        .contains(getApplicationContext().getPackageName())) {
+    ContentResolver contentResolver = context.getContentResolver();
+    String enabledNotificationListeners =
+        Settings.Secure.getString(contentResolver, "enabled_notification_listeners");
+    String packageName = getPackageName();
+
+    // check to see if the enabledNotificationListeners String contains our package name
+    if (enabledNotificationListeners == null ||
+        !enabledNotificationListeners.contains(packageName)) {
+      // in this situation we know that the user has not granted the app the Notification access
+      // permission
       AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
       alertBuilder.setTitle(getString(R.string.confirmation));
       alertBuilder.setMessage(getString(R.string.enable_notification));

@@ -198,7 +198,15 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     linkCategoryCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
       @Override
       public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        spinnerLayout.setVisibility(b ? View.VISIBLE : View.GONE);
+        if (Shared.categories.isEmpty()) {
+          linkCategoryCheckbox.setChecked(false);
+          Toast.makeText(
+              context,
+              getString(R.string.no_categories_available), Toast.LENGTH_SHORT
+          ).show();
+        } else {
+          spinnerLayout.setVisibility(b ? View.VISIBLE : View.GONE);
+        }
       }
     });
 
