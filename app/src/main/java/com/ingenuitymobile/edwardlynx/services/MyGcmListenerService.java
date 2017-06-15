@@ -81,7 +81,6 @@ public class MyGcmListenerService extends FirebaseMessagingService {
           pendingIntent, title, message);
 
       notificationManager.notify(Integer.parseInt(id), notificationBuilder.build());
-      BadgeUtils.setBadge(MyGcmListenerService.this, 1);
     }
 
     if (remoteMessage.getNotification() != null) {

@@ -3,6 +3,7 @@ package com.ingenuitymobile.edwardlynx.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -71,6 +72,7 @@ public class MainActivity extends BaseActivity implements
 
     checkForUpdates();
     autoUploadCrashes();
+    enableNotificationAccess();
   }
 
   @Override
@@ -89,6 +91,30 @@ public class MainActivity extends BaseActivity implements
   public void onDestroy() {
     super.onDestroy();
     unregisterManagers();
+  }
+
+  private void enableNotificationAccess() {
+    if (!Settings.Secure.getString(this.getContentResolver(), "enabled_notification_listeners")
+        .contains(getApplicationContext().getPackageName())) {
+      AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+      alertBuilder.setTitle(getString(R.string.confirmation));
+      alertBuilder.setMessage(getString(R.string.enable_notification));
+      alertBuilder.setPositiveButton(getString(R.string.enable),
+          new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+              intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+              startActivity(intent);
+            }
+          });
+      alertBuilder.setNegativeButton(getString(R.string.later),
+          new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              dialog.dismiss();
+            }
+          });
+      alertBuilder.create().show();
+    }
   }
 
 
@@ -194,7 +220,7 @@ public class MainActivity extends BaseActivity implements
 
   private void logout() {
     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-    alertBuilder.setTitle("Confirmation");
+    alertBuilder.setTitle(getString(R.string.confirmation));
     alertBuilder.setMessage(getString(R.string.logout_confirmation_message));
     alertBuilder.setPositiveButton(getString(R.string.logout),
         new DialogInterface.OnClickListener() {

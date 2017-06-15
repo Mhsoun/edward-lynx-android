@@ -15,7 +15,6 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.TokenParam;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.CategoriesResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
-import com.ingenuitymobile.edwardlynx.utils.BadgeUtils;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.StringUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
@@ -37,7 +36,6 @@ public class SplashActivity extends BaseActivity {
     setContentView(R.layout.activity_splash);
 
     Shared.init(this);
-    BadgeUtils.clearBadge(this);
 
     if (SessionStore.restoreAccessToken(this) != null) {
       LogUtil.e("AAA " + SessionStore.restoreAccessToken(this));

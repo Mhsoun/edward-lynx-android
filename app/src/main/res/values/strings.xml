@@ -231,6 +231,10 @@
   <string name="cancel">Cancel</string>
   <string name="add">Add</string>
 
+  <string name="enable_notification">Please enable Notification Access for badge notification</string>
+  <string name="enable">Enable</string>
+  <string name="later">Later</string>
+
   <string name="confirmation">Confirmation</string>
   <string name="complete_action_message">Complete this action, %1$s?</string>
   <string name="complete">Complete</string>
