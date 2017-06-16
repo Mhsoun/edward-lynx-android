@@ -54,7 +54,8 @@
       android:background="@color/unfinished_status"
       android:gravity="center"
       android:padding="2dp"
-      android:text="@string/open_status_bold"
+      android:text="@string/open_status"
+      android:textAllCaps="true"
       android:textColor="@color/white"
       android:textSize="10sp"/>
 

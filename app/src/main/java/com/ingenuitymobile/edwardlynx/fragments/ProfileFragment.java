@@ -47,7 +47,7 @@ public class ProfileFragment extends BaseFragment {
   public static ProfileFragment newInstance(Context ctx) {
     ProfileFragment fragment = new ProfileFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", ctx.getString(R.string.profile_bold));
+    bundle.putString("title", ctx.getString(R.string.drawer_profile).toUpperCase());
     fragment.setArguments(bundle);
     return fragment;
   }

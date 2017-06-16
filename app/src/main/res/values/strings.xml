@@ -17,7 +17,7 @@
   // region Login
   <string name="username">Username/Email</string>
   <string name="password">Password</string>
-  <string name="login">LOGIN</string>
+  <string name="login">Login</string>
   <string name="username_required">Username is required</string>
   <string name="password_required">Password is required</string>
   <string name="forgot_password">Forgot Password?</string>
@@ -30,28 +30,15 @@
   <string name="drawer_settings">Settings</string>
   <string name="drawer_logout">Logout</string>
 
-  <string name="dashboard_bold">DASHBOARD</string>
-  <string name="surveys_bold">SURVEYS</string>
-  <string name="invite_bold">INVITE</string>
-  <string name="change_password_bold">CHANGE PASSWORD</string>
-  <string name="development_plans_bold">DEVELOPMENT PLANS</string>
-  <string name="profile_bold">PROFILE</string>
-  <string name="survey_questions_bold">SURVEY QUESTIONS</string>
-  <string name="create_instant_feedback_bold">CREATE INSTANT FEEDBACK</string>
-  <string name="invite_people_bold">INVITE PEOPLE</string>
-  <string name="instant_feedback_requests_bold">INSTANT FEEDBACK REQUESTS</string>
-  <string name="results_bold">RESULTS</string>
-  <string name="goals_details_bold">GOALS DETAILS</string>
-  <string name="instant_feedback_bold">INSTANT FEEDBACK</string>
-  <string name="instant_feedback_answers_bold">FEEDBACK RESULT</string>
+  <string name="create_instant_feedback">Create Instant Feedback</string>
+  <string name="invite_people">Invite People</string>
+  <string name="instant_feedback_requests">Instant Feedback Requests</string>
+  <string name="results">Results</string>
+  <string name="goals_details">Goals Details</string>
+  <string name="instant_feedback">Instant Feedback</string>
+  <string name="instant_feedback_answers">Feedback Result</string>
   <string name="anonymous_feedback">Anonymous Feedback</string>
-  <string name="survey_report_bold">SURVEY RESULT</string>
-  <string name="share_report_bold">SHARE RESULT</string>
-  <string name="create_development_plan_bold">CREATE DEVELOPMENT PLAN</string>
-  <string name="details_bold">DETAILS</string>
-  <string name="development_plan_bold">DEVELOPMENT PLANS</string>
-  <string name="add_more_participants_bold">ADD MORE PARTICIPANTS</string>
-
+  <string name="create_development_plan">Create Development Plan</string>
 
   <string name="free_text_description">Text</string>
   <string name="optional">(optional)</string>
@@ -111,7 +98,7 @@
 
   // region Change password
   <string name="change_password">Change Password</string>
-  <string name="current_password">Current Password</string>asdas
+  <string name="current_password">Current Password</string>
   <string name="new_password">New Password</string>
   <string name="re_new_password">New Password (Again)</string>
   <string name="old_password_required">Old password can\'t be blank</string>
@@ -152,20 +139,16 @@
   <string name="due_date_error">Due date should be on or after today</string>
   <string name="no_categories_available">No Categories available</string>
 
-
-
   // region Development plan
-  <string name="all_bold">ALL</string>
-  <string name="in_progress_bold">IN PROGRESS</string>
-  <string name="completed_bold">COMPLETED</string>
-  <string name="expired_bold">EXPIRED</string>
+  <string name="all">All</string>
+  <string name="in_progress">In Progress</string>
   <string name="overall_progress">Overall Progress</string>
   <string name="goal_prgress">Goals Progress Bar</string>
 
   // region Development plan details
   <string name="completed_details">%1$d / %2$d Completed</string>
-  <string name="goals_details">%1$d of %2$d goals</string>
-  <string name="completed"> completed</string>
+  <string name="number_of_goals">%1$d of %2$d goals</string>
+  <string name="text_completed"> completed</string>
   <string name="completed_text">Completed</string>
 
   // region Invite to answer
@@ -206,17 +189,15 @@
   <string name="city">City</string>
 
   // Dashboard
-  <string name="status">STATUS</string>
-  <string name="shortcuts">SHORTCUTS</string>
   <string name="dev_plan_dashboard">Development\nPlan</string>
   <string name="instant_feedback_dashboard">Instant\nFeedback</string>
   <string name="lynx_measurement_dashboard">Lynx\nMeasurement</string>
-  <string name="answer_dashboard">ANSWER</string>
-  <string name="results_dashboard">RESULTS</string>
-  <string name="invite_dashboard">INVITE</string>
-  <string name="create_dashboard">CREATE</string>
+  <string name="answer_dashboard">Answer</string>
+  <string name="results_dashboard">Results</string>
+  <string name="invite_dashboard">Invite</string>
+  <string name="create_dashboard">Create</string>
   <string name="create_new_dashboard">Create New</string>
-  <string name="reminders_dashboard">REMINDERS</string>
+  <string name="reminders_dashboard">Reminders</string>
   <string name="no_reminders">No Reminders</string>
   <string name="see_more">See More</string>
   <string name="now">Now</string>
@@ -246,10 +227,10 @@
 
   // region survey
   <string name="contact_to_reactivate">Reactivate</string>
-  <string name="lynx_measurement">LYNX MEASUREMENT</string>
-  <string name="open_status_bold">OPEN</string>
-  <string name="unfinished_status_bold">UNFINISHED</string>
-  <string name="not_invited_status_bold">NOT INVITED</string>
+  <string name="lynx_measurement">Lynx Measurement</string>
+  <string name="open_status">Open</string>
+  <string name="unfinished_status">Unfinished</string>
+  <string name="not_invited_status">Not Invited</string>
   <string name="save_to_drafts">Save to Drafts</string>
 
   <string name="no_data_found">No data found</string>
@@ -298,8 +279,8 @@
   <string name="close">Close</string>
 
   // reminder
-  <string name="goal_bold">GOAL</string>
-  <string name="survey_bold">SURVEY</string>
+  <string name="goal">Goal</string>
+  <string name="survey">Survey</string>
 
   // Search
   <string name="search">Search</string>

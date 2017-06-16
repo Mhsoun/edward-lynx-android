@@ -80,8 +80,8 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
-
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    setTitle(getString(R.string.goals_details).toUpperCase());
 
     final String json = getIntent().getStringExtra("goal_param_body");
     param = !TextUtils.isEmpty(json) ?

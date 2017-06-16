@@ -61,7 +61,7 @@ public class DevelopmenPlansFragment extends BaseFragment {
   public static DevelopmenPlansFragment newInstance(Context ctx) {
     DevelopmenPlansFragment fragment = new DevelopmenPlansFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", ctx.getString(R.string.development_plans_bold));
+    bundle.putString("title", ctx.getString(R.string.drawer_development_plans).toUpperCase());
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -343,13 +343,13 @@ public class DevelopmenPlansFragment extends BaseFragment {
     public CharSequence getPageTitle(int position) {
       switch (position) {
       case ALL:
-        return getString(R.string.all_bold);
+        return getString(R.string.all).toUpperCase();
       case UNFINISHED:
-        return getString(R.string.in_progress_bold);
+        return getString(R.string.in_progress).toUpperCase();
       case COMPLETED:
-        return getString(R.string.completed_bold);
+        return getString(R.string.completed_text).toUpperCase();
       case EXPIRED:
-        return getString(R.string.expired_bold);
+        return getString(R.string.expired).toUpperCase();
       default:
         return "";
       }

@@ -37,11 +37,11 @@ public class Reminder extends Model {
 
   public String getType(Context ctx) {
     if (type.equals(Type.GOAL.toString())) {
-      return ctx.getResources().getString(R.string.goal_bold);
+      return ctx.getResources().getString(R.string.goal).toUpperCase();
     } else if (type.equals(Type.SURVEY.toString())) {
-      return ctx.getResources().getString(R.string.survey_bold);
+      return ctx.getResources().getString(R.string.survey).toUpperCase();
     } else {
-      return ctx.getResources().getString(R.string.instant_feedback_bold);
+      return ctx.getResources().getString(R.string.instant_feedback).toUpperCase();
     }
   }
 }

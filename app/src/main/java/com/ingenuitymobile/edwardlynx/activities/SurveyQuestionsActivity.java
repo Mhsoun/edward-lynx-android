@@ -77,7 +77,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
     initViews();
     getData();
-    setTitle(getString(R.string.answer_survey));
+    setTitle(getString(R.string.answer_survey).toUpperCase());
 
     NotificationManager notificationManager =
         (NotificationManager) getApplicationContext()

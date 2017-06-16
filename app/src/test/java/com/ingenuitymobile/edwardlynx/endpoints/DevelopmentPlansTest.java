@@ -28,19 +28,6 @@ public class DevelopmentPlansTest extends BaseTest {
     planParam.name = "Android Dev-plan Testing";
     planParam.goals = new ArrayList<>();
 
-    GoalParam goalParam = new GoalParam();
-    goalParam.title = "Android Dev-plan Testing 1";
-    goalParam.description = "Android Dev-plan Testing 1 description";
-    goalParam.actions = new ArrayList<>();
-    ActionParam actionParam = new ActionParam();
-    actionParam.title = "Action plan 1";
-    actionParam.position = 0;
-    goalParam.actions.add(actionParam);
-    actionParam = new ActionParam();
-    actionParam.title = "Action plan 2";
-    actionParam.position = 1;
-    goalParam.actions.add(actionParam);
-    planParam.goals.add(goalParam);
     client.service.postDevelopmentPlans(planParam)
         .first()
         .toBlocking()

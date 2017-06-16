@@ -46,8 +46,8 @@ public class ReportsActivity extends BaseActivity {
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
-
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    setTitle(getString(R.string.results).toUpperCase());
 
     initViews();
   }
@@ -186,11 +186,11 @@ public class ReportsActivity extends BaseActivity {
     public CharSequence getPageTitle(int position) {
       switch (position) {
       case ALL:
-        return getString(R.string.all_bold);
+        return getString(R.string.all).toUpperCase();
       case FEEDBACK:
-        return getString(R.string.instant_feedback_bold);
+        return getString(R.string.instant_feedback).toUpperCase();
       case LYNX:
-        return getString(R.string.lynx_measurement);
+        return getString(R.string.lynx_measurement).toUpperCase();
       default:
         return "";
       }

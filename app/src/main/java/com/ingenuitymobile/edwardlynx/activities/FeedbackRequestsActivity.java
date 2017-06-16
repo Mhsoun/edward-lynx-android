@@ -43,6 +43,7 @@ public class FeedbackRequestsActivity extends BaseActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     initViews();
+    setTitle(getString(R.string.instant_feedback_requests).toUpperCase());
   }
 
   @Override

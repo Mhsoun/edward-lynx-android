@@ -32,6 +32,7 @@ public class ShareReportActivity extends InviteBaseActivity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    setTitle(getString(R.string.share_report).toUpperCase());
 
     id = getIntent().getLongExtra("id", 0L);
 

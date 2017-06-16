@@ -84,7 +84,8 @@
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
             android:paddingTop="2dp"
-            android:text="@string/instant_feedback_bold"
+            android:text="@string/instant_feedback"
+            android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="10sp"/>
 

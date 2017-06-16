@@ -62,6 +62,8 @@ public class LoginActivity extends BaseActivity {
 
     usernameEdit.setText(SessionStore.restoreUsername(this));
     passwordEdit.setText(SessionStore.restorePassword(this));
+
+    loginText.setText(getString(R.string.login).toUpperCase());
   }
 
   public void login(View v) {
@@ -93,7 +95,7 @@ public class LoginActivity extends BaseActivity {
 
           @Override
           public void onError(Throwable e) {
-            loginText.setText(getString(R.string.login));
+            loginText.setText(getString(R.string.login).toUpperCase());
             if (e != null) {
               Response response = (Response) ((RetrofitError) e).getBody();
               if (response != null) {

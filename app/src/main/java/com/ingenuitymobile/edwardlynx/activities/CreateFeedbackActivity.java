@@ -100,6 +100,8 @@ public class CreateFeedbackActivity extends BaseActivity {
     initViews();
     setPreview();
     hideKeyboard();
+
+    setTitle(getString(R.string.create_instant_feedback).toUpperCase());
   }
 
   @Override

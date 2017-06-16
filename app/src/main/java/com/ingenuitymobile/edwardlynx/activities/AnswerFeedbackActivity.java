@@ -52,8 +52,8 @@ public class AnswerFeedbackActivity extends BaseActivity {
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
-
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    setTitle(getString(R.string.instant_feedback).toUpperCase());
 
     id = getIntent().getLongExtra("id", 0L);
 

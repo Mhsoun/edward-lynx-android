@@ -74,6 +74,8 @@ public class MainActivity extends BaseActivity implements
     checkForUpdates();
     autoUploadCrashes();
     enableNotificationAccess();
+
+    setTitle(getString(R.string.drawer_dashboard).toUpperCase());
   }
 
   @Override

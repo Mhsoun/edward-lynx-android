@@ -38,6 +38,7 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    setTitle(getString(R.string.add_more_participants).toUpperCase());
 
     initViews();
 

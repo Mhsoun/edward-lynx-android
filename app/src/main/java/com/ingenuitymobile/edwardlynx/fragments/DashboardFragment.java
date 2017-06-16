@@ -71,7 +71,7 @@ public class DashboardFragment extends BaseFragment {
   public static DashboardFragment newInstance(Context ctx, OnChangeFragmentListener listener) {
     DashboardFragment fragment = new DashboardFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", ctx.getString(R.string.dashboard_bold));
+    bundle.putString("title", ctx.getString(R.string.drawer_dashboard).toUpperCase());
     fragment.setArguments(bundle);
     fragment.listener = listener;
     return fragment;

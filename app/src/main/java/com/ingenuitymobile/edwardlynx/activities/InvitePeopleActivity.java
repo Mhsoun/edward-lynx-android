@@ -80,6 +80,7 @@ public class InvitePeopleActivity extends BaseActivity {
         getString(R.string.direct_report)
     };
     initViews();
+    setTitle(getString(R.string.invite_people).toUpperCase());
   }
 
   @Override

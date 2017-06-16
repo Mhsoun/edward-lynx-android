@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:text="@string/completed"
+            android:text="@string/text_completed"
             android:textColor="@color/white"/>
       </LinearLayout>
     </LinearLayout>
@@ -97,9 +97,9 @@
           android:layout_alignParentBottom="true"
           android:layout_alignParentRight="true"
           android:layout_margin="12dp"
-          android:onClick="addGoal"
           android:background="@drawable/bg_round_accent"
           android:elevation="2dp"
+          android:onClick="addGoal"
           android:padding="12dp"
           android:src="@drawable/ic_add_goal"
           android:tint="@android:color/transparent"/>

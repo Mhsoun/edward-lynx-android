@@ -39,7 +39,7 @@ public class ChangePasswordFragment extends BaseFragment {
   public static ChangePasswordFragment newInstance(Context ctx) {
     ChangePasswordFragment fragment = new ChangePasswordFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", ctx.getString(R.string.change_password_bold));
+    bundle.putString("title", ctx.getString(R.string.change_password).toUpperCase());
     fragment.setArguments(bundle);
     return fragment;
   }

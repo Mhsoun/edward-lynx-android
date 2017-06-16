@@ -47,6 +47,7 @@ public class InviteActivity extends InviteBaseActivity {
     getData();
 
     body = new Gson().fromJson(getIntent().getStringExtra("body"), InstantFeedbackBody.class);
+    setTitle(getString(R.string.invite_people).toUpperCase());
   }
 
   public void create(View v) {

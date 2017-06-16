@@ -66,102 +66,87 @@
         android:screenOrientation="portrait"/>
     <activity
         android:name=".activities.MainActivity"
-        android:label="@string/dashboard_bold"
+        android:label="@string/drawer_dashboard"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme.NoActionBar"/>
     <activity
         android:name=".activities.SurveyQuestionsActivity"
-        android:label="@string/survey_questions_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.CreateFeedbackActivity"
-        android:label="@string/create_instant_feedback_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.InviteActivity"
-        android:label="@string/invite_people_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.FeedbackRequestsActivity"
-        android:label="@string/instant_feedback_requests_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.ReportsActivity"
-        android:label="@string/results_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.AnswerFeedbackActivity"
-        android:label="@string/instant_feedback_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.InstantFeedbackReportActivity"
-        android:label="@string/instant_feedback_answers_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.SurveyReportActivity"
-        android:label="@string/survey_report_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.InstantFeedbackDetailedActivity"
-        android:label="@string/instant_feedback_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.ShareReportActivity"
-        android:label="@string/share_report_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.CreateDevelopmentPlanActivity"
-        android:label="@string/create_development_plan_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.CreateDetailedDevelopmentPlanActivity"
-        android:label="@string/goals_details_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.DevelopmentPlanDetailedActivity"
-        android:label="@string/development_plan_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.AddMoreParticipantsActivity"
-        android:label="@string/add_more_participants_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.InviteSurveyActivity"
-        android:label="@string/invite_bold"
+        android:label="@string/invite"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
     <activity
         android:name=".activities.InvitePeopleActivity"
-        android:label="@string/invite_people_bold"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">

@@ -113,7 +113,10 @@ public class AllReportsAdapter extends RecyclerView.Adapter<AllReportsAdapter.Vi
           }
         });
 
-        holder.reportType.setText(context.getResources().getString(R.string.instant_feedback_bold));
+        holder.reportType.setText(
+            context.getResources().getString(R.string.instant_feedback).toUpperCase()
+        );
+
         holder.reportType.setBackgroundColor(
             context.getResources().getColor(R.color.instant_feedback_color));
       }

@@ -62,7 +62,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
     final Context context = holder.itemView.getContext();
 
     holder.descriptionText.setText(
-        context.getResources().getString(R.string.instant_feedback_bold));
+        context.getResources().getString(R.string.instant_feedback).toUpperCase());
     holder.createdText.setText(
         context.getResources().getString(R.string.created_by, feedback.author.name));
 

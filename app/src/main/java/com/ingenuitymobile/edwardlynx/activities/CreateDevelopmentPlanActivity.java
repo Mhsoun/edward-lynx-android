@@ -59,6 +59,7 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    setTitle(getString(R.string.create_development_plan).toUpperCase());
 
     initViews();
   }

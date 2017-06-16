@@ -52,6 +52,7 @@ public class InviteSurveyActivity extends BaseActivity {
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
+    setTitle(getString(R.string.invite).toUpperCase());
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

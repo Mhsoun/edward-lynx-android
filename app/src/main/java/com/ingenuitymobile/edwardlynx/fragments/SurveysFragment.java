@@ -49,7 +49,7 @@ public class SurveysFragment extends BaseFragment {
   public static SurveysFragment newInstance(Context ctx) {
     SurveysFragment fragment = new SurveysFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", ctx.getString(R.string.surveys_bold));
+    bundle.putString("title", ctx.getString(R.string.drawer_settings).toUpperCase());
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -230,11 +230,11 @@ public class SurveysFragment extends BaseFragment {
     public CharSequence getPageTitle(int position) {
       switch (position) {
       case ALL:
-        return getString(R.string.all_bold);
+        return getString(R.string.all).toUpperCase();
       case FEEDBACK:
-        return getString(R.string.instant_feedback_bold);
+        return getString(R.string.instant_feedback).toUpperCase();
       case LYNX:
-        return getString(R.string.lynx_measurement);
+        return getString(R.string.lynx_measurement).toUpperCase();
       default:
         return "";
       }

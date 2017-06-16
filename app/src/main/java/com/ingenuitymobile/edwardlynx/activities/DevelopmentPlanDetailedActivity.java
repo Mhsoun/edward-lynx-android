@@ -129,7 +129,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     manager = new LinearLayoutManager(this);
     recyclerView.setLayoutManager(manager);
 
-    goalsText.setText(context.getString(R.string.goals_details, 0, 0));
+    goalsText.setText(context.getString(R.string.number_of_goals, 0, 0));
     percentageText.setText(0 + "%");
   }
 
@@ -233,7 +233,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
     progressFitChart.setValue(progress);
     percentageText.setText(((int) progress) + "%");
-    goalsText.setText(context.getString(R.string.goals_details, count, size));
+    goalsText.setText(context.getString(R.string.number_of_goals, count, size));
   }
 
   private void addAction(long goalId, Action param) {
