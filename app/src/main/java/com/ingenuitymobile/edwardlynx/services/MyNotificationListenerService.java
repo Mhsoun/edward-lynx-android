@@ -21,6 +21,12 @@ public class MyNotificationListenerService extends NotificationListenerService {
   public void onCreate() {
     super.onCreate();
     LogUtil.e("AAA MyNotificationListenerService onCreate");
+    int count = getNotificationCount();
+    if (count <= 0) {
+      BadgeUtils.clearBadge(this);
+    } else {
+      BadgeUtils.setBadge(this, count);
+    }
   }
 
   @Override
@@ -50,9 +56,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
     StatusBarNotification[] notifications = getActiveNotifications();
 
     int count = 0;
-    for (StatusBarNotification notification : notifications) {
-      if (notification.getPackageName().equals(getPackageName())) {
-        count++;
+    if (notifications.length != 0) {
+      for (StatusBarNotification notification : notifications) {
+        if (notification.getPackageName().equals(getPackageName())) {
+          count++;
+        }
       }
     }
     return count;
