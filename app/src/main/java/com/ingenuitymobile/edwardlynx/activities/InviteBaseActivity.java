@@ -245,7 +245,7 @@ public class InviteBaseActivity extends BaseActivity {
 
     final EditText emailEdit = new EditText(context);
     emailEdit.setLayoutParams(lp);
-    emailEdit.setHint(getString(R.string.email_address));
+    emailEdit.setHint(getString(R.string.email));
     emailEdit.setTextColor(getResources().getColor(R.color.black));
     emailEdit.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
     emailEdit.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -254,7 +254,7 @@ public class InviteBaseActivity extends BaseActivity {
     final AlertDialog alertDialog = new AlertDialog.Builder(this)
         .setTitle(getString(R.string.add_user))
         .setMessage(getString(R.string.enter_email))
-        .setPositiveButton(getString(R.string.add_email), null)
+        .setPositiveButton(getString(R.string.add_user), null)
         .setNegativeButton(getString(R.string.cancel), null)
         .setView(layout,
             ViewUtil.dpToPx(16, getResources()), 0, ViewUtil.dpToPx(16, getResources()), 0)

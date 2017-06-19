@@ -116,7 +116,6 @@
               android:layout_marginLeft="8dp"
               android:layout_toLeftOf="@id/text_add"
               android:background="@drawable/bg_rounded_input_field"
-              android:hint="@string/custom_scale_hit"
               android:imeOptions="actionDone"
               android:inputType="textPersonName"
               android:onClick="add"
@@ -253,7 +252,7 @@
             android:background="@color/text_input_field"
             android:gravity="top"
             android:inputType="textMultiLine"
-            android:text="@string/type_here_label"
+            android:text="@string/type_here"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:visibility="gone"/>

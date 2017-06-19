@@ -49,7 +49,7 @@ public class SurveysFragment extends BaseFragment {
   public static SurveysFragment newInstance(Context ctx) {
     SurveysFragment fragment = new SurveysFragment();
     Bundle bundle = new Bundle();
-    bundle.putString("title", ctx.getString(R.string.drawer_settings).toUpperCase());
+    bundle.putString("title", ctx.getString(R.string.drawer_surveys).toUpperCase());
     fragment.setArguments(bundle);
     return fragment;
   }

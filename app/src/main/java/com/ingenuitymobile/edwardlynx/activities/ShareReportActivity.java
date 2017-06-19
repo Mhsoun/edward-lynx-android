@@ -43,7 +43,7 @@ public class ShareReportActivity extends InviteBaseActivity {
 
   public void share(View v) {
     if (ids.isEmpty()) {
-      Toast.makeText(ShareReportActivity.this, getString(R.string.please_select_one),
+      Toast.makeText(ShareReportActivity.this, getString(R.string.select_atleast_one),
           Toast.LENGTH_SHORT).show();
     } else {
       List<Long> recipients = new ArrayList<>();

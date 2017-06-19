@@ -215,7 +215,6 @@ public class SurveyReportActivity extends BaseActivity {
     if (response.rate != null) {
       if (response.rate.highest != null) {
         if (response.rate.highest.managers != null && !response.rate.highest.managers.isEmpty()) {
-          LogUtil.e("AAA " + response.rate.highest.managers.isEmpty());
           highestManagerFragment = new QuestionRateFragment();
           highestManagerFragment.setDataSet(
               response.rate.highest.managers,

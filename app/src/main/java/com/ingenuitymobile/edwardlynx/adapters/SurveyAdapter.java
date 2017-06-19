@@ -138,8 +138,9 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
           context.getResources().getDrawable(R.drawable.bg_normal_calendar_text));
       break;
     case Survey.COMPLETED:
-      holder.statusText.setText(context.getResources().getString(R.string.text_completed)
-          .toUpperCase()
+      holder.statusText.setText(
+          context.getResources().getString(R.string.completed_text)
+              .toUpperCase()
       );
       holder.statusText.setBackgroundColor(
           context.getResources().getColor(R.color.done_color));

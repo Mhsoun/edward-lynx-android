@@ -56,6 +56,7 @@ public class DashboardFragment extends BaseFragment {
   private TextView seeMoreText;
 
   private TextView emptyReminderText;
+  private TextView emptyDevPlanText;
 
   private OnChangeFragmentListener listener;
 
@@ -147,6 +148,8 @@ public class DashboardFragment extends BaseFragment {
     reminderList.setNestedScrollingEnabled(false);
     reminderList.setLayoutManager(new LinearLayoutManager(getActivity()));
     emptyReminderText = (TextView) mainView.findViewById(R.id.text_empty_reminders);
+    emptyDevPlanText = (TextView) mainView.findViewById(R.id.text_empty_dev_plan);
+
 
     reminderAdapter = new ReminderAdapter(reminders, listener);
     reminderList.setAdapter(reminderAdapter);
@@ -189,6 +192,8 @@ public class DashboardFragment extends BaseFragment {
             } else {
               devPlanData.addAll(response.developmentPlans);
             }
+
+            emptyDevPlanText.setVisibility(devPlanData.isEmpty() ? View.VISIBLE : View.GONE);
 
             reminders.clear();
             reminders.addAll(response.reminders);

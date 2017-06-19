@@ -70,6 +70,7 @@ public class FeedbackReportsFragment extends BaseFragment {
   private void initViews() {
     final RecyclerView feedbackList = (RecyclerView) mainView.findViewById(R.id.list_reports);
     emptyText = (TextView) mainView.findViewById(R.id.text_empty_state);
+    emptyText.setText(getString(R.string.no_results));
     refreshLayout = (SwipeRefreshLayout) mainView.findViewById(R.id.swipe_refresh_layout);
 
     final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),

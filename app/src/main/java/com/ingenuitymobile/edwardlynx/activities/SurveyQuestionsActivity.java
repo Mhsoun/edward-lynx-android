@@ -221,7 +221,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
               dialogFragment.show(getSupportFragmentManager(), "Popup");
             } else {
               Toast.makeText(SurveyQuestionsActivity.this,
-                  getString(R.string.survey_answers_submitted), Toast.LENGTH_SHORT).show();
+                  getString(R.string.saved_to_drafts), Toast.LENGTH_SHORT).show();
               finish();
             }
           }

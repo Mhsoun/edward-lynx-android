@@ -199,7 +199,7 @@ public class InvitePeopleActivity extends BaseActivity {
               LogUtil.e("AAA onNext");
               Toast.makeText(
                   context,
-                  getString(R.string.instant_feedback_created),
+                  getString(R.string.successfully_invite_people_to_rate_you),
                   Toast.LENGTH_SHORT
               ).show();
             }

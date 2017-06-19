@@ -269,7 +269,7 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     }
 
     if (param.actions.isEmpty()) {
-      Toast.makeText(context, getString(R.string.goal_action_added), Toast.LENGTH_SHORT)
+      Toast.makeText(context, getString(R.string.no_actions_added), Toast.LENGTH_SHORT)
           .show();
       return;
     }

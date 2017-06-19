@@ -251,13 +251,26 @@
             android:textColor="@color/colorAccent"/>
       </RelativeLayout>
 
-      <android.support.v7.widget.RecyclerView
-          android:id="@+id/recycler_dev_plans"
+      <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginBottom="8dp"
           android:layout_marginTop="8dp">
-      </android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_dev_plans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/text_empty_dev_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/no_development_plans"
+            android:textColor="@color/white"/>
+      </RelativeLayout>
     </LinearLayout>
   </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

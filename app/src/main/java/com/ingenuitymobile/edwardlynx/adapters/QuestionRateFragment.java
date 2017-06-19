@@ -78,8 +78,6 @@ public class QuestionRateFragment extends BaseFragment {
     ((TextView) mainView.findViewById(R.id.text_title)).setText(title);
     mainView.findViewById(R.id.text_details).setVisibility(View.GONE);
     adapter.notifyDataSetChanged();
-    ((TextView) mainView.findViewById(R.id.text_empty))
-        .setText(getString(R.string.no_rated_questions));
     mainView.findViewById(R.id.text_empty).setVisibility(
         questionRates.isEmpty() ? View.VISIBLE : View.GONE);
   }

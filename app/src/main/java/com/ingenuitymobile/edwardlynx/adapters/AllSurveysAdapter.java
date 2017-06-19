@@ -193,7 +193,7 @@ public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         break;
       case Survey.COMPLETED:
         holder.statusText.setText(
-            context.getResources().getString(R.string.text_completed)
+            context.getResources().getString(R.string.completed_text)
                 .toUpperCase()
         );
         holder.statusText.setBackgroundColor(

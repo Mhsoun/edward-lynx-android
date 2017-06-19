@@ -74,7 +74,6 @@ public class CreateFeedbackActivity extends BaseActivity {
   private EditText       freeTextEdit;
 
   public CreateFeedbackActivity() {
-    type = -1;
     options = new ArrayList<>();
   }
 
@@ -187,9 +186,6 @@ public class CreateFeedbackActivity extends BaseActivity {
 
     if (TextUtils.isEmpty(question)) {
       Toast.makeText(CreateFeedbackActivity.this, getString(R.string.question_required_label),
-          Toast.LENGTH_SHORT).show();
-    } else if (type == -1) {
-      Toast.makeText(CreateFeedbackActivity.this, getString(R.string.answer_required_label),
           Toast.LENGTH_SHORT).show();
     } else {
       Intent intent = new Intent(this, InviteActivity.class);
@@ -341,8 +337,6 @@ public class CreateFeedbackActivity extends BaseActivity {
         final String string = addOptionEdit.getText().toString();
         if (!TextUtils.isEmpty(string)) {
           if (options.contains(string)) {
-            Toast.makeText(CreateFeedbackActivity.this, getString(R.string.existing_option),
-                Toast.LENGTH_SHORT).show();
             return true;
           }
 
