@@ -42,9 +42,6 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
 
     initViews();
 
-    final TextView textView = (TextView) findViewById(R.id.text_button_bottom);
-    textView.setText(getString(R.string.add_participants_button));
-
     id = getIntent().getLongExtra("id", 0L);
     LogUtil.e("AAA " + id);
   }
@@ -122,7 +119,7 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
             public void onNext(Response response) {
               LogUtil.e("AAA onNext");
               progressDialog.dismiss();
-              Toast.makeText(context, getString(R.string.added_more_particpants),
+              Toast.makeText(context, getString(R.string.instant_feedback_created),
                   Toast.LENGTH_SHORT).show();
             }
           }));
