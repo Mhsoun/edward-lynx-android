@@ -289,7 +289,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
           @Override
           public void onNext(Response response) {
-            if (!isComplete) {
+            if (isComplete) {
               Toast.makeText(context,
                   getString(R.string.action_updated), Toast.LENGTH_SHORT)
                   .show();
