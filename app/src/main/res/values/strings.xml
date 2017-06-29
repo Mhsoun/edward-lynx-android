@@ -52,6 +52,8 @@
   <string name="due_in">Due in</string>
   <string name="days">%1$d Days</string>
   <string name="day">%1$d Day</string>
+  <string name="hours">%1$d Hours</string>
+  <string name="hour">%1$d Hour</string>
   <string name="now">Now</string>
   <string name="no_reminders">No Reminders</string>
   // engregion

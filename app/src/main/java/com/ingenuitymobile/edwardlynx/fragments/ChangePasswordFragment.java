@@ -84,6 +84,7 @@ public class ChangePasswordFragment extends BaseFragment {
         return;
       }
 
+
       if (TextUtils.isEmpty(rePassword) || !newPassword.equals(rePassword)) {
         rePasswordEdit.setError(getString(R.string.password_not_match));
         rePasswordEdit.requestFocus();
@@ -119,6 +120,12 @@ public class ChangePasswordFragment extends BaseFragment {
                   oldPasswordEdit.setError(response.errors.currentPassword.get(0));
                   oldPasswordEdit.requestFocus();
                 }
+
+                if (!response.errors.password.isEmpty()) {
+                  newPasswordEdit.setError(response.errors.password.get(0));
+                  newPasswordEdit.requestFocus();
+                }
+
               } else if (!TextUtils.isEmpty(response.message)) {
                 ViewUtil.showAlert(getActivity(), getString(R.string.error),
                     response.message);

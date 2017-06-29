@@ -39,19 +39,6 @@
         android:textStyle="bold"/>
   </LinearLayout>
 
-  <TextView
-      android:id="@+id/text_now"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignLeft="@id/space"
-      android:layout_centerVertical="true"
-      android:text="@string/now"
-      android:textColor="@color/colorAccent"
-      android:textSize="16sp"
-      android:textStyle="bold"
-      android:visibility="gone"/>
-
-
   <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

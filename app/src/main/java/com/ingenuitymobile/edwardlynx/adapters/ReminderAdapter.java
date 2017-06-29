@@ -18,6 +18,7 @@ import com.ingenuitymobile.edwardlynx.activities.MainActivity;
 import com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity;
 import com.ingenuitymobile.edwardlynx.api.models.Reminder;
 import com.ingenuitymobile.edwardlynx.utils.DateUtil;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -41,7 +42,6 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
     RelativeLayout bodyLayout;
     TextView       typeText;
     TextView       descriptionText;
-    TextView       nowText;
     LinearLayout   dueDateLayout;
     TextView       dueDateText;
 
@@ -50,7 +50,6 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
       bodyLayout = (RelativeLayout) itemView.findViewById(R.id.layout_body);
       typeText = (TextView) itemView.findViewById(R.id.text_type);
       descriptionText = (TextView) itemView.findViewById(R.id.text_description);
-      nowText = (TextView) itemView.findViewById(R.id.text_now);
       dueDateText = (TextView) itemView.findViewById(R.id.text_due_date);
       dueDateLayout = (LinearLayout) itemView.findViewById(R.id.layout_due_date);
     }
@@ -87,7 +86,6 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
 
     try {
       holder.dueDateLayout.setVisibility(View.GONE);
-      holder.nowText.setVisibility(View.GONE);
 
       if (!TextUtils.isEmpty(reminder.due)) {
         Date date = DateUtil.getAPIFormat().parse(reminder.due);
@@ -98,14 +96,23 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         long hours = minutes / 60;
         long days = hours / 24;
         if (days <= 0) {
-          holder.nowText.setVisibility(View.VISIBLE);
+          if (hours <= 0) {
+            holder.dueDateLayout.setVisibility(View.VISIBLE);
+            holder.dueDateText.setText(
+                context
+                    .getResources()
+                    .getString(hours == 1 ? R.string.hour : R.string.hours, hours)
+            );
+          }
         } else {
           holder.dueDateLayout.setVisibility(View.VISIBLE);
           holder.dueDateText.setText(
               context.getResources().getString(days == 1 ? R.string.day : R.string.days, days));
         }
       }
-    } catch (Exception e) {}
+    } catch (Exception e) {
+      LogUtil.e("AAA " + e);
+    }
 
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override

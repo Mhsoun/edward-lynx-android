@@ -14,6 +14,9 @@ public class ValidationErrors {
   @SerializedName("currentPassword")
   public List<String> currentPassword;
 
+  @SerializedName("password")
+  public List<String> password;
+
   public ValidationErrors() {
     currentPassword = new ArrayList<>();
   }
