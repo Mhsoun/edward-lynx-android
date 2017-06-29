@@ -95,7 +95,6 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         long minutes = seconds / 60;
         long hours = minutes / 60;
         long days = hours / 24;
-        LogUtil.e("AAA days= " + days + " hours= " + hours);
         if (days <= 0) {
           if (hours > 0) {
             holder.dueDateLayout.setVisibility(View.VISIBLE);
