@@ -83,8 +83,6 @@
           android:background="@drawable/bg_rounded_input_field"
           android:enabled="false"
           android:gravity="top"
-          android:imeOptions="actionDone"
-          android:inputType="textPersonName"
           android:padding="4dp"
           android:textColor="@color/common_text_color"
           android:textSize="20sp"/>

@@ -274,7 +274,7 @@ public class MainActivity extends BaseActivity implements
           intent = new Intent(context, SurveyQuestionsActivity.class);
         }
         if (intent != null) {
-          intent.putExtra("id", Long.parseLong(bundle.getString("id")));
+          intent.putExtra("id", Long.parseLong(String.valueOf(bundle.get("id"))));
           startActivity(intent);
         }
       }

@@ -68,6 +68,10 @@ public class MyGcmListenerService extends FirebaseMessagingService {
         intent = new Intent(this, SplashActivity.class);
       }
 
+      if (!isActive) {
+        intent = new Intent(this, SplashActivity.class);
+      }
+
       intent.putExtras(bundle);
       intent.putExtra("id", Long.parseLong(id));
 

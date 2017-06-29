@@ -2,7 +2,9 @@ package com.ingenuitymobile.edwardlynx.services;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
+import android.os.IBinder;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 
@@ -56,7 +58,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
     StatusBarNotification[] notifications = getActiveNotifications();
 
     int count = 0;
-    if (notifications.length != 0) {
+    if (notifications != null && notifications.length != 0) {
       for (StatusBarNotification notification : notifications) {
         if (notification.getPackageName().equals(getPackageName())) {
           count++;
