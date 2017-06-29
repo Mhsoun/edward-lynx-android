@@ -169,7 +169,9 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
         calendar.setTime(DateUtil.getAPIFormat().parse(param.dueDate));
       }
     } catch (Exception e) {LogUtil.e("AAA ", e);}
-    calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
+    if (calendar.get(Calendar.HOUR_OF_DAY) > 10) {
+      calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
+    }
 
     datePicker.setStepMinutes(15);
     datePicker.selectDate(calendar);
