@@ -166,6 +166,7 @@ public class CreateFeedbackActivity extends BaseActivity {
     isNA.setOnCheckedChangeListener(onCheckedChangeListener);
 
     final RecyclerView optionList = (RecyclerView) findViewById(R.id.list_options);
+    optionList.setNestedScrollingEnabled(false);
     optionList.setHasFixedSize(true);
     optionList.setLayoutManager(new LinearLayoutManager(this));
 
