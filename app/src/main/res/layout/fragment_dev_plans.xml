@@ -24,8 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/searchview"
+        app:tabGravity="fill"
         app:tabIndicatorHeight="0dp"
-        app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/survey_selected"
         app:tabTextColor="@color/text_input_field"/>
   </RelativeLayout>

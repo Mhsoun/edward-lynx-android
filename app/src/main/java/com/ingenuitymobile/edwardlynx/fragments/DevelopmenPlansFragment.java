@@ -47,12 +47,10 @@ public class DevelopmenPlansFragment extends BaseFragment {
   private DevelopmentPlanListFragment allFragment;
   private DevelopmentPlanListFragment unfinishedFragment;
   private DevelopmentPlanListFragment completedFragment;
-  private DevelopmentPlanListFragment expiredFragment;
 
   private ArrayList<DevelopmentPlan> data;
   private ArrayList<DevelopmentPlan> unfinishedData;
   private ArrayList<DevelopmentPlan> completedData;
-  private ArrayList<DevelopmentPlan> expiredData;
 
   private SearchView searchView;
 
@@ -70,7 +68,6 @@ public class DevelopmenPlansFragment extends BaseFragment {
     data = new ArrayList<>();
     unfinishedData = new ArrayList<>();
     completedData = new ArrayList<>();
-    expiredData = new ArrayList<>();
   }
 
   @Override
@@ -138,7 +135,6 @@ public class DevelopmenPlansFragment extends BaseFragment {
             data.clear();
             unfinishedData.clear();
             completedData.clear();
-            expiredData.clear();
             data.addAll(response.items);
 
             for (DevelopmentPlan plan : data) {
@@ -200,12 +196,6 @@ public class DevelopmenPlansFragment extends BaseFragment {
       }
       completedFragment.setData(completedData);
       break;
-    case EXPIRED:
-      if (expiredFragment == null) {
-        expiredFragment = new DevelopmentPlanListFragment();
-      }
-      expiredFragment.setData(expiredData);
-      break;
     }
   }
 
@@ -245,11 +235,6 @@ public class DevelopmenPlansFragment extends BaseFragment {
         completedFragment = new DevelopmentPlanListFragment();
       }
       completedFragment.setQueryString(newText);
-
-      if (expiredFragment == null) {
-        expiredFragment = new DevelopmentPlanListFragment();
-      }
-      expiredFragment.setQueryString(newText);
       return false;
     }
   };
@@ -293,7 +278,7 @@ public class DevelopmenPlansFragment extends BaseFragment {
       };
 
   private class MyPagerAdapter extends FragmentPagerAdapter {
-    private int NUM_ITEMS = 4;
+    private int NUM_ITEMS = 3;
 
     MyPagerAdapter(FragmentManager fragmentManager) {
       super(fragmentManager);
@@ -327,12 +312,6 @@ public class DevelopmenPlansFragment extends BaseFragment {
         }
         completedFragment.setData(completedData);
         return completedFragment;
-      case EXPIRED:
-        if (expiredFragment == null) {
-          expiredFragment = new DevelopmentPlanListFragment();
-        }
-        expiredFragment.setData(expiredData);
-        return expiredFragment;
       default:
         return null;
       }
