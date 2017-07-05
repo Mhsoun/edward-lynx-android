@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+
+      <com.ingenuitymobile.edwardlynx.views.fitchart.FitChart
+          android:id="@+id/fitchart_progress"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          app:animationMode="overdraw"
+          app:backStrokeColor="@color/colorPrimaryDark"
+          app:strokeSize="12dp"
+          app:valueStrokeColor="@color/colorAccent"/>
+
+      <TextView
+          android:id="@+id/text_percentage"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:textColor="@color/white"
+          android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:text="@string/overall_progress"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"/>
+  </LinearLayout>
+</RelativeLayout>

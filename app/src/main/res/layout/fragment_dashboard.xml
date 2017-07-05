@@ -17,15 +17,15 @@
 
       <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="110dp"
+          android:layout_height="92dp"
           android:orientation="horizontal"
-          android:weightSum="3">
+          android:weightSum="4">
 
         <RelativeLayout
             android:id="@+id/layout_dev_plan"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="6dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="1"
             android:background="@drawable/bg_round_dev_plan_dashboard">
 
@@ -36,8 +36,8 @@
               android:orientation="vertical">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_bar_chart"
                 android:tint="@color/white"/>
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"
                 android:text="@string/dev_plan_dashboard"
                 android:textColor="@color/white"
@@ -59,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="3dp"
             android:layout_weight="1"
             android:background="@drawable/bg_round_feedback">
 
@@ -70,8 +70,8 @@
               android:orientation="vertical">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_paper_plane"
                 android:tint="@color/white"/>
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"
                 android:text="@string/instant_feedback_dashboard"
                 android:textColor="@color/white"
@@ -92,7 +92,8 @@
             android:id="@+id/layout_lynx_measurement"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="2dp"
             android:layout_weight="1"
             android:background="@drawable/bg_round_lynx">
 
@@ -103,8 +104,8 @@
               android:orientation="vertical">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_pencil_square_o"
                 android:tint="@color/white"/>
@@ -116,6 +117,39 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"
                 android:text="@string/lynx_measurement_dashboard"
+                android:textColor="@color/white"
+                android:textSize="12sp"/>
+          </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_team"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_round_lynx">
+
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerInParent="true"
+              android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_pencil_square_o"
+                android:tint="@color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:gravity="center_horizontal"
+                android:text="@string/team"
                 android:textColor="@color/white"
                 android:textSize="12sp"/>
           </LinearLayout>

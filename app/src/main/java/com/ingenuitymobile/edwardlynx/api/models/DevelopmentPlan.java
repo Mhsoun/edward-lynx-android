@@ -20,6 +20,10 @@ public class DevelopmentPlan extends Response {
   public String     createdAt;
   @SerializedName("updatedAt")
   public String     updatedAt;
+  @SerializedName("checked")
+  public int        checked;
+  @SerializedName("shared")
+  public int        shared;
   @SerializedName("goals")
   public List<Goal> goals;
 

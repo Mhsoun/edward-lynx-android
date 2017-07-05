@@ -69,6 +69,20 @@ public class Goal extends Model implements ParentListItem {
         .create().toJson(this);
   }
 
+  public boolean isCompleted() {
+    int actionCount = 0;
+    int actionSize = 0;
+    if (actions != null && !actions.isEmpty()) {
+      actionSize = actions.size();
+      for (Action action : actions) {
+        if (action.checked == 1) {
+          actionCount++;
+        }
+      }
+    }
+    return actionCount != 0 && actionCount == actionSize;
+  }
+
   public static class GoalSerializer implements JsonSerializer<Goal> {
 
     @Override

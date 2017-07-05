@@ -23,6 +23,7 @@ import com.ingenuitymobile.edwardlynx.activities.InviteSurveyActivity;
 import com.ingenuitymobile.edwardlynx.activities.MainActivity.ChangeFragment;
 import com.ingenuitymobile.edwardlynx.activities.MainActivity.OnChangeFragmentListener;
 import com.ingenuitymobile.edwardlynx.activities.ReportsActivity;
+import com.ingenuitymobile.edwardlynx.activities.TeamActivity;
 import com.ingenuitymobile.edwardlynx.adapters.DevelopmentPlanAdapter;
 import com.ingenuitymobile.edwardlynx.adapters.ReminderAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
@@ -47,6 +48,7 @@ public class DashboardFragment extends BaseFragment {
   private RelativeLayout devPlanLayout;
   private RelativeLayout instantFeedbackLayout;
   private RelativeLayout lynxLayout;
+  private RelativeLayout teamLayout;
 
   private RelativeLayout answerLayout;
   private TextView       resultsText;
@@ -115,6 +117,7 @@ public class DashboardFragment extends BaseFragment {
     devPlanLayout = (RelativeLayout) mainView.findViewById(R.id.layout_dev_plan);
     instantFeedbackLayout = (RelativeLayout) mainView.findViewById(R.id.layout_instant_feedback);
     lynxLayout = (RelativeLayout) mainView.findViewById(R.id.layout_lynx_measurement);
+    teamLayout = (RelativeLayout) mainView.findViewById(R.id.layout_team);
 
     answerLayout = (RelativeLayout) mainView.findViewById(R.id.layout_answer);
     resultsText = (TextView) mainView.findViewById(R.id.text_results);
@@ -126,6 +129,7 @@ public class DashboardFragment extends BaseFragment {
     devPlanLayout.setOnClickListener(onClickListener);
     instantFeedbackLayout.setOnClickListener(onClickListener);
     lynxLayout.setOnClickListener(onClickListener);
+    teamLayout.setOnClickListener(onClickListener);
 
     answerLayout.setOnClickListener(onClickListener);
     resultsText.setOnClickListener(onClickListener);
@@ -221,6 +225,9 @@ public class DashboardFragment extends BaseFragment {
         break;
       case R.id.layout_lynx_measurement:
         listener.onChange(ChangeFragment.SURVEYS_LYNX);
+        break;
+      case R.id.layout_team:
+        startActivity(new Intent(getActivity(), TeamActivity.class));
         break;
       case R.id.layout_answer:
         startActivity(new Intent(getActivity(), FeedbackRequestsActivity.class));

@@ -310,4 +310,9 @@
   <string name="strong_agreement_scale">Strong Agreement scale</string>
   <string name="reverse_agreement_scale">Reverse Agreement scale</string>
   <string name="numeric_1_to_10_explanation">Numeric 1&#8211;10 scale with explanation</string>
+
+  // region manager View
+  <string name="team">Team</string>
+  <string name="individual">Individual</string>
+  <string name="share_to_manager">Share to Manager</string>
 </resources>
