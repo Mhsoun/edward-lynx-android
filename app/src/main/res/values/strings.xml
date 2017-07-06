@@ -315,4 +315,6 @@
   <string name="team">Team</string>
   <string name="individual">Individual</string>
   <string name="share_to_manager">Share to Manager</string>
+  <string name="not_shared_to_manager">Development Plan no longer shared to manager</string>
+  <string name="shared_to_manager">Successfully shared Development Plan to manager</string>
 </resources>

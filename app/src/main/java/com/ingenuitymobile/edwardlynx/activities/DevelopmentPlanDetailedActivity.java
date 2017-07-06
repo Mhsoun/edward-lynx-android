@@ -16,6 +16,8 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,6 +28,7 @@ import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.GoalAdapter;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.DevPlanBody;
 import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
@@ -48,6 +51,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
   private long              id;
   private long              goalId;
+  private boolean           isFromTeam;
   private ArrayList<String> expandedIds;
 
   private RecyclerView        recyclerView;
@@ -62,6 +66,9 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
   private PopupMenu popupGoal;
   private PopupMenu popupAction;
+
+  private LinearLayout shareToManagerLayout;
+  private CheckBox     shareToManagerCheckbox;
 
   public DevelopmentPlanDetailedActivity() {
     data = new ArrayList<>();
@@ -82,6 +89,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     id = getIntent().getLongExtra("id", 0L);
+    isFromTeam = getIntent().getBooleanExtra("isFromTeam", false);
     LogUtil.e("AAA id" + id);
     initViews();
 
@@ -122,6 +130,8 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     percentageText = (TextView) findViewById(R.id.text_percentage);
     progressFitChart = (FitChart) findViewById(R.id.fitchart_progress);
     goalsText = (TextView) findViewById(R.id.text_goals);
+    shareToManagerLayout = (LinearLayout) findViewById(R.id.layout_share_to_manager);
+    shareToManagerCheckbox = (CheckBox) findViewById(R.id.checkbox_is_anonymous);
 
     progressFitChart.setMinValue(0f);
     progressFitChart.setMaxValue(100f);
@@ -131,6 +141,10 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
 
     goalsText.setText(context.getString(R.string.number_of_goals, 0, 0));
     percentageText.setText(0 + "%");
+
+    shareToManagerLayout.setVisibility(isFromTeam ? View.GONE : View.VISIBLE);
+
+    findViewById(R.id.image_add).setVisibility(isFromTeam ? View.GONE : View.VISIBLE);
   }
 
   private List<ParentListItem> generateCategories(List<Goal> goals) {
@@ -192,7 +206,7 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         data.clear();
         data.addAll(developmentPlan.goals);
         recyclerView.setAdapter(null);
-        adapter = new GoalAdapter(generateCategories(new ArrayList<>(data)), listener);
+        adapter = new GoalAdapter(generateCategories(new ArrayList<>(data)), listener, isFromTeam);
         adapter.setExpandCollapseListener(collapseListener);
         recyclerView.setAdapter(adapter);
         setData(developmentPlan);
@@ -234,6 +248,9 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     progressFitChart.setValue(progress);
     percentageText.setText(((int) progress) + "%");
     goalsText.setText(context.getString(R.string.number_of_goals, count, size));
+    shareToManagerCheckbox.setChecked(plan.shared == 1);
+    shareToManagerCheckbox.setOnCheckedChangeListener(
+        shareToManagerCheckbox.getVisibility() == View.VISIBLE ? onCheckedChangeListener : null);
   }
 
   private void addAction(long goalId, Action param) {
@@ -458,6 +475,51 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     alertBuilder.create().show();
   }
 
+  public void addGoal(View v) {
+    Intent intent = new Intent(context, CreateDetailedDevelopmentPlanActivity.class);
+    intent.putExtra("planId", id);
+    intent.putExtra("position", (data.size() + 1));
+    startActivity(intent);
+  }
+
+  private CompoundButton.OnCheckedChangeListener onCheckedChangeListener =
+      new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+          dialog = ProgressDialog.show(context, "", getString(R.string.loading));
+
+          DevPlanBody body = new DevPlanBody();
+          body.shared = isChecked ? 1 : 0;
+
+          subscription.add(Shared.apiClient.updateDevelopmentPlan(id, body,
+              new Subscriber<DevelopmentPlan>() {
+                @Override
+                public void onCompleted() {
+                  LogUtil.e("AAA onCompleted getData");
+                  if (dialog != null) {
+                    dialog.dismiss();
+                  }
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                  LogUtil.e("AAA onError getData " + e);
+                  if (dialog != null) {
+                    dialog.dismiss();
+                  }
+                }
+
+                @Override
+                public void onNext(DevelopmentPlan developmentPlan) {
+                  Toast.makeText(context,
+                      getString(isChecked ?
+                          R.string.shared_to_manager : R.string.not_shared_to_manager),
+                      Toast.LENGTH_SHORT)
+                      .show();
+                }
+              }));
+        }
+      };
 
   private ExpandableRecyclerAdapter.ExpandCollapseListener collapseListener =
       new ExpandableRecyclerAdapter.ExpandCollapseListener() {
@@ -591,11 +653,4 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
           alertDialog.show();
         }
       };
-
-  public void addGoal(View v) {
-    Intent intent = new Intent(context, CreateDetailedDevelopmentPlanActivity.class);
-    intent.putExtra("planId", id);
-    intent.putExtra("position", (data.size() + 1));
-    startActivity(intent);
-  }
 }

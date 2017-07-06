@@ -54,13 +54,17 @@ public class DevelopmenPlansFragment extends BaseFragment {
 
   private SearchView searchView;
 
-  private int position;
+  private int     position;
+  private boolean isFromTeam;
+  private long    id;
 
-  public static DevelopmenPlansFragment newInstance(Context ctx) {
+  public static DevelopmenPlansFragment newInstance(Context ctx, boolean isFromTeam, long id) {
     DevelopmenPlansFragment fragment = new DevelopmenPlansFragment();
     Bundle bundle = new Bundle();
     bundle.putString("title", ctx.getString(R.string.drawer_development_plans).toUpperCase());
     fragment.setArguments(bundle);
+    fragment.isFromTeam = isFromTeam;
+    fragment.id = id;
     return fragment;
   }
 
@@ -107,15 +111,58 @@ public class DevelopmenPlansFragment extends BaseFragment {
     refreshLayout.setRefreshing(true);
 
     final ImageView imageView = (ImageView) mainView.findViewById(R.id.image_create_dev_plan);
+    imageView.setVisibility(isFromTeam ? View.GONE : View.VISIBLE);
     imageView.setOnClickListener(onClickListener);
 
     viewPager.setCurrentItem(position);
+
+    if (allFragment == null) {
+      allFragment = new DevelopmentPlanListFragment();
+      allFragment.isFromTeam = isFromTeam;
+    }
+
+    if (unfinishedFragment == null) {
+      unfinishedFragment = new DevelopmentPlanListFragment();
+      unfinishedFragment.isFromTeam = isFromTeam;
+    }
+
+    if (completedFragment == null) {
+      completedFragment = new DevelopmentPlanListFragment();
+      completedFragment.isFromTeam = isFromTeam;
+    }
   }
 
   private void getData() {
     LogUtil.e("AAA getData Development plans");
-    subscription.add(
-        Shared.apiClient.getDevelopmentPlans(new Subscriber<DevelopmentPlansResponse>() {
+    if (isFromTeam) {
+      getUserDevPlan();
+    } else {
+      subscription.add(
+          Shared.apiClient.getDevelopmentPlans(new Subscriber<DevelopmentPlansResponse>() {
+            @Override
+            public void onCompleted() {
+              LogUtil.e("AAA onCompleted ");
+              refreshLayout.setRefreshing(false);
+              setSelection();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+              LogUtil.e("AAA onError " + e);
+              refreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void onNext(final DevelopmentPlansResponse response) {
+              setResponse(response);
+            }
+          }));
+    }
+  }
+
+  private void getUserDevPlan() {
+    subscription.add(Shared.apiClient.getUserDevelopmentPlans(id,
+        new Subscriber<DevelopmentPlansResponse>() {
           @Override
           public void onCompleted() {
             LogUtil.e("AAA onCompleted ");
@@ -130,59 +177,54 @@ public class DevelopmenPlansFragment extends BaseFragment {
           }
 
           @Override
-          public void onNext(final DevelopmentPlansResponse response) {
-            LogUtil.e("AAA onNext ");
-            data.clear();
-            unfinishedData.clear();
-            completedData.clear();
-            data.addAll(response.items);
+          public void onNext(DevelopmentPlansResponse response) {
+            setResponse(response);
+          }
+        }));
+  }
 
-            for (DevelopmentPlan plan : data) {
-              final int size = plan.goals.size();
-              int count = 0;
-              if (plan.goals != null) {
-                for (Goal goal : plan.goals) {
-                  if (goal.isCompleted()) {
-                    count++;
-                  } else {
-                    if (goal.actions != null) {
-                      for (Action action : goal.actions) {
-                        if (action.checked == 1) {
-                          unfinishedData.add(plan);
-                          break;
-                        }
-                      }
-                    }
-                  }
+  private void setResponse(DevelopmentPlansResponse response) {
+    LogUtil.e("AAA onNext ");
+    data.clear();
+    unfinishedData.clear();
+    completedData.clear();
+    data.addAll(response.items);
+
+    for (DevelopmentPlan plan : data) {
+      final int size = plan.goals.size();
+      int count = 0;
+      if (plan.goals != null) {
+        for (Goal goal : plan.goals) {
+          if (goal.isCompleted()) {
+            count++;
+          } else {
+            if (goal.actions != null) {
+              for (Action action : goal.actions) {
+                if (action.checked == 1) {
+                  unfinishedData.add(plan);
+                  break;
                 }
-              }
-
-              if (count != 0 && count == size) {
-                completedData.add(plan);
               }
             }
           }
-        }));
+        }
+      }
+
+      if (count != 0 && count == size) {
+        completedData.add(plan);
+      }
+    }
   }
 
   private void setSelection() {
     switch (viewPager.getCurrentItem()) {
     case ALL:
-      if (allFragment == null) {
-        allFragment = new DevelopmentPlanListFragment();
-      }
       allFragment.setData(data);
       break;
     case UNFINISHED:
-      if (unfinishedFragment == null) {
-        unfinishedFragment = new DevelopmentPlanListFragment();
-      }
       unfinishedFragment.setData(unfinishedData);
       break;
     case COMPLETED:
-      if (completedFragment == null) {
-        completedFragment = new DevelopmentPlanListFragment();
-      }
       completedFragment.setData(completedData);
       break;
     }
@@ -210,19 +252,8 @@ public class DevelopmenPlansFragment extends BaseFragment {
 
     @Override
     public boolean onQueryTextChange(String newText) {
-      if (allFragment == null) {
-        allFragment = new DevelopmentPlanListFragment();
-      }
       allFragment.setQueryString(newText);
-
-      if (unfinishedFragment == null) {
-        unfinishedFragment = new DevelopmentPlanListFragment();
-      }
       unfinishedFragment.setQueryString(newText);
-
-      if (completedFragment == null) {
-        completedFragment = new DevelopmentPlanListFragment();
-      }
       completedFragment.setQueryString(newText);
       return false;
     }
@@ -284,21 +315,12 @@ public class DevelopmenPlansFragment extends BaseFragment {
     public Fragment getItem(int position) {
       switch (position) {
       case ALL:
-        if (allFragment == null) {
-          allFragment = new DevelopmentPlanListFragment();
-        }
         allFragment.setData(data);
         return allFragment;
       case UNFINISHED:
-        if (unfinishedFragment == null) {
-          unfinishedFragment = new DevelopmentPlanListFragment();
-        }
         unfinishedFragment.setData(unfinishedData);
         return unfinishedFragment;
       case COMPLETED:
-        if (completedFragment == null) {
-          completedFragment = new DevelopmentPlanListFragment();
-        }
         completedFragment.setData(completedData);
         return completedFragment;
       default:

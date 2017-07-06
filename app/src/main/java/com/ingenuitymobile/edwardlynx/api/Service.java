@@ -2,6 +2,7 @@ package com.ingenuitymobile.edwardlynx.api;
 
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.DevPlanBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InviteUserParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
@@ -21,8 +22,10 @@ import com.ingenuitymobile.edwardlynx.api.responses.DashboardResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.IndividualProgressResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.TeamCategoriesResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
 
 import java.util.Map;
@@ -142,8 +145,15 @@ public interface Service {
   @GET("/api/v1/dev-plans")
   Observable<DevelopmentPlansResponse> getDevelopmentPlans();
 
+  @GET("/api/v1/dev-plans")
+  Observable<DevelopmentPlansResponse> getuserDevelopmentPlans(@Query("user") long id);
+
   @GET("/api/v1/dev-plans/{id}")
   Observable<DevelopmentPlan> getDevelopmentPlan(@Path("id") long id);
+
+  @Headers("Content-Type: application/json")
+  @PATCH("/api/v1/dev-plans/{id}")
+  Observable<DevelopmentPlan> updateDevelopmentPlan(@Path("id") long id, @Body DevPlanBody body);
 
   @Headers("Content-Type: application/json")
   @POST("/api/v1/dev-plans")
@@ -192,5 +202,13 @@ public interface Service {
       @Path("goalId") long goalId,
       @Path("actionId") long actionId
   );
+  // endregion
+
+  // region Team Manager
+  @GET("/api/v1/dev-plans-manager/users")
+  Observable<IndividualProgressResponse> getIndividualProgress();
+
+  @GET("/api/v1/dev-plans-manager/teams")
+  Observable<TeamCategoriesResponse> getTeamCategories();
   // endregion
 }

@@ -1,16 +1,12 @@
 package com.ingenuitymobile.edwardlynx.api.models;
 
-import android.util.Log;
-
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.annotations.SerializedName;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

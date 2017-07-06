@@ -3,6 +3,7 @@ package com.ingenuitymobile.edwardlynx.api;
 import com.google.gson.GsonBuilder;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.DevPlanBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InviteUserParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
@@ -22,8 +23,10 @@ import com.ingenuitymobile.edwardlynx.api.responses.DashboardResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.DevelopmentPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbackAnswerResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.IndividualProgressResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.TeamCategoriesResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.squareup.okhttp.OkHttpClient;
@@ -431,6 +434,20 @@ public class ApiClient {
         }));
   }
 
+  public Subscription getUserDevelopmentPlans(
+      final long id,
+      final Subscriber<DevelopmentPlansResponse> subscriber) {
+
+    return service.getuserDevelopmentPlans(id)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getUserDevelopmentPlans(id, subscriber);
+          }
+        }));
+  }
+
   public Subscription getDevelopmentPlan(
       final long id,
       final Subscriber<DevelopmentPlan> subscriber) {
@@ -441,6 +458,21 @@ public class ApiClient {
           @Override
           public void onPostAgain() {
             getDevelopmentPlan(id, subscriber);
+          }
+        }));
+  }
+
+  public Subscription updateDevelopmentPlan(
+      final long id,
+      final DevPlanBody body,
+      final Subscriber<DevelopmentPlan> subscriber) {
+
+    return service.updateDevelopmentPlan(id, body)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            updateDevelopmentPlan(id, body, subscriber);
           }
         }));
   }
@@ -550,6 +582,29 @@ public class ApiClient {
           @Override
           public void onPostAgain() {
             updateActionPlan(planId, goalId, actionId, param, subscriber);
+          }
+        }));
+  }
+
+  public Subscription getIndividualProgress(
+      final Subscriber<IndividualProgressResponse> subscriber) {
+    return service.getIndividualProgress()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getIndividualProgress(subscriber);
+          }
+        }));
+  }
+
+  public Subscription getTeamCategories(final Subscriber<TeamCategoriesResponse> subscriber) {
+    return service.getTeamCategories()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getTeamCategories(subscriber);
           }
         }));
   }

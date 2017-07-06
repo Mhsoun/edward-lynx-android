@@ -11,7 +11,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.adapters.IndividualProgressAdapter;
+import com.ingenuitymobile.edwardlynx.api.models.IndividualProgress;
+import com.ingenuitymobile.edwardlynx.api.responses.IndividualProgressResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+
+import java.util.ArrayList;
+
+import rx.Subscriber;
 
 /**
  * Created by memengski on 6/21/17.
@@ -22,6 +30,13 @@ public class IndividualProgressFragment extends BaseFragment {
   private View               mainView;
   private TextView           emptyText;
   private SwipeRefreshLayout refreshLayout;
+
+  private ArrayList<IndividualProgress> data;
+  private IndividualProgressAdapter     adapter;
+
+  public IndividualProgressFragment() {
+    data = new ArrayList<>();
+  }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,7 +52,7 @@ public class IndividualProgressFragment extends BaseFragment {
       return mainView;
     }
 
-    mainView = inflater.inflate(R.layout.fragment_survey_list, container, false);
+    mainView = inflater.inflate(R.layout.fragment_individual_progress, container, false);
     initViews();
     LogUtil.e("AAA onCreateView AllReportsFragment2");
     return mainView;
@@ -50,27 +65,52 @@ public class IndividualProgressFragment extends BaseFragment {
   }
 
   private void initViews() {
-    final RecyclerView feedbackList = (RecyclerView) mainView.findViewById(R.id.list_survey);
+    final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(
+        R.id.list_individual_progress);
     emptyText = (TextView) mainView.findViewById(R.id.text_empty_state);
     emptyText.setText(getString(R.string.no_development_plans));
     refreshLayout = (SwipeRefreshLayout) mainView.findViewById(R.id.swipe_refresh_layout);
 
     final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
         LinearLayoutManager.VERTICAL);
-    feedbackList.addItemDecoration(dividerItemDecoration);
-    feedbackList.setHasFixedSize(true);
-    feedbackList.setLayoutManager(new LinearLayoutManager(getActivity()));
+    recyclerView.addItemDecoration(dividerItemDecoration);
+    recyclerView.setHasFixedSize(true);
+    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+    adapter = new IndividualProgressAdapter(data);
+    recyclerView.setAdapter(adapter);
 
     refreshLayout.setOnRefreshListener(refreshListener);
     refreshLayout.setRefreshing(true);
   }
 
   private void getData() {
+    subscription.add(Shared.apiClient.getIndividualProgress(
+        new Subscriber<IndividualProgressResponse>() {
+          @Override
+          public void onCompleted() {
+            LogUtil.e("AAA onCompleted ");
+            refreshLayout.setRefreshing(false);
+            setData();
+          }
 
+          @Override
+          public void onError(Throwable e) {
+            LogUtil.e("AAA onError " + e);
+            refreshLayout.setRefreshing(false);
+          }
+
+          @Override
+          public void onNext(IndividualProgressResponse response) {
+            data.clear();
+            data.addAll(response.items);
+          }
+        }));
   }
 
   private void setData() {
-//    emptyText.setVisibility(displayData.isEmpty() ? View.VISIBLE : View.GONE);
+    adapter.notifyDataSetChanged();
+    emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
   }
 
   private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout

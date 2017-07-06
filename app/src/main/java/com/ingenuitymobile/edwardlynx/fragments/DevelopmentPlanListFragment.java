@@ -29,6 +29,8 @@ public class DevelopmentPlanListFragment extends BaseFragment {
   private DevelopmentPlanAdapter adapter;
   private TextView               emptyText;
 
+  public boolean isFromTeam;
+
   public DevelopmentPlanListFragment() {
     data = new ArrayList<>();
     displayData = new ArrayList<>();
@@ -65,7 +67,7 @@ public class DevelopmentPlanListFragment extends BaseFragment {
     surveyList.setHasFixedSize(true);
     surveyList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    adapter = new DevelopmentPlanAdapter(displayData);
+    adapter = new DevelopmentPlanAdapter(displayData, isFromTeam);
     surveyList.setAdapter(adapter);
   }
 

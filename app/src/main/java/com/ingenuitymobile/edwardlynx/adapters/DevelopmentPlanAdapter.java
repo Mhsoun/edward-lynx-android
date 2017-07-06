@@ -38,10 +38,12 @@ public class DevelopmentPlanAdapter extends
     RecyclerView.Adapter<DevelopmentPlanAdapter.ViewHolder> {
 
   private List<DevelopmentPlan> data;
+  private boolean               isFromTeam;
 
-  public DevelopmentPlanAdapter(List<DevelopmentPlan> data) {
+  public DevelopmentPlanAdapter(List<DevelopmentPlan> data, boolean isFromTeam) {
     super();
     this.data = data;
+    this.isFromTeam = isFromTeam;
   }
 
   class ViewHolder extends RecyclerView.ViewHolder {
@@ -171,6 +173,7 @@ public class DevelopmentPlanAdapter extends
       public void onClick(View view) {
         Intent intent = new Intent(context, DevelopmentPlanDetailedActivity.class);
         intent.putExtra("id", plan.id);
+        intent.putExtra("isFromTeam", isFromTeam);
         context.startActivity(intent);
       }
     });

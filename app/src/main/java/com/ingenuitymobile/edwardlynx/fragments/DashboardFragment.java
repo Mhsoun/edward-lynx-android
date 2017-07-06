@@ -145,7 +145,7 @@ public class DashboardFragment extends BaseFragment {
     surveyList.setHasFixedSize(true);
     surveyList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    devPlanAdapter = new DevelopmentPlanAdapter(devPlanData);
+    devPlanAdapter = new DevelopmentPlanAdapter(devPlanData, false);
     surveyList.setAdapter(devPlanAdapter);
 
     final RecyclerView reminderList = (RecyclerView) mainView.findViewById(R.id.recycler_reminders);

@@ -34,10 +34,13 @@ public class GoalAdapter extends
     ExpandableRecyclerAdapter<GoalAdapter.ParentView, GoalAdapter.ChildView> {
 
   private OnSelectActionListener listener;
+  private boolean                isFromTeam;
 
-  public GoalAdapter(List<ParentListItem> data, OnSelectActionListener listener) {
+  public GoalAdapter(List<ParentListItem> data, OnSelectActionListener listener,
+      boolean isFromTeam) {
     super(data);
     this.listener = listener;
+    this.isFromTeam = isFromTeam;
   }
 
   class ParentView extends ParentViewHolder {
@@ -148,6 +151,7 @@ public class GoalAdapter extends
                     ? R.color.colorAccent : R.color.dev_plan_color),
             PorterDuff.Mode.SRC_IN);
 
+    holder.optionImage.setVisibility(isFromTeam ? View.GONE : View.VISIBLE);
     holder.optionImage.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -183,6 +187,7 @@ public class GoalAdapter extends
       }
     });
 
+    holder.optionImage.setVisibility(isFromTeam ? View.GONE : View.VISIBLE);
     holder.optionImage.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {

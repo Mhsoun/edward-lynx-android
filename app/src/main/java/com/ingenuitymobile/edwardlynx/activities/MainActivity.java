@@ -298,7 +298,7 @@ public class MainActivity extends BaseActivity implements
 
   private void changeToDevPlan() {
     if (developmenPlansFragment == null) {
-      developmenPlansFragment = DevelopmenPlansFragment.newInstance(context);
+      developmenPlansFragment = DevelopmenPlansFragment.newInstance(context, false, 0L);
     }
 
     developmenPlansFragment.setPosition(0);
