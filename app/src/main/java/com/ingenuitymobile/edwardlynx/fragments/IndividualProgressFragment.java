@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.activities.AddIndividualUserActivity;
 import com.ingenuitymobile.edwardlynx.adapters.IndividualProgressAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.IndividualProgress;
 import com.ingenuitymobile.edwardlynx.api.responses.IndividualProgressResponse;
@@ -82,6 +84,8 @@ public class IndividualProgressFragment extends BaseFragment {
 
     refreshLayout.setOnRefreshListener(refreshListener);
     refreshLayout.setRefreshing(true);
+
+    mainView.findViewById(R.id.image_create).setOnClickListener(onClickListener);
   }
 
   private void getData() {
@@ -112,6 +116,13 @@ public class IndividualProgressFragment extends BaseFragment {
     adapter.notifyDataSetChanged();
     emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
   }
+
+  private View.OnClickListener onClickListener = new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+      startActivity(new Intent(getActivity(), AddIndividualUserActivity.class));
+    }
+  };
 
   private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout
       .OnRefreshListener() {

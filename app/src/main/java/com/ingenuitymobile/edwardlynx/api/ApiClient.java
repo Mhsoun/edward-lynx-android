@@ -1,6 +1,7 @@
 package com.ingenuitymobile.edwardlynx.api;
 
 import com.google.gson.GsonBuilder;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.AddUserBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.DevPlanBody;
@@ -586,6 +587,18 @@ public class ApiClient {
         }));
   }
 
+  public Subscription getIndividualUsers(
+      final Subscriber<UsersResponse> subscriber) {
+    return service.getIndividualUsers()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getIndividualUsers(subscriber);
+          }
+        }));
+  }
+
   public Subscription getIndividualProgress(
       final Subscriber<IndividualProgressResponse> subscriber) {
     return service.getIndividualProgress()
@@ -605,6 +618,19 @@ public class ApiClient {
           @Override
           public void onPostAgain() {
             getTeamCategories(subscriber);
+          }
+        }));
+  }
+
+  public Subscription putIndividualUsers(final AddUserBody body,
+      final Subscriber<Response> subscriber) {
+
+    return service.putIndividualUsers(body)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            putIndividualUsers(body, subscriber);
           }
         }));
   }

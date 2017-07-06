@@ -17,22 +17,24 @@ public class User extends Response {
   public static final String FEEDBACK_PROVIDER = "feedback-provider";
   public static final String ANALYST           = "analyst";
 
+  @SerializedName("managed")
+  public boolean managed;
   @SerializedName("id")
-  public long   id;
+  public long    id;
   @SerializedName("name")
-  public String name;
+  public String  name;
   @SerializedName("email")
-  public String email;
+  public String  email;
   @SerializedName("info")
-  public String info;
+  public String  info;
   @SerializedName("lang")
-  public String lang;
+  public String  lang;
   @SerializedName("navcolor")
-  public String navcolor;
+  public String  navcolor;
   @SerializedName("type")
-  public String type;
+  public String  type;
   @SerializedName("registeredOn")
-  public String registeredOn;
+  public String  registeredOn;
 
   @SerializedName("department")
   public String department;

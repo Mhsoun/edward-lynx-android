@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.api;
 
+import com.ingenuitymobile.edwardlynx.api.bodyparams.AddUserBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.DevPlanBody;
@@ -38,6 +39,7 @@ import retrofit.http.GET;
 import retrofit.http.Headers;
 import retrofit.http.PATCH;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 import retrofit.http.Path;
 import retrofit.http.Query;
 import rx.Observable;
@@ -205,10 +207,17 @@ public interface Service {
   // endregion
 
   // region Team Manager
+  @GET("/api/v1/dev-plans-manager/users?type=sharing")
+  Observable<UsersResponse> getIndividualUsers();
+
   @GET("/api/v1/dev-plans-manager/users")
   Observable<IndividualProgressResponse> getIndividualProgress();
 
   @GET("/api/v1/dev-plans-manager/teams")
   Observable<TeamCategoriesResponse> getTeamCategories();
+
+  @Headers("Content-Type: application/json")
+  @PUT("/api/v1/dev-plans-manager/users")
+  Observable<Response> putIndividualUsers(@Body AddUserBody body);
   // endregion
 }

@@ -317,4 +317,8 @@
   <string name="share_to_manager">Share to Manager</string>
   <string name="not_shared_to_manager">Development Plan no longer shared to manager</string>
   <string name="shared_to_manager">Successfully shared Development Plan to manager</string>
+  <string name="users">Users</string>
+
+  <string name="disabled_users">Successfully disabled users to Manager View</string>
+  <string name="enabled_user">Successfully enabled users to Manager View</string>
 </resources>

@@ -37,5 +37,6 @@
 
   <color name="unfinished_status">#636363</color>
   <color name="survey_line">#7d648f</color>
+  <color name="team_color">#dfb65d</color>
 
 </resources>

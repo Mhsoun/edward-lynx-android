@@ -36,7 +36,9 @@ import rx.Subscriber;
 
 public class InviteBaseActivity extends BaseActivity {
 
-  private ArrayList<User> displayData;
+  protected ArrayList<User> displayData;
+  protected UsersAdapter    adapter;
+  protected int             invited;
 
   private TextView   countText;
   private TextView   selectText;
@@ -46,9 +48,6 @@ public class InviteBaseActivity extends BaseActivity {
   protected ArrayList<String> deletedIds;
   protected ArrayList<User>   data;
   protected ArrayList<User>   recipients;
-
-  private   UsersAdapter adapter;
-  protected int          invited;
 
   public InviteBaseActivity() {
     data = new ArrayList<>();

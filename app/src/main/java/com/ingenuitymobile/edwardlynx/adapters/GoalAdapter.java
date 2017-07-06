@@ -165,8 +165,10 @@ public class GoalAdapter extends
     final Action action = (Action) childListItem;
     final Context context = holder.itemView.getContext();
 
-    holder.addText.setVisibility(action.isAddAction ? View.VISIBLE : View.GONE);
+    holder.addText.setVisibility(action.
+        isAddAction ? View.VISIBLE : View.GONE);
     holder.detailsLayout.setVisibility(action.isAddAction ? View.GONE : View.VISIBLE);
+    holder.itemView.setVisibility(action.isAddAction && isFromTeam ? View.GONE : View.VISIBLE);
 
     holder.nameText.setText(action.title);
     holder.imageView.setImageDrawable(holder.imageView.getContext().getResources()
@@ -179,6 +181,9 @@ public class GoalAdapter extends
     holder.bodyLayout.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        if (isFromTeam) {
+          return;
+        }
         if (action.isAddAction) {
           listener.onAddGoal(action);
         } else if (action.checked == 0) {

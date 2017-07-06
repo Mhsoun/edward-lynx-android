@@ -163,6 +163,11 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
     </activity>
+    <activity
+        android:name=".activities.AddIndividualUserActivity"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme">
+    </activity>
 
     <service
         android:name=".services.MyGcmListenerService">
