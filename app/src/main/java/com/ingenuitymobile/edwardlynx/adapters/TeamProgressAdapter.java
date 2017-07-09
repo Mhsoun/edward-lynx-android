@@ -1,6 +1,7 @@
 package com.ingenuitymobile.edwardlynx.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
-import com.ingenuitymobile.edwardlynx.api.models.TeamCategory;
+import com.ingenuitymobile.edwardlynx.activities.TeamDevPlanDetailedActivity;
+import com.ingenuitymobile.edwardlynx.api.models.TeamDevPlan;
 import com.ingenuitymobile.edwardlynx.views.fitchart.FitChart;
 
 import java.util.List;
@@ -20,9 +22,9 @@ import java.util.List;
 public class TeamProgressAdapter extends
     RecyclerView.Adapter<TeamProgressAdapter.ViewHolder> {
 
-  private List<TeamCategory> data;
+  private List<TeamDevPlan> data;
 
-  public TeamProgressAdapter(List<TeamCategory> data) {
+  public TeamProgressAdapter(List<TeamDevPlan> data) {
     super();
     this.data = data;
   }
@@ -51,17 +53,19 @@ public class TeamProgressAdapter extends
   @Override
   public void onBindViewHolder(ViewHolder holder, final int position) {
     final Context context = holder.itemView.getContext();
-    final TeamCategory teamCategory = data.get(position);
+    final TeamDevPlan teamDevPlan = data.get(position);
 
-    holder.nameText.setText(teamCategory.name);
-    holder.progressFitChart.setValue(teamCategory.progress);
+    holder.nameText.setText(teamDevPlan.name);
+    holder.progressFitChart.setValue(teamDevPlan.progress);
     holder.progressFitChart.clearAnimation();
-    holder.percentageText.setText(((int) (teamCategory.progress * 100)) + "%");
+    holder.percentageText.setText(((int) (teamDevPlan.progress * 100)) + "%");
 
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-
+        Intent intent = new Intent(context, TeamDevPlanDetailedActivity.class);
+        intent.putExtra("id", teamDevPlan.id);
+        context.startActivity(intent);
       }
     });
   }

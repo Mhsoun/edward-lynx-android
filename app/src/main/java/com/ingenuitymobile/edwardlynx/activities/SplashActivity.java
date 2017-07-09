@@ -86,6 +86,7 @@ public class SplashActivity extends BaseActivity {
       @Override
       public void onNext(CategoriesResponse categoriesResponse) {
         Shared.categories = categoriesResponse.items;
+        LogUtil.e("AAA onNext postTokenDevice");
       }
     }));
   }

@@ -13,8 +13,8 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.TeamProgressAdapter;
-import com.ingenuitymobile.edwardlynx.api.models.TeamCategory;
-import com.ingenuitymobile.edwardlynx.api.responses.TeamCategoriesResponse;
+import com.ingenuitymobile.edwardlynx.api.models.TeamDevPlan;
+import com.ingenuitymobile.edwardlynx.api.responses.TeamDevPlansResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import java.util.ArrayList;
@@ -29,8 +29,8 @@ public class TeamProgressFragment extends BaseFragment {
 
   private View mainView;
 
-  private ArrayList<TeamCategory> data;
-  private TeamProgressAdapter     adapter;
+  private ArrayList<TeamDevPlan> data;
+  private TeamProgressAdapter    adapter;
 
   private TextView           emptyText;
   private SwipeRefreshLayout refreshLayout;
@@ -95,7 +95,7 @@ public class TeamProgressFragment extends BaseFragment {
   };
 
   private void getData() {
-    subscription.add(Shared.apiClient.getTeamCategories(new Subscriber<TeamCategoriesResponse>() {
+    subscription.add(Shared.apiClient.getTeamCategories(new Subscriber<TeamDevPlansResponse>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA onCompleted ");
@@ -109,7 +109,7 @@ public class TeamProgressFragment extends BaseFragment {
       }
 
       @Override
-      public void onNext(TeamCategoriesResponse response) {
+      public void onNext(TeamDevPlansResponse response) {
         data.clear();
         data.addAll(response.items);
         adapter.notifyDataSetChanged();

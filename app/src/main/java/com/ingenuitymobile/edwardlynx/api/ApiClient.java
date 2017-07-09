@@ -17,6 +17,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Goal;
 import com.ingenuitymobile.edwardlynx.api.models.Questions;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
+import com.ingenuitymobile.edwardlynx.api.models.TeamDevPlan;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
 import com.ingenuitymobile.edwardlynx.api.responses.CategoriesResponse;
@@ -27,7 +28,7 @@ import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.IndividualProgressResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
-import com.ingenuitymobile.edwardlynx.api.responses.TeamCategoriesResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.TeamDevPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.squareup.okhttp.OkHttpClient;
@@ -611,13 +612,24 @@ public class ApiClient {
         }));
   }
 
-  public Subscription getTeamCategories(final Subscriber<TeamCategoriesResponse> subscriber) {
+  public Subscription getTeamCategories(final Subscriber<TeamDevPlansResponse> subscriber) {
     return service.getTeamCategories()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
           public void onPostAgain() {
             getTeamCategories(subscriber);
+          }
+        }));
+  }
+
+  public Subscription getTeamCategory(final long id, final Subscriber<TeamDevPlan> subscriber) {
+    return service.getTeamCategory(id)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            getTeamCategory(id, subscriber);
           }
         }));
   }

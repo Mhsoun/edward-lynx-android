@@ -16,6 +16,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Goal;
 import com.ingenuitymobile.edwardlynx.api.models.Questions;
 import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.models.Surveys;
+import com.ingenuitymobile.edwardlynx.api.models.TeamDevPlan;
 import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
 import com.ingenuitymobile.edwardlynx.api.responses.CategoriesResponse;
@@ -26,7 +27,7 @@ import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.IndividualProgressResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
-import com.ingenuitymobile.edwardlynx.api.responses.TeamCategoriesResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.TeamDevPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
 
 import java.util.Map;
@@ -214,7 +215,10 @@ public interface Service {
   Observable<IndividualProgressResponse> getIndividualProgress();
 
   @GET("/api/v1/dev-plans-manager/teams")
-  Observable<TeamCategoriesResponse> getTeamCategories();
+  Observable<TeamDevPlansResponse> getTeamCategories();
+
+  @GET("/api/v1/dev-plans-manager/teams/{id}")
+  Observable<TeamDevPlan> getTeamCategory(@Path("id") long id);
 
   @Headers("Content-Type: application/json")
   @PUT("/api/v1/dev-plans-manager/users")
