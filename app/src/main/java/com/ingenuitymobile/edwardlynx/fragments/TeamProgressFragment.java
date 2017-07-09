@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.activities.AddTeamDevPlanActivity;
 import com.ingenuitymobile.edwardlynx.adapters.TeamProgressAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.TeamDevPlan;
 import com.ingenuitymobile.edwardlynx.api.responses.TeamDevPlansResponse;
@@ -90,7 +92,8 @@ public class TeamProgressFragment extends BaseFragment {
   private View.OnClickListener listener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-
+      Intent intent =  new Intent(getActivity(), AddTeamDevPlanActivity.class);
+      startActivity(intent);
     }
   };
 

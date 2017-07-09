@@ -32,7 +32,6 @@ public class TeamDevplanDetailedAdapter extends
     this.data = data;
   }
 
-
   class ViewHolder extends RecyclerView.ViewHolder {
     TextView     nameText;
     FitChart     progressFitChart;
