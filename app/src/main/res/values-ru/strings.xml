@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Edward Lynx</string>
+    <string name="about">Сведения о Вас</string>
+    <string name="action_added"></string>
+    <string name="action_delete">Задача успешно удалена</string>
+    <string name="action_updated">Действие по выполнению цели успешно обновлено</string>
+    <string name="actions">Задача</string>
+    <string name="add">Добавить</string>
+    <string name="add_action">Добавить Задачу</string>
+    <string name="add_goal">Добавить цель</string>
+    <string name="add_more_participants">Добавить участников</string>
+    <string name="add_na_option">Добавить функцию ответа \"Незнаю\"</string>
+    <string name="add_user">Добавить пользователя</string>
+    <string name="all">Все</string>
+    <string name="anonymous_feedback">Анонимная обратная связь</string>
+    <string name="answer_survey">Заполнить опросник</string>
+    <string name="answer_dashboard">Ответить</string>
+    <string name="answer_type_label">Тип ответа</string>
+    <string name="average_values">Среднее значение</string>
+    <string name="breakdown_details">Диаграмма отображает среднее значение оценок областей компетентности, для каждой категории участников.</string>
+    <string name="breakdown_title">Распеределение ответов в соответствии с категорией участника</string>
+    <string name="cancel">Отменить</string>
+</resources>
