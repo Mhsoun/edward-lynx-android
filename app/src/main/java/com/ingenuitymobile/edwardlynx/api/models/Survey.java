@@ -2,20 +2,23 @@ package com.ingenuitymobile.edwardlynx.api.models;
 
 import android.content.Context;
 
+import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.google.gson.annotations.SerializedName;
 import com.ingenuitymobile.edwardlynx.R;
+
+import java.util.List;
 
 /**
  * Created by mEmEnG-sKi on 09/01/2017.
  */
 
-public class Survey {
+public class Survey implements ParentListItem {
 
   public static final int OPEN        = 0;
   public static final int UNFINISHED  = 1;
   public static final int COMPLETED   = 2;
   public static final int NOT_INVITED = 3;
-
+  public List<String> reports;
 
   @SerializedName("_links")
   public Links  links;
@@ -75,5 +78,15 @@ public class Survey {
     }
     string = isUpperCase ? string.toUpperCase() : string;
     return string;
+  }
+
+  @Override
+  public List<?> getChildItemList() {
+    return reports;
+  }
+
+  @Override
+  public boolean isInitiallyExpanded() {
+    return false;
   }
 }
