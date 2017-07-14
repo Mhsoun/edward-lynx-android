@@ -3,11 +3,9 @@ package com.ingenuitymobile.edwardlynx.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,7 +16,9 @@ import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
 import com.ingenuitymobile.edwardlynx.R;
-import com.ingenuitymobile.edwardlynx.api.models.Survey;
+import com.ingenuitymobile.edwardlynx.api.models.TeamReport;
+import com.ingenuitymobile.edwardlynx.api.models.TeamReportItem;
+import com.ingenuitymobile.edwardlynx.api.models.TeamReportSurvey;
 
 import java.util.List;
 
@@ -73,7 +73,7 @@ public class TeamResultsAdapter extends ExpandableRecyclerAdapter<TeamResultsAda
     @Override
     public void onBindParentViewHolder(final TeamResultsAdapter.ParentView holder, int position,
                                        ParentListItem parentListItem) {
-        final Survey survey = (Survey) parentListItem;
+        final TeamReportSurvey survey = (TeamReportSurvey) parentListItem;
         final Context context = holder.itemView.getContext();
 
         holder.nameText.setText(survey.name);
@@ -81,9 +81,9 @@ public class TeamResultsAdapter extends ExpandableRecyclerAdapter<TeamResultsAda
 
     @Override
     public void onBindChildViewHolder(final TeamResultsAdapter.ChildView holder, int position, Object childListItem) {
-        final String string = (String) childListItem;
+        final TeamReport report = (TeamReport) childListItem;
         final Context context = holder.itemView.getContext();
-        holder.reportText.setText(string);
+        holder.reportText.setText(report.name);
 
         holder.layoutBody.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +91,7 @@ public class TeamResultsAdapter extends ExpandableRecyclerAdapter<TeamResultsAda
                 Toast.makeText(context, "Report Preview", Toast.LENGTH_SHORT).show();
                 context.startActivity(new Intent(Intent.ACTION_VIEW ,
                         Uri.parse("http://docs.google.com/gview?embedded=true&url=" +
-                                "https://www.antennahouse.com/XSLsample/pdf/sample-link_1.pdf"))); // Sample PDF file - Replace when final
+                                report.link))); // Sample PDF file - Replace when final
             }
         });
 
@@ -100,11 +100,10 @@ public class TeamResultsAdapter extends ExpandableRecyclerAdapter<TeamResultsAda
             public void onClick(View v) {
                 Toast.makeText(context, "Downloading Report", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.antennahouse.com/XSLsample/pdf/sample-link_1.pdf"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(report.link));
                 context.startActivity(intent);
             }
         });
     }
-
 }
 

@@ -28,6 +28,7 @@ import com.ingenuitymobile.edwardlynx.api.responses.IndividualProgressResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.TeamDevPlansResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.TeamReportResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
 
 import java.util.Map;
@@ -223,5 +224,12 @@ public interface Service {
   @Headers("Content-Type: application/json")
   @PUT("/api/v1/dev-plans-manager/users")
   Observable<Response> putIndividualUsers(@Body AddUserBody body);
+
+  //endregion
+
+  // region Reports
+  @GET("/api/v1/dev-plans-manager/reports")
+  Observable<TeamReportResponse> getSurveyReports();
+
   // endregion
 }

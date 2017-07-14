@@ -29,6 +29,7 @@ import com.ingenuitymobile.edwardlynx.api.responses.IndividualProgressResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.TeamDevPlansResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.TeamReportResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.squareup.okhttp.OkHttpClient;
@@ -733,4 +734,10 @@ public class ApiClient {
   public interface OnDisplayErrorListener {
     void onDisplayError(Throwable e);
   }
+
+  public Observable<TeamReportResponse> getSurveyReports() {
+      return service.getSurveyReports();
+  }
+
+
 }
