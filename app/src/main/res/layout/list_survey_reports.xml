@@ -40,11 +40,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginLeft="32dp"
                     android:layout_marginRight="8dp"
-                    android:layout_toLeftOf="@id/image_option"
+                    android:layout_toLeftOf="@id/image_download"
                     android:textColor="@color/white"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:layout_alignParentLeft="true"
+                    />
             </RelativeLayout>
         </LinearLayout>
 </RelativeLayout>
