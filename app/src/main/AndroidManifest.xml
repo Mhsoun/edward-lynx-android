@@ -1,220 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.ingenuitymobile.edwardlynx"
-          xmlns:android="http://schemas.android.com/apk/res/android">
-
-  <uses-permission android:name="android.permission.INTERNET"/>
-  <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
-
-  <application
-      android:name=".MainApplication"
-      android:allowBackup="false"
-      android:icon="@mipmap/ic_launcher"
-      android:label="@string/app_name"
-      android:supportsRtl="true"
-      android:theme="@style/AppTheme">
-    <activity
-        android:name=".activities.SplashActivity"
-        android:launchMode="singleTask">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
-
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
-    </activity>
-    <activity android:name=".activities.DeeplinkingActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW"/>
-
-        <category android:name="android.intent.category.DEFAULT"/>
-        <category android:name="android.intent.category.BROWSABLE"/>
-
-        <data
-            android:host="edwardlynx.ingenuity.ph"
-            android:pathPrefix="/survey/answer"
-            android:scheme="https"/>
-      </intent-filter>
-
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW"/>
-
-        <category android:name="android.intent.category.DEFAULT"/>
-        <category android:name="android.intent.category.BROWSABLE"/>
-
-        <data
-            android:host="edwardlynx.ingenuity.ph"
-            android:pathPrefix="/instant-feedbacks/answer"
-            android:scheme="https"/>
-      </intent-filter>
-
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW"/>
-
-        <category android:name="android.intent.category.DEFAULT"/>
-        <category android:name="android.intent.category.BROWSABLE"/>
-
-        <data
-            android:host="edwardlynx.ingenuity.ph"
-            android:pathPrefix="/dev-plan/"
-            android:scheme="https"/>
-      </intent-filter>
-    </activity>
-    <activity
-        android:name=".activities.LoginActivity"
-        android:screenOrientation="portrait"/>
-    <activity
-        android:name=".activities.ForgotPasswordActivity"
-        android:screenOrientation="portrait"/>
-    <activity
-        android:name=".activities.MainActivity"
-        android:label="@string/drawer_dashboard"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar"/>
-    <activity
-        android:name=".activities.SurveyQuestionsActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.CreateFeedbackActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.InviteActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.FeedbackRequestsActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.ReportsActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.AnswerFeedbackActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.InstantFeedbackReportActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.SurveyReportActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.InstantFeedbackDetailedActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.ShareReportActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.CreateDevelopmentPlanActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.CreateDetailedDevelopmentPlanActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.DevelopmentPlanDetailedActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.AddMoreParticipantsActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.InviteSurveyActivity"
-        android:label="@string/invite"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.InvitePeopleActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme"
-        android:windowSoftInputMode="adjustPan">
-    </activity>
-    <activity
-        android:name=".activities.TeamActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme"
-        android:windowSoftInputMode="adjustPan">
-    </activity>
-    <activity
-        android:name=".activities.IndividualDevelopmentPlanActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
+    <application
+        android:name=".MainApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:screenOrientation="portrait"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.AddIndividualUserActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.TeamDevPlanDetailedActivity"
-        android:label="@string/app_name"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme">
-    </activity>
-    <activity
-        android:name=".activities.AddTeamDevPlanActivity"
-        android:label="@string/app_name"
-        android:screenOrientation="portrait"
-        android:theme="@style/AppTheme"
-        android:windowSoftInputMode="adjustPan">
-    </activity>
-
-    <service
-        android:name=".services.MyGcmListenerService">
-      <intent-filter>
-        <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-      </intent-filter>
-    </service>
-
-    <service
-        android:name=".services.MyInstanceIDListenerService">
-      <intent-filter>
-        <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-      </intent-filter>
-    </service>
-    <service
-        android:name=".services.DeleteTokenService">
-    </service>
-
-    <service
-        android:name="com.ingenuitymobile.edwardlynx.services.MyNotificationListenerService"
-        android:label="@string/app_name"
-        android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
-      <intent-filter>
-        <action android:name="android.service.notification.NotificationListenerService"/>
-      </intent-filter>
-    </service>
-
-    <meta-data
-        android:name="io.fabric.ApiKey"
-        android:value="7c67a5365060930052205dfdf95102678ef19047"/>
-
-    //your activity declarations and other stuff
-    <meta-data
-        android:name="net.hockeyapp.android.appIdentifier"
-        android:value="@string/hockey_app_id"/>
-  </application>
+        <activity
+            android:name=".activities.SplashActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.DeeplinkingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="edwardlynx.ingenuity.ph"
+                    android:pathPrefix="/survey/answer"
+                    android:scheme="https"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="edwardlynx.ingenuity.ph"
+                    android:pathPrefix="/instant-feedbacks/answer"
+                    android:scheme="https"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="edwardlynx.ingenuity.ph"
+                    android:pathPrefix="/dev-plan/"
+                    android:scheme="https"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.ForgotPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/drawer_dashboard"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.SurveyQuestionsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.CreateFeedbackActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.InviteActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.FeedbackRequestsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.ReportsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.AnswerFeedbackActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.InstantFeedbackReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.SurveyReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.InstantFeedbackDetailedActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.ShareReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.CreateDevelopmentPlanActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.CreateDetailedDevelopmentPlanActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.DevelopmentPlanDetailedActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.AddMoreParticipantsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.InviteSurveyActivity"
+            android:label="@string/invite"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.InvitePeopleActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+            android:name=".activities.TeamActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+            android:name=".activities.IndividualDevelopmentPlanActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.AddIndividualUserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.TeamDevPlanDetailedActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".activities.AddTeamDevPlanActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <service
+            android:name=".services.MyGcmListenerService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".services.MyInstanceIDListenerService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".services.DeleteTokenService">
+        </service>
+        <service
+            android:name="com.ingenuitymobile.edwardlynx.services.MyNotificationListenerService"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService"/>
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="7c67a5365060930052205dfdf95102678ef19047"/>
+        //your activity declarations and other stuff
+        <meta-data
+            android:name="net.hockeyapp.android.appIdentifier"
+            android:value="@string/hockey_app_id"/>
+    </application>
 </manifest>

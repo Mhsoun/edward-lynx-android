@@ -1,315 +1,315 @@
 <resources>
-  <string name="app_name">Edward Lynx</string>
-  <string name="live_url">https://edwardlynx.ingenuity.ph</string>
-  <string name="staging_url">https://edwardlynx.ingenuity.ph</string>
-  <string name="client_id">2</string>
-  <string name="client_secret">jNl8Akpv79hORetW7jCMCQnKQjwiB6XerZxIxcsy</string>
-  <string name="hockey_app_id">1b9084aaa22c4395a83bedd31b305831</string>
+    <string name="app_name">Edward Lynx</string>
+    <string name="live_url">https://edwardlynx.ingenuity.ph</string>
+    <string name="staging_url">https://edwardlynx.ingenuity.ph</string>
+    <string name="client_id">2</string>
+    <string name="client_secret">jNl8Akpv79hORetW7jCMCQnKQjwiB6XerZxIxcsy</string>
+    <string name="hockey_app_id">1b9084aaa22c4395a83bedd31b305831</string>
 
-  <string name="self">Candidates</string>
-  <string name="others_combined">Others Combined</string>
-  <string name="not_available">N/A</string>
-  <string name="free_text_description">Text</string>
-  <string name="navigation_drawer_open">Open navigation drawer</string>
-  <string name="navigation_drawer_close">Close navigation drawer</string>
-  <string name="contact_to_reactivate">Reactivate</string>
+    <string name="self">Candidates</string>
+    <string name="others_combined">Others Combined</string>
+    <string name="not_available">N/A</string>
+    <string name="free_text_description">Text</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="contact_to_reactivate">Reactivate</string>
 
-  // region Login
-  <string name="username">Username/Email</string>
-  <string name="password">Password</string>
-  <string name="login">Login</string>
-  <string name="username_required">Username can\'t be blank</string>
-  <string name="password_required">Password can\'t be blank</string>
-  <string name="forgot_password">Forgot Password?</string>
-  <string name="contact_us">Contact Us</string>
-  // endregion
+    // region Login
+    <string name="username">Username/Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="username_required">Username can\'t be blank</string>
+    <string name="password_required">Password can\'t be blank</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="contact_us">Contact Us</string>
+    // endregion
 
-  // region Navigation Menu
-  <string name="drawer_dashboard">Dashboard</string>
-  <string name="drawer_development_plans">Development Plans</string>
-  <string name="instant_feedback">Instant Feedback</string>
-  <string name="drawer_profile">Profile</string>
-  <string name="drawer_surveys">Surveys</string>
-  <string name="drawer_settings">Settings</string>
-  <string name="drawer_logout">Logout</string>
-  // endregion
+    // region Navigation Menu
+    <string name="drawer_dashboard">Dashboard</string>
+    <string name="drawer_development_plans">Development Plans</string>
+    <string name="instant_feedback">Instant Feedback</string>
+    <string name="drawer_profile">Profile</string>
+    <string name="drawer_surveys">Surveys</string>
+    <string name="drawer_settings">Settings</string>
+    <string name="drawer_logout">Logout</string>
+    // endregion
 
-  // region Dashboard
-  <string name="dev_plan_dashboard">Development\nPlan</string>
-  <string name="instant_feedback_dashboard">Instant\nFeedback</string>
-  <string name="lynx_measurement_dashboard">Lynx\nMeasurement</string>
-  <string name="answer_dashboard">Answer</string>
-  <string name="results_dashboard">Results</string>
-  <string name="invite_dashboard">Invite</string>
-  <string name="create_dashboard">Create</string>
-  <string name="reminders_dashboard">Reminders</string>
-  <!--Development Plans-->
-  <string name="no_development_plans">No Development Plans</string>
-  <string name="see_more">See More</string>
-  <!--Instant Feedback-->
-  <string name="goal">Goal</string>
-  <string name="survey">Survey</string>
-  <string name="due_in">Due in</string>
-  <string name="days">%1$d Days</string>
-  <string name="day">%1$d Day</string>
-  <string name="hours">%1$d Hours</string>
-  <string name="hour">%1$d Hour</string>
-  <string name="now">Now</string>
-  <string name="no_reminders">No Reminders</string>
-  // engregion
+    // region Dashboard
+    <string name="dev_plan_dashboard">Development\nPlan</string>
+    <string name="instant_feedback_dashboard">Instant\nFeedback</string>
+    <string name="lynx_measurement_dashboard">Lynx\nMeasurement</string>
+    <string name="answer_dashboard">Answer</string>
+    <string name="results_dashboard">Results</string>
+    <string name="invite_dashboard">Invite</string>
+    <string name="create_dashboard">Create</string>
+    <string name="reminders_dashboard">Reminders</string>
+    <!--Development Plans-->
+    <string name="no_development_plans">No Development Plans</string>
+    <string name="see_more">See More</string>
+    <!--Instant Feedback-->
+    <string name="goal">Goal</string>
+    <string name="survey">Survey</string>
+    <string name="due_in">Due in</string>
+    <string name="days">%1$d Days</string>
+    <string name="day">%1$d Day</string>
+    <string name="hours">%1$d Hours</string>
+    <string name="hour">%1$d Hour</string>
+    <string name="now">Now</string>
+    <string name="no_reminders">No Reminders</string>
+    // engregion
 
-  // region Dashboar: Results
-  <string name="results">Results</string>
-  <string name="search_reports">Search Results</string>
-  <string name="all">All</string>
-  <!--Instant Feedback-->
-  <string name="lynx_measurement">Lynx Measurement</string>
-  <string name="lynx_360">Lynx 360</string>
-  <string name="lynx_management">LMTT</string>
-  <string name="lynx_progress">Lynx Progress</string>
-  <string name="lynx_survey">Lynx Survey</string>
-  <string name="lynx_team_tool">LTT</string>
-  <!--Instant Feedback-->
-  <string name="no_results">No Results</string>
-  <string name="details_circle_chart">Invited: %1$d | Answered: %2$d</string>
-  <string name="minimum_chart">Minimum of 3 people to view this chart</string>
-  <string name="no_chart_data_available">No chart data available</string>
-  <string name="response_rate">Response Rate</string>
-  <string name="response_rate_details">The following chart indicates the number of individuals that responded to your feedback, broken down by category of feedback provider.</string>
-  <string name="average_values">Average values</string>
-  <string name="shows_averages">Shows the averages for all categories.</string>
-  <string name="index_over_competencies">Index over competencies</string>
-  <string name="index_over_competencies_details">Shows the overall values for each area of competence (the average of all the answers from those who responded to your feedback request.) Your own personal assessment is shown in a separate bar.</string>
-  <string name="radar_diagram">Radar Diagram</string>
-  <string name="radar_diagram_details">Shows an overview of the results from the feedback survey, compare with your own personal assessment. The points where the radius of the circle is largest show where your strong points are (according to you or the feedback group).</string>
-  <string name="participants_comments">Participant\'s Comments</string>
-  <string name="highest_rate_manager">Five Highest Rated Questions (Manager)</string>
-  <string name="lowest_rate_manager">Five Lowest Rated Questions (Manager)</string>
-  <string name="highest_rate_others">Five Highest Rated Questions (Others combined)</string>
-  <string name="lowest_rate_others">Five Lowest Rated Questions (Others combined)</string>
-  <string name="overestimated_attributes">Blindspot (Overestimated)</string>
-  <string name="overestimated_attributes_details">Questions where others have rated you lower than you rated yourself. Shows areas where there are areas for improvement.</string>
-  <string name="underestimated_attributes">Blindspot (Underestimated)</string>
-  <string name="underestimated_attributes_details">Questions where others have rated you higher than you rated yourself. Shows the attributes you have that others appreciate.</string>
-  <string name="breakdown_title">Breakdown of answers by participant type</string>
-  <string name="breakdown_details">The diagrams show an average of the answers of the competence areas for each participant category.</string>
-  <string name="detailed_summary">Detailed answer summary per category</string>
-  <string name="yes_no">Yes/No Questions</string>
-  <string name="share_report">Share Result</string>
-  <string name="add_more_participants">Add More Participants</string>
-  <string name="share">Share</string>
-  <string name="instant_feedback_answers">Feedback Result</string>
-  // endregion
+    // region Dashboar: Results
+    <string name="results">Results</string>
+    <string name="search_reports">Search Results</string>
+    <string name="all">All</string>
+    <!--Instant Feedback-->
+    <string name="lynx_measurement">Lynx Measurement</string>
+    <string name="lynx_360">Lynx 360</string>
+    <string name="lynx_management">LMTT</string>
+    <string name="lynx_progress">Lynx Progress</string>
+    <string name="lynx_survey">Lynx Survey</string>
+    <string name="lynx_team_tool">LTT</string>
+    <!--Instant Feedback-->
+    <string name="no_results">No Results</string>
+    <string name="details_circle_chart">Invited: %1$d | Answered: %2$d</string>
+    <string name="minimum_chart">Minimum of 3 people to view this chart</string>
+    <string name="no_chart_data_available">No chart data available</string>
+    <string name="response_rate">Response Rate</string>
+    <string name="response_rate_details">The following chart indicates the number of individuals that responded to your feedback, broken down by category of feedback provider.</string>
+    <string name="average_values">Average values</string>
+    <string name="shows_averages">Shows the averages for all categories.</string>
+    <string name="index_over_competencies">Index over competencies</string>
+    <string name="index_over_competencies_details">Shows the overall values for each area of competence (the average of all the answers from those who responded to your feedback request.) Your own personal assessment is shown in a separate bar.</string>
+    <string name="radar_diagram">Radar Diagram</string>
+    <string name="radar_diagram_details">Shows an overview of the results from the feedback survey, compare with your own personal assessment. The points where the radius of the circle is largest show where your strong points are (according to you or the feedback group).</string>
+    <string name="participants_comments">Participant\'s Comments</string>
+    <string name="highest_rate_manager">Five Highest Rated Questions (Manager)</string>
+    <string name="lowest_rate_manager">Five Lowest Rated Questions (Manager)</string>
+    <string name="highest_rate_others">Five Highest Rated Questions (Others combined)</string>
+    <string name="lowest_rate_others">Five Lowest Rated Questions (Others combined)</string>
+    <string name="overestimated_attributes">Blindspot (Overestimated)</string>
+    <string name="overestimated_attributes_details">Questions where others have rated you lower than you rated yourself. Shows areas where there are areas for improvement.</string>
+    <string name="underestimated_attributes">Blindspot (Underestimated)</string>
+    <string name="underestimated_attributes_details">Questions where others have rated you higher than you rated yourself. Shows the attributes you have that others appreciate.</string>
+    <string name="breakdown_title">Breakdown of answers by participant type</string>
+    <string name="breakdown_details">The diagrams show an average of the answers of the competence areas for each participant category.</string>
+    <string name="detailed_summary">Detailed answer summary per category</string>
+    <string name="yes_no">Yes/No Questions</string>
+    <string name="share_report">Share Result</string>
+    <string name="add_more_participants">Add More Participants</string>
+    <string name="share">Share</string>
+    <string name="instant_feedback_answers">Feedback Result</string>
+    // endregion
 
-  // region Dashboard: Invite
-  <string name="invite">Invite</string>
-  <string name="invite_people_to_rate_you">Invite people to rate you in a survey</string>
-  <string name="name">Name</string>
-  <string name="name_required">Name can\'t be blank</string>
-  <string name="email">E-mail</string>
-  <string name="email_required">E-mail can\'t be blank </string>
-  <string name="role">Role</string>
-  <string name="colleague">Colleague</string>
-  <string name="manager">Manager</string>
-  <string name="customer">Customer</string>
-  <string name="matrix_manager">Matrix Manager</string>
-  <string name="other_stakeholder">Other Stakeholder</string>
-  <string name="direct_report">Direct Report</string>
-  <string name="users_to_invite">Users to invite</string>
-  <string name="no_users">No Users</string>
-  <string name="send_invites">Send Invites</string>
-  <string name="successfully_invite_people_to_rate_you">Successfully invited others to rate you</string>
-  // endregion
+    // region Dashboard: Invite
+    <string name="invite">Invite</string>
+    <string name="invite_people_to_rate_you">Invite people to rate you in a survey</string>
+    <string name="name">Name</string>
+    <string name="name_required">Name can\'t be blank</string>
+    <string name="email">E-mail</string>
+    <string name="email_required">E-mail can\'t be blank </string>
+    <string name="role">Role</string>
+    <string name="colleague">Colleague</string>
+    <string name="manager">Manager</string>
+    <string name="customer">Customer</string>
+    <string name="matrix_manager">Matrix Manager</string>
+    <string name="other_stakeholder">Other Stakeholder</string>
+    <string name="direct_report">Direct Report</string>
+    <string name="users_to_invite">Users to invite</string>
+    <string name="no_users">No Users</string>
+    <string name="send_invites">Send Invites</string>
+    <string name="successfully_invite_people_to_rate_you">Successfully invited others to rate you</string>
+    // endregion
 
-  // region Dashboard: Create
-  <string name="create_new_dashboard">Create New</string>
-  <!--dev_plan_dashboard-->
-  <!--Instant Feedback-->
-  <string name="cancel">Cancel</string>
-  <string name="create_development_plan">Create Development Plan</string>
-  <string name="create_development_plan_name">Enter Development Plan Name</string>
-  <!--name_required-->
-  <string name="goals">Goals</string>
-  <string name="no_goals_added">No Goals added</string>
-  <string name="create">Create</string>
-  <string name="development_plan_created">Successfully created Development Plan</string>
-  <string name="goals_details">Goal Details</string>
-  <string name="goal_name">Enter Goal Name</string>
-  <!--name_required-->
-  <string name="input_description">Enter Description</string>
-  <string name="actions">Actions</string>
-  <string name="add">Add</string>
-  <string name="goals_added">No goals added</string>
-  <string name="no_actions_added">No Actions added</string>
-  <string name="due_date">Due Date</string>
-  <string name="due_date_error">Due date should be on or after today</string>
-  <string name="link_to_categroy">Link to a category</string>
-  <string name="no_categories_available">No Categories available</string>
-  <string name="add_goal">Add Goal</string>
-  <string name="loading">Processing. . .</string>
-  <string name="create_instant_feedback">Create Instant Feedback</string>
-  <string name="answer_type_label">Answer Type</string>
-  <string name="question">Question</string>
-  <string name="question_required_label">Question can\t be blank</string>
-  <string name="custom_scale_required_label">Custom scale input is required</string>
-  <string name="is_anonymous">Is Anonymous</string>
-  <string name="add_na_option">Add a N/A option</string>
-  <string name="question_type_preview">Question Type Preview</string>
-  <string name="yes_or_no">Yes or No</string>
-  <string name="free_text">Free text</string>
-  <string name="numeric_1_to_10">Numeric 1&#8211;10 scale</string>
-  <string name="custom_scale">Custom Scale</string>
-  <string name="options">Options</string>
-  <string name="content">Content</string>
-  <!--invite_dashboard-->
-  <string name="invite_people">Invite People</string>
-  <string name="search">Search</string>
-  <string name="number_people_selected">People selected: %1$d</string>
-  <string name="select_atleast_one">No users selected</string>
-  <string name="select_all">Select all</string>
-  <string name="deselect_all">Deselect all</string>
-  <!--send_invites-->
-  <string name="invite_by_email">Invite people by email address</string>
-  <string name="instant_feedback_created">Successfully invited participants</string>
-  <string name="add_user">Add User</string>
-  <string name="enter_email">Enter Name and Email address</string>
-  <!--name-->
-  <!--email-->
-  <!--cancel-->
-  <!--add_user-->
-  <string name="yes">Yes</string>
-  <string name="no">No</string>
-  // endregion
+    // region Dashboard: Create
+    <string name="create_new_dashboard">Create New</string>
+    <!--dev_plan_dashboard-->
+    <!--Instant Feedback-->
+    <string name="cancel">Cancel</string>
+    <string name="create_development_plan">Create Development Plan</string>
+    <string name="create_development_plan_name">Enter Development Plan Name</string>
+    <!--name_required-->
+    <string name="goals">Goals</string>
+    <string name="no_goals_added">No Goals added</string>
+    <string name="create">Create</string>
+    <string name="development_plan_created">Successfully created Development Plan</string>
+    <string name="goals_details">Goal Details</string>
+    <string name="goal_name">Enter Goal Name</string>
+    <!--name_required-->
+    <string name="input_description">Enter Description</string>
+    <string name="actions">Actions</string>
+    <string name="add">Add</string>
+    <string name="goals_added">No goals added</string>
+    <string name="no_actions_added">No Actions added</string>
+    <string name="due_date">Due Date</string>
+    <string name="due_date_error">Due date should be on or after today</string>
+    <string name="link_to_categroy">Link to a category</string>
+    <string name="no_categories_available">No Categories available</string>
+    <string name="add_goal">Add Goal</string>
+    <string name="loading">Processing. . .</string>
+    <string name="create_instant_feedback">Create Instant Feedback</string>
+    <string name="answer_type_label">Answer Type</string>
+    <string name="question">Question</string>
+    <string name="question_required_label">Question can\t be blank</string>
+    <string name="custom_scale_required_label">Custom scale input is required</string>
+    <string name="is_anonymous">Is Anonymous</string>
+    <string name="add_na_option">Add a N/A option</string>
+    <string name="question_type_preview">Question Type Preview</string>
+    <string name="yes_or_no">Yes or No</string>
+    <string name="free_text">Free text</string>
+    <string name="numeric_1_to_10">Numeric 1&#8211;10 scale</string>
+    <string name="custom_scale">Custom Scale</string>
+    <string name="options">Options</string>
+    <string name="content">Content</string>
+    <!--invite_dashboard-->
+    <string name="invite_people">Invite People</string>
+    <string name="search">Search</string>
+    <string name="number_people_selected">People selected: %1$d</string>
+    <string name="select_atleast_one">No users selected</string>
+    <string name="select_all">Select all</string>
+    <string name="deselect_all">Deselect all</string>
+    <!--send_invites-->
+    <string name="invite_by_email">Invite people by email address</string>
+    <string name="instant_feedback_created">Successfully invited participants</string>
+    <string name="add_user">Add User</string>
+    <string name="enter_email">Enter Name and Email address</string>
+    <!--name-->
+    <!--email-->
+    <!--cancel-->
+    <!--add_user-->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    // endregion
 
-  // region Dashboard: Answer
-  <string name="instant_feedback_requests">Instant Feedback Requests</string>
-  // endregion
+    // region Dashboard: Answer
+    <string name="instant_feedback_requests">Instant Feedback Requests</string>
+    // endregion
 
-  // region Profile
-  <!--profile-->
-  <!--name-->
-  <string name="gender">Gender</string>
-  <string name="male_camel">Male</string>
-  <string name="female_camel">Female</string>
-  <string name="male">male</string>
-  <string name="female">female</string>
-  <string name="about">About</string>
-  <!--role-->
-  <string name="department">Department</string>
-  <string name="country">Country</string>
-  <string name="city">City</string>
-  <string name="edit">Edit</string>
-  <string name="save">Save</string>
-  <!--cancel-->
-  <string name="user_updated">Successfully updated profile</string>
-  // endregion
+    // region Profile
+    <!--profile-->
+    <!--name-->
+    <string name="gender">Gender</string>
+    <string name="male_camel">Male</string>
+    <string name="female_camel">Female</string>
+    <string name="male">male</string>
+    <string name="female">female</string>
+    <string name="about">About</string>
+    <!--role-->
+    <string name="department">Department</string>
+    <string name="country">Country</string>
+    <string name="city">City</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <!--cancel-->
+    <string name="user_updated">Successfully updated profile</string>
+    // endregion
 
-  // region Surveys
-  <!--drawer_surveys-->
-  <string name="search_survey">Search Surveys</string>
-  <!--all-->
-  <!--Instant Feedback-->
-  <!--Lynx Measurement-->
-  <string name="created_by">Created by: %1$s</string>
-  <!--lynx_360-->
-  <!--lynx_management-->
-  <!--lynx_progress-->
-  <!--lynx_survey-->
-  <!--lynx_team_tool-->
-  <!--Instant Feedback-->
-  <string name="open_status">Open</string>
-  <string name="unfinished_status">Unfinished</string>
-  <string name="completed_text">Completed</string>
-  <string name="not_invited_status">Not Invited</string>
-  <string name="answer_survey">Answer Survey</string>
-  <string name="required_fields">Please fill up all required questions</string>
-  <string name="optional">(optional)</string>
-  <string name="save_to_drafts">Save to Drafts</string>
-  <string name="instant_feed_submitted">Successfully answered Instant Feedback</string>
-  <string name="anonymous_feedback">Anonymous Feedback</string>
-  <string name="submit">Submit</string>
-  <string name="type_here">Type here. . .</string>
-  <string name="saved_to_drafts">Successfully saved answers to drafts</string>
-  <string name="survey_completed">Survey Completed!</string>
-  <string name="shared_to_other_people">Succesfully shared result</string>
-  // endregion
+    // region Surveys
+    <!--drawer_surveys-->
+    <string name="search_survey">Search Surveys</string>
+    <!--all-->
+    <!--Instant Feedback-->
+    <!--Lynx Measurement-->
+    <string name="created_by">Created by: %1$s</string>
+    <!--lynx_360-->
+    <!--lynx_management-->
+    <!--lynx_progress-->
+    <!--lynx_survey-->
+    <!--lynx_team_tool-->
+    <!--Instant Feedback-->
+    <string name="open_status">Open</string>
+    <string name="unfinished_status">Unfinished</string>
+    <string name="completed_text">Completed</string>
+    <string name="not_invited_status">Not Invited</string>
+    <string name="answer_survey">Answer Survey</string>
+    <string name="required_fields">Please fill up all required questions</string>
+    <string name="optional">(optional)</string>
+    <string name="save_to_drafts">Save to Drafts</string>
+    <string name="instant_feed_submitted">Successfully answered Instant Feedback</string>
+    <string name="anonymous_feedback">Anonymous Feedback</string>
+    <string name="submit">Submit</string>
+    <string name="type_here">Type here. . .</string>
+    <string name="saved_to_drafts">Successfully saved answers to drafts</string>
+    <string name="survey_completed">Survey Completed!</string>
+    <string name="shared_to_other_people">Succesfully shared result</string>
+    // endregion
 
-  // region Development Plans
-  <!--drawer_dev_plan-->
-  <string name="search_development_plans">Search Development Plans</string>
-  <!--all-->
-  <string name="in_progress">In Progress</string>
-  <!--completed-->
-  <string name="expired">Expired</string>
-  <string name="overall_progress">Overall Progress</string>
-  <string name="goal_prgress">Goals Progress Bar</string>
-  <string name="completed_details">%1$d / %2$d Completed</string>
-  <string name="number_of_goals">%1$d of %2$d goals</string>
-  <string name="text_completed"> completed</string>
-  <string name="due_date_goal">Due Date: %1$s</string>
-  <string name="add_action">Add Action</string>
-  <string name="action_added">Successfully added goal action</string>
-  <string name="goal_created">Successfully added goal</string>
-  <string name="goal_updated">Successfully updated goal</string>
-  <string name="create_action">Create Action</string>
-  <string name="enter_new_action">Enter new action</string>
-  <string name="update_goal">Update Goal</string>
-  <string name="delete_goal">Delete Goal</string>
-  <string name="confirmation">Confirmation</string>
-  <string name="delete_goal_message">Delete this goal, %1$s?</string>
-  <string name="delete_text">Delete</string>
-  <string name="goal_delete">Successfully deleted goal</string>
-  <string name="update_action">Update Action</string>
-  <string name="delete_action">Delete Action</string>
-  <string name="enter_new_name_for">Enter new name for action</string>
-  <string name="update">Update</string>
-  <string name="action_updated">Successfully updated goal action</string>
-  <string name="delte_action_message">Delete this action, %1$s?</string>
-  <string name="action_delete">Successfully deleted goal action</string>
-  <string name="complete_action_message">Complete this action, %1$s?</string>
-  <string name="complete">Complete</string>
-  <string name="goal_completed">Goal Completed!</string>
-  <string name="label_popup">You\'ve got the right mix of dedication and\nenthusiasm. Keep it up!</string>
-  <string name="close">Close</string>
-  // endregion
+    // region Development Plans
+    <!--drawer_dev_plan-->
+    <string name="search_development_plans">Search Development Plans</string>
+    <!--all-->
+    <string name="in_progress">In Progress</string>
+    <!--completed-->
+    <string name="expired">Expired</string>
+    <string name="overall_progress">Overall Progress</string>
+    <string name="goal_prgress">Goals Progress Bar</string>
+    <string name="completed_details">%1$d / %2$d Completed</string>
+    <string name="number_of_goals">%1$d of %2$d goals</string>
+    <string name="text_completed"> completed</string>
+    <string name="due_date_goal">Due Date: %1$s</string>
+    <string name="add_action">Add Action</string>
+    <string name="action_added">Successfully added goal action</string>
+    <string name="goal_created">Successfully added goal</string>
+    <string name="goal_updated">Successfully updated goal</string>
+    <string name="create_action">Create Action</string>
+    <string name="enter_new_action">Enter new action</string>
+    <string name="update_goal">Update Goal</string>
+    <string name="delete_goal">Delete Goal</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="delete_goal_message">Delete this goal, %1$s?</string>
+    <string name="delete_text">Delete</string>
+    <string name="goal_delete">Successfully deleted goal</string>
+    <string name="update_action">Update Action</string>
+    <string name="delete_action">Delete Action</string>
+    <string name="enter_new_name_for">Enter new name for action</string>
+    <string name="update">Update</string>
+    <string name="action_updated">Successfully updated goal action</string>
+    <string name="delte_action_message">Delete this action, %1$s?</string>
+    <string name="action_delete">Successfully deleted goal action</string>
+    <string name="complete_action_message">Complete this action, %1$s?</string>
+    <string name="complete">Complete</string>
+    <string name="goal_completed">Goal Completed!</string>
+    <string name="label_popup">You\'ve got the right mix of dedication and\nenthusiasm. Keep it up!</string>
+    <string name="close">Close</string>
+    // endregion
 
-  // region Settings
-  <string name="change_password">Change Password</string>
-  <string name="current_password">Current Password</string>
-  <string name="new_password">New Password</string>
-  <string name="re_new_password">New Password (Again)</string>
-  <string name="old_password_required">Field can\'t be blank</string>
-  <string name="new_password_required">Field can\'t be blank</string>
-  <string name="password_not_match">New password fields must be the same</string>
-  <string name="password_updated">Successfully updated password</string>
-  <string name="enable_notification">Please enable Notification Access for badge notification</string>
-  <string name="enable">Enable</string>
-  <string name="later">Later</string>
-  // engregion
+    // region Settings
+    <string name="change_password">Change Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="re_new_password">New Password (Again)</string>
+    <string name="old_password_required">Field can\'t be blank</string>
+    <string name="new_password_required">Field can\'t be blank</string>
+    <string name="password_not_match">New password fields must be the same</string>
+    <string name="password_updated">Successfully updated password</string>
+    <string name="enable_notification">Please enable Notification Access for badge notification</string>
+    <string name="enable">Enable</string>
+    <string name="later">Later</string>
+    // engregion
 
-  // region logout
-  <string name="logout">Logout</string>
-  <string name="logout_confirmation_message">Logging out will require the app for your credentials next time.</string>
-  // endregion
+    // region logout
+    <string name="logout">Logout</string>
+    <string name="logout_confirmation_message">Logging out will require the app for your credentials next time.</string>
+    // endregion
 
-  // region forgot password
-  <string name="recover">Recover</string>
-  <string name="valid_email_required">Valid email is required</string>
-  <string name="login_now">Login now</string>
+    // region forgot password
+    <string name="recover">Recover</string>
+    <string name="valid_email_required">Valid email is required</string>
+    <string name="login_now">Login now</string>
 
-  // Generic messages
-  <string name="no_data_found">No data found</string>
-  <string name="error">Error</string>
-  <string name="no_internet_connection">No Internet Connection</string>
-  <string name="cant_connect">Can\'t connect to server. Try again later</string>
-  <string name="no_access">You are not authorize to answer this survey</string>
-  <string name="no_access_feedback">You are not authorize to answer this instant feedback</string>
+    // Generic messages
+    <string name="no_data_found">No data found</string>
+    <string name="error">Error</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="cant_connect">Can\'t connect to server. Try again later</string>
+    <string name="no_access">You are not authorize to answer this survey</string>
+    <string name="no_access_feedback">You are not authorize to answer this instant feedback</string>
 
-  <string name="numeric_1_to_5">Numeric 1&#8211;5 scale</string>
-  <string name="agreement_scale">Agreement scale</string>
-  <string name="strong_agreement_scale">Strong Agreement scale</string>
-  <string name="reverse_agreement_scale">Reverse Agreement scale</string>
-  <string name="numeric_1_to_10_explanation">Numeric 1&#8211;10 scale with explanation</string>
+    <string name="numeric_1_to_5">Numeric 1&#8211;5 scale</string>
+    <string name="agreement_scale">Agreement scale</string>
+    <string name="strong_agreement_scale">Strong Agreement scale</string>
+    <string name="reverse_agreement_scale">Reverse Agreement scale</string>
+    <string name="numeric_1_to_10_explanation">Numeric 1&#8211;10 scale with explanation</string>
 
   // region manager View
   <string name="team">Team</string>
@@ -318,7 +318,7 @@
   <string name="not_shared_to_manager">Development Plan no longer shared to manager</string>
   <string name="shared_to_manager">Successfully shared Development Plan to manager</string>
   <string name="users">Users</string>
-
   <string name="disabled_users">Successfully disabled users to Manager View</string>
   <string name="enabled_user">Successfully enabled users to Manager View</string>
+
 </resources>

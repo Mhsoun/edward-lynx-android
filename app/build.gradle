@@ -1,88 +1,90 @@
 buildscript {
-  repositories {
-    maven { url 'https://maven.fabric.io/public' }
-  }
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
 
-  dependencies {
-    // These docs use an open ended version so that our plugin
-    // can be updated quickly in response to Android tooling updates
+    dependencies {
+        // These docs use an open ended version so that our plugin
+        // can be updated quickly in response to Android tooling updates
 
-    // We recommend changing it to the latest version from our changelog:
-    // https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
-    classpath 'io.fabric.tools:gradle:1.+'
-  }
+        // We recommend changing it to the latest version from our changelog:
+        // https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 repositories {
-  maven { url 'https://maven.fabric.io/public' }
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion "25.0.0"
-  defaultConfig {
-    applicationId "com.ingenuitymobile.edwardlynx"
-    minSdkVersion 16
-    targetSdkVersion 25
-    versionCode 1
-    versionName "1.0"
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-  }
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        applicationId "com.ingenuitymobile.edwardlynx"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-  }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 }
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  compile 'com.android.support:appcompat-v7:25.0.1'
-  compile 'com.android.support:design:25.1.0'
-  compile 'uk.co.chrisjenx:calligraphy:2.2.0'
-  compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
-    transitive = true;
-  }
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
+        transitive = true;
+    }
 
-  // rxjava with retrofit
-  compile 'io.reactivex:rxjava:1.0.+'
-  compile 'io.reactivex:rxandroid:0.23.+'
-  compile 'com.squareup.retrofit:retrofit:1.9.+'
-  compile 'com.squareup.okhttp:okhttp:+'
-  compile 'com.squareup.okhttp:okhttp-urlconnection:+'
-  compile 'com.squareup.okio:okio:+'
-  // https://github.com/florent37/SingleDateAndTimePicker
-  compile 'com.github.florent37:singledateandtimepicker:1.1.5'
-  // Firabase messaging
-  compile 'com.google.firebase:firebase-messaging:10.2.0'
-  // Expandable recycler adapter
-  // https://bignerdranch.github.io/expandable-recycler-view/
-  compile 'com.bignerdranch.android:expandablerecyclerview:2.1.1'
-  // https://github.com/txusballesteros/fit-chart
-  compile 'com.txusballesteros:FitChart:1.0'
-  // https://github.com/PhilJay/MPAndroidChart
-  compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-  // https://support.hockeyapp.net/kb/client-integration-android/hockeyapp-for-android-sdk
-  compile 'net.hockeyapp.android:HockeySDK:4.0.0'
-  // viewpagerindicator
-  compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
-  // https://github.com/Kaopiz/android-segmented-control
-  compile 'info.hoang8f:android-segmented:1.0.6'
+    // rxjava with retrofit
+    // https://github.com/florent37/SingleDateAndTimePicker
+    // Firabase messaging
+    // Expandable recycler adapter
+    // https://bignerdranch.github.io/expandable-recycler-view/
+    // https://github.com/txusballesteros/fit-chart
+    // https://github.com/PhilJay/MPAndroidChart
+    // https://support.hockeyapp.net/kb/client-integration-android/hockeyapp-for-android-sdk
+    // viewpagerindicator
+    // https://github.com/Kaopiz/android-segmented-control
+  
 
-  // tests
+    // tests
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
-  testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:design:25.1.0'
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+    compile 'io.reactivex:rxjava:1.0.+'
+    compile 'io.reactivex:rxandroid:0.23.+'
+    compile 'com.squareup.retrofit:retrofit:1.9.+'
+    compile 'com.squareup.okhttp:okhttp:+'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:+'
+    compile 'com.squareup.okio:okio:+'
+    compile 'com.github.florent37:singledateandtimepicker:1.1.5'
+    compile 'com.google.firebase:firebase-messaging:10.2.0'
+    compile 'com.bignerdranch.android:expandablerecyclerview:2.1.1'
+    compile 'com.txusballesteros:FitChart:1.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    compile 'net.hockeyapp.android:HockeySDK:4.0.0'
+    compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
+    compile 'info.hoang8f:android-segmented:1.0.6'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
 }
 
 apply plugin: 'com.google.gms.google-services'

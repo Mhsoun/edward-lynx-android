@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity implements
     context = this;
 
     initViews();
-    setUserCrashlytics();
+//    setUserCrashlytics();
 
     changeToDashboard();
     checkIntent();
