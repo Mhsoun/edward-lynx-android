@@ -11,7 +11,7 @@ import com.ingenuitymobile.edwardlynx.api.responses.Response;
 public class User extends Response {
 
   public static final String ADMIN             = "admin";
-  public static final String SUPER_ADMIN       = "superAdmin";
+  public static final String SUPER_ADMIN       = "superadmin";
   public static final String SUPERVISOR        = "supervisor";
   public static final String PARTICIPANT       = "participant";
   public static final String FEEDBACK_PROVIDER = "feedback-provider";

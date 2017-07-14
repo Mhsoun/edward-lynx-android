@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ import com.ingenuitymobile.edwardlynx.adapters.DevelopmentPlanAdapter;
 import com.ingenuitymobile.edwardlynx.adapters.ReminderAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.DevelopmentPlan;
 import com.ingenuitymobile.edwardlynx.api.models.Reminder;
+import com.ingenuitymobile.edwardlynx.api.models.User;
 import com.ingenuitymobile.edwardlynx.api.responses.DashboardResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.views.BadgeView;
@@ -45,6 +47,7 @@ public class DashboardFragment extends BaseFragment {
 
   private View mainView;
 
+  private LinearLayout   topLayout;
   private RelativeLayout devPlanLayout;
   private RelativeLayout instantFeedbackLayout;
   private RelativeLayout lynxLayout;
@@ -114,6 +117,7 @@ public class DashboardFragment extends BaseFragment {
   }
 
   private void initViews() {
+    topLayout = (LinearLayout) mainView.findViewById(R.id.layout_top);
     devPlanLayout = (RelativeLayout) mainView.findViewById(R.id.layout_dev_plan);
     instantFeedbackLayout = (RelativeLayout) mainView.findViewById(R.id.layout_instant_feedback);
     lynxLayout = (RelativeLayout) mainView.findViewById(R.id.layout_lynx_measurement);
@@ -162,13 +166,16 @@ public class DashboardFragment extends BaseFragment {
   }
 
   private void setupViews() {
-//    final int disabledColor = Color.parseColor("#3f244f");
-//    if (Shared.user.type.equals(User.FEEDBACK_PROVIDER)) {
-//      createDevelopmenPlanLayout.setBackgroundColor(disabledColor);
-//      viewReportsLayout.setBackgroundColor(disabledColor);
-//    } else if (Shared.user.type.equals(User.ANALYST)) {
-//      createDevelopmenPlanLayout.setBackgroundColor(disabledColor);
-//    }
+    LogUtil.e("AAA " + Shared.user.type);
+    if ((Shared.user.type.equals(User.ADMIN) ||
+        Shared.user.type.equals(User.SUPER_ADMIN) ||
+        Shared.user.type.equals(User.SUPERVISOR))) {
+      teamLayout.setVisibility(View.VISIBLE);
+      topLayout.setWeightSum(4);
+    } else {
+      teamLayout.setVisibility(View.GONE);
+      topLayout.setWeightSum(3);
+    }
   }
 
   private void getDasboard() {

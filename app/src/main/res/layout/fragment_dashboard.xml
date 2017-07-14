@@ -16,10 +16,11 @@
         android:orientation="vertical">
 
       <LinearLayout
+          android:id="@+id/layout_top"
           android:layout_width="match_parent"
           android:layout_height="92dp"
           android:orientation="horizontal"
-          android:weightSum="4">
+          android:weightSum="3">
 
         <RelativeLayout
             android:id="@+id/layout_dev_plan"
