@@ -153,7 +153,7 @@
     <string name="no_reminders">Без напоминаний</string>
     <string name="no_results">Нет результатов для отображения</string>
     <string name="no_users">Нет пользователей для отображения</string>
-    <string name="not_available"></string>
+    <string name="not_available">N/A</string>
     <string name="not_invited_status">Нет приглашенных участников</string>
     <string name="now">Заполнить сейчас</string>
     <string name="number_of_goals">%1$d из %2$d целей выполнены</string>
@@ -217,4 +217,5 @@
     <string name="yes_or_no">Да или Нет</string>
     <string name="yes_no">Вопросы \"да/нет\"</string>
     <string name="yes">Да</string>
+    <string name="create_new_dashboard">Создать новый план</string>
 </resources>
