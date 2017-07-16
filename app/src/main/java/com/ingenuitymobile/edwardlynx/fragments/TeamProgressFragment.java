@@ -92,7 +92,7 @@ public class TeamProgressFragment extends BaseFragment {
   private View.OnClickListener listener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-      Intent intent =  new Intent(getActivity(), AddTeamDevPlanActivity.class);
+      Intent intent = new Intent(getActivity(), AddTeamDevPlanActivity.class);
       startActivity(intent);
     }
   };
@@ -114,7 +114,11 @@ public class TeamProgressFragment extends BaseFragment {
       @Override
       public void onNext(TeamDevPlansResponse response) {
         data.clear();
-        data.addAll(response.items);
+        for (TeamDevPlan teamDevPlan : response.items) {
+          if (teamDevPlan.visible == 1) {
+            data.add(teamDevPlan);
+          }
+        }
         adapter.notifyDataSetChanged();
         emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
       }

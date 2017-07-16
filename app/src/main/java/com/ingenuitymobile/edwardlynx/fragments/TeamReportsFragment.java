@@ -39,80 +39,17 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class TeamReportsFragment extends BaseFragment {
 
-  private ApiClient apiClient;
-  private View mainView;
-  private RecyclerView recyclerView;
-  private List<TeamReportSurvey> surveys;
-  private List<TeamReportItem> items;
+  private View                    mainView;
+  private List<TeamReportItem>    items;
   private TeamResultParentAdapter adapter;
 
-  public TeamReportsFragment(){
+  public TeamReportsFragment() {
+    items = new ArrayList<>();
   }
-
-  @Override
-  public void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-
-    String[] reps = {"Report Link 1", "Report Link 2", "Report Link 3"};
-    Survey survey = new Survey();
-    Survey survey2 = new Survey();
-
-    survey.reports = new ArrayList<>();
-    survey2.reports = new ArrayList<>();
-
-    // Placeholder data
-    survey.name = "Survey Name";
-    survey2.name = "Survey2 Name";
-
-    // Add reports
-    for(String rep : reps){
-      survey.reports.add(rep);
-      survey2.reports.add(rep);
-    }
-
-  }
-
-  public void getReports(){
-    subscription.add(apiClient.getSurveyReports()
-    .observeOn(AndroidSchedulers.mainThread())
-    .subscribeOn(AndroidSchedulers.mainThread())
-    .subscribe(new Subscriber<TeamReportResponse>() {
-      @Override
-      public void onCompleted() {
-        adapter = new TeamResultParentAdapter(items);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
-      }
-
-      @Override
-      public void onError(Throwable e) {
-        Log.wtf("Team Report Error", e.getLocalizedMessage());
-      }
-
-      @Override
-      public void onNext(TeamReportResponse teamReportResponse) {
-
-        for (int i=0;i<teamReportResponse.items.size();i++) {
-          items.add(teamReportResponse.items.get(i));
-          for (int y=0;y<teamReportResponse.items.get(i).surveys.size();y++) {
-            surveys.add(teamReportResponse.items.get(i).surveys.get(y));
-            Log.wtf("user", teamReportResponse.items.get(i).name);
-            Log.wtf("Surveys", teamReportResponse.items.get(i).surveys.get(y).name);
-          }
-        }
-
-      }
-    }));
-  }
-
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    apiClient = Shared.apiClient;
-    surveys = new ArrayList<>();
-    items = new ArrayList<>();
 
     if (mainView != null) {
       ViewGroup parent = (ViewGroup) mainView.getParent();
@@ -130,19 +67,41 @@ public class TeamReportsFragment extends BaseFragment {
     return mainView;
   }
 
-  private void initViews() {
+  @Override
+  public void onResume() {
+    super.onResume();
     getReports();
-    recyclerView = (RecyclerView) mainView.findViewById(R.id.list_reports);
-
   }
 
-  private List<ParentListItem> generateResults(List<TeamReportSurvey> surveys) {
-    List<ParentListItem> parentListItems = new ArrayList<>();
-    for (TeamReportSurvey survey : surveys) {
-      parentListItems.add(survey);
-    }
-    return parentListItems;
+  private void initViews() {
+    final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.list_reports);
+
+    adapter = new TeamResultParentAdapter(items);
+    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    recyclerView.setAdapter(adapter);
   }
 
+  public void getReports() {
+    subscription.add(Shared.apiClient.getSurveyReports()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Subscriber<TeamReportResponse>() {
+          @Override
+          public void onCompleted() {
+
+          }
+
+          @Override
+          public void onError(Throwable e) {
+            Log.wtf("Team Report Error", e.getLocalizedMessage());
+          }
+
+          @Override
+          public void onNext(TeamReportResponse teamReportResponse) {
+            items.addAll(teamReportResponse.items);
+            adapter.notifyDataSetChanged();
+          }
+        }));
+  }
 
 }

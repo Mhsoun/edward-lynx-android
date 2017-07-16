@@ -6,7 +6,6 @@
     <string name="action_delete">Задача успешно удалена</string>
     <string name="action_updated">Действие по выполнению цели успешно обновлено</string>
     <string name="actions">Задача</string>
-    <string name="add">Добавить</string>
     <string name="add_action">Добавить Задачу</string>
     <string name="add_goal">Добавить цель</string>
     <string name="add_more_participants">Добавить участников</string>
@@ -82,7 +81,6 @@
     <string name="female_camel">Женский</string>
     <string name="forgot_password">Забыли пароль?</string>
     <string name="free_text">Текстовый ответ</string>
-    <string name="free_text_description">Текстовый</string>
     <string name="gender">Пол</string>
     <string name="goal">Цель</string>
     <string name="goal_completed">Цель выполнена</string>

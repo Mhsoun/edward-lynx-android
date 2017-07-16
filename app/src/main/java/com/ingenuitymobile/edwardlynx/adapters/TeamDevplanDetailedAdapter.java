@@ -2,6 +2,7 @@ package com.ingenuitymobile.edwardlynx.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +45,7 @@ public class TeamDevplanDetailedAdapter extends
       percentageText = (TextView) itemView.findViewById(R.id.text_percentage);
       progressFitChart = (FitChart) itemView.findViewById(R.id.fitchart_progress);
       recyclerView = (RecyclerView) itemView.findViewById(R.id.recycler_goals);
-      recyclerView.setLayoutManager(new GridLayoutManager(itemView.getContext(), 3));
+      recyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
       recyclerView.setNestedScrollingEnabled(false);
     }
   }

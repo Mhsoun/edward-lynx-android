@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.api.models.TeamDevPlan;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.views.draggable.ItemTouchHelperAdapter;
 import com.ingenuitymobile.edwardlynx.views.draggable.OnStartDragListener;
 
@@ -22,12 +24,12 @@ import java.util.List;
  */
 
 public class AddTeamPlanAdapter extends
-    RecyclerView.Adapter<AddTeamPlanAdapter.ViewHolder> implements ItemTouchHelperAdapter {
+    RecyclerView.Adapter<AddTeamPlanAdapter.ViewHolder> {
 
-  private List<String>        data;
+  private List<TeamDevPlan>   data;
   private OnStartDragListener onStartDragListener;
 
-  public AddTeamPlanAdapter(List<String> data, OnStartDragListener onStartDragListener) {
+  public AddTeamPlanAdapter(List<TeamDevPlan> data, OnStartDragListener onStartDragListener) {
     super();
     this.data = data;
     this.onStartDragListener = onStartDragListener;
@@ -55,17 +57,31 @@ public class AddTeamPlanAdapter extends
   @Override
   public void onBindViewHolder(final ViewHolder holder, final int position) {
     final Context context = holder.itemView.getContext();
-    final String teamPlan = data.get(position);
+    final TeamDevPlan teamPlan = data.get(position);
 
-    holder.nameText.setText(teamPlan);
+    holder.nameText.setText(teamPlan.name);
+
+    holder.circleImage.setVisibility(teamPlan.visible == 1 ? View.VISIBLE : View.INVISIBLE);
 
     holder.handleImage.setOnTouchListener(new View.OnTouchListener() {
       @Override
       public boolean onTouch(View v, MotionEvent event) {
+        LogUtil.e("AAA " + MotionEventCompat.getActionMasked(event));
         if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
           onStartDragListener.onStartDrag(holder);
         }
-        return false;
+        if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_UP) {
+          notifyDataSetChanged();
+        }
+        LogUtil.e("AAA humana" + MotionEventCompat.getActionMasked(event));
+        return true;
+      }
+    });
+
+    holder.itemView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        onStartDragListener.onSelectedItem(position);
       }
     });
   }
@@ -73,18 +89,5 @@ public class AddTeamPlanAdapter extends
   @Override
   public int getItemCount() {
     return data.size();
-  }
-
-  @Override
-  public void onItemDismiss(int position) {
-    data.remove(position);
-    notifyItemRemoved(position);
-  }
-
-  @Override
-  public boolean onItemMove(int fromPosition, int toPosition) {
-    Collections.swap(data, fromPosition, toPosition);
-    notifyItemMoved(fromPosition, toPosition);
-    return true;
   }
 }

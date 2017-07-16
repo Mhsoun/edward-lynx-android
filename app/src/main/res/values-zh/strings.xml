@@ -6,7 +6,6 @@
     <string name="action_delete">成功删除此目标任务</string>
     <string name="action_updated">成功更新目标任务</string>
     <string name="actions">具体任务</string>
-    <string name="add">添加</string>
     <string name="add_action">添加任务</string>
     <string name="add_goal">添加目标</string>
     <string name="add_more_participants">添加更多评分者</string>
@@ -83,7 +82,6 @@
     <string name="female_camel">女</string>
     <string name="forgot_password">忘记密码？</string>
     <string name="free_text">文本描述</string>
-    <string name="free_text_description">文本</string>
     <string name="gender">性别</string>
     <string name="goal">发展目标</string>
     <string name="goal_completed">发展目标已完成!</string>

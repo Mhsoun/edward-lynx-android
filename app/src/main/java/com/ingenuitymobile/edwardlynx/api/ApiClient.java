@@ -7,7 +7,9 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.DevPlanBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InviteUserParam;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.PostTeamDevPlanBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.TeamDevPlanBodies;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.TokenParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
 import com.ingenuitymobile.edwardlynx.api.models.Action;
@@ -28,6 +30,7 @@ import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.IndividualProgressResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.TeamDevPlanResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.TeamDevPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.TeamReportResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
@@ -624,6 +627,42 @@ public class ApiClient {
         }));
   }
 
+  public Subscription updateTeamCategories(final TeamDevPlanBodies bodies,
+      final Subscriber<Response> subscriber) {
+    return service.udpateTeamCategories(bodies)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            updateTeamCategories(bodies, subscriber);
+          }
+        }));
+  }
+
+  public Subscription postTeamCategory(final PostTeamDevPlanBody body,
+      final Subscriber<TeamDevPlanResponse> subscriber) {
+    return service.postTeamCategory(body)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            postTeamCategory(body, subscriber);
+          }
+        }));
+  }
+
+  public Subscription deleteTeamCategory(final long id,
+      final Subscriber<Response> subscriber) {
+    return service.deleteTeamCategory(id)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            deleteTeamCategory(id, subscriber);
+          }
+        }));
+  }
+
   public Subscription getTeamCategory(final long id, final Subscriber<TeamDevPlan> subscriber) {
     return service.getTeamCategory(id)
         .observeOn(AndroidSchedulers.mainThread())
@@ -736,7 +775,7 @@ public class ApiClient {
   }
 
   public Observable<TeamReportResponse> getSurveyReports() {
-      return service.getSurveyReports();
+    return service.getSurveyReports();
   }
 
 

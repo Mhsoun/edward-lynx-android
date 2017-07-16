@@ -6,7 +6,10 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.DevPlanBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InviteUserParam;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.PostTeamDevPlanBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.TeamDevPlanBodies;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.TeamDevPlanBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.TokenParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
 import com.ingenuitymobile.edwardlynx.api.models.Action;
@@ -27,6 +30,7 @@ import com.ingenuitymobile.edwardlynx.api.responses.FeedbacksResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.IndividualProgressResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.api.responses.SurveyResultsResponse;
+import com.ingenuitymobile.edwardlynx.api.responses.TeamDevPlanResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.TeamDevPlansResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.TeamReportResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
@@ -218,13 +222,24 @@ public interface Service {
   @GET("/api/v1/dev-plans-manager/teams")
   Observable<TeamDevPlansResponse> getTeamCategories();
 
+  @Headers("Content-Type: application/json")
+  @PUT("/api/v1/dev-plans-manager/teams")
+  Observable<Response> udpateTeamCategories(@Body TeamDevPlanBodies body);
+
+  @Headers("Content-Type: application/json")
+  @POST("/api/v1/dev-plans-manager/teams")
+  Observable<TeamDevPlanResponse> postTeamCategory(@Body PostTeamDevPlanBody body);
+
+  @Headers("Content-Type: application/json")
+  @DELETE("/api/v1/dev-plans-manager/teams/{id}")
+  Observable<Response> deleteTeamCategory(@Path("id") long id);
+
   @GET("/api/v1/dev-plans-manager/teams/{id}")
   Observable<TeamDevPlan> getTeamCategory(@Path("id") long id);
 
   @Headers("Content-Type: application/json")
   @PUT("/api/v1/dev-plans-manager/users")
   Observable<Response> putIndividualUsers(@Body AddUserBody body);
-
   //endregion
 
   // region Reports

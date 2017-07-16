@@ -33,4 +33,27 @@ public class AnswerTypeUtil {
     }
     return -1;
   }
+
+  public static String getStringType(Context ctx, int type) {
+    if (type == Answer.NUMERIC_1_5_SCALE) {
+      return ctx.getString(R.string.numeric_1_to_5);
+    } else if (type == Answer.NUMERIC_1_10_SCALE) {
+      return ctx.getString(R.string.numeric_1_to_10);
+    } else if (type == Answer.AGREEMENT_SCALE) {
+      return ctx.getString(R.string.agreement_scale);
+    } else if (type == Answer.YES_OR_NO) {
+      return ctx.getString(R.string.yes_or_no);
+    } else if (type == Answer.STRONG_AGREEMENT_SCALE) {
+      return ctx.getString(R.string.strong_agreement_scale);
+    } else if (type == Answer.CUSTOM_TEXT) {
+      return ctx.getString(R.string.free_text);
+    } else if (type == Answer.REVERSE_AGREEMENT_SCALE) {
+      return ctx.getString(R.string.reverse_agreement_scale);
+    } else if (type == Answer.NUMERIC_1_10_WITH_EXPLANATION) {
+      return ctx.getString(R.string.numeric_1_to_10_explanation);
+    } else if (type == Answer.CUSTOM_SCALE) {
+      return ctx.getString(R.string.custom_scale);
+    }
+    return "";
+  }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Feedback;
 import com.ingenuitymobile.edwardlynx.api.models.Question;
+import com.ingenuitymobile.edwardlynx.utils.AnswerTypeUtil;
 import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
@@ -71,7 +72,7 @@ public class FeedbackReportsAdapter extends
       Question question = feedback.questions.get(0);
 
       holder.nameText.setText(question.text);
-      holder.descriptionText.setText(question.answer.decscription);
+      holder.descriptionText.setText(AnswerTypeUtil.getStringType(context, question.answer.type));
 
       holder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override
