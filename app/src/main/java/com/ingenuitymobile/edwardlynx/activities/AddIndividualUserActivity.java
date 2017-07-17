@@ -104,8 +104,13 @@ public class AddIndividualUserActivity extends InviteBaseActivity {
 
           @Override
           public void onError(Throwable e) {
-            progressDialog.dismiss();
             LogUtil.e("AAA onError");
+            progressDialog.dismiss();
+            Toast.makeText(
+                context,
+                getString(R.string.failed_update_users_team_plan),
+                Toast.LENGTH_SHORT
+            ).show();
           }
 
           @Override
