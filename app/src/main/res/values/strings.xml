@@ -321,4 +321,5 @@
   <string name="disabled_users">Successfully disabled users to Manager View</string>
   <string name="enabled_user">Successfully enabled users to Manager View</string>
   <string name="language_required">Language can\'t be blank</string>
+  <string name="language">Language</string>
 </resources>
