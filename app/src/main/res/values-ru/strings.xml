@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Edward Lynx</string>
-    <string name="about">Сведения о Вас</string>
-    <string name="action_added"></string>
+    <string name="about">Сведения о вас</string>
+    <string name="action_added">Задача успешно добавлена</string>
     <string name="action_delete">Задача успешно удалена</string>
     <string name="action_updated">Действие по выполнению цели успешно обновлено</string>
     <string name="actions">Задача</string>
     <string name="add_action">Добавить Задачу</string>
     <string name="add_goal">Добавить цель</string>
     <string name="add_more_participants">Добавить участников</string>
-    <string name="add_na_option">Добавить функцию ответа \"Незнаю\"</string>
+    <string name="add_na_option">Добавить ответ \"Не знаю\"</string>
     <string name="add_user">Добавить пользователя</string>
     <string name="all">Все</string>
     <string name="anonymous_feedback">Анонимная обратная связь</string>
@@ -26,7 +26,7 @@
     <string name="close">Закрыть</string>
     <string name="colleague">Коллега</string>
     <string name="complete">Завершить</string>
-    <string name="complete_action_message">Завершить это действие, %1$s?</string>
+    <string name="complete_action_message">Завершить эту задачу: %1$s?</string>
     <string name="completed_details">%1$d / %2$d Завершено</string>
     <string name="completed_text">Завершенные</string>
     <string name="confirmation">Подтверждение</string>
@@ -41,16 +41,16 @@
     <string name="create_instant_feedback">Создать Мгновенную обратную связь</string>
     <string name="created_by">Создано: %1$s</string>
     <string name="current_password">Действующий пароль</string>
-    <string name="custom_scale">Индивидуальные настройки шкалы</string>
+    <string name="custom_scale">Индивидуальные настройки шкалы ответов</string>
     <string name="custom_scale_required_label">Введите данные для Индивидуальной шкалы</string>
     <string name="customer">Клиент</string>
     <string name="days">%1$d дня(ей)</string>
     <string name="day">%1$d день</string>
     <string name="delete_action">Удалить задачу</string>
     <string name="delete_goal">Удалить цель</string>
-    <string name="delete_goal_message">Удалить эту цель, %1$s?</string>
+    <string name="delete_goal_message">Удалить эту цель: %1$s?</string>
     <string name="delete_text">Удалить</string>
-    <string name="delte_action_message">Удалить эту задачу, %1$s?</string>
+    <string name="delte_action_message">Удалить эту задачу: %1$s?</string>
     <string name="department">Подразделение</string>
     <string name="deselect_all">Снять выбор</string>
     <string name="detailed_summary">Подробный суммарный ответ для каждой категории</string>
@@ -59,7 +59,7 @@
     <string name="direct_report">Непосредственные подчиненные</string>
     <string name="drawer_dashboard">Панель управления</string>
     <string name="drawer_development_plans">Планы развития</string>
-    <string name="drawer_logout">Выход из системы</string>
+    <string name="drawer_logout">Выход</string>
     <string name="drawer_profile">Профиль</string>
     <string name="drawer_settings">Настройки</string>
     <string name="drawer_surveys">Опросники</string>
@@ -80,7 +80,7 @@
     <string name="female">Женский</string>
     <string name="female_camel">Женский</string>
     <string name="forgot_password">Забыли пароль?</string>
-    <string name="free_text">Текстовый ответ</string>
+    <string name="free_text">Письменный ответ</string>
     <string name="gender">Пол</string>
     <string name="goal">Цель</string>
     <string name="goal_completed">Цель выполнена</string>
@@ -111,14 +111,14 @@
     <string name="invite_people">Пригласить участников</string>
     <string name="invite_people_to_rate_you">Пригласить участников для опроса</string>
     <string name="is_anonymous">Анонимный</string>
-    <string name="label_popup">Вы нашли удачный баланс между решительностью и энтузиазмом. Так держать!</string>
+    <string name="label_popup">Вы проявили оптимальное сочетание решительности и энтузиазма. Так держать!</string>
     <string name="later">Позже</string>
     <string name="link_to_categroy">Объединить в категорию</string>
     <string name="loading">Идет обработка...</string>
     <string name="login">Логин</string>
     <string name="login_now"></string>
     <string name="logout">Выход из системы</string>
-    <string name="logout_confirmation_message">В случае выхода из приложения вам понадобяться данные для входа.</string>
+    <string name="logout_confirmation_message">В случае выхода из приложения вам потребуются данные для входа.</string>
     <string name="lowest_rate_manager">Пять вопросов, получивших наименьшую оценку (Руководитель)</string>
     <string name="lowest_rate_others">Пять вопросов, получивших наименьшую оценку</string>
     <string name="lynx_360">Линкс 360</string>
@@ -141,7 +141,7 @@
     <string name="no">нет</string>
     <string name="no_access">У вас нет доступа к данной опроснику</string>
     <string name="no_access_feedback">У вас нет доступа к данной обратной связи</string>
-    <string name="no_actions_added">Нет задач для отображения</string>
+    <string name="no_actions_added">Задачи не добавлены</string>
     <string name="no_categories_available">Нет доступных категорий</string>
     <string name="no_chart_data_available">График данных отсутствует</string>
     <string name="no_data_found">Данные не найдены</string>
@@ -151,7 +151,7 @@
     <string name="no_reminders">Без напоминаний</string>
     <string name="no_results">Нет результатов для отображения</string>
     <string name="no_users">Нет пользователей для отображения</string>
-    <string name="not_available">N/A</string>
+    <string name="not_available">Не знаю</string>
     <string name="not_invited_status">Нет приглашенных участников</string>
     <string name="now">Заполнить сейчас</string>
     <string name="number_of_goals">%1$d из %2$d целей выполнены</string>
@@ -160,7 +160,7 @@
     <string name="old_password_required">Графа не может быть пустой</string>
     <string name="open_status">Открыть</string>
     <string name="optional">(необязательно)</string>
-    <string name="options">Дополнительные функции</string>
+    <string name="options">Варианты</string>
     <string name="other_stakeholder">Другие стейкхолдеры</string>
     <string name="overall_progress">Общий прогресс</string>
     <string name="overestimated_attributes">\"Слепые пятна\" (Переоцененные качества)</string>
@@ -201,7 +201,7 @@
     <string name="survey">Опросник</string>
     <string name="survey_completed">Опросник заполнен!</string>
     <string name="text_completed">Завершено</string>
-    <string name="type_here">Ввведите здесь...</string>
+    <string name="type_here">Ввведите ответ...</string>
     <string name="underestimated_attributes">\"Слепые пятна\" (Недооцененные качества)</string>
     <string name="underestimated_attributes_details">Вопросы, где вы получили оценки выше ваших собственных. Ваши качества, ценные для окружающих.</string>
     <string name="unfinished_status">Не завершено</string>
@@ -216,4 +216,5 @@
     <string name="yes_no">Вопросы \"да/нет\"</string>
     <string name="yes">Да</string>
     <string name="create_new_dashboard">Создать новый план</string>
+    <string name="share_to_manager">Открыть доступ менеджер</string>
 </resources>
