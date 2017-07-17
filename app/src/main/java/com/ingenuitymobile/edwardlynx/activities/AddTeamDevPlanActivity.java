@@ -51,11 +51,8 @@ public class AddTeamDevPlanActivity extends BaseActivity {
 
   private AddTeamPlanAdapter adapter;
 
-  private String language;
-
   public AddTeamDevPlanActivity() {
     data = new ArrayList<>();
-    language = "";
   }
 
   @Override
@@ -100,7 +97,7 @@ public class AddTeamDevPlanActivity extends BaseActivity {
     itemTouchHelper = new ItemTouchHelper(callback);
     itemTouchHelper.attachToRecyclerView(recyclerView);
 
-    radioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
+    setDefaultState();
   }
 
   private void getData() {
@@ -156,13 +153,21 @@ public class AddTeamDevPlanActivity extends BaseActivity {
     emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
   }
 
+  private void setDefaultState() {
+    nameEdit.setText("");
+    ((RadioButton) radioGroup.getChildAt(0)).setChecked(true);
+  }
+
   public void addTeamPlan(View v) {
     final String name = nameEdit.getText().toString();
+    String language = "";
+    for (int i = 0; i < radioGroup.getChildCount(); i++) {
+      RadioButton radioButton = ((RadioButton) radioGroup.getChildAt(i));
 
-    if (TextUtils.isEmpty(name)) {
-      nameEdit.setError(getString(R.string.name_required));
-      nameEdit.requestFocus();
-      return;
+      if (radioButton.isChecked()) {
+        language = (String) radioButton.getTag();
+        break;
+      }
     }
 
     if (TextUtils.isEmpty(language)) {
@@ -182,13 +187,9 @@ public class AddTeamDevPlanActivity extends BaseActivity {
     subscription.add(Shared.apiClient.postTeamCategory(body, new Subscriber<TeamDevPlanResponse>() {
       @Override
       public void onCompleted() {
-        nameEdit.setText("");
-        radioGroup.setOnCheckedChangeListener(null);
-        radioGroup.clearCheck();
-        language = "";
-        radioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
         progressDialog.dismiss();
         notifyAdapter();
+        setDefaultState();
       }
 
       @Override
@@ -269,15 +270,6 @@ public class AddTeamDevPlanActivity extends BaseActivity {
       Collections.swap(data, fromPosition, toPosition);
       adapter.notifyItemMoved(fromPosition, toPosition);
       return true;
-    }
-  };
-
-  private RadioGroup.OnCheckedChangeListener onCheckedChangeListener = new RadioGroup
-      .OnCheckedChangeListener() {
-    @Override
-    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-      RadioButton radioButton = (RadioButton) radioGroup.findViewById(checkedId);
-      language = (String) radioButton.getTag();
     }
   };
 }
