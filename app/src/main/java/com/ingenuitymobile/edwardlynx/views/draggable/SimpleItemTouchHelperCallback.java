@@ -5,6 +5,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
+
 /**
  * Created by memengski on 7/9/17.
  */
@@ -47,6 +49,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
   @Override
   public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder source,
       RecyclerView.ViewHolder target) {
+    LogUtil.e("AAA onMove");
     if (source.getItemViewType() != target.getItemViewType()) {
       return false;
     }
@@ -92,6 +95,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
   @Override
   public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
     super.clearView(recyclerView, viewHolder);
+    mAdapter.onNotifyAdapter();
 
     viewHolder.itemView.setAlpha(ALPHA_FULL);
 

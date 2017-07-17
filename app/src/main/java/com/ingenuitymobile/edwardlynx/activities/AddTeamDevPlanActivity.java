@@ -64,6 +64,7 @@ public class AddTeamDevPlanActivity extends BaseActivity {
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
+    setTitle(getString(R.string.manage_plans).toUpperCase());
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -210,6 +211,12 @@ public class AddTeamDevPlanActivity extends BaseActivity {
         teamDevPlan.checked = response.checked;
         teamDevPlan.goals = response.goals;
         data.add(0, teamDevPlan);
+
+        Toast.makeText(
+            context,
+            getString(R.string.successfully_created_team_plan),
+            Toast.LENGTH_SHORT
+        ).show();
       }
     }));
   }
@@ -242,6 +249,11 @@ public class AddTeamDevPlanActivity extends BaseActivity {
           @Override
           public void onNext(Response response) {
             progressDialog.dismiss();
+            Toast.makeText(
+                context,
+                getString(R.string.successfully_updated_team_plan),
+                Toast.LENGTH_SHORT
+            ).show();
           }
         }));
   }
@@ -270,6 +282,11 @@ public class AddTeamDevPlanActivity extends BaseActivity {
       Collections.swap(data, fromPosition, toPosition);
       adapter.notifyItemMoved(fromPosition, toPosition);
       return true;
+    }
+
+    @Override
+    public void onNotifyAdapter() {
+      adapter.notifyDataSetChanged();
     }
   };
 }

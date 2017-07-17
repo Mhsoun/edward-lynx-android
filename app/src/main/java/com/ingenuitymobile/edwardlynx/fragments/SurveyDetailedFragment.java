@@ -68,7 +68,6 @@ public class SurveyDetailedFragment extends BaseFragment {
 
   private void setData() {
     titleText.setText(survey.getType(getActivity(), false) + ": " + survey.name);
-    evaluatedText.setText(survey.personsEvaluatedText);
     descriptionText.setText(Html.fromHtml(survey.description));
   }
 }

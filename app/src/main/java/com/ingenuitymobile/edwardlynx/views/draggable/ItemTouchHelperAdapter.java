@@ -21,6 +21,7 @@ public interface ItemTouchHelperAdapter {
    */
   boolean onItemMove(int fromPosition, int toPosition);
 
+  void onNotifyAdapter();
 
   /**
    * Called when an item has been dismissed by a swipe.<br/>

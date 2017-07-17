@@ -6,27 +6,21 @@
                 android:layout_marginBottom="6dp"
                 android:background="@drawable/bg_rounded_reminder_feedback">
 
-  <View
-      android:id="@+id/space"
-      android:layout_width="1dp"
-      android:layout_height="match_parent"
-      android:layout_alignParentRight="true"
-      android:layout_marginRight="84dp"/>
-
   <LinearLayout
       android:id="@+id/layout_due_date"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_alignLeft="@id/space"
+      android:layout_alignParentRight="true"
       android:layout_centerVertical="true"
+      android:layout_marginRight="16dp"
       android:orientation="vertical"
       android:visibility="visible">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/due_in"
         android:layout_gravity="right"
+        android:text="@string/due_in"
         android:textColor="@color/white"
         android:textSize="11sp"/>
 
@@ -34,8 +28,8 @@
         android:id="@+id/text_due_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/days"
         android:layout_gravity="right"
+        android:text="@string/days"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"/>

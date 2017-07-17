@@ -66,14 +66,9 @@ public class AddTeamPlanAdapter extends
     holder.handleImage.setOnTouchListener(new View.OnTouchListener() {
       @Override
       public boolean onTouch(View v, MotionEvent event) {
-        LogUtil.e("AAA " + MotionEventCompat.getActionMasked(event));
         if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
           onStartDragListener.onStartDrag(holder);
         }
-        if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_UP) {
-          notifyDataSetChanged();
-        }
-        LogUtil.e("AAA humana" + MotionEventCompat.getActionMasked(event));
         return true;
       }
     });

@@ -312,7 +312,11 @@
   <string name="numeric_1_to_10_explanation">Numeric 1&#8211;10 scale with explanation</string>
 
   // region manager View
+  <string name="manager_view_dasboard">Manager\nView</string>
+  <string name="team_devevelopment_plans">Team Development Plans</string>
+  <string name="manager_view">Manager View</string>
   <string name="team">Team</string>
+  <string name="team_progress">Team Progress</string>
   <string name="individual">Individual</string>
   <string name="share_to_manager">Share to Manager</string>
   <string name="not_shared_to_manager">Development Plan no longer shared to manager</string>
@@ -322,4 +326,7 @@
   <string name="enabled_user">Successfully enabled users to Manager View</string>
   <string name="language_required">Language can\'t be blank</string>
   <string name="language">Language</string>
+  <string name="successfully_created_team_plan">Successfully created Team Development Plan</string>
+  <string name="successfully_updated_team_plan">Successfully updated Team Development Plan(s)</string>
+  <string name="manage_plans">Manage Plans</string>
 </resources>

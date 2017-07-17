@@ -45,7 +45,7 @@ public class TeamActivity extends BaseActivity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    setTitle(getString(R.string.team).toUpperCase());
+    setTitle(getString(R.string.manager_view).toUpperCase());
 
     initViews();
   }

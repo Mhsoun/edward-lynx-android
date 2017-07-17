@@ -42,7 +42,7 @@ public class AddIndividualUserActivity extends InviteBaseActivity {
     setTitle(getString(R.string.users).toUpperCase());
 
     final TextView textView = (TextView) findViewById(R.id.text_button_bottom);
-    textView.setText(getString(R.string.submit));
+    textView.setText(getString(R.string.update));
 
     initViews();
   }

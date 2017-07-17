@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="12dp"
-        android:orientation="vertical"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:orientation="vertical">
 
       <LinearLayout
           android:id="@+id/layout_top"
@@ -42,7 +42,7 @@
                 android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_bar_chart"
-                android:tint="@color/white" />
+                android:tint="@color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/dev_plan_dashboard"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
           </LinearLayout>
         </RelativeLayout>
 
@@ -76,7 +76,7 @@
                 android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_paper_plane"
-                android:tint="@color/white" />
+                android:tint="@color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/instant_feedback_dashboard"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
           </LinearLayout>
         </RelativeLayout>
 
@@ -110,7 +110,7 @@
                 android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_pencil_square_o"
-                android:tint="@color/white" />
+                android:tint="@color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -120,7 +120,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/lynx_measurement_dashboard"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
           </LinearLayout>
         </RelativeLayout>
 
@@ -143,7 +143,7 @@
                 android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_pencil_square_o"
-                android:tint="@color/white" />
+                android:tint="@color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -151,9 +151,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"
-                android:text="@string/team"
+                android:text="@string/manager_view_dasboard"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
           </LinearLayout>
         </RelativeLayout>
       </LinearLayout>
