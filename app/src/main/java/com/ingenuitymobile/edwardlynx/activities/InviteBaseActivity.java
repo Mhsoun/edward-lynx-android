@@ -12,6 +12,8 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,7 +43,7 @@ public class InviteBaseActivity extends BaseActivity {
   protected int             invited;
 
   private TextView   countText;
-  private TextView   selectText;
+  private CheckBox   selectCheckbox;
   private SearchView searchView;
 
   protected ArrayList<String> ids;
@@ -72,7 +74,7 @@ public class InviteBaseActivity extends BaseActivity {
     searchView.setOnFocusChangeListener(onFocusChangeListener);
 
     countText = (TextView) findViewById(R.id.text_count);
-    selectText = (TextView) findViewById(R.id.text_select_all);
+    selectCheckbox = (CheckBox) findViewById(R.id.checkbox);
 
     final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
         LinearLayoutManager.VERTICAL);
@@ -85,7 +87,7 @@ public class InviteBaseActivity extends BaseActivity {
 
     searchView.setOnQueryTextListener(onQueryTextListener);
     searchView.setOnCloseListener(onCloseListener);
-    selectText.setOnClickListener(onClickListener);
+    selectCheckbox.setOnCheckedChangeListener(onCheckedChangeListener);
     updateUI();
   }
 
@@ -131,11 +133,9 @@ public class InviteBaseActivity extends BaseActivity {
   }
 
   private void updateUI() {
-    if (ids.size() != 0 && ids.size() + invited >= adapter.getItemCount()) {
-      selectText.setText(getString(R.string.deselect_all));
-    } else {
-      selectText.setText(getString(R.string.select_all));
-    }
+    selectCheckbox.setOnCheckedChangeListener(null);
+    selectCheckbox.setChecked((ids.size() != 0 && ids.size() + invited >= adapter.getItemCount()));
+    selectCheckbox.setOnCheckedChangeListener(onCheckedChangeListener);
 
     countText.setText(getString(R.string.number_people_selected, ids.size()));
     notifyAdapter();
@@ -166,13 +166,12 @@ public class InviteBaseActivity extends BaseActivity {
     notifyAdapter();
   }
 
-  private View.OnClickListener onClickListener = new View.OnClickListener() {
+  private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton
+      .OnCheckedChangeListener() {
     @Override
-    public void onClick(View view) {
-      final boolean isSelected = selectText.getText().toString().equals(
-          getString(R.string.select_all));
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
       for (User user : displayData) {
-        if (isSelected) {
+        if (isChecked) {
           if (!ids.contains(String.valueOf(user.id))) {
             ids.add(String.valueOf(user.id));
           }
