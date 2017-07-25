@@ -171,6 +171,12 @@ public class AddTeamDevPlanActivity extends BaseActivity {
       }
     }
 
+    if (TextUtils.isEmpty(name)) {
+      Toast.makeText(context, getString(R.string.name_required), Toast.LENGTH_SHORT).show();
+      nameEdit.requestFocus();
+      return;
+    }
+
     if (TextUtils.isEmpty(language)) {
       Toast.makeText(context, getString(R.string.language_required), Toast.LENGTH_SHORT).show();
       radioGroup.requestFocus();

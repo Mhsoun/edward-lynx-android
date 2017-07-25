@@ -61,6 +61,7 @@ public class AddIndividualUserActivity extends InviteBaseActivity {
         displayData.clear();
         displayData.addAll(data);
         adapter.notifyDataSetChanged();
+        updateUI();
       }
 
       @Override

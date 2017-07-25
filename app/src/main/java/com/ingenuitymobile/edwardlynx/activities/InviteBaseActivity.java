@@ -132,7 +132,7 @@ public class InviteBaseActivity extends BaseActivity {
     }));
   }
 
-  private void updateUI() {
+  protected void updateUI() {
     selectCheckbox.setOnCheckedChangeListener(null);
     selectCheckbox.setChecked((ids.size() != 0 && ids.size() + invited >= adapter.getItemCount()));
     selectCheckbox.setOnCheckedChangeListener(onCheckedChangeListener);
