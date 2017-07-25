@@ -16,16 +16,6 @@
         android:textColor="@color/white"
         android:textSize="17sp"
         android:textStyle="bold"/>
-
-    <ProgressBar
-        android:id="@+id/progress_answer"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:max="100"
-        android:progress="45"/>
   </LinearLayout>
 
 </RelativeLayout>

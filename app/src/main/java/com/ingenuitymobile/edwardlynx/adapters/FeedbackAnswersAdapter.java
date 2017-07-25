@@ -33,13 +33,11 @@ public class FeedbackAnswersAdapter extends
   }
 
   class ViewHolder extends RecyclerView.ViewHolder {
-    TextView    descriptionText;
-    ProgressBar progressBar;
+    TextView descriptionText;
 
     ViewHolder(View itemView) {
       super(itemView);
       descriptionText = (TextView) itemView.findViewById(R.id.text_description);
-      progressBar = (ProgressBar) itemView.findViewById(R.id.progress_answer);
     }
   }
 
@@ -60,14 +58,6 @@ public class FeedbackAnswersAdapter extends
     } else {
       holder.descriptionText.setText(frequency.description);
     }
-
-    holder.progressBar.setProgress(
-        (int) (((float) (frequency.count) / (float) totalAnswers) * 100));
-    holder.progressBar.setScaleY(3f);
-    holder.progressBar
-        .getProgressDrawable()
-        .setColorFilter(context.getResources().getColor(R.color.instant_feedback_color),
-            PorterDuff.Mode.SRC_IN);
   }
 
   @Override
