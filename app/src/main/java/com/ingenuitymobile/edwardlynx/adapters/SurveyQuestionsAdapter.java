@@ -152,16 +152,20 @@ public class SurveyQuestionsAdapter extends
           public void onCheckedChanged(RadioGroup radioGroup, int i) {
             RadioButton radioButton = (RadioButton) radioGroup.findViewById(i);
             listener.onAnswer(question.id, (String) radioButton.getTag());
+
+            if (question.answer.type == NUMERIC_1_10_WITH_EXPLANATION) {
+              holder.explanationEdit.setVisibility(View.VISIBLE);
+              listener.onExplanation(question.id, "");
+            }
           }
         });
 
-        if (question.answer.type == NUMERIC_1_10_WITH_EXPLANATION) {
+        if (question.value != null &&
+            question.answer.type == NUMERIC_1_10_WITH_EXPLANATION) {
           holder.explanationEdit.setVisibility(View.VISIBLE);
 
-          if (!TextUtils.isEmpty(question.explanation)) {
-            holder.explanationEdit.setText(question.explanation);
-            listener.onExplanation(question.id, question.explanation);
-          }
+          holder.explanationEdit.setText(question.explanation);
+          listener.onExplanation(question.id, question.explanation);
 
           holder.explanationEdit.addTextChangedListener(new TextWatcher() {
             @Override
