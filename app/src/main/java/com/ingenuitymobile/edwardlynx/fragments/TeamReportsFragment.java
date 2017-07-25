@@ -1,29 +1,17 @@
 package com.ingenuitymobile.edwardlynx.fragments;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
-import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.TeamResultParentAdapter;
-import com.ingenuitymobile.edwardlynx.adapters.TeamResultsAdapter;
-import com.ingenuitymobile.edwardlynx.api.ApiClient;
-import com.ingenuitymobile.edwardlynx.api.models.Action;
-import com.ingenuitymobile.edwardlynx.api.models.Goal;
-import com.ingenuitymobile.edwardlynx.api.models.Survey;
-import com.ingenuitymobile.edwardlynx.api.models.TeamReport;
 import com.ingenuitymobile.edwardlynx.api.models.TeamReportItem;
-import com.ingenuitymobile.edwardlynx.api.models.TeamReportSurvey;
 import com.ingenuitymobile.edwardlynx.api.responses.TeamReportResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 

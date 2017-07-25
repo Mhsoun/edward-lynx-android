@@ -252,7 +252,7 @@
   <string name="goal_created">Successfully added goal</string>
   <string name="goal_updated">Successfully updated goal</string>
   <string name="create_action">Create Action</string>
-  <string name="enter_new_action">Enter new action</string>
+  <string name="enter_new_action">Enter new name for action</string>
   <string name="update_goal">Update Goal</string>
   <string name="delete_goal">Delete Goal</string>
   <string name="confirmation">Confirmation</string>
