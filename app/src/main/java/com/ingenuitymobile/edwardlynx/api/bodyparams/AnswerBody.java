@@ -11,12 +11,15 @@ import java.util.List;
 public class AnswerBody {
 
   @SerializedName("type")
-  public int type;
+  public int          type;
   @SerializedName("options")
   public List<String> options;
-  
+
   @SerializedName("question")
   public long   question;
   @SerializedName("value")
   public String answer;
+
+  @SerializedName("explanation")
+  public String explanation;
 }

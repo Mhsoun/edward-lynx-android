@@ -307,6 +307,22 @@ public class SurveyQuestionsActivity extends BaseActivity {
       body.answer = value;
       bodies.add(body);
     }
+
+    @Override
+    public void onExplanation(long id, String explanation) {
+      for (int x = 0; x < bodies.size(); x++) {
+        AnswerBody body = bodies.get(x);
+        if (id == body.question) {
+          body.explanation = explanation;
+          return;
+        }
+      }
+
+      AnswerBody body = new AnswerBody();
+      body.question = id;
+      body.explanation = explanation;
+      bodies.add(body);
+    }
   };
 
   private class MyPagerAdapter extends FragmentPagerAdapter {

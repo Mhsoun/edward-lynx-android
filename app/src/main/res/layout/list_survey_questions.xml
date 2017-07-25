@@ -37,6 +37,19 @@
   </RadioGroup>
 
   <EditText
+      android:id="@+id/edit_text_explanation"
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:layout_marginTop="8dp"
+      android:background="@color/text_input_field"
+      android:gravity="top"
+      android:inputType="textMultiLine"
+      android:padding="8dp"
+      android:textColor="@color/white"
+      android:textSize="14sp"
+      android:visibility="gone"/>
+
+  <EditText
       android:id="@+id/edit_text"
       android:layout_width="match_parent"
       android:layout_height="60dp"

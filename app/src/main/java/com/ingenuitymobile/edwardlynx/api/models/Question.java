@@ -24,6 +24,8 @@ public class Question {
   public int    order;
   @SerializedName("value")
   public Object value;
+  @SerializedName("explanation")
+  public String explanation;
 
   public boolean isSectionHeader;
   public String  description;

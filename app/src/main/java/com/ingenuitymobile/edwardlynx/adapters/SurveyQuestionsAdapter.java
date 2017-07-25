@@ -6,6 +6,7 @@ import android.graphics.drawable.StateListDrawable;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,11 +22,14 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Option;
 import com.ingenuitymobile.edwardlynx.api.models.Question;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
 import java.util.List;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
+
+import static com.ingenuitymobile.edwardlynx.api.models.Answer.NUMERIC_1_10_WITH_EXPLANATION;
 
 /**
  * Created by mEmEnG-sKi on 10/01/2017.
@@ -62,6 +66,7 @@ public class SurveyQuestionsAdapter extends
     SegmentedGroup segmentedGroup;
     RadioGroup     radioGroup;
     EditText       editText;
+    EditText       explanationEdit;
 
 
     DataViewHolder(View itemView) {
@@ -70,6 +75,7 @@ public class SurveyQuestionsAdapter extends
       segmentedGroup = (SegmentedGroup) itemView.findViewById(R.id.segmented_group);
       radioGroup = (RadioGroup) itemView.findViewById(R.id.group_button);
       editText = (EditText) itemView.findViewById(R.id.edit_text);
+      explanationEdit = (EditText) itemView.findViewById(R.id.edit_text_explanation);
     }
   }
 
@@ -148,6 +154,31 @@ public class SurveyQuestionsAdapter extends
             listener.onAnswer(question.id, (String) radioButton.getTag());
           }
         });
+
+        if (question.answer.type == NUMERIC_1_10_WITH_EXPLANATION) {
+          listener.onExplanation(question.id, "");
+          holder.explanationEdit.setVisibility(View.VISIBLE);
+
+          if (!TextUtils.isEmpty(question.explanation)) {
+            holder.explanationEdit.setText(question.explanation);
+            listener.onExplanation(question.id, question.explanation);
+          }
+
+          holder.explanationEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+              listener.onExplanation(question.id, holder.explanationEdit.getText().toString());
+            }
+          });
+        } else {
+          holder.explanationEdit.setVisibility(View.GONE);
+        }
       } else if (question.answer.decscription.equals(
           context.getResources().getString(R.string.free_text_description))) {
         holder.editText.setVisibility(View.VISIBLE);
@@ -253,5 +284,7 @@ public class SurveyQuestionsAdapter extends
 
   public interface OnAnswerItemListener {
     void onAnswer(long id, String value);
+
+    void onExplanation(long id, String explanation);
   }
 }

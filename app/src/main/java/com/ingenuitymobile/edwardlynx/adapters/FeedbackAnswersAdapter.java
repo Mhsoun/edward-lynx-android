@@ -33,18 +33,18 @@ public class FeedbackAnswersAdapter extends
   }
 
   class ViewHolder extends RecyclerView.ViewHolder {
-    TextView descriptionText;
+    TextView commentText;
 
     ViewHolder(View itemView) {
       super(itemView);
-      descriptionText = (TextView) itemView.findViewById(R.id.text_description);
+      commentText = (TextView) itemView.findViewById(R.id.text_comment);
     }
   }
 
   @Override
   public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     return new FeedbackAnswersAdapter.ViewHolder(LayoutInflater.from(parent.getContext())
-        .inflate(R.layout.list_answers, parent, false));
+        .inflate(R.layout.list_comment_item, parent, false));
   }
 
   @Override
@@ -54,9 +54,9 @@ public class FeedbackAnswersAdapter extends
 
 
     if (type == Answer.CUSTOM_TEXT) {
-      holder.descriptionText.setText(frequency.value);
+      holder.commentText.setText(frequency.value);
     } else {
-      holder.descriptionText.setText(frequency.description);
+      holder.commentText.setText(frequency.description);
     }
   }
 
