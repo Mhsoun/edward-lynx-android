@@ -156,7 +156,6 @@ public class SurveyQuestionsAdapter extends
         });
 
         if (question.answer.type == NUMERIC_1_10_WITH_EXPLANATION) {
-          listener.onExplanation(question.id, "");
           holder.explanationEdit.setVisibility(View.VISIBLE);
 
           if (!TextUtils.isEmpty(question.explanation)) {
