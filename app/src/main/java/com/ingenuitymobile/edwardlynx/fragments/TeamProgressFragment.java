@@ -78,6 +78,7 @@ public class TeamProgressFragment extends BaseFragment {
     recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
     emptyText = (TextView) mainView.findViewById(R.id.text_empty_state);
+    emptyText.setText(getString(R.string.no_development_plans));
     refreshLayout = (SwipeRefreshLayout) mainView.findViewById(R.id.swipe_refresh_layout);
 
     adapter = new TeamProgressAdapter(data);

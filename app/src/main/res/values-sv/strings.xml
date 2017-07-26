@@ -32,6 +32,13 @@
   <string name="drawer_surveys">Undersökningar</string>
   <string name="drawer_settings">Inställningar</string>
   <string name="drawer_logout">Logga ut</string>
+  <string name="survey">Undersökningar</string>
+  <string name="goals">Mål</string>
+  <string name="due_date">Förfallodatum</string>
+  <string name="logout">Logga ut</string>
+
+
+  <string name="lynx_measurement_dashboard">Lynx\nmätning</string>
 
   <string name="instant_feedback_requests">Förfrågningar om snabb återkoppling</string>
   <string name="anonymous_feedback">Anonym feedback</string>
