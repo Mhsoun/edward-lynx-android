@@ -48,6 +48,7 @@ public class MainActivity extends BaseActivity implements
     CHANGE_PASSWORD
   }
 
+  private NavigationView          navigationView;
   private Toolbar                 toolbar;
   private SurveysFragment         surveysFragment;
   private DevelopmenPlansFragment developmenPlansFragment;
@@ -225,7 +226,7 @@ public class MainActivity extends BaseActivity implements
     drawer.setDrawerListener(toggle);
     toggle.syncState();
 
-    final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+    navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
   }
 
@@ -282,6 +283,7 @@ public class MainActivity extends BaseActivity implements
   }
 
   private void changeToDashboard() {
+    navigationView.setCheckedItem(R.id.dashboard);
     if (dashboardFragment == null) {
       dashboardFragment = DashboardFragment.newInstance(context, listener);
     }
@@ -289,6 +291,7 @@ public class MainActivity extends BaseActivity implements
   }
 
   private void changeToSurveys(int position) {
+    navigationView.setCheckedItem(R.id.survey);
     if (surveysFragment == null) {
       surveysFragment = SurveysFragment.newInstance(context);
     }
@@ -297,6 +300,7 @@ public class MainActivity extends BaseActivity implements
   }
 
   private void changeToDevPlan() {
+    navigationView.setCheckedItem(R.id.development_plans);
     if (developmenPlansFragment == null) {
       developmenPlansFragment = DevelopmenPlansFragment.newInstance(context, false, 0L);
     }

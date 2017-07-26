@@ -200,7 +200,7 @@ public class DevelopmenPlansFragment extends BaseFragment {
           } else {
             if (goal.actions != null) {
               for (Action action : goal.actions) {
-                if (action.checked == 1) {
+                if (action.checked == 1 && !unfinishedData.contains(plan)) {
                   unfinishedData.add(plan);
                   break;
                 }
