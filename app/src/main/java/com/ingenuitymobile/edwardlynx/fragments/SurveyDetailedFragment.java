@@ -20,7 +20,6 @@ public class SurveyDetailedFragment extends BaseFragment {
   private View mainView;
 
   private TextView titleText;
-  private TextView evaluatedText;
   private TextView descriptionText;
 
   private Survey survey;
@@ -53,7 +52,6 @@ public class SurveyDetailedFragment extends BaseFragment {
 
   private void initViews() {
     titleText = (TextView) mainView.findViewById(R.id.text_title);
-    evaluatedText = (TextView) mainView.findViewById(R.id.text_evaluate);
     descriptionText = (TextView) mainView.findViewById(R.id.text_description);
   }
 
