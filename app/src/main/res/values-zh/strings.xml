@@ -178,7 +178,6 @@
   <string name="required_fields">请填写所有需回答的问题</string>
   <string name="response_rate">答复率</string>
   <string name="response_rate_details">以下图表显示了对您的问卷邀请有答复的人数，并按照工作关系进行分类</string>
-  <string name="results">结果</string>
   <string name="results_dashboard">结果</string>
   <string name="role">工作关系</string>
   <string name="save">保存</string>

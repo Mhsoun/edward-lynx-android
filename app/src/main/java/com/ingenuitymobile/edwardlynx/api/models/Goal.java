@@ -79,6 +79,17 @@ public class Goal extends Model implements ParentListItem {
     return actionCount != 0 && actionCount == actionSize;
   }
 
+  public boolean isUnfinished() {
+    if (actions != null) {
+      for (Action action : this.actions) {
+        if (action.checked == 1) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   public static class GoalSerializer implements JsonSerializer<Goal> {
 
     @Override

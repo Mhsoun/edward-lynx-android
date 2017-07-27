@@ -177,7 +177,6 @@
   <string name="required_fields">"Необходимо ответить на все вопросы "</string>
   <string name="response_rate">Процент/доля ответивших</string>
   <string name="response_rate_details">Диаграмма отображает количество ответивших на запрос об обратной связи, данные отображены по категориям.</string>
-  <string name="results">Результаты</string>
   <string name="results_dashboard">Результаты</string>
   <string name="role">Должность</string>
   <string name="save">Сохранить</string>

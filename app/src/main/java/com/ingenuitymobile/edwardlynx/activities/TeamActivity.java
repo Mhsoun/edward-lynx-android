@@ -151,7 +151,7 @@ public class TeamActivity extends BaseActivity {
       case TEAM:
         return getString(R.string.team).toUpperCase();
       case RESULT:
-        return getString(R.string.results).toUpperCase();
+        return getString(R.string.results_dashboard).toUpperCase();
       default:
         return "";
       }

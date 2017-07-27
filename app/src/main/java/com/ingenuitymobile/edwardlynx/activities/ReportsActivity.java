@@ -47,7 +47,7 @@ public class ReportsActivity extends BaseActivity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    setTitle(getString(R.string.results).toUpperCase());
+    setTitle(getString(R.string.results_dashboard).toUpperCase());
 
     initViews();
   }

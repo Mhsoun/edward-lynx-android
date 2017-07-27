@@ -194,24 +194,20 @@ public class DevelopmenPlansFragment extends BaseFragment {
       final int size = plan.goals.size();
       int count = 0;
       if (plan.goals != null) {
+        boolean isUnfinished = false;
         for (Goal goal : plan.goals) {
           if (goal.isCompleted()) {
             count++;
-          } else {
-            if (goal.actions != null) {
-              for (Action action : goal.actions) {
-                if (action.checked == 1 && !unfinishedData.contains(plan)) {
-                  unfinishedData.add(plan);
-                  break;
-                }
-              }
-            }
+          } else if (goal.isUnfinished()) {
+            isUnfinished = true;
           }
         }
-      }
 
-      if (count != 0 && count == size) {
-        completedData.add(plan);
+        if (count != 0 && count == size) {
+          completedData.add(plan);
+        } else if (isUnfinished || count != 0) {
+          unfinishedData.add(plan);
+        }
       }
     }
   }

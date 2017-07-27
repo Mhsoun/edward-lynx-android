@@ -59,7 +59,6 @@
   // engregion
 
   // region Dashboar: Results
-  <string name="results">Results</string>
   <string name="search_reports">Search Results</string>
   <string name="all">All</string>
   <!--Instant Feedback-->
