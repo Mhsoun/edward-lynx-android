@@ -25,7 +25,7 @@
   <string name="no_development_plans">Inga utvecklingsplaner</string>
   <string name="see_more">Se mer</string>
 
-  <string name="drawer_dashboard">Dashboard</string>
+  <string name="drawer_dashboard">instrumentbräda</string>
   <string name="drawer_profile">Profil</string>
   <string name="drawer_surveys">Undersökningar</string>
   <string name="drawer_settings">Inställningar</string>
@@ -220,12 +220,33 @@
   <string name="individual">Individuell</string>
   <string name="disabled_users">Har framgångsrikt inaktiverat användarna till Manager View</string>
   <string name="enabled_user">Har framgångsrikt aktiverat användarna till Manager View</string>
-  <string name="failed_update_users_team_plan">Har misslyckats med att uppdatera användare</string>
   <string name="manage_plans">Hantera planer</string>
   <string name="language">Språk</string>
   <string name="team_devevelopment_plans">Teamutvecklingsplaner</string>
-  <string name="failed_create_team_plan">Har misslyckats med att skapa teamutvecklingsplaner</string>
   <string name="successfully_created_team_plan">Har famgångsrikt skapat teamutvecklingsplaner</string>
-  <string name="failed_update_team_plan">Har misslyckats med att uppdatera teamutvecklingsplan (er)</string>
   <string name="successfully_updated_team_plan">Har framgångsrikt uppdaterat teamutvecklingsplan (er)</string>
+
+  <string name="manager_view">Chefsöverblick</string>
+  <string name="manager_view_dasboard">Chefsöverblick</string>
+
+  <string name="not_shared_to_manager">Utvecklingsplanen delas inte längre med chefen</string>
+  <string name="shared_to_manager">Framgångsrikt delat utvecklingsplanen med chefen</string>
+
+  <string name="hours">Timmar</string>
+  <string name="hour">Timmar</string>
+
+  // region forgot password
+  <string name="recover">Ta igen sig</string>
+  <string name="valid_email_required">Giltig e-post krävs</string>
+  <string name="login_now">Logga in nu</string>
+  <string name="forgot_password_message">Framgångsrikt skickad begäran om återställning av lösenord</string>
+  <string name="enter_new_name_for">Ange nytt namn för åtgärd</string>
+  <string name="no">Nej</string>
+  <string name="number_of_goals">%1$d av %2$d mål</string>
+  <string name="search">Sök</string>
+  <string name="search_development_plans">Sök utvecklingsplaner</string>
+  <string name="share_to_manager">Dela till chef</string>
+  <string name="text_completed"> avslutad</string>
+  <string name="users">användares</string>
+  <string name="yes">Ja</string>
 </resources>

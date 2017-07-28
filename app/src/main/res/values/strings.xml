@@ -327,9 +327,6 @@
   <string name="language">Language</string>
   <string name="successfully_created_team_plan">Successfully created Team Development Plan</string>
   <string name="successfully_updated_team_plan">Successfully updated Team Development Plan(s)</string>
-  <string name="failed_create_team_plan">Failed to create Team Development Plan</string>
-  <string name="failed_update_team_plan">Failed to update Team Development Plan(s)</string>
-  <string name="failed_update_users_team_plan">Failed to update users</string>
 
   <string name="manage_plans">Manage Plans</string>
 

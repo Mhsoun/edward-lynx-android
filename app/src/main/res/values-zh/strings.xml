@@ -213,4 +213,34 @@
   <string name="yes_no">是/否问题</string>
   <string name="yes_or_no">是／否</string>
   <string name="shows_averages">显示所有类别的平均值</string>
+
+  <string name="manager_view">经理人界面</string>
+  <string name="manager_view_dasboard">经理人界面</string>
+
+  <string name="not_shared_to_manager">个人发展计划不再与经理共享</string>
+  <string name="shared_to_manager">成功与经理贡献个人发展计划</string>
+
+  <string name="hours">小时</string>
+  <string name="hour">小时</string>
+
+  <string name="disabled_users">成功禁用用户到管理器视图</string>
+  <string name="enabled_user">成功启用用户到管理员视图</string>
+
+  <string name="language">语言</string>
+  <string name="team_devevelopment_plans">团队发展规划</string>
+
+  <string name="individual">个别</string>
+  <string name="team">球队</string>
+
+  <string name="successfully_created_team_plan">成功创建团队发展规划</string>
+  <string name="successfully_updated_team_plan">成功更新团队发展计划</string>
+
+  <string name="recover">恢复</string>
+  <string name="valid_email_required">有效的电子邮件是必需的</string>
+  <string name="login_now">现在登录</string>
+  <string name="forgot_password_message">成功发送密码恢复请求</string>
+  <string name="manage_plans">管理计划</string>
+  <string name="share_to_manager">分享给经理</string>
+  <string name="users">用户</string>
+  <string name="team_progress">团队进度</string>
 </resources>

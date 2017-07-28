@@ -203,11 +203,6 @@ public class AddTeamDevPlanActivity extends BaseActivity {
       public void onError(Throwable e) {
         LogUtil.e("AAA onError " + e);
         progressDialog.dismiss();
-        Toast.makeText(
-            context,
-            getString(R.string.failed_create_team_plan),
-            Toast.LENGTH_SHORT
-        ).show();
       }
 
       @Override
@@ -256,11 +251,6 @@ public class AddTeamDevPlanActivity extends BaseActivity {
           public void onError(Throwable e) {
             LogUtil.e("AAA onError " + e);
             progressDialog.dismiss();
-            Toast.makeText(
-                context,
-                getString(R.string.failed_update_team_plan),
-                Toast.LENGTH_SHORT
-            ).show();
           }
 
           @Override

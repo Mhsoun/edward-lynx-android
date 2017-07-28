@@ -220,12 +220,24 @@
   <string name="users">Пользователи</string>
   <string name="disabled_users">Обзор пользователей отключен</string>
   <string name="enabled_user">Обзор пользователей успешно предоставлен менеджеру</string>
-  <string name="failed_update_users_team_plan">Ошибка при обновлении пользователей</string>
   <string name="manage_plans">Управление планами</string>
   <string name="language">Язык</string>
   <string name="team_devevelopment_plans">Планы развития команды</string>
-  <string name="failed_create_team_plan">Ошибка при создании Плана развития команды (командного плана развития)</string>
   <string name="successfully_created_team_plan">План развития команды успешно создан!</string>
-  <string name="failed_update_team_plan">Ошибка при обновлении Плана развития команды</string>
   <string name="successfully_updated_team_plan">План развития команды успешно обновлен!</string>
+
+  <string name="manager_view">Просмотр для менеджера</string>
+  <string name="manager_view_dasboard">Просмотр для менеджера</string>
+
+  <string name="not_shared_to_manager">План развития больше не доступен для менеджера</string>
+  <string name="shared_to_manager">Доступ к Плану развития успешно предоставлен менеджеру! </string>
+
+  <string name="hours">Час(ы)</string>
+  <string name="hour">Час(ы)</string>
+
+  <string name="recover">оправляться</string>
+  <string name="valid_email_required">Требуется действительное электронное письмо</string>
+  <string name="login_now">Вход в систему</string>
+  <string name="forgot_password_message">Successfully sent password recovery request</string>
+  <string name="team_progress">Командный прогресс</string>
 </resources>
