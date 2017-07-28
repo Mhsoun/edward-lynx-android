@@ -5,6 +5,7 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.AddUserBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.DevPlanBody;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.ForgotPassword;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InviteUserParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.PostTeamDevPlanBody;
@@ -134,6 +135,20 @@ public class ApiClient {
     map.put("client_id", consumerKey);
     map.put("client_secret", consumerSecret);
     return service.postRefreshToken(map);
+  }
+
+  public Subscription postForgotPassword(
+      final ForgotPassword param,
+      final Subscriber<Response> subscriber) {
+
+    return service.postForgotPassword(param)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
+          @Override
+          public void onPostAgain() {
+            postForgotPassword(param, subscriber);
+          }
+        }));
   }
 
   public Subscription getMe(final Subscriber<User> subscriber) {

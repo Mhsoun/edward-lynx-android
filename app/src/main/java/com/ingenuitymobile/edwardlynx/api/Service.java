@@ -4,6 +4,7 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.AddUserBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.AnswerParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.CreateDevelopmentPlanParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.DevPlanBody;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.ForgotPassword;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InstantFeedbackBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InviteUserParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.PostTeamDevPlanBody;
@@ -64,6 +65,13 @@ public interface Service {
   @FormUrlEncoded
   @POST("/oauth/token")
   Authentication postRefreshToken(@FieldMap Map<String, String> map);
+
+  @Headers({
+      "Content-Type: application/json",
+      "Accept: application/json"
+  })
+  @POST("/api/v1/user/forgotpassword")
+  Observable<Response> postForgotPassword(@Body ForgotPassword param);
   // endregion
 
   // region Users

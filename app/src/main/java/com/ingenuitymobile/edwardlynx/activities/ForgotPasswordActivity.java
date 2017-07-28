@@ -9,10 +9,17 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.api.bodyparams.ForgotPassword;
+import com.ingenuitymobile.edwardlynx.api.responses.Response;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.StringUtil;
 import com.ingenuitymobile.edwardlynx.views.EditTextGroup;
+
+import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 15/12/2016.
@@ -27,6 +34,8 @@ public class ForgotPasswordActivity extends BaseActivity {
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_forgot_password);
+
+    context = this;
 
     initViews();
   }
@@ -57,6 +66,35 @@ public class ForgotPasswordActivity extends BaseActivity {
     }
 
     recoverText.setText(getString(R.string.loading));
+
+    ForgotPassword param = new ForgotPassword(emailGroup.getEditTextSting());
+
+    LogUtil.e("AAA " + param.toString());
+
+    subscription.add(Shared.apiClient.postForgotPassword(param
+        , new Subscriber<Response>() {
+          @Override
+          public void onCompleted() {
+            LogUtil.e("AAA onCompleted");
+            finish();
+          }
+
+          @Override
+          public void onError(Throwable e) {
+            LogUtil.e("AAA onError");
+            recoverText.setText(getString(R.string.recover));
+          }
+
+          @Override
+          public void onNext(Response response) {
+            LogUtil.e("AAA onNext");
+            Toast.makeText(
+                context,
+                getString(R.string.forgot_password_message),
+                Toast.LENGTH_SHORT
+            ).show();
+          }
+        }));
   }
 
   public void login(View v) {

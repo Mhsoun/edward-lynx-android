@@ -332,4 +332,6 @@
   <string name="failed_update_users_team_plan">Failed to update users</string>
 
   <string name="manage_plans">Manage Plans</string>
+
+  <string name="forgot_password_message">Successfully sent password recovery request</string>
 </resources>
