@@ -25,7 +25,7 @@
   <string name="no_development_plans">Inga utvecklingsplaner</string>
   <string name="see_more">Se mer</string>
 
-  <string name="drawer_dashboard">instrumentbräda</string>
+  <string name="drawer_dashboard">Dashboard</string>
   <string name="drawer_profile">Profil</string>
   <string name="drawer_surveys">Undersökningar</string>
   <string name="drawer_settings">Inställningar</string>
@@ -249,4 +249,8 @@
   <string name="text_completed"> avslutad</string>
   <string name="users">användares</string>
   <string name="yes">Ja</string>
+  <string name="team">Team</string>
+  <string name="team_progress">Team Progress</string>
+  <string name="not_available">N/A</string>
+  <string name="recover_password">Återställa lösenord</string>
 </resources>

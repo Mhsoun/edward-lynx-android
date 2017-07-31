@@ -240,4 +240,5 @@
   <string name="login_now">Вход в систему</string>
   <string name="forgot_password_message">Successfully sent password recovery request</string>
   <string name="team_progress">Командный прогресс</string>
+  <string name="recover_password">Восстановить пароль</string>
 </resources>

@@ -243,4 +243,5 @@
   <string name="share_to_manager">分享给经理</string>
   <string name="users">用户</string>
   <string name="team_progress">团队进度</string>
+  <string name="recover_password">恢复密码</string>
 </resources>

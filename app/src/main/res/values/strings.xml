@@ -331,4 +331,6 @@
   <string name="manage_plans">Manage Plans</string>
 
   <string name="forgot_password_message">Successfully sent password recovery request</string>
+
+  <string name="recover_password">Recover Password</string>
 </resources>
