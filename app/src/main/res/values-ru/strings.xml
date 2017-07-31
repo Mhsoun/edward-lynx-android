@@ -238,7 +238,7 @@
   <string name="recover">оправляться</string>
   <string name="valid_email_required">Требуется действительное электронное письмо</string>
   <string name="login_now">Вход в систему</string>
-  <string name="forgot_password_message">Successfully sent password recovery request</string>
+  <string name="forgot_password_message">Успешно отправлено запрос на восстановление пароля</string>
   <string name="team_progress">Командный прогресс</string>
   <string name="recover_password">Восстановить пароль</string>
 </resources>
