@@ -116,12 +116,14 @@ public class ChangePasswordFragment extends BaseFragment {
             Response response = (Response) ((RetrofitError) e).getBody();
             if (response != null) {
               if (response.errors != null) {
-                if (!response.errors.currentPassword.isEmpty()) {
+                if (response.errors.currentPassword != null &&
+                    !response.errors.currentPassword.isEmpty()) {
                   oldPasswordEdit.setError(response.errors.currentPassword.get(0));
                   oldPasswordEdit.requestFocus();
                 }
 
-                if (!response.errors.password.isEmpty()) {
+                if (response.errors.password != null &&
+                    !response.errors.password.isEmpty()) {
                   newPasswordEdit.setError(response.errors.password.get(0));
                   newPasswordEdit.requestFocus();
                 }
