@@ -110,6 +110,17 @@ public class InviteBaseActivity extends BaseActivity {
       @Override
       public void onNext(final UsersResponse response) {
         LogUtil.e("AAA onNext ");
+        if (response.users == null) {
+          return;
+        }
+
+        for (User user : response.users) {
+          if (user.email.equals(Shared.user.email)) {
+            response.users.remove(user);
+            break;
+          }
+        }
+
         data.clear();
         data.addAll(response.users);
 
@@ -275,7 +286,7 @@ public class InviteBaseActivity extends BaseActivity {
                   emailEdit.setError(getString(R.string.email_required));
                 } else if (!StringUtil.isValidEmail(email)) {
                   emailEdit.setError(getString(R.string.valid_email_required));
-                } else {
+                } else if (!email.equals(Shared.user.email)) {
                   dialogInterface.dismiss();
 
                   long LOWER_RANGE = 10000; //assign lower range value

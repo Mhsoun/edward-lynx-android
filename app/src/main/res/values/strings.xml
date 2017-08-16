@@ -171,7 +171,7 @@
   <string name="invite_by_email">Invite people by email address</string>
   <string name="instant_feedback_created">Successfully invited participants</string>
   <string name="add_user">Add User</string>
-  <string name="enter_email">Enter Name and Email address</string>
+  <string name="enter_email">Enter Name and Email address\n(Cannot add your own e-mail)</string>
   <!--name-->
   <!--email-->
   <!--cancel-->
@@ -294,6 +294,7 @@
   // region forgot password
   <string name="recover">Recover</string>
   <string name="valid_email_required">Valid email is required</string>
+  <string name="cant_add_email">Can\'t add email</string>
   <string name="login_now">Login now</string>
 
   // Generic messages
