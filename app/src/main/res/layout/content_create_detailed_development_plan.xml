@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,263 +8,263 @@
     tools:context="com.ingenuitymobile.edwardlynx.activities.CreateDetailedDevelopmentPlanActivity"
     tools:showIn="@layout/activity_create_detailed_development_plan">
 
-  <ImageView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:scaleType="centerCrop"
-      android:src="@drawable/bg"/>
-
-  <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:scrollbars="none">
-
-    <LinearLayout
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg" />
 
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/goal_name"
-          android:textColor="@color/white"/>
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-      <EditText
-          android:id="@+id/edit_development_name"
-          style="@style/edit_text"
-          android:layout_width="match_parent"
-          android:layout_height="40dp"
-          android:layout_marginTop="4dp"
-          android:imeOptions="actionNext"
-          android:inputType="textPersonName"
-          android:textColor="@color/white"/>
-
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
-          android:text="@string/input_description"
-          android:textColor="@color/white"/>
-
-      <EditText
-          android:id="@+id/edit_development_description"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_gravity="top"
-          android:layout_marginTop="4dp"
-          android:background="@drawable/bg_rounded_input_field"
-          android:gravity="top"
-          android:imeOptions="actionDone"
-          android:maxLines="2"
-          android:minLines="2"
-          android:padding="4dp"
-          android:textColor="@color/white"
-          android:textSize="20sp"/>
-
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="0.5dp"
-          android:layout_marginTop="16dp"
-          android:background="@color/white"/>
-
-      <LinearLayout
-          android:id="@+id/layout_actions"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/actions"
-            android:textColor="@color/white"/>
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="60dp">
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-          <android.support.v7.widget.RecyclerView
-              android:id="@+id/list_action_plan"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goal_name"
+                android:textColor="@color/white" />
 
-          <TextView
-              android:id="@+id/text_empty_state"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_centerInParent="true"
-              android:text="@string/no_actions_added"
-              android:textColor="@color/white"
-              android:visibility="gone"/>
-        </RelativeLayout>
+            <EditText
+                android:id="@+id/edit_development_name"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:textColor="@color/white" />
 
-        <RelativeLayout
-            android:id="@+id/layout_add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/input_description"
+                android:textColor="@color/white" />
 
-          <TextView
-              android:id="@+id/text_add"
-              android:layout_width="wrap_content"
-              android:layout_height="40dp"
-              android:layout_alignParentRight="true"
-              android:layout_marginLeft="8dp"
-              android:background="@drawable/bg_rounded_input_field"
-              android:gravity="center"
-              android:onClick="addPlan"
-              android:paddingLeft="12dp"
-              android:paddingRight="12dp"
-              android:text="@string/add"
-              android:textColor="@color/colorPrimaryDark"/>
+            <EditText
+                android:id="@+id/edit_development_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_rounded_input_field"
+                android:gravity="top"
+                android:imeOptions="actionDone"
+                android:maxLines="2"
+                android:minLines="2"
+                android:padding="4dp"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
-          <EditText
-              android:id="@+id/edit_name"
-              android:layout_width="match_parent"
-              android:layout_height="40dp"
-              android:layout_centerVertical="true"
-              android:layout_marginLeft="8dp"
-              android:layout_toLeftOf="@id/text_add"
-              android:background="@drawable/bg_rounded_input_field"
-              android:imeOptions="actionDone"
-              android:inputType="textPersonName"
-              android:padding="4dp"
-              android:textColor="@color/white"
-              android:textSize="18sp"/>
-        </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/layout_actions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/actions"
+                    android:textColor="@color/white" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_action_plan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/text_empty_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/no_actions_added"
+                        android:textColor="@color/white"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/text_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="8dp"
+                        android:background="@drawable/bg_rounded_input_field"
+                        android:gravity="center"
+                        android:onClick="addPlan"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:text="@string/add"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    <EditText
+                        android:id="@+id/edit_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toLeftOf="@id/text_add"
+                        android:background="@drawable/bg_rounded_input_field"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPersonName"
+                        android:padding="4dp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+                </RelativeLayout>
 
 
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_round_accent"
-            android:onClick="addPlan"
-            android:padding="12dp"
-            android:src="@drawable/ic_add_goal"
-            android:tint="@android:color/transparent"/>
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_round_accent"
+                    android:onClick="addPlan"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_add_goal"
+                    android:tint="@android:color/transparent" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginTop="12dp"
-            android:background="@color/white"/>
-      </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/white" />
+            </LinearLayout>
 
-      <RelativeLayout
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="16dp">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/due_date"
-            android:textColor="@color/white"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/due_date"
+                    android:textColor="@color/white" />
 
-        <android.support.v7.widget.AppCompatCheckBox
-            android:id="@+id/checkbox_remind"
-            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"/>
-      </RelativeLayout>
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/checkbox_remind"
+                    style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
 
-      <com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker
-          android:id="@+id/date_picker"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:background="@drawable/bg_rounded_input_field"
-          android:visibility="gone"
-          app:picker_selectedTextColor="@color/orange_button"
-          app:picker_selectorColor="@color/white"
-          app:picker_textColor="@color/white"
-          app:picker_textSize="15sp"
-          tools:picker_canBeOnPast="true"
-          tools:picker_curved="true"
-          tools:picker_cyclic="true"
-          tools:picker_visibleItemCount="7"/>
+            <com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker
+                android:id="@+id/date_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_input_field"
+                android:visibility="gone"
+                app:picker_selectedTextColor="@color/orange_button"
+                app:picker_selectorColor="@color/white"
+                app:picker_textColor="@color/white"
+                app:picker_textSize="15sp"
+                tools:picker_canBeOnPast="true"
+                tools:picker_curved="true"
+                tools:picker_cyclic="true"
+                tools:picker_visibleItemCount="7" />
 
-      <TextView
-          android:id="@+id/text_due_date_error"
-          android:visibility="gone"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_centerVertical="true"
-          android:text="@string/due_date_error"
-          android:textColor="@color/white"
-          android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/text_due_date_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/due_date_error"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:visibility="gone" />
 
-      <RelativeLayout
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="32dp">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/link_to_categroy"
-            android:textColor="@color/white"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/link_to_categroy"
+                    android:textColor="@color/white" />
 
-        <android.support.v7.widget.AppCompatCheckBox
-            android:id="@+id/checkbox_link_category"
-            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"/>
-      </RelativeLayout>
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/checkbox_link_category"
+                    style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
 
-      <RelativeLayout
-          android:id="@+id/layout_spinner"
-          android:layout_width="match_parent"
-          android:layout_height="40dp"
-          android:visibility="gone">
+            <RelativeLayout
+                android:id="@+id/layout_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:visibility="gone">
 
-        <ImageView
-            android:id="@+id/layout_right"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/bg_rounded_input_field"
-            android:src="@drawable/ic_arrow_down"
-            android:tint="@color/colorPrimaryDark">
-        </ImageView>
+                <ImageView
+                    android:id="@+id/layout_right"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/bg_rounded_input_field"
+                    android:src="@drawable/ic_arrow_down"
+                    android:tint="@color/colorPrimaryDark"></ImageView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginRight="4dp"
-            android:layout_toLeftOf="@id/layout_right"
-            android:background="@drawable/bg_rounded_input_field"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_toLeftOf="@id/layout_right"
+                    android:background="@drawable/bg_rounded_input_field" />
 
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@null"/>
-      </RelativeLayout>
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@null" />
+            </RelativeLayout>
 
-      <TextView
-          android:id="@+id/text_done"
-          style="@style/orange_button"
-          android:layout_width="match_parent"
-          android:layout_marginBottom="16dp"
-          android:layout_marginLeft="16dp"
-          android:layout_marginRight="16dp"
-          android:layout_marginTop="16dp"
-          android:onClick="save"
-          android:text="@string/add_goal"/>
-    </LinearLayout>
-  </ScrollView>
+            <TextView
+                android:id="@+id/text_done"
+                style="@style/orange_button"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:onClick="save"
+                android:text="@string/add_goal" />
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

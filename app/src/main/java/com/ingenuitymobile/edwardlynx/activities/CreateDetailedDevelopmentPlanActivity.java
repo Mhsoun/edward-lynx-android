@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ import rx.Subscriber;
 
 public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
 
+  private ScrollView              scrollView;
   private EditText                developmentNameEdit;
   private EditText                descriptionEdit;
   private AppCompatCheckBox       remindCheckbox;
@@ -110,6 +112,7 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
   }
 
   private void initViews() {
+    scrollView = (ScrollView) findViewById(R.id.scrollview);
     developmentNameEdit = (EditText) findViewById(R.id.edit_development_name);
     descriptionEdit = (EditText) findViewById(R.id.edit_development_description);
     remindCheckbox = (AppCompatCheckBox) findViewById(R.id.checkbox_remind);
@@ -168,7 +171,9 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
       if (isRemind) {
         calendar.setTime(DateUtil.getAPIFormat().parse(param.dueDate));
       }
-    } catch (Exception e) {LogUtil.e("AAA ", e);}
+    } catch (Exception e) {
+      LogUtil.e("AAA ", e);
+    }
 
     datePicker.setStepMinutes(15);
     datePicker.selectDate(calendar);
@@ -191,6 +196,14 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
       @Override
       public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         datePicker.setVisibility(b ? View.VISIBLE : View.GONE);
+        if (b) {
+          scrollView.post(new Runnable() {
+            @Override
+            public void run() {
+              scrollView.fullScroll(View.FOCUS_DOWN);
+            }
+          });
+        }
       }
     });
 
@@ -205,6 +218,14 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
           ).show();
         } else {
           spinnerLayout.setVisibility(b ? View.VISIBLE : View.GONE);
+          if (b) {
+            scrollView.post(new Runnable() {
+              @Override
+              public void run() {
+                scrollView.fullScroll(View.FOCUS_DOWN);
+              }
+            });
+          }
         }
       }
     });
