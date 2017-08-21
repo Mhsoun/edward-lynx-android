@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
   <string name="about">关于</string>
   <string name="action_added">成功添加目标任务</string>
   <string name="action_delete">成功删除此目标任务</string>
