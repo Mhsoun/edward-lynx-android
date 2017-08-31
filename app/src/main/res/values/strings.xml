@@ -5,8 +5,8 @@
   <string name="app_name">Edward Lynx</string>
   <string name="live_url">https://stage.lynxtool.edwardlynx.com</string>
   <string name="staging_url">https://stage.lynxtool.edwardlynx.com</string>
-  <string name="client_id">10</string>
-  <string name="client_secret">fDqjgu9pJe5PggYuKJTYCgRIYUt4mHQ8eHgvcJOt</string>
+  <string name="client_id">12</string>
+  <string name="client_secret">5fdCA47OE30ZCHTDceENXSumjhZiVzB6cbDKMiXv</string>
   <string name="hockey_app_id">1b9084aaa22c4395a83bedd31b305831</string>
 
   <string name="self">Candidates</string>
