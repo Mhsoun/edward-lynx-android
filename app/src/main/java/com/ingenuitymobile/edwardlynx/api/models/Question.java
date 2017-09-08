@@ -1,5 +1,6 @@
 package com.ingenuitymobile.edwardlynx.api.models;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -29,4 +30,9 @@ public class Question {
 
   public boolean isSectionHeader;
   public String  description;
+
+  @Override
+  public String toString() {
+    return new Gson().toJson(this);
+  }
 }

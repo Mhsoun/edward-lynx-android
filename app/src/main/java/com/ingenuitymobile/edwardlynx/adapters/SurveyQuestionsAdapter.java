@@ -6,7 +6,6 @@ import android.graphics.drawable.StateListDrawable;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Option;
 import com.ingenuitymobile.edwardlynx.api.models.Question;
-import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
 import java.util.List;
@@ -92,7 +90,7 @@ public class SurveyQuestionsAdapter extends
   }
 
   @Override
-  public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, int position) {
+  public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
     final Context context = viewHolder.itemView.getContext();
     final Question question = data.get(position);
 
@@ -119,7 +117,6 @@ public class SurveyQuestionsAdapter extends
             createRadioButton(holder.radioGroup,
                 context, option.description, option.value);
           }
-
         }
 
         if (question.isNA == 1) {
@@ -151,6 +148,8 @@ public class SurveyQuestionsAdapter extends
           @Override
           public void onCheckedChanged(RadioGroup radioGroup, int i) {
             RadioButton radioButton = (RadioButton) radioGroup.findViewById(i);
+            String value = (String) radioButton.getTag();
+            data.get(position).value = Double.parseDouble(value);
             listener.onAnswer(question.id, (String) radioButton.getTag());
 
             if (question.answer.type == NUMERIC_1_10_WITH_EXPLANATION) {
@@ -176,6 +175,7 @@ public class SurveyQuestionsAdapter extends
 
             @Override
             public void afterTextChanged(Editable editable) {
+              data.get(position).explanation = holder.editText.getText().toString();
               listener.onExplanation(question.id, holder.explanationEdit.getText().toString());
             }
           });
@@ -204,6 +204,7 @@ public class SurveyQuestionsAdapter extends
 
           @Override
           public void afterTextChanged(Editable editable) {
+            data.get(position).value = holder.editText.getText().toString();
             listener.onAnswer(question.id, holder.editText.getText().toString());
           }
         });

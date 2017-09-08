@@ -63,7 +63,6 @@ public class SurveyQuestionsFragment extends BaseFragment {
     adapter = new SurveyQuestionsAdapter(data, listener);
     questionsList.setAdapter(adapter);
     adapter.isEnabled(isEnabled);
-    LogUtil.e("AAA adapter " + adapter.getItemCount());
   }
 
   public void setData(List<Question> data,
