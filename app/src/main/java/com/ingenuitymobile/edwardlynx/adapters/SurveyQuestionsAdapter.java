@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.api.models.Option;
 import com.ingenuitymobile.edwardlynx.api.models.Question;
+import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.ViewUtil;
 
 import java.util.List;
@@ -99,12 +100,11 @@ public class SurveyQuestionsAdapter extends
       holder.nameText.setText(question.text);
     } else {
       final DataViewHolder holder = (DataViewHolder) viewHolder;
-      holder.questionText.setText(question.text + (question.optional == 1 ? " " +
-          context.getResources().getString(R.string.optional) : ""));
+      holder.questionText.setText(
+          question.text + (question.optional == 1 ? " " +
+              context.getResources().getString(R.string.optional) : "")
+      );
       holder.editText.setVisibility(View.GONE);
-
-      holder.radioGroup.setVisibility(question.answer.isNumeric ? View.GONE : View.VISIBLE);
-      holder.segmentedGroup.setVisibility(question.answer.isNumeric ? View.VISIBLE : View.GONE);
 
       if (question.answer.options != null) {
         holder.radioGroup.removeAllViews();
@@ -131,6 +131,8 @@ public class SurveyQuestionsAdapter extends
 
         holder.radioGroup = question.answer.isNumeric ? holder.segmentedGroup : holder.radioGroup;
         holder.radioGroup.invalidate();
+        holder.radioGroup.setOrientation(
+            question.answer.isNumeric ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
 
         holder.radioGroup.setClickable(isEnabled);
 
@@ -242,7 +244,8 @@ public class SurveyQuestionsAdapter extends
       final RadioGroup radioGroup,
       final Context context,
       final String description,
-      int value) {
+      int value
+  ) {
 
     final AppCompatRadioButton radioButton = new AppCompatRadioButton(context);
     final LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(
@@ -255,6 +258,7 @@ public class SurveyQuestionsAdapter extends
     radioButton.setText(description);
     radioButton.setTextSize(14);
     radioGroup.addView(radioButton);
+    LogUtil.e("AAA " + description);
   }
 
   private void createSegmentedButton(
