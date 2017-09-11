@@ -28,6 +28,7 @@ import java.util.List;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
+import static com.ingenuitymobile.edwardlynx.api.models.Answer.CUSTOM_SCALE;
 import static com.ingenuitymobile.edwardlynx.api.models.Answer.NUMERIC_1_10_WITH_EXPLANATION;
 
 /**
@@ -135,14 +136,19 @@ public class SurveyQuestionsAdapter extends
             question.answer.isNumeric ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
 
         holder.radioGroup.setClickable(isEnabled);
+        LogUtil.e("AAA " + question.id);
 
         for (int i = 0; i < holder.radioGroup.getChildCount(); i++) {
           holder.radioGroup.getChildAt(i).setClickable(isEnabled);
 
-          if (question.value != null && holder.radioGroup.getChildAt(i).getTag().equals(
-              String.valueOf((int) (double) question.value))) {
-            ((RadioButton) holder.radioGroup.getChildAt(i)).setChecked(true);
-            listener.onAnswer(question.id, (String) holder.radioGroup.getChildAt(i).getTag());
+          if (question.value != null) {
+            String value = question.answer.type == CUSTOM_SCALE ?
+                (String) question.value : String.valueOf((int) (double) question.value);
+
+            if (holder.radioGroup.getChildAt(i).getTag().equals(value)) {
+              ((RadioButton) holder.radioGroup.getChildAt(i)).setChecked(true);
+              listener.onAnswer(question.id, (String) holder.radioGroup.getChildAt(i).getTag());
+            }
           }
         }
 
@@ -258,7 +264,6 @@ public class SurveyQuestionsAdapter extends
     radioButton.setText(description);
     radioButton.setTextSize(14);
     radioGroup.addView(radioButton);
-    LogUtil.e("AAA " + description);
   }
 
   private void createSegmentedButton(
