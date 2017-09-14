@@ -37,6 +37,7 @@ import com.ingenuitymobile.edwardlynx.adapters.CreateActionPlanAdapter;
 import com.ingenuitymobile.edwardlynx.api.models.Action;
 import com.ingenuitymobile.edwardlynx.api.models.Category;
 import com.ingenuitymobile.edwardlynx.api.models.Goal;
+import com.ingenuitymobile.edwardlynx.api.responses.CategoriesResponse;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.utils.DateUtil;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
@@ -146,25 +147,11 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     remindCheckbox.setChecked(isRemind);
     datePicker.setVisibility(isRemind ? View.VISIBLE : View.GONE);
 
-    List<String> categories = new ArrayList<>();
-    int index = 0;
-    for (int x = 0; x < Shared.categories.size(); x++) {
-      final Category category = Shared.categories.get(x);
-      categories.add(category.title);
-      if (param.categoryId != 0L && category.id == param.categoryId) {
-        index = x;
-      }
-    }
-
     final boolean isLinkCategory = param.categoryId != 0L;
     linkCategoryCheckbox.setChecked(isLinkCategory);
     spinnerLayout.setVisibility(isLinkCategory ? View.VISIBLE : View.GONE);
 
-    ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
-        android.R.layout.simple_spinner_item, categories);
-    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    spinner.setAdapter(dataAdapter);
-    spinner.setSelection(index);
+    getCategories();
 
     Calendar calendar = Calendar.getInstance();
     try {
@@ -367,6 +354,45 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
                 .show();
           }
         }));
+  }
+
+  private void getCategories() {
+    subscription.add(Shared.apiClient.getCategories(new Subscriber<CategoriesResponse>() {
+      @Override
+      public void onCompleted() {
+        List<String> categories = new ArrayList<>();
+        int index = 0;
+        for (int x = 0; x < Shared.categories.size(); x++) {
+          final Category category = Shared.categories.get(x);
+          categories.add(category.title);
+          if (param.categoryId != 0L && category.id == param.categoryId) {
+            index = x;
+          }
+        }
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
+            context,
+            android.R.layout.simple_spinner_item,
+            categories
+        );
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+        spinner.setSelection(index);
+      }
+
+      @Override
+      public void onError(Throwable e) {
+        LogUtil.e("AAA " + e);
+        progressDialog.dismiss();
+      }
+
+      @Override
+      public void onNext(CategoriesResponse categoriesResponse) {
+        Shared.categories = categoriesResponse.items;
+        LogUtil.e("AAA onNext postTokenDevice");
+      }
+    }));
   }
 
   private CreateActionPlanAdapter.OnDeleteListener listener = new CreateActionPlanAdapter
