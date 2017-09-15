@@ -112,6 +112,8 @@
         android:id="@+id/text_evaluate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:textColor="@color/white"
         android:textSize="11sp"/>
   </LinearLayout>

@@ -97,20 +97,16 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if (holder.isExpired) {
-          LogUtil.e("AAA Expired");
+        if (isInvite) {
+          Intent intent = new Intent(context, InvitePeopleActivity.class);
+          intent.putExtra("id", survey.id);
+          intent.putExtra("title", survey.name);
+          intent.putExtra("evaluate", survey.personsEvaluatedText);
+          context.startActivity(intent);
         } else {
-          if (isInvite) {
-            Intent intent = new Intent(context, InvitePeopleActivity.class);
-            intent.putExtra("id", survey.id);
-            intent.putExtra("title", survey.name);
-            intent.putExtra("evaluate", survey.personsEvaluatedText);
-            context.startActivity(intent);
-          } else {
-            Intent intent = new Intent(context, SurveyQuestionsActivity.class);
-            intent.putExtra("id", survey.id);
-            context.startActivity(intent);
-          }
+          Intent intent = new Intent(context, SurveyQuestionsActivity.class);
+          intent.putExtra("id", survey.id);
+          context.startActivity(intent);
         }
       }
     });
