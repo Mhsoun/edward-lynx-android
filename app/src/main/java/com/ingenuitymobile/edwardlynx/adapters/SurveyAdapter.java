@@ -161,9 +161,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
       holder.reactivateText.setVisibility(View.VISIBLE);
       holder.monthText.setBackground(
           context.getResources().getDrawable(R.drawable.bg_expired_calendar_text));
-    }
-
-    if (holder.days <= 14 && survey.status != Survey.COMPLETED &&
+    } else if (holder.days <= 14 && survey.status != Survey.COMPLETED &&
         survey.status != Survey.NOT_INVITED) {
       holder.monthText.setBackground(
           context.getResources().getDrawable(R.drawable.bg_deadline_calendar_text));
