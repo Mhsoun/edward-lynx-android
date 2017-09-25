@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -166,15 +167,14 @@ public class DashboardFragment extends BaseFragment {
   }
 
   private void setupViews() {
-    LogUtil.e("AAA " + Shared.user.type);
-    if ((Shared.user.type.equals(User.ADMIN) ||
-        Shared.user.type.equals(User.SUPER_ADMIN) ||
-        Shared.user.type.equals(User.SUPERVISOR))) {
+    teamLayout.setVisibility(View.GONE);
+    topLayout.setWeightSum(3);
+    if (Shared.user != null && !TextUtils.isEmpty(Shared.user.type) &&
+        (Shared.user.type.equals(User.ADMIN) ||
+            Shared.user.type.equals(User.SUPER_ADMIN) ||
+            Shared.user.type.equals(User.SUPERVISOR))) {
       teamLayout.setVisibility(View.VISIBLE);
       topLayout.setWeightSum(4);
-    } else {
-      teamLayout.setVisibility(View.GONE);
-      topLayout.setWeightSum(3);
     }
   }
 

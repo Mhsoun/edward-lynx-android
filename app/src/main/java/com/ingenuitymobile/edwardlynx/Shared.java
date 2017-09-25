@@ -65,7 +65,10 @@ public class Shared {
       String text = context.getString(R.string.no_internet_connection);
 
       if (NetUtil.hasActiveConnection(context)) {
-        Response response = (Response) ((RetrofitError) e).getBody();
+        final retrofit.client.Response error = ((RetrofitError) e).getResponse();
+        Response response = error.getStatus() == 500 ?
+            null
+            : (Response) error.getBody();
         if (response != null) {
           text = response.message;
         } else {
