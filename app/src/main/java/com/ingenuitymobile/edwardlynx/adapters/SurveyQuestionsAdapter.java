@@ -28,7 +28,6 @@ import java.util.List;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-import static com.ingenuitymobile.edwardlynx.api.models.Answer.CUSTOM_SCALE;
 import static com.ingenuitymobile.edwardlynx.api.models.Answer.NUMERIC_1_10_WITH_EXPLANATION;
 
 /**
@@ -142,8 +141,12 @@ public class SurveyQuestionsAdapter extends
           holder.radioGroup.getChildAt(i).setClickable(isEnabled);
 
           if (question.value != null) {
-            String value = question.answer.type == CUSTOM_SCALE ?
-                (String) question.value : String.valueOf((int) (double) question.value);
+            String value;
+            if (question.value instanceof String) {
+              value = (String) question.value;
+            } else {
+              value = String.valueOf((int) (double) question.value);
+            }
 
             if (holder.radioGroup.getChildAt(i).getTag().equals(value)) {
               ((RadioButton) holder.radioGroup.getChildAt(i)).setChecked(true);
