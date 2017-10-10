@@ -21,12 +21,12 @@ repositories {
 }
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion "25.0.0"
+  compileSdkVersion 26
+  buildToolsVersion "26.0.1"
   defaultConfig {
     applicationId "com.ingenuitymobile.edwardlynx"
     minSdkVersion 16
-    targetSdkVersion 25
+    targetSdkVersion 26
     versionCode 4
     versionName "1.1.4"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
