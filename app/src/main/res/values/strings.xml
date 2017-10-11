@@ -121,6 +121,7 @@
   <string name="no_users">No Users</string>
   <string name="send_invites">Send Invites</string>
   <string name="successfully_invite_people_to_rate_you">Successfully invited others to rate you</string>
+  <string name="survey_sending_failed">Survey has reached its end date and answers are not accepted anymore.</string>
   // endregion
 
   // region Dashboard: Create

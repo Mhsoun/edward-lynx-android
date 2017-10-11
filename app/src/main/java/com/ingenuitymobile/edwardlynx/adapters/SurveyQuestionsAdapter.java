@@ -173,6 +173,7 @@ public class SurveyQuestionsAdapter extends
         if (question.value != null &&
             question.answer.type == NUMERIC_1_10_WITH_EXPLANATION) {
           holder.explanationEdit.setVisibility(View.VISIBLE);
+          holder.explanationEdit.setEnabled(isEnabled);
 
           holder.explanationEdit.setText(question.explanation);
           listener.onExplanation(question.id, question.explanation);

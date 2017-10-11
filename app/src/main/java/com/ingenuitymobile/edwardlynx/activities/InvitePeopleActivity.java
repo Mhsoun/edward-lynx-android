@@ -185,12 +185,17 @@ public class InvitePeopleActivity extends BaseActivity {
             @Override
             public void onCompleted() {
               LogUtil.e("AAA onCompleted");
+              progressDialog.dismiss();
               finish();
             }
 
             @Override
             public void onError(Throwable e) {
               progressDialog.dismiss();
+              Toast.makeText(context,
+                      getString(R.string.survey_sending_failed),
+                      Toast.LENGTH_SHORT
+              ).show();
               LogUtil.e("AAA onError " + e);
             }
 

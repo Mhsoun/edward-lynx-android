@@ -86,6 +86,7 @@ public class TeamReportsFragment extends BaseFragment {
 
           @Override
           public void onNext(TeamReportResponse teamReportResponse) {
+            items.clear();
             items.addAll(teamReportResponse.items);
             adapter.notifyDataSetChanged();
           }

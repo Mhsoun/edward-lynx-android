@@ -212,7 +212,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
           @Override
           public void onCompleted() {
             LogUtil.e("AAA onCompleted");
-
+            progressDialog.dismiss();
 
             if (textView.getId() == R.id.text_submit) {
               PopupDialogFragment dialogFragment = PopupDialogFragment.newInstance(false,
@@ -232,6 +232,9 @@ public class SurveyQuestionsActivity extends BaseActivity {
             if (e != null && ((RetrofitError) e).getResponse().getStatus() == 422) {
               Toast.makeText(SurveyQuestionsActivity.this, getString(R.string.required_fields),
                   Toast.LENGTH_SHORT).show();
+            } else if (e != null && ((RetrofitError) e).getResponse().getStatus() == 400) {
+              Toast.makeText(SurveyQuestionsActivity.this,getString(R.string.survey_sending_failed),
+                      Toast.LENGTH_SHORT).show();
             }
             textView.setText(
                 textView.getId() == R.id.text_submit ? R.string.submit : R.string.save_to_drafts);

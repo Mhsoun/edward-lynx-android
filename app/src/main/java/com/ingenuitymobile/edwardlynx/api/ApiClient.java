@@ -756,7 +756,8 @@ public class ApiClient {
         } else {
           Throwable throwable;
           if (((RetrofitError) e).getResponse().getStatus() == 422 ||
-              ((RetrofitError) e).getResponse().getStatus() == 404) {
+              ((RetrofitError) e).getResponse().getStatus() == 404 ||
+              ((RetrofitError) e).getResponse().getStatus() == 400) {
             throwable = e;
           } else {
             LogUtil.e("AAA " + e);
