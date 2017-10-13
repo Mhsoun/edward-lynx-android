@@ -62,6 +62,7 @@ public class SurveyQuestionsFragment extends BaseFragment {
     questionsList.setLayoutManager(new LinearLayoutManager(getActivity()));
     adapter = new SurveyQuestionsAdapter(data, listener);
     questionsList.setAdapter(adapter);
+    questionsList.setItemViewCacheSize(adapter.getItemCount());
     adapter.isEnabled(isEnabled);
   }
 
