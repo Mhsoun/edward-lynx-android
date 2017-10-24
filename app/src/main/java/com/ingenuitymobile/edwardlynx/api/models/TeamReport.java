@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 public class TeamReport {
     @SerializedName("id")
     @Expose
-    public int id;
+    public String id;
     @SerializedName("name")
     @Expose
     public String name;
