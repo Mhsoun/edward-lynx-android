@@ -3,6 +3,8 @@
     tools:ignore="MissingTranslation">
 
   <string name="app_name">Edward Lynx</string>
+  <string name="deep_link_live_url">lynxtool.edwardlynx.com</string>
+  <string name="deep_link_staging_url">stage.lynxtool.edwardlynx.com</string>
   <string name="live_url">https://stage.lynxtool.edwardlynx.com</string>
   <string name="staging_url">https://stage.lynxtool.edwardlynx.com</string>
   <string name="client_id">12</string>
