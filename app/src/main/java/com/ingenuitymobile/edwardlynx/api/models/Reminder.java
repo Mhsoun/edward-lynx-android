@@ -34,6 +34,8 @@ public class Reminder extends Model {
   public String description;
   @SerializedName("due")
   public String due;
+  @SerializedName("key")
+  public String key;
 
   public String getType(Context ctx) {
     if (type.equals(Type.GOAL.toString())) {
