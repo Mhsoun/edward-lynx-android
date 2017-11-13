@@ -237,13 +237,13 @@ public class ApiClient {
   }
 
 
-  public Subscription getSurvey(final long id, final Subscriber<Survey> subscriber) {
-    return service.getSurvey(id)
+  public Subscription getSurvey(final long id, final String key, final Subscriber<Survey> subscriber) {
+    return service.getSurvey(id, key)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
           public void onPostAgain() {
-            getSurvey(id, subscriber);
+            getSurvey(id, key, subscriber);
           }
         }));
   }
@@ -259,13 +259,13 @@ public class ApiClient {
         }));
   }
 
-  public Subscription getSurveyQuestions(final long id, final Subscriber<Questions> subscriber) {
-    return service.getSurveyQuestions(id)
+  public Subscription getSurveyQuestions(final long id, final String key, final Subscriber<Questions> subscriber) {
+    return service.getSurveyQuestions(id, key)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
           public void onPostAgain() {
-            getSurveyQuestions(id, subscriber);
+            getSurveyQuestions(id, key, subscriber);
           }
         }));
   }

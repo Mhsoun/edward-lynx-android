@@ -10,7 +10,6 @@ import com.ingenuitymobile.edwardlynx.api.bodyparams.InviteUserParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.PostTeamDevPlanBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.ShareParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.TeamDevPlanBodies;
-import com.ingenuitymobile.edwardlynx.api.bodyparams.TeamDevPlanBody;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.TokenParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserBody;
 import com.ingenuitymobile.edwardlynx.api.models.Action;
@@ -102,7 +101,7 @@ public interface Service {
   Observable<CategoriesResponse> getCategories();
 
   @GET("/api/v1/surveys/{id}")
-  Observable<Survey> getSurvey(@Path("id") long id);
+  Observable<Survey> getSurvey(@Path("id") long id, @Query("key") String key);
 
   @GET("/api/v1/surveys/exchange/{key}")
   Observable<Response> getSurveyId(@Path("key") String key);
@@ -120,7 +119,7 @@ public interface Service {
   Observable<Response> updateAnswerSurvey(@Path("id") long id, @Body AnswerParam param);
 
   @GET("/api/v1/surveys/{id}/questions")
-  Observable<Questions> getSurveyQuestions(@Path("id") long id);
+  Observable<Questions> getSurveyQuestions(@Path("id") long id, @Query("key") String key);
 
   @GET("/api/v1/surveys/{id}/results")
   Observable<SurveyResultsResponse> getSurveyResults(@Path("id") long id);
