@@ -205,6 +205,7 @@ public class DashboardFragment extends BaseFragment {
             }
 
             emptyDevPlanText.setVisibility(devPlanData.isEmpty() ? View.VISIBLE : View.GONE);
+            seeMoreText.setVisibility(devPlanData.isEmpty() ? View.GONE : View.VISIBLE);
 
             reminders.clear();
             reminders.addAll(response.reminders);
