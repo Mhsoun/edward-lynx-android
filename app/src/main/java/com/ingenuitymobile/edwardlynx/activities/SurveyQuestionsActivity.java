@@ -50,6 +50,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
   private List<Category>      data;
   private List<AnswerBody>    bodies;
   private Survey              survey;
+  private String              key;
 
   private ViewPager viewPager;
   private ImageView previousImage;
@@ -74,6 +75,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     id = getIntent().getLongExtra("id", 0L);
+    key = getIntent().getStringExtra("key");
 
     initViews();
     getData();
@@ -114,7 +116,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
   private void getData() {
     LogUtil.e("AAA getData Survey details");
-    subscription.add(Shared.apiClient.getSurvey(id, new Subscriber<Survey>() {
+    subscription.add(Shared.apiClient.getSurvey(id, key, new Subscriber<Survey>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA Survey details onCompleted ");
@@ -137,7 +139,7 @@ public class SurveyQuestionsActivity extends BaseActivity {
 
   private void getSurveyQuestions() {
     LogUtil.e("AAA getData questions");
-    subscription.add(Shared.apiClient.getSurveyQuestions(id, new Subscriber<Questions>() {
+    subscription.add(Shared.apiClient.getSurveyQuestions(id, key, new Subscriber<Questions>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA questions onCompleted ");
@@ -146,8 +148,6 @@ public class SurveyQuestionsActivity extends BaseActivity {
         circleIndicator.setViewPager(viewPager);
         circleIndicator.setOnPageChangeListener(pageChangeListener);
         setNavigation(0);
-        submitText.setVisibility(survey.status == Survey.COMPLETED || data.size() != 1
-            ? View.GONE : View.VISIBLE);
       }
 
       @Override

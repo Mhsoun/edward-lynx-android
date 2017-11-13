@@ -157,6 +157,7 @@ public class SurveyReportsFragment extends BaseFragment {
         public void onSelect(long id, String key) {
           Intent intent = new Intent(getActivity(), SurveyReportActivity.class);
           intent.putExtra("id", id);
+          intent.putExtra("key", key);
           startActivity(intent);
         }
       };

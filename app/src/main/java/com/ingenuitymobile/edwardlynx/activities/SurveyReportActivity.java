@@ -41,6 +41,7 @@ import rx.Subscriber;
 
 public class SurveyReportActivity extends BaseActivity {
   private long   id;
+  private String key;
   private Survey survey;
 
   private PagerAdapter        adapter;
@@ -75,6 +76,7 @@ public class SurveyReportActivity extends BaseActivity {
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     id = getIntent().getLongExtra("id", 0L);
+    key = getIntent().getStringExtra("key");
     initViews();
   }
 
@@ -112,7 +114,8 @@ public class SurveyReportActivity extends BaseActivity {
 
   private void getData() {
     LogUtil.e("AAA getData Survey details " + id);
-    subscription.add(Shared.apiClient.getSurvey(id, new Subscriber<Survey>() {
+    LogUtil.e("AAA getData Survey details " + key);
+    subscription.add(Shared.apiClient.getSurvey(id, key, new Subscriber<Survey>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA Survey details onCompleted ");
