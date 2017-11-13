@@ -124,6 +124,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         } else if (reminder.type.equals(Reminder.Type.SURVEY.toString())) {
           Intent intent = new Intent(context, SurveyQuestionsActivity.class);
           intent.putExtra("id", reminder.id);
+          intent.putExtra("key", reminder.key);
           context.startActivity(intent);
         } else {
           Intent intent = new Intent(context, DevelopmentPlanDetailedActivity.class);

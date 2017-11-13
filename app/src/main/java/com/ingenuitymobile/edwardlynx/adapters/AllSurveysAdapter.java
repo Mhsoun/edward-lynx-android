@@ -165,6 +165,7 @@ public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
           } else {
             Intent intent = new Intent(context, SurveyQuestionsActivity.class);
             intent.putExtra("id", survey.id);
+            intent.putExtra("key", survey.key);
             context.startActivity(intent);
           }
         }
