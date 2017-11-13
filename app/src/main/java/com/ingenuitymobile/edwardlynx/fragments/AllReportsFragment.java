@@ -39,6 +39,12 @@ public class AllReportsFragment extends BaseFragment {
   private TextView              emptyText;
   private SwipeRefreshLayout    refreshLayout;
 
+  private int                 page;
+  private LinearLayoutManager manager;
+
+  private boolean loading;
+  private int     previousTotal;
+
   public AllReportsFragment() {
     data = new ArrayList<>();
     displayData = new ArrayList<>();
@@ -46,7 +52,7 @@ public class AllReportsFragment extends BaseFragment {
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+                           Bundle savedInstanceState) {
 
     if (mainView != null) {
       ViewGroup parent = (ViewGroup) mainView.getParent();
@@ -67,7 +73,7 @@ public class AllReportsFragment extends BaseFragment {
   @Override
   public void onResume() {
     super.onResume();
-    getSurveys();
+    getSurveys(true);
   }
 
   private void initViews() {
@@ -77,23 +83,36 @@ public class AllReportsFragment extends BaseFragment {
     refreshLayout = (SwipeRefreshLayout) mainView.findViewById(R.id.swipe_refresh_layout);
 
     final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
-        LinearLayoutManager.VERTICAL);
+            LinearLayoutManager.VERTICAL);
     feedbackList.addItemDecoration(dividerItemDecoration);
     feedbackList.setHasFixedSize(true);
-    feedbackList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+    manager = new LinearLayoutManager(getActivity());
+    feedbackList.setLayoutManager(manager);
 
     adapter = new AllReportsAdapter(displayData);
     feedbackList.setAdapter(adapter);
 
     refreshLayout.setOnRefreshListener(refreshListener);
+    feedbackList.addOnScrollListener(onScrollListener);
+
     refreshLayout.setRefreshing(true);
   }
 
-  private void getSurveys() {
-    subscription.add(Shared.apiClient.getSurveys(1, NUM, null, new Subscriber<Surveys>() {
+  private void getSurveys(final boolean isRefresh) {
+    if (isRefresh) {
+      page = 1;
+      previousTotal = 0;
+    } else {
+      page++;
+    }
+
+    LogUtil.e("AAA getSurveys");
+    subscription.add(Shared.apiClient.getSurveys(page, NUM, null, new Subscriber<Surveys>() {
       @Override
       public void onCompleted() {
-        adapter.notifyDataSetChanged();
+        LogUtil.e("AAA onCompleted ");
+        refreshLayout.setRefreshing(false);
         getInstantFeedbacks();
       }
 
@@ -104,7 +123,9 @@ public class AllReportsFragment extends BaseFragment {
 
       @Override
       public void onNext(final Surveys surveys) {
-        data.clear();
+        if (isRefresh) {
+          data.clear();
+        }
         for (Survey survey : surveys.items) {
           data.add(new AllSurveys(survey, null));
         }
@@ -115,25 +136,25 @@ public class AllReportsFragment extends BaseFragment {
   private void getInstantFeedbacks() {
     LogUtil.e("AAA getData FeedbackRequestsFragment");
     subscription.add(
-        Shared.apiClient.getInstantFeedbacks("mine", new Subscriber<FeedbacksResponse>() {
-          @Override
-          public void onCompleted() {
-            refreshLayout.setRefreshing(false);
-            setData();
-          }
+            Shared.apiClient.getInstantFeedbacks("mine", new Subscriber<FeedbacksResponse>() {
+              @Override
+              public void onCompleted() {
+                refreshLayout.setRefreshing(false);
+                setData();
+              }
 
-          @Override
-          public void onError(Throwable e) {
-            refreshLayout.setRefreshing(false);
-          }
+              @Override
+              public void onError(Throwable e) {
+                refreshLayout.setRefreshing(false);
+              }
 
-          @Override
-          public void onNext(final FeedbacksResponse response) {
-            for (Feedback feedback : response.items) {
-              data.add(new AllSurveys(null, feedback));
-            }
-          }
-        }));
+              @Override
+              public void onNext(final FeedbacksResponse response) {
+                for (Feedback feedback : response.items) {
+                  data.add(new AllSurveys(null, feedback));
+                }
+              }
+            }));
   }
 
   private void setData() {
@@ -146,7 +167,7 @@ public class AllReportsFragment extends BaseFragment {
       } else {
         if (!allSurveys.feedback.questions.isEmpty()) {
           if (allSurveys.feedback.questions.get(0).text.toLowerCase().contains(
-              queryString.toLowerCase())) {
+                  queryString.toLowerCase())) {
             displayData.add(allSurveys);
           }
         }
@@ -165,11 +186,35 @@ public class AllReportsFragment extends BaseFragment {
   }
 
   private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout
-      .OnRefreshListener() {
+          .OnRefreshListener() {
     @Override
     public void onRefresh() {
-      getSurveys();
+      getSurveys(true);
     }
   };
 
+  private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+
+    @Override
+    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+      super.onScrolled(recyclerView, dx, dy);
+      if (dy > 0) {
+        final int visibleItemCount = recyclerView.getChildCount();
+        final int totalItemCount = manager.getItemCount();
+        final int firstVisibleItem = manager.findFirstVisibleItemPosition();
+
+        if (loading) {
+          if (totalItemCount > previousTotal) {
+            loading = false;
+            previousTotal = totalItemCount;
+          }
+        }
+        if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + NUM)) {
+          getSurveys(false);
+          LogUtil.e("AAA loading");
+          loading = true;
+        }
+      }
+    }
+  };
 }
