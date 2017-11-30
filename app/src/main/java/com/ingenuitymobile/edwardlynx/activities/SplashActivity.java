@@ -121,8 +121,10 @@ public class SplashActivity extends BaseActivity {
     if (data != null) {
       final List<String> segments = data.getPathSegments();
       LogUtil.e("AAA " + segments.get(0));
-      if (segments.get(0).equals(Shared.SURVEY)) {
-        subscription.add(Shared.apiClient.getSurveyId(segments.get(2),
+      if (segments.get(0).equals(Shared.SURVEY_ANSWER)) {
+        subscription.add(Shared.apiClient.getSurveyId(
+            segments.get(2),
+            "answer",
             new Subscriber<Response>() {
               @Override
               public void onCompleted() {
@@ -139,10 +141,34 @@ public class SplashActivity extends BaseActivity {
                 Bundle surveyBundle = new Bundle();
                 surveyBundle.putString("type", segments.get(0));
                 surveyBundle.putString("id", String.valueOf(response.surveyId));
+                surveyBundle.putString("key", segments.get(2));
                 getIntent().putExtras(surveyBundle);
               }
             }));
-      } if (segments.get(0).equals(Shared.EMAIL_FEEDBACK_REQUEST)) {
+      } else if(segments.get(0).equals(Shared.SURVEY_INVITE)) {
+          subscription.add(Shared.apiClient.getSurveyId(
+              segments.get(1),
+              "invite",
+              new Subscriber<Response>() {
+                  @Override
+                  public void onCompleted() {
+                      openMainPage();
+                  }
+
+                  @Override
+                  public void onError(Throwable e) {
+                      displayNotAuthorize(e, false);
+                  }
+
+                  @Override
+                  public void onNext(Response response) {
+                      Bundle surveyBundle = new Bundle();
+                      surveyBundle.putString("type", segments.get(0));
+                      surveyBundle.putString("id", String.valueOf(response.surveyId));
+                      getIntent().putExtras(surveyBundle);
+                  }
+              }));
+      } else if (segments.get(0).equals(Shared.EMAIL_FEEDBACK_REQUEST)) {
         subscription.add(Shared.apiClient.getFeedbackId(segments.get(2),
             new Subscriber<Response>() {
               @Override

@@ -26,7 +26,8 @@ public class Shared {
   public static final String DEV_PLAN                 = "dev-plan";
   public static final String INSTANT_FEEDBACK_REQUEST = "instant-request";
   public static final String EMAIL_FEEDBACK_REQUEST   = "instant-feedbacks";
-  public static final String SURVEY                   = "survey";
+  public static final String SURVEY_ANSWER            = "survey";
+  public static final String SURVEY_INVITE            = "survey-invite";
 
   public static ApiClient apiClient;
 

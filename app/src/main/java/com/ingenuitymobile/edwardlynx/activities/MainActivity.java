@@ -271,11 +271,14 @@ public class MainActivity extends BaseActivity implements
           intent = new Intent(context, DevelopmentPlanDetailedActivity.class);
         } else if (type.equals(Shared.INSTANT_FEEDBACK_REQUEST)) {
           intent = new Intent(context, AnswerFeedbackActivity.class);
-        } else if (type.equals(Shared.SURVEY)) {
+        } else if (type.equals(Shared.SURVEY_ANSWER)) {
           intent = new Intent(context, SurveyQuestionsActivity.class);
+        } else if (type.equals(Shared.SURVEY_INVITE)) {
+          intent = new Intent(context, InvitePeopleActivity.class);
         }
         if (intent != null) {
           intent.putExtra("id", Long.parseLong(String.valueOf(bundle.get("id"))));
+          intent.putExtra("key", String.valueOf(bundle.get("key")));
           startActivity(intent);
         }
       }

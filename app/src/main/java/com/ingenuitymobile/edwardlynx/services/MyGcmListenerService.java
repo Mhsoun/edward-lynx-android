@@ -1,9 +1,11 @@
 package com.ingenuitymobile.edwardlynx.services;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -15,9 +17,9 @@ import com.ingenuitymobile.edwardlynx.R;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.activities.AnswerFeedbackActivity;
 import com.ingenuitymobile.edwardlynx.activities.DevelopmentPlanDetailedActivity;
+import com.ingenuitymobile.edwardlynx.activities.InvitePeopleActivity;
 import com.ingenuitymobile.edwardlynx.activities.SplashActivity;
 import com.ingenuitymobile.edwardlynx.activities.SurveyQuestionsActivity;
-import com.ingenuitymobile.edwardlynx.utils.BadgeUtils;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 import static android.app.Notification.PRIORITY_MAX;
@@ -36,6 +38,7 @@ public class MyGcmListenerService extends FirebaseMessagingService {
       LogUtil.e("AAA id " + remoteMessage.getData().get("id"));
       LogUtil.e("AAA type " + remoteMessage.getData().get("type"));
 
+      final String channelId = getString(R.string.app_name);
       final String type = remoteMessage.getData().get("type");
       final String id = remoteMessage.getData().get("id");
       final String title = remoteMessage.getNotification().getTitle();
@@ -61,8 +64,11 @@ public class MyGcmListenerService extends FirebaseMessagingService {
       case Shared.INSTANT_FEEDBACK_REQUEST:
         intent = new Intent(this, AnswerFeedbackActivity.class);
         break;
-      case Shared.SURVEY:
+      case Shared.SURVEY_ANSWER + "-answer":
         intent = new Intent(this, SurveyQuestionsActivity.class);
+        break;
+      case Shared.SURVEY_INVITE:
+        intent = new Intent(this, InvitePeopleActivity.class);
         break;
       default:
         intent = new Intent(this, SplashActivity.class);
@@ -82,9 +88,17 @@ public class MyGcmListenerService extends FirebaseMessagingService {
           (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
       final NotificationCompat.Builder notificationBuilder = getNotificationBuilder(isActive,
-          pendingIntent, title, message);
+          pendingIntent, title, message, channelId);
 
-      notificationManager.notify(Integer.parseInt(id), notificationBuilder.build());
+      if (notificationManager != null) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+          final String channelName = getString(R.string.app_name);
+          final int channelImportance = NotificationManager.IMPORTANCE_HIGH;
+          notificationManager.createNotificationChannel(new NotificationChannel(channelId, channelName, channelImportance));
+        }
+
+        notificationManager.notify(Integer.parseInt(id), notificationBuilder.build());
+      }
     }
 
     if (remoteMessage.getNotification() != null) {
@@ -93,7 +107,10 @@ public class MyGcmListenerService extends FirebaseMessagingService {
   }
 
   public NotificationCompat.Builder getNotificationBuilder(boolean isActive,
-      PendingIntent pendingIntent, String title, String message) {
+      PendingIntent pendingIntent, String title, String message, String channelId) {
+    final int smallIcon = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
+            R.mipmap.small_icon : R.mipmap.ic_launcher;
+
     RemoteViews notificationView = new RemoteViews(
         getPackageName(),
         R.layout.view_custom_notiff
@@ -104,19 +121,19 @@ public class MyGcmListenerService extends FirebaseMessagingService {
     notificationView.setTextViewText(R.id.title, title);
     notificationView.setTextViewText(R.id.text, message);
     if (isActive) {
-      return new NotificationCompat.Builder(this)
+      return new NotificationCompat.Builder(this, channelId)
           .setContent(notificationView)
           .setPriority(PRIORITY_MAX)
           .setVibrate(new long[]{100, 100, 100, 100, 100})
-          .setSmallIcon(R.mipmap.ic_launcher)
+          .setSmallIcon(smallIcon)
           .setWhen(System.currentTimeMillis())
           .setAutoCancel(true)
           .setContentTitle(title)
           .setContentText(message)
           .setContentIntent(pendingIntent);
     } else {
-      return new NotificationCompat.Builder(this)
-          .setSmallIcon(R.mipmap.ic_launcher)
+      return new NotificationCompat.Builder(this, channelId)
+          .setSmallIcon(smallIcon)
           .setContentTitle(title)
           .setContentText(message)
           .setAutoCancel(false)
