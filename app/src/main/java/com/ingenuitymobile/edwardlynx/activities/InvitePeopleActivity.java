@@ -2,6 +2,7 @@ package com.ingenuitymobile.edwardlynx.activities;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Path;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import com.ingenuitymobile.edwardlynx.utils.StringUtil;
 
 import java.util.ArrayList;
 
+import retrofit.RetrofitError;
 import rx.Subscriber;
 
 /**
@@ -192,11 +194,18 @@ public class InvitePeopleActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
               progressDialog.dismiss();
-              Toast.makeText(context,
-                      e.getMessage(),
-                      Toast.LENGTH_SHORT
-              ).show();
               LogUtil.e("AAA onError " + e);
+              if (e != null && ((RetrofitError) e).getResponse().getStatus() == 403) {
+                Toast.makeText(context,
+                        getString(R.string.survey_action_unauthorized),
+                        Toast.LENGTH_SHORT
+                ).show();
+              } else {
+                Toast.makeText(context,
+                        getString(R.string.survey_sending_failed),
+                        Toast.LENGTH_SHORT
+                ).show();
+              }
             }
 
             @Override
