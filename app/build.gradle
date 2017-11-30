@@ -67,9 +67,9 @@ dependencies {
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
-  compile 'com.android.support:appcompat-v7:25.0.1'
-  compile 'com.android.support:design:25.1.0'
-  compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+  compile 'com.android.support:appcompat-v7:26.1.0'
+  compile 'com.android.support:design:26.1.0'
+  compile 'uk.co.chrisjenx:calligraphy:2.3.0'
   compile 'io.reactivex:rxjava:1.0.+'
   compile 'io.reactivex:rxandroid:0.23.+'
   compile 'com.squareup.retrofit:retrofit:1.9.+'
@@ -77,11 +77,11 @@ dependencies {
   compile 'com.squareup.okhttp:okhttp-urlconnection:+'
   compile 'com.squareup.okio:okio:+'
   compile 'com.github.florent37:singledateandtimepicker:1.1.5'
-  compile 'com.google.firebase:firebase-messaging:10.2.1'
+  compile 'com.google.firebase:firebase-messaging:11.6.2'
   compile 'com.bignerdranch.android:expandablerecyclerview:2.1.1'
   compile 'com.txusballesteros:FitChart:1.0'
   compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-  compile 'net.hockeyapp.android:HockeySDK:4.0.0'
+  compile 'net.hockeyapp.android:HockeySDK:5.0.4'
   compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
   compile 'info.hoang8f:android-segmented:1.0.6'
   compile "me.leolin:ShortcutBadger:1.1.19@aar"
