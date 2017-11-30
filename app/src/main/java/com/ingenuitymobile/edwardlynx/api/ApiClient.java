@@ -38,7 +38,11 @@ import com.ingenuitymobile.edwardlynx.api.responses.UsersResponse;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.squareup.okhttp.OkHttpClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -47,6 +51,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
+import retrofit.mime.TypedByteArray;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -248,13 +253,13 @@ public class ApiClient {
         }));
   }
 
-  public Subscription getSurveyId(final String key, final Subscriber<Response> subscriber) {
-    return service.getSurveyId(key)
+  public Subscription getSurveyId(final String key, final String action, final Subscriber<Response> subscriber) {
+    return service.getSurveyId(key, action)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
           public void onPostAgain() {
-            getSurveyId(key, subscriber);
+            getSurveyId(key, action, subscriber);
           }
         }));
   }
@@ -755,10 +760,20 @@ public class ApiClient {
               });
         } else {
           Throwable throwable;
-          if (((RetrofitError) e).getResponse().getStatus() == 422 ||
+          if (((RetrofitError) e).getResponse().getStatus() == 400 ||
+              ((RetrofitError) e).getResponse().getStatus() == 403 ||
               ((RetrofitError) e).getResponse().getStatus() == 404 ||
-              ((RetrofitError) e).getResponse().getStatus() == 400) {
-            throwable = e;
+              ((RetrofitError) e).getResponse().getStatus() == 422) {
+              String errorMessage;
+              try {
+                  JSONObject errorJson =
+                          new JSONObject(new String(((TypedByteArray) error.getBody()).getBytes()));
+                  errorMessage = errorJson.getString("message");
+              } catch (JSONException err) {
+                  errorMessage = e.getLocalizedMessage();
+              }
+
+              throwable = new Throwable(errorMessage);
           } else {
             LogUtil.e("AAA " + e);
             displayErrorListener.onDisplayError(e);

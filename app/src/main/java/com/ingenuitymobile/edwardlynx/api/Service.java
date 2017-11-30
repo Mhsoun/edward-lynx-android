@@ -104,7 +104,7 @@ public interface Service {
   Observable<Survey> getSurvey(@Path("id") long id, @Query("key") String key);
 
   @GET("/api/v1/surveys/exchange/{key}")
-  Observable<Response> getSurveyId(@Path("key") String key);
+  Observable<Response> getSurveyId(@Path("key") String key, @Query("action") String action);
 
   @Headers("Content-Type: application/json")
   @POST("/api/v1/surveys/{id}/answers")
