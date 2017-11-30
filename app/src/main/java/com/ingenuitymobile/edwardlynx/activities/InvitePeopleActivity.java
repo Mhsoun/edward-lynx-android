@@ -193,7 +193,7 @@ public class InvitePeopleActivity extends BaseActivity {
             public void onError(Throwable e) {
               progressDialog.dismiss();
               Toast.makeText(context,
-                      getString(R.string.survey_sending_failed),
+                      e.getMessage(),
                       Toast.LENGTH_SHORT
               ).show();
               LogUtil.e("AAA onError " + e);
