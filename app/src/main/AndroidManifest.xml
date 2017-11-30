@@ -23,31 +23,14 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="@string/deep_link_staging_url" />
-                <data android:host="@string/deep_link_live_url" />
-                <data android:pathPrefix="/survey/answer" />
-                <data android:scheme="https"/>
                 <data android:scheme="http"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="@string/deep_link_staging_url" />
-                <data android:host="@string/deep_link_live_url" />
-                <data android:pathPrefix="/instant-feedbacks/answer" />
                 <data android:scheme="https"/>
-                <data android:scheme="http"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="@string/deep_link_staging_url" />
                 <data android:host="@string/deep_link_live_url" />
+                <data android:host="@string/deep_link_staging_url" />
+                <data android:pathPrefix="/instant-feedbacks/answer/" />
+                <data android:pathPrefix="/survey-invite/" />
+                <data android:pathPrefix="/survey/answer/" />
                 <data android:pathPrefix="/dev-plan/" />
-                <data android:scheme="https"/>
-                <data android:scheme="http"/>
             </intent-filter>
         </activity>
         <activity
