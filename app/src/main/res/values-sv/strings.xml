@@ -256,4 +256,5 @@
   <string name="team_progress">Team Progress</string>
   <string name="not_available">N/A</string>
   <string name="recover_password">Återställa lösenord</string>
+    <string name="no_access_invite">Du är inte behörig att bjuda in användare till denna undersökning</string>
 </resources>

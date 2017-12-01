@@ -311,6 +311,7 @@
   <string name="cant_connect">Can\'t connect to server. Try again later</string>
   <string name="no_access">You are not authorize to answer this survey</string>
   <string name="no_access_feedback">You are not authorize to answer this instant feedback</string>
+  <string name="no_access_invite">You are not authorized to invite users to this survey</string>
 
   <string name="numeric_1_to_5">Numeric 1&#8211;5 scale</string>
   <string name="agreement_scale">Agreement scale</string>
