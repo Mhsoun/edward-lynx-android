@@ -52,6 +52,9 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
     getInstantFeedbackDetailed();
   }
 
+  /**
+   * getInstantFeedbackDetailed gets the detailed feedbacks from API
+   */
   private void getInstantFeedbackDetailed() {
     subscription.add(Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
       @Override
@@ -78,6 +81,10 @@ public class AddMoreParticipantsActivity extends InviteBaseActivity {
     }));
   }
 
+  /**
+   * create send invites to target participants
+   * @param v
+   */
   public void create(View v) {
     if (ids.isEmpty()) {
       Toast.makeText(context, getString(R.string.select_atleast_one), Toast.LENGTH_SHORT).show();

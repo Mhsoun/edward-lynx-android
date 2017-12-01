@@ -119,6 +119,9 @@ public class CreateFeedbackActivity extends BaseActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     questionText = (EditText) findViewById(R.id.edit_question);
     questionText.setOnFocusChangeListener(onFocusChangeListener);
@@ -177,11 +180,18 @@ public class CreateFeedbackActivity extends BaseActivity {
     addOptionEdit.setOnFocusChangeListener(onFocusChangeListener);
   }
 
+  /**
+   * add adds new item for feedback
+   * @param v
+   */
   public void add(View v) {
     addOptionEdit.onEditorAction(EditorInfo.IME_ACTION_DONE);
   }
 
-
+  /**
+   * invite opens invite screen to select target users to send the feedback questions
+   * @param v
+   */
   public void invite(View v) {
     final String question = questionText.getText().toString();
 
@@ -215,6 +225,9 @@ public class CreateFeedbackActivity extends BaseActivity {
     }
   }
 
+  /**
+   * setPreview updates the preview of the feedback questions
+   */
   private void setPreview() {
     if (type == Answer.CUSTOM_TEXT) {
       previewRadiogroup.setVisibility(View.GONE);
@@ -267,6 +280,12 @@ public class CreateFeedbackActivity extends BaseActivity {
     }
   }
 
+  /**
+   * createRadioButton creates a radio button with the given properties
+   * @param radioGroup radio group to be created
+   * @param context activity context
+   * @param description radio group description to be displayed
+   */
   private void createRadioButton(final RadioGroup radioGroup, final Context context,
       final String description) {
     final RadioButton radioButton = new RadioButton(context);
@@ -280,6 +299,12 @@ public class CreateFeedbackActivity extends BaseActivity {
     radioGroup.addView(radioButton);
   }
 
+  /**
+   * createSegmentedButton creates a segmented button with the given properties
+   * @param radioGroup segmented radio button to be created
+   * @param context activity context
+   * @param description segmented radio button description to be displayed
+   */
   private void createSegmentedButton(
       final SegmentedGroup radioGroup,
       final Context context,
@@ -302,6 +327,9 @@ public class CreateFeedbackActivity extends BaseActivity {
     radioGroup.invalidate();
   }
 
+  /**
+   * listener for the N/A option checkbox
+   */
   private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton
       .OnCheckedChangeListener() {
     @Override
@@ -310,6 +338,9 @@ public class CreateFeedbackActivity extends BaseActivity {
     }
   };
 
+  /**
+   * listener for the question text box to update the text in the preview
+   */
   private TextWatcher textWatcher = new TextWatcher() {
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -327,6 +358,9 @@ public class CreateFeedbackActivity extends BaseActivity {
     }
   };
 
+  /**
+   * listener for the keyboard to detect when the done action is triggered
+   */
   private TextView.OnEditorActionListener editorActionListener = new TextView
       .OnEditorActionListener() {
     @Override
@@ -352,6 +386,9 @@ public class CreateFeedbackActivity extends BaseActivity {
     }
   };
 
+  /**
+   * listener for the custom scale adapter
+   */
   private CustomScaleAdapter.OnDeleteListener listener = new CustomScaleAdapter.OnDeleteListener
       () {
     @Override

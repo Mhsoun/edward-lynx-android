@@ -112,6 +112,9 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     scrollView = (ScrollView) findViewById(R.id.scrollview);
     developmentNameEdit = (EditText) findViewById(R.id.edit_development_name);
@@ -178,6 +181,9 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     setListeners();
   }
 
+  /**
+   * setListeners sets the view listeners for the current activity
+   */
   private void setListeners() {
     remindCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
       @Override
@@ -234,11 +240,19 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     addPlanEdit.setOnFocusChangeListener(onFocusChangeListener);
   }
 
+  /**
+   * notifyAdapter notifies the list adapter of data changes
+   */
   private void notifyAdapter() {
     emptyText.setVisibility(param.actions.isEmpty() ? View.VISIBLE : View.GONE);
     adapter.notifyDataSetChanged();
   }
 
+  /**
+   * addPlan adds a new plan to the list,
+   * used in CreateDetailedDevelopmentPlanActivity
+   * @param v
+   */
   public void addPlan(View v) {
     if (addPlanLayout.getVisibility() == View.GONE) {
       addPlanLayout.setVisibility(View.VISIBLE);
@@ -248,6 +262,11 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     }
   }
 
+  /**
+   * save closes this activity and returns to the AddDevelopmentPlan with data,
+   * used in CreateDetailedDevelopmentPlanActivity
+   * @param v
+   */
   public void save(View v) {
     final String developmentPlan = developmentNameEdit.getText().toString();
     final String description = descriptionEdit.getText().toString();
@@ -304,6 +323,9 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     }
   }
 
+  /**
+   * addGoal adds a new development plan goal
+   */
   private void addGoal() {
     hideKeyboard();
     progressDialog.show();
@@ -330,6 +352,9 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * updateGoal updates the edited goal
+   */
   private void updateGoal() {
     hideKeyboard();
     progressDialog.show();
@@ -356,6 +381,9 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * getCategories retrieves the categories from API
+   */
   private void getCategories() {
     subscription.add(Shared.apiClient.getCategories(new Subscriber<CategoriesResponse>() {
       @Override
@@ -395,6 +423,9 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * listener for deleting the action plan
+   */
   private CreateActionPlanAdapter.OnDeleteListener listener = new CreateActionPlanAdapter
       .OnDeleteListener() {
     @Override
@@ -424,6 +455,9 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     }
   };
 
+  /**
+   * listener for saving text from the add plan text field
+   */
   private TextView.OnEditorActionListener editorActionListener = new TextView
       .OnEditorActionListener() {
     @Override
@@ -445,6 +479,9 @@ public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {
     }
   };
 
+  /**
+   * RecyclerView movement callback for the create action plan adapter
+   */
   ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
       ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
