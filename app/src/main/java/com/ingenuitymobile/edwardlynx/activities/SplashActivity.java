@@ -133,7 +133,7 @@ public class SplashActivity extends BaseActivity {
 
               @Override
               public void onError(Throwable e) {
-                displayNotAuthorize(e, false);
+                displayNotAuthorize(e, getString(R.string.no_access));
               }
 
               @Override
@@ -157,7 +157,7 @@ public class SplashActivity extends BaseActivity {
 
                   @Override
                   public void onError(Throwable e) {
-                      displayNotAuthorize(e, false);
+                      displayNotAuthorize(e, getString(R.string.no_access_invite));
                   }
 
                   @Override
@@ -178,7 +178,7 @@ public class SplashActivity extends BaseActivity {
 
               @Override
               public void onError(Throwable e) {
-                displayNotAuthorize(e, true);
+                displayNotAuthorize(e, getString(R.string.no_access_feedback));
               }
 
               @Override
@@ -229,14 +229,14 @@ public class SplashActivity extends BaseActivity {
         });
   }
 
-  private void displayNotAuthorize(Throwable e, boolean isFeedback) {
+  private void displayNotAuthorize(Throwable e, String errorMessage) {
     if (e != null) {
       final retrofit.client.Response error = ((RetrofitError) e).getResponse();
       if (error != null && error.getStatus() == 404) {
         ViewUtil.showAlert(
             SplashActivity.this,
             "",
-            getString(isFeedback ? R.string.no_access_feedback : R.string.no_access),
+            errorMessage,
             new DialogInterface.OnClickListener() {
               @Override
               public void onClick(DialogInterface dialogInterface, int i) {

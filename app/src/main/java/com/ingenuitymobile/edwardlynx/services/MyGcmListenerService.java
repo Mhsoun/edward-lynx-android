@@ -41,6 +41,7 @@ public class MyGcmListenerService extends FirebaseMessagingService {
       final String channelId = getString(R.string.app_name);
       final String type = remoteMessage.getData().get("type");
       final String id = remoteMessage.getData().get("id");
+      final String key = remoteMessage.getData().get("key");
       final String title = remoteMessage.getNotification().getTitle();
       final String message = remoteMessage.getNotification().getBody();
 
@@ -54,8 +55,10 @@ public class MyGcmListenerService extends FirebaseMessagingService {
       bundle.putString("message", message);
       bundle.putString("type", type);
       bundle.putString("id", id);
+      bundle.putString("key", key);
 
       final boolean isActive = LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+      int notificationId = Integer.parseInt(id);
 
       switch (type) {
       case Shared.DEV_PLAN:
@@ -69,6 +72,7 @@ public class MyGcmListenerService extends FirebaseMessagingService {
         break;
       case Shared.SURVEY_INVITE:
         intent = new Intent(this, InvitePeopleActivity.class);
+        notificationId *= -1;
         break;
       default:
         intent = new Intent(this, SplashActivity.class);
@@ -80,8 +84,9 @@ public class MyGcmListenerService extends FirebaseMessagingService {
 
       intent.putExtras(bundle);
       intent.putExtra("id", Long.parseLong(id));
+      intent.putExtra("key", key);
 
-      final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+      final PendingIntent pendingIntent = PendingIntent.getActivity(this, notificationId, intent,
           isActive ? PendingIntent.FLAG_CANCEL_CURRENT : PendingIntent.FLAG_ONE_SHOT);
 
       final NotificationManager notificationManager =
@@ -97,7 +102,7 @@ public class MyGcmListenerService extends FirebaseMessagingService {
           notificationManager.createNotificationChannel(new NotificationChannel(channelId, channelName, channelImportance));
         }
 
-        notificationManager.notify(Integer.parseInt(id), notificationBuilder.build());
+        notificationManager.notify(notificationId, notificationBuilder.build());
       }
     }
 

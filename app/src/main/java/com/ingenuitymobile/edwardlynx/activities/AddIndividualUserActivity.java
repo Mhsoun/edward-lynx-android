@@ -27,6 +27,9 @@ public class AddIndividualUserActivity extends InviteBaseActivity {
 
   private int count;
 
+  /**
+   * AddIndividualUserActivity constructor
+   */
   public AddIndividualUserActivity() {
     count = 0;
   }
@@ -53,6 +56,9 @@ public class AddIndividualUserActivity extends InviteBaseActivity {
     getIndividualUsers();
   }
 
+  /**
+   * getIndividualUsers retrieves all users from API
+   */
   private void getIndividualUsers() {
     subscription.add(Shared.apiClient.getIndividualUsers(new Subscriber<UsersResponse>() {
       @Override
@@ -85,6 +91,11 @@ public class AddIndividualUserActivity extends InviteBaseActivity {
     }));
   }
 
+  /**
+   * share to all selected users,
+   * used in ShareReportActivity
+   * @param v
+   */
   public void share(View v) {
     AddUserBody userBody = new AddUserBody();
     userBody.users = new ArrayList<>();

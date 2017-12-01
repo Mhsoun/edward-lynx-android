@@ -1,8 +1,9 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Path;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -46,6 +47,7 @@ public class InvitePeopleActivity extends BaseActivity {
   private EditText emailEdit;
   private Spinner  spinner;
   private TextView emptyText;
+  private String   key;
 
   private InviteUserAdapter    adapter;
   private ArrayList<UserParam> userParams;
@@ -65,6 +67,7 @@ public class InvitePeopleActivity extends BaseActivity {
 
     final String title = getIntent().getStringExtra("title");
     id = getIntent().getLongExtra("id", 0L);
+    key = getIntent().getStringExtra("key");
     evaluate = getIntent().getStringExtra("evaluate");
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -83,6 +86,14 @@ public class InvitePeopleActivity extends BaseActivity {
     };
     initViews();
     setTitle(getString(R.string.invite_people).toUpperCase());
+
+    NotificationManager notificationManager =
+        (NotificationManager) getApplicationContext()
+            .getSystemService(Context.NOTIFICATION_SERVICE);
+    notificationManager.cancel((int) id * -1);
+    if (!TextUtils.isEmpty(key)) {
+      postNotificationRead();
+    }
   }
 
   @Override
@@ -219,6 +230,29 @@ public class InvitePeopleActivity extends BaseActivity {
             }
           }));
     }
+  }
+
+  /**
+   * method call to notify API that notification is read
+   */
+  private void postNotificationRead() {
+    subscription.add(Shared.apiClient.getSurveyId(
+            key,
+            "invite",
+            new Subscriber<Response>() {
+              @Override
+              public void onCompleted() {
+              }
+
+              @Override
+              public void onError(Throwable e) {
+              }
+
+              @Override
+              public void onNext(Response response) {
+              }
+            }
+    ));
   }
 
   ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
