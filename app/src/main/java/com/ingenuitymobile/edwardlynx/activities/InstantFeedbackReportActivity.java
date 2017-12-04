@@ -110,6 +110,9 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     return true;
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     questionText = (TextView) findViewById(R.id.text_question);
     emptyText = (TextView) findViewById(R.id.text_empty_state);
@@ -133,6 +136,9 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     detailsText.setText("");
   }
 
+  /**
+   * retrieves the instant feedback details from the API
+   */
   private void getData() {
     LogUtil.e("AAA getData instant feedbaks detail");
     subscription.add(Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
@@ -163,8 +169,11 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * retrieves the instant feedback answers from the API
+   */
   private void getAnswers() {
-    LogUtil.e("AAA getData instant feedbaks answers");
+    LogUtil.e("AAA getData instant feedback answers");
     subscription.add(
         Shared.apiClient.getInstantFeedbackAnswers(id, new Subscriber<FeedbackAnswerResponse>() {
           @Override
@@ -187,6 +196,9 @@ public class InstantFeedbackReportActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * sets the instant feedback questions in the activity
+   */
   private void setDetails() {
     questionText.setText(feedback.questions.get(0).text);
 
@@ -203,6 +215,9 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     anonymousText.setVisibility(feedback.anonymous == 1 ? View.VISIBLE : View.GONE);
   }
 
+  /**
+   * sets the data for the views in the InstantFeedbackReportActivity with retrieved data from API
+   */
   private void setData() {
     final int type = feedback.questions.get(0).answer.type;
 
@@ -335,12 +350,18 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     }
   }
 
+  /**
+   * action to be invoked when the share button is clicked
+   */
   private void share() {
     Intent intent = new Intent(InstantFeedbackReportActivity.this, ShareReportActivity.class);
     intent.putExtra("id", id);
     startActivity(intent);
   }
 
+  /**
+   * action to be invoked when the add more button is clicked
+   */
   private void addMore() {
     Intent intent = new Intent(InstantFeedbackReportActivity.this,
         AddMoreParticipantsActivity.class);

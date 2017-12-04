@@ -50,6 +50,10 @@ public class InviteActivity extends InviteBaseActivity {
     setTitle(getString(R.string.invite_people).toUpperCase());
   }
 
+  /**
+   * action to be invoked when the send invites button is pressed
+   * @param v
+   */
   public void create(View v) {
     if (ids.isEmpty()) {
       Toast.makeText(context, getString(R.string.select_atleast_one), Toast.LENGTH_SHORT).show();

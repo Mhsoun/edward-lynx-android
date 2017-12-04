@@ -97,6 +97,10 @@ public class MainActivity extends BaseActivity implements
     unregisterManagers();
   }
 
+  /**
+   * ask permission to the user for enabling the notification access for the app,
+   * this is important for tracking unread notification count and notification clearing
+   */
   private void enableNotificationAccess() {
     ContentResolver contentResolver = context.getContentResolver();
     String enabledNotificationListeners =
@@ -129,7 +133,9 @@ public class MainActivity extends BaseActivity implements
     }
   }
 
-
+  /**
+   * function to register crash uploader to hockey app
+   */
   public void autoUploadCrashes() {
     if (!TextUtils.isEmpty(getString(R.string.hockey_app_id))) {
       CrashManager.register(this, getResources().getString(R.string.hockey_app_id),
@@ -141,18 +147,27 @@ public class MainActivity extends BaseActivity implements
     }
   }
 
+  /**
+   * function to register for crash detection
+   */
   private void checkForCrashes() {
     if (!TextUtils.isEmpty(getString(R.string.hockey_app_id))) {
       CrashManager.register(this);
     }
   }
 
+  /**
+   * function to check for updates to hockey app
+   */
   private void checkForUpdates() {
     if (BuildConfig.DEBUG && !TextUtils.isEmpty(getString(R.string.hockey_app_id))) {
       UpdateManager.register(this);
     }
   }
 
+  /**
+   * function to remove listeners for the crash detections
+   */
   private void unregisterManagers() {
     if (!TextUtils.isEmpty(getString(R.string.hockey_app_id))) {
       UpdateManager.unregister();
@@ -203,6 +218,10 @@ public class MainActivity extends BaseActivity implements
     return true;
   }
 
+  /**
+   * changes the view to the target fragment
+   * @param fragment the fragment to be replaced for the main content view
+   */
   private void changeFragment(Fragment fragment) {
     hideKeyboard();
     toolbar.setTitle(fragment.getArguments().getString("title"));
@@ -216,6 +235,9 @@ public class MainActivity extends BaseActivity implements
     this.fragment = fragment;
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
@@ -230,6 +252,9 @@ public class MainActivity extends BaseActivity implements
     navigationView.setNavigationItemSelectedListener(this);
   }
 
+  /**
+   * action invoked when the logout menu is clicked in the side navigation drawer
+   */
   private void logout() {
     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
     alertBuilder.setTitle(getString(R.string.confirmation));
@@ -255,12 +280,20 @@ public class MainActivity extends BaseActivity implements
     alertBuilder.create().show();
   }
 
+  /**
+   * function to set crashlytics parameters
+   */
   private void setUserCrashlytics() {
     Crashlytics.setUserIdentifier(String.valueOf(Shared.user.id));
     Crashlytics.setUserEmail(Shared.user.email);
     Crashlytics.setUserName(Shared.user.name);
   }
 
+  /**
+   * checks for the intents when opening this activity,
+   * acts as a redirecting filter depending on the type passed with the intent,
+   * opens the target page depending on the type passed with the intent
+   */
   private void checkIntent() {
     if (getIntent().getExtras() != null) {
       final Bundle bundle = getIntent().getExtras();
@@ -285,6 +318,9 @@ public class MainActivity extends BaseActivity implements
     }
   }
 
+  /**
+   *  function to change the view to dashboard fragment
+   */
   private void changeToDashboard() {
     navigationView.setCheckedItem(R.id.dashboard);
     if (dashboardFragment == null) {
@@ -293,6 +329,10 @@ public class MainActivity extends BaseActivity implements
     changeFragment(dashboardFragment);
   }
 
+  /**
+   * function to change the view to surveys fragment
+   * @param position the tab position to be displayed when the surveys fragment is opened
+   */
   private void changeToSurveys(int position) {
     navigationView.setCheckedItem(R.id.survey);
     if (surveysFragment == null) {
@@ -302,6 +342,9 @@ public class MainActivity extends BaseActivity implements
     changeFragment(surveysFragment);
   }
 
+  /**
+   * function to change the view to development plan
+   */
   private void changeToDevPlan() {
     navigationView.setCheckedItem(R.id.development_plans);
     if (developmenPlansFragment == null) {
@@ -312,6 +355,9 @@ public class MainActivity extends BaseActivity implements
     changeFragment(developmenPlansFragment);
   }
 
+  /**
+   * listener interface for changing the fragment
+   */
   private OnChangeFragmentListener listener = new OnChangeFragmentListener() {
     @Override
     public void onChange(ChangeFragment changeFragment) {
@@ -339,6 +385,9 @@ public class MainActivity extends BaseActivity implements
     }
   };
 
+  /**
+   * interface to connect to other classes to change the fragment
+   */
   public interface OnChangeFragmentListener {
     void onChange(ChangeFragment changeFragment);
   }

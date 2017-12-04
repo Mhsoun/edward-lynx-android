@@ -43,6 +43,9 @@ public class LoginActivity extends BaseActivity {
     initViews();
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     final EditText usernameEdit = (EditText) findViewById(R.id.edit_username);
     final EditText passwordEdit = (EditText) findViewById(R.id.edit_password);
@@ -66,6 +69,10 @@ public class LoginActivity extends BaseActivity {
     loginText.setText(getString(R.string.login).toUpperCase());
   }
 
+  /**
+   * action invoked when the login button is clicked, will try user login
+   * @param v
+   */
   public void login(View v) {
     usernameGroup.removeError();
     passwordGroup.removeError();
@@ -117,16 +124,27 @@ public class LoginActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * action invoked when the forgot password is clicked, redirects the user to ForgotPasswordActivity
+   * @param v
+   */
   public void forgotPassword(View v) {
     startActivity(new Intent(this, ForgotPasswordActivity.class));
   }
 
+  /**
+   * action invoked when the contact us is clicked, opens a webpage to contact Edward Lynx
+   * @param v
+   */
   public void contactUs(View v) {
     Intent i = new Intent(Intent.ACTION_VIEW);
     i.setData(Uri.parse("http://www.edwardlynx.com/contact/"));
     startActivity(i);
   }
 
+  /**
+   * listener for the input when the action is done, will try to login the user
+   */
   private TextView.OnEditorActionListener editorActionListener = new TextView
       .OnEditorActionListener() {
     @Override

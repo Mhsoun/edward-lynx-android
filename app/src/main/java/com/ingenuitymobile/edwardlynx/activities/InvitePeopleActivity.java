@@ -57,7 +57,6 @@ public class InvitePeopleActivity extends BaseActivity {
     userParams = new ArrayList<>();
   }
 
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -104,6 +103,9 @@ public class InvitePeopleActivity extends BaseActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     final TextView evaluatedText = (TextView) findViewById(R.id.text_evaluated);
     evaluatedText.setText(evaluate);
@@ -144,11 +146,18 @@ public class InvitePeopleActivity extends BaseActivity {
     spinner.setAdapter(dataAdapter);
   }
 
+  /**
+   * notifyAdapter notifies the list adapter of data changes
+   */
   private void notifyAdapter() {
     emptyText.setVisibility(userParams.isEmpty() ? View.VISIBLE : View.GONE);
     adapter.notifyDataSetChanged();
   }
 
+  /**
+   * action invoked when the add user is pressed
+   * @param v
+   */
   public void addUser(View v) {
     final String name = nameEdit.getText().toString();
     final String email = emailEdit.getText().toString();
@@ -184,6 +193,10 @@ public class InvitePeopleActivity extends BaseActivity {
     emailEdit.clearFocus();
   }
 
+  /**
+   * action invoked when the send invite is pressed
+   * @param v
+   */
   public void sendInvites(View v) {
     if (userParams.isEmpty()) {
       Toast.makeText(context, getString(R.string.select_atleast_one), Toast.LENGTH_SHORT).show();
@@ -255,6 +268,9 @@ public class InvitePeopleActivity extends BaseActivity {
     ));
   }
 
+  /**
+   * listener for swiping an item from the list of people to be invited
+   */
   ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
       ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 

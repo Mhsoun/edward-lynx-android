@@ -60,6 +60,9 @@ public class FeedbackRequestsActivity extends BaseActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     final RecyclerView feedbackList = (RecyclerView) findViewById(R.id.list_feedback);
 
@@ -73,6 +76,9 @@ public class FeedbackRequestsActivity extends BaseActivity {
     feedbackList.setAdapter(adapter);
   }
 
+  /**
+   * retrieves the instant feedback data from the API
+   */
   private void getData() {
     LogUtil.e("AAA getData FeedbackRequestsActivity");
     subscription.add(
@@ -97,6 +103,9 @@ public class FeedbackRequestsActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * listener for the select action on the feedback
+   */
   private FeedbackAdapter.OnSelectFeedbackListener listener = new FeedbackAdapter
       .OnSelectFeedbackListener() {
     @Override

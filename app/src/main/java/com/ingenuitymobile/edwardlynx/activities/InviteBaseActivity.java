@@ -68,6 +68,9 @@ public class InviteBaseActivity extends BaseActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   protected void initViews() {
     final RecyclerView usersList = (RecyclerView) findViewById(R.id.list_users);
     searchView = (SearchView) findViewById(R.id.searchview);
@@ -91,6 +94,9 @@ public class InviteBaseActivity extends BaseActivity {
     updateUI();
   }
 
+  /**
+   * retrieves the list of users from the API
+   */
   protected void getData() {
     LogUtil.e("AAA getData users");
     subscription.add(Shared.apiClient.getUsers("list", new Subscriber<UsersResponse>() {
@@ -143,6 +149,9 @@ public class InviteBaseActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * updates the view when a user is clicked from the list
+   */
   protected void updateUI() {
     selectCheckbox.setOnCheckedChangeListener(null);
     selectCheckbox.setChecked((ids.size() != 0 && ids.size() + invited >= adapter.getItemCount()));
@@ -152,6 +161,9 @@ public class InviteBaseActivity extends BaseActivity {
     notifyAdapter();
   }
 
+  /**
+   * notifyAdapter notifies the list adapter of data changes
+   */
   private void notifyAdapter() {
     Handler handler = new Handler();
     final Runnable r = new Runnable() {
@@ -163,6 +175,10 @@ public class InviteBaseActivity extends BaseActivity {
     handler.post(r);
   }
 
+  /**
+   * action invoked when a new character is typed into the search text field
+   * @param newText new search query
+   */
   private void search(String newText) {
     displayData.clear();
 
@@ -177,6 +193,9 @@ public class InviteBaseActivity extends BaseActivity {
     notifyAdapter();
   }
 
+  /**
+   * listener for the select all checkbox
+   */
   private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton
       .OnCheckedChangeListener() {
     @Override
@@ -194,6 +213,9 @@ public class InviteBaseActivity extends BaseActivity {
     }
   };
 
+  /**
+   * listener for the adapter when a user is selected from the list
+   */
   public UsersAdapter.OnSelectUserListener listener = new UsersAdapter.OnSelectUserListener() {
     @Override
     public void onSelect(String id, boolean isSelected) {
@@ -212,6 +234,9 @@ public class InviteBaseActivity extends BaseActivity {
     }
   };
 
+  /**
+   * listener for the search view when a query text is changed
+   */
   private SearchView.OnQueryTextListener onQueryTextListener =
       new SearchView.OnQueryTextListener() {
         @Override
@@ -227,6 +252,9 @@ public class InviteBaseActivity extends BaseActivity {
         }
       };
 
+  /**
+   * listener for the search view when it is closed
+   */
   private SearchView.OnCloseListener onCloseListener = new SearchView.OnCloseListener() {
     @Override
     public boolean onClose() {
@@ -237,7 +265,10 @@ public class InviteBaseActivity extends BaseActivity {
     }
   };
 
-
+  /**
+   * action invoked when the invite button is pressed
+   * @param v
+   */
   public void invite(View v) {
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);

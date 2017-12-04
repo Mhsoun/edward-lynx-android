@@ -60,6 +60,9 @@ public class ReportsActivity extends BaseActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     final SearchView searchView = (SearchView) findViewById(R.id.searchview);
     searchView.setOnQueryTextListener(onQueryTextListener);
@@ -75,6 +78,9 @@ public class ReportsActivity extends BaseActivity {
     viewPager.setCurrentItem(position);
   }
 
+  /**
+   * sets the selected fragment
+   */
   private void setSelection() {
     switch (viewPager.getCurrentItem()) {
     case ALL:
@@ -98,6 +104,9 @@ public class ReportsActivity extends BaseActivity {
     }
   }
 
+  /**
+   * listener for the changing of query text in the search view
+   */
   private SearchView.OnQueryTextListener onQueryTextListener = new SearchView.OnQueryTextListener
       () {
     @Override
@@ -125,6 +134,9 @@ public class ReportsActivity extends BaseActivity {
     }
   };
 
+  /**
+   * listener for the changing of page in the reports view pager
+   */
   private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener
       () {
     @Override
@@ -144,6 +156,9 @@ public class ReportsActivity extends BaseActivity {
     }
   };
 
+  /**
+   * custom pager adapter for the reports fragment
+   */
   private class MyPagerAdapter extends FragmentPagerAdapter {
     private int NUM_ITEMS = 3;
 
