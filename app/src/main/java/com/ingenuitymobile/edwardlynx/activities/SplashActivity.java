@@ -26,6 +26,11 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 13/12/2016.
+ * Activity to be displayed on application startup to check current user access and API
+ * connectivity, once connection is established, data will be retrieved for loading.
+ * If no user is logged in, login page will be displayed, else, user details will be
+ * retrieved and intent data will be checked and redirect to the page depending on the
+ * type of intent and data passed.
  */
 
 public class SplashActivity extends BaseActivity {
@@ -52,6 +57,9 @@ public class SplashActivity extends BaseActivity {
     }
   }
 
+  /**
+   * retrieves the user details from the API and stores it locally
+   */
   private void getUser() {
     subscription.add(Shared.apiClient.getMe(new Subscriber<User>() {
       @Override
@@ -71,6 +79,9 @@ public class SplashActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * retrieves the categories from the API
+   */
   private void getCategories() {
     subscription.add(Shared.apiClient.getCategories(new Subscriber<CategoriesResponse>() {
       @Override
@@ -91,6 +102,9 @@ public class SplashActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * posts the Firebase token to the API for GCM async
+   */
   private void postTokenDevice() {
     if (!TextUtils.isEmpty(SessionStore.restoreFirebaseToken(SplashActivity.this))) {
       subscription.add(Shared.apiClient.postTokenDevice(
@@ -116,6 +130,10 @@ public class SplashActivity extends BaseActivity {
     }
   }
 
+  /**
+   * checks if the application is launched via an Intent and retrieves all intent details,
+   * details will be used to determine which screen will be opened if a type exists
+   */
   private void checkIntent() {
     Uri data = getIntent().getData();
     if (data != null) {
@@ -201,6 +219,9 @@ public class SplashActivity extends BaseActivity {
     }
   }
 
+  /**
+   * opens the main screen of the app passing data to be processed
+   */
   private void openMainPage() {
     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
     if (getIntent().getExtras() != null) {
@@ -210,6 +231,10 @@ public class SplashActivity extends BaseActivity {
     SplashActivity.this.finish();
   }
 
+  /**
+   * displays an error message to the user
+   * @param e the error thrown by the caller method
+   */
   private void showError(Throwable e) {
     LogUtil.e("AAA " + e);
     if (e != null) {
@@ -229,6 +254,11 @@ public class SplashActivity extends BaseActivity {
         });
   }
 
+  /**
+   * displays a message telling the user that an action is unauthorized
+   * @param e the error thrown by the caller method
+   * @param errorMessage the user readable error message thrown by the caller method
+   */
   private void displayNotAuthorize(Throwable e, String errorMessage) {
     if (e != null) {
       final retrofit.client.Response error = ((RetrofitError) e).getResponse();

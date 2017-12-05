@@ -21,6 +21,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 16/01/2017.
+ * Activity to display the instant feedback questions.
  */
 
 public class FeedbackRequestsActivity extends BaseActivity {

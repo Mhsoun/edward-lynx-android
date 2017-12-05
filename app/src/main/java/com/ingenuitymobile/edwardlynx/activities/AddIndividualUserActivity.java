@@ -21,6 +21,7 @@ import rx.Subscriber;
 
 /**
  * Created by memengski on 7/6/17.
+ * Activity for adding individual users to share reports.
  */
 
 public class AddIndividualUserActivity extends InviteBaseActivity {

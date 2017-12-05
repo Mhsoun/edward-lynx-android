@@ -34,6 +34,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 31/01/2017.
+ * Activity to create a development plan.
  */
 
 public class CreateDevelopmentPlanActivity extends BaseActivity {

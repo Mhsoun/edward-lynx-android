@@ -10,6 +10,7 @@ import com.ingenuitymobile.edwardlynx.fragments.DevelopmenPlansFragment;
 
 /**
  * Created by memengski on 7/6/17.
+ * Activity to instantiate the development plans fragment.
  */
 
 public class IndividualDevelopmentPlanActivity extends BaseActivity {

@@ -34,6 +34,8 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 23/01/2017.
+ * Base activity for the InviteActivity, includes all listeners, components and action handlers
+ * for the invite activity.
  */
 
 public class InviteBaseActivity extends BaseActivity {

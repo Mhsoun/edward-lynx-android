@@ -23,6 +23,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 15/12/2016.
+ * Activity for the user password retrieval.
  */
 
 public class ForgotPasswordActivity extends BaseActivity {

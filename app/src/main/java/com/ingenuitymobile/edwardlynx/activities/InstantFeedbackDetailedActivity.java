@@ -29,6 +29,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 22/02/2017.
+ * Activity to create instant feedback and invite people to answer.
  */
 
 public class InstantFeedbackDetailedActivity extends BaseActivity {

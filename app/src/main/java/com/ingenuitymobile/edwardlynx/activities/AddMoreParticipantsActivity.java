@@ -22,6 +22,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 14/02/2017.
+ * Activity to add more participants to invite.
  */
 
 public class AddMoreParticipantsActivity extends InviteBaseActivity {

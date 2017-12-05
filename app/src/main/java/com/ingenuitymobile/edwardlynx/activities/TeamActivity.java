@@ -17,6 +17,7 @@ import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 /**
  * Created by memengski on 6/21/17.
+ * Activity that displays the the progress of the team.
  */
 
 public class TeamActivity extends BaseActivity {
@@ -58,6 +59,9 @@ public class TeamActivity extends BaseActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     viewPager = (ViewPager) findViewById(R.id.viewpager);
     final MyPagerAdapter adapter = new MyPagerAdapter(
@@ -81,6 +85,9 @@ public class TeamActivity extends BaseActivity {
     }
   }
 
+  /**
+   * displays the fragment depending on the current selection of the view pager
+   */
   private void setSelection() {
     switch (viewPager.getCurrentItem()) {
     case INDIVIDUAL:
@@ -95,6 +102,10 @@ public class TeamActivity extends BaseActivity {
     }
   }
 
+  /**
+   * listener for the view pager on changing the page, updates the current fragment
+   * depending on what is currently selected
+   */
   private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener
       () {
     @Override
@@ -114,6 +125,9 @@ public class TeamActivity extends BaseActivity {
     }
   };
 
+  /**
+   * custom pager adapter to render fragment for the currently selected page
+   */
   private class MyPagerAdapter extends FragmentPagerAdapter {
     private int NUM_ITEMS = 3;
 

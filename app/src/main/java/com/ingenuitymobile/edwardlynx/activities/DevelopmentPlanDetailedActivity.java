@@ -45,6 +45,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 02/02/2017.
+ * Activity to view details of the selected development plan.
  */
 
 public class DevelopmentPlanDetailedActivity extends BaseActivity {

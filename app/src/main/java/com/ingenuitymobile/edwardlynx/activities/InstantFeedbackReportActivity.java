@@ -43,6 +43,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 17/01/2017.
+ * Activity to display the detailed report for an instant feedback.
  */
 
 public class InstantFeedbackReportActivity extends BaseActivity {

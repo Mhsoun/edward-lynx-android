@@ -45,6 +45,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 
 /**
  * Created by mEmEnG-sKi on 10/01/2017.
+ * Activity to create instant feedback and invite people for answering.
  */
 
 public class CreateFeedbackActivity extends BaseActivity {

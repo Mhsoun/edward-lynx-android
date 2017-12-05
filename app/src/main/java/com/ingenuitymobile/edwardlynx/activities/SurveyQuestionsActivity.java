@@ -39,6 +39,11 @@ import java.util.List;
 import retrofit.RetrofitError;
 import rx.Subscriber;
 
+/**
+ * Created by memengski on 4/7/17.
+ * Activity to display the survey questions to be answered.
+ */
+
 public class SurveyQuestionsActivity extends BaseActivity {
 
   private TextView submitText;
@@ -62,7 +67,6 @@ public class SurveyQuestionsActivity extends BaseActivity {
     data = new ArrayList<>();
     bodies = new ArrayList<>();
   }
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +99,9 @@ public class SurveyQuestionsActivity extends BaseActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     submitText = (TextView) findViewById(R.id.text_submit);
     saveDraftsText = (TextView) findViewById(R.id.text_save_drafts);
@@ -114,6 +121,9 @@ public class SurveyQuestionsActivity extends BaseActivity {
     }
   }
 
+  /**
+   * retrieves the survey details from the API based on the survey id
+   */
   private void getData() {
     LogUtil.e("AAA getData Survey details");
     subscription.add(Shared.apiClient.getSurvey(id, key, new Subscriber<Survey>() {
@@ -137,6 +147,9 @@ public class SurveyQuestionsActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * retrieves the survey questions from the API based on the survey id and key
+   */
   private void getSurveyQuestions() {
     LogUtil.e("AAA getData questions");
     subscription.add(Shared.apiClient.getSurveyQuestions(id, key, new Subscriber<Questions>() {
@@ -180,6 +193,10 @@ public class SurveyQuestionsActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * updates the navigation views and screen components when the page is changed
+   * @param position
+   */
   private void setNavigation(int position) {
     findViewById(R.id.layout_navigation).setVisibility(View.VISIBLE);
 
@@ -192,6 +209,11 @@ public class SurveyQuestionsActivity extends BaseActivity {
     }
   }
 
+  /**
+   * action to be invoked when the submit button is clicked,
+   * verifies if the survey questions are all answered and submits to the API for saving
+   * @param v the current activity view
+   */
   public void submit(View v) {
     if (TextUtils.isEmpty(survey.key)) {
       Toast.makeText(context, getString(R.string.no_access), Toast.LENGTH_SHORT).show();
@@ -249,6 +271,9 @@ public class SurveyQuestionsActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * listener for clicking the navigation helpers which are the go to next or previous page
+   */
   private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -274,6 +299,10 @@ public class SurveyQuestionsActivity extends BaseActivity {
     }
   };
 
+  /**
+   * listener for the changing of the page in the questions view pager,
+   * updates the navigation view when the page is changed
+   */
   private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener
       () {
     @Override
@@ -293,6 +322,10 @@ public class SurveyQuestionsActivity extends BaseActivity {
     }
   };
 
+  /**
+   * listener for the answering the surveys in the survey questions adapter and
+   * updates the parameter body to be submitted to the API for saving
+   */
   private SurveyQuestionsAdapter.OnAnswerItemListener listener = new SurveyQuestionsAdapter
       .OnAnswerItemListener() {
     @Override
@@ -328,6 +361,10 @@ public class SurveyQuestionsActivity extends BaseActivity {
     }
   };
 
+  /**
+   * custom pager adapter for the survey fragment to facilitate the display
+   * of questions and survey details
+   */
   private class MyPagerAdapter extends FragmentPagerAdapter {
 
     MyPagerAdapter(FragmentManager fragmentManager) {

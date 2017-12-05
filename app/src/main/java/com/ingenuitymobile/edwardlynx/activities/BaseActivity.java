@@ -20,6 +20,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by mEmEnG-sKi on 14/12/2016.
+ * Base activity to be used for all other activities with reusable functions and components.
  */
 
 public class BaseActivity extends AppCompatActivity {

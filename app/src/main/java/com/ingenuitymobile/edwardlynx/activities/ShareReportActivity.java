@@ -18,6 +18,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 17/01/2017.
+ * Activity to select people and share report to them.
  */
 
 public class ShareReportActivity extends InviteBaseActivity {
@@ -40,7 +41,10 @@ public class ShareReportActivity extends InviteBaseActivity {
     getData();
   }
 
-
+    /**
+     * action to be invoked when the share button in the ShareReportActivity is clicked.
+     * @param v
+     */
   public void share(View v) {
     if (ids.isEmpty()) {
       Toast.makeText(ShareReportActivity.this, getString(R.string.select_atleast_one),

@@ -18,6 +18,7 @@ import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 /**
  * Created by mEmEnG-sKi on 16/01/2017.
+ * Activity for displaying the reports and organising them by type.
  */
 
 public class ReportsActivity extends BaseActivity {

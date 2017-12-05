@@ -35,6 +35,13 @@ import net.hockeyapp.android.UpdateManager;
 
 import io.fabric.sdk.android.Fabric;
 
+/**
+ * Created by mEmEnG-sKi on 13/12/2016.
+ * Activity to handle displaying of fragments and also redirection when the app is
+ * opened with a data passed such as opening from an email link or opening from
+ * notification. This activity also serves as the root of the activity stack.
+ */
+
 public class MainActivity extends BaseActivity implements
     NavigationView.OnNavigationItemSelectedListener {
 

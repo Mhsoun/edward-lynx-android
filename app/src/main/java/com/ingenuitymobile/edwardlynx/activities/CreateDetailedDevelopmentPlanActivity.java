@@ -51,6 +51,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 31/01/2017.
+ * Activity to create detailed development plan.
  */
 
 public class CreateDetailedDevelopmentPlanActivity extends BaseActivity {

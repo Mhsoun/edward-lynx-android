@@ -21,6 +21,11 @@ import java.util.ArrayList;
 
 import rx.Subscriber;
 
+/**
+ * Created by memengski.
+ * Activity for inviting people to answer the survey.
+ */
+
 public class InviteSurveyActivity extends BaseActivity {
 
   private final static int NUM = 10;

@@ -37,6 +37,7 @@ import rx.Subscriber;
 
 /**
  * Created by memengski on 7/9/17.
+ * Activity to add development plan.
  */
 
 public class AddTeamDevPlanActivity extends BaseActivity {

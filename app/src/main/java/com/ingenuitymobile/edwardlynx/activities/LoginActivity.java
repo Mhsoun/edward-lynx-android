@@ -27,6 +27,8 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by mEmEnG-sKi on 13/12/2016.
+ * Activity for the login screen and login logic handling of the app.
+ * Also includes the options to reset password and contact Edward Lynx.
  */
 
 public class LoginActivity extends BaseActivity {

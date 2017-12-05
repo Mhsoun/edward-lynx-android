@@ -22,6 +22,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 10/01/2017.
+ * Activity for inviting people to answer a survey or instant feedback.
  */
 
 public class InviteActivity extends InviteBaseActivity {
