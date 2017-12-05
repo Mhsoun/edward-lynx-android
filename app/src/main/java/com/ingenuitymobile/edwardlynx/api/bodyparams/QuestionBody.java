@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by mEmEnG-sKi on 16/01/2017.
+ * API model for question body.
  */
 
 public class QuestionBody {

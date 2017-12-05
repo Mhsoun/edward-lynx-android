@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by memengski on 4/11/17.
+ * API model for dashboard response.
  */
 
 public class DashboardResponse extends Response {

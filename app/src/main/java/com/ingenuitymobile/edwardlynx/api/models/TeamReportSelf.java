@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by riddick on 7/13/17.
+ * API model for team report self.
  */
 
 public class TeamReportSelf {

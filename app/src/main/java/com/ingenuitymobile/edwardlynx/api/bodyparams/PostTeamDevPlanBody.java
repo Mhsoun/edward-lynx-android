@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by memengski on 7/17/17.
+ * API model for team development plan body.
  */
 
 public class PostTeamDevPlanBody {

@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by memengski on 7/28/17.
+ * API model for forgot password.
  */
 
 public class ForgotPassword {

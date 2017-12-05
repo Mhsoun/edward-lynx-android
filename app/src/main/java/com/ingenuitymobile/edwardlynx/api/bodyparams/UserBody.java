@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by mEmEnG-sKi on 19/09/2016.
+ * API model for user body.
  */
 public class UserBody {
 

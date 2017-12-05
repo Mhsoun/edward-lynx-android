@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by riddick on 7/13/17.
+ * API model for team report survey.
  */
 
 public class TeamReportSurvey implements ParentListItem {

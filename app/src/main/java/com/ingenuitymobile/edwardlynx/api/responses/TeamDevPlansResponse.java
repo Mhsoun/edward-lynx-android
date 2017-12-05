@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by memengski on 7/5/17.
+ * API model for list of team development plans response.
  */
 
 public class TeamDevPlansResponse {

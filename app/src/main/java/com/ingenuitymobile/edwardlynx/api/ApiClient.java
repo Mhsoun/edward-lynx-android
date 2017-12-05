@@ -55,6 +55,8 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by mEmEnG-sKi on 19/12/2016.
+ * class for API call handling, also includes storage and retrieval of access token,
+ * setting up of authentication and parameters for different API calls.
  */
 
 public class ApiClient {

@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by mEmEnG-sKi on 02/02/2017.
+ * API model for categories response.
  */
 
 public class CategoriesResponse extends Response {

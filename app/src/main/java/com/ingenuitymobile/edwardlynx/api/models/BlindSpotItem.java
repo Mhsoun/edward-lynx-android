@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by memengski on 5/29/17.
+ * API model for blind spot item.
  */
 
 public class BlindSpotItem {

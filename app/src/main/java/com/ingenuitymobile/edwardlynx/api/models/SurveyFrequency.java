@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by memengski on 4/7/17.
+ * API model for survey frequency.
  */
 
 public class SurveyFrequency {

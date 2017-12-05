@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by mEmEnG-sKi on 09/01/2017.
+ * API model for survey response.
  */
 
 public class Surveys extends Response {

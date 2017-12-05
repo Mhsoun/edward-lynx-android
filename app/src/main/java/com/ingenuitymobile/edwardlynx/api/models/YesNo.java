@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by memengski on 6/1/17.
+ * API model for yes or no questions.
  */
 
 public class YesNo {

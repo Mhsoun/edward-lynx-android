@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by riddick on 7/13/17.
+ * API model for team report items.
  */
 
 public class TeamReportItem implements ParentListItem {

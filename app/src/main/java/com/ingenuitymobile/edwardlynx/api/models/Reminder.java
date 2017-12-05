@@ -7,6 +7,7 @@ import com.ingenuitymobile.edwardlynx.R;
 
 /**
  * Created by memengski on 3/31/17.
+ * API model for reminders.
  */
 
 public class Reminder extends Model {

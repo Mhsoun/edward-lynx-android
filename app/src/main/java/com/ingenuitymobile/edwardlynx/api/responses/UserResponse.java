@@ -6,6 +6,7 @@ import com.ingenuitymobile.edwardlynx.api.models.User;
 
 /**
  * Created by mEmEnG-sKi on 16/09/2016.
+ * API model for user response.
  */
 public class UserResponse extends Response {
 

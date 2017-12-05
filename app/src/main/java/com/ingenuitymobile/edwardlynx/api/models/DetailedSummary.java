@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by memengski on 5/31/17.
+ * API model for detailed summary.
  */
 
 public class DetailedSummary {

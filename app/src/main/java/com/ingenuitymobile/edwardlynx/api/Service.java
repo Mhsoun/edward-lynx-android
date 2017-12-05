@@ -52,6 +52,7 @@ import rx.Observable;
 
 /**
  * Created by mEmEnG-sKi on 19/12/2016.
+ * interface for API network calls from the ApiClient class.
  */
 
 public interface Service {

@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by mEmEnG-sKi on 17/01/2017.
+ * API model for share param.
  */
 
 public class ShareParam {

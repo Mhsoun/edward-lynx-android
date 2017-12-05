@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by memengski on 5/24/17.
+ * API model for invite user.
  */
 
 public class InviteUserParam {

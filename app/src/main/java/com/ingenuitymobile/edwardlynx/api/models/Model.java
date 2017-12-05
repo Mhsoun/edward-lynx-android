@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by mEmEnG-sKi on 08/09/2016.
+ * Base API model.
  */
 public class Model {
 

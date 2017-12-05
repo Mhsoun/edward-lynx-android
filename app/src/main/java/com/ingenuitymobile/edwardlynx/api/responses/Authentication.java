@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by mEmEnG-sKi on 15/09/2016.
+ * API model for authentication response.
  */
 public class Authentication extends Response {
 
