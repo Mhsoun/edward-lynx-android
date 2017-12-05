@@ -37,6 +37,7 @@ import rx.Subscriber;
 
 /**
  * Created by memengski on 5/24/17.
+ * Activity to add people and invite them to answer a survey.
  */
 
 public class InvitePeopleActivity extends BaseActivity {
@@ -90,9 +91,6 @@ public class InvitePeopleActivity extends BaseActivity {
         (NotificationManager) getApplicationContext()
             .getSystemService(Context.NOTIFICATION_SERVICE);
     notificationManager.cancel((int) id * -1);
-    if (!TextUtils.isEmpty(key)) {
-      postNotificationRead();
-    }
   }
 
   @Override
@@ -243,29 +241,6 @@ public class InvitePeopleActivity extends BaseActivity {
             }
           }));
     }
-  }
-
-  /**
-   * method call to notify API that notification is read
-   */
-  private void postNotificationRead() {
-    subscription.add(Shared.apiClient.getSurveyId(
-            key,
-            "invite",
-            new Subscriber<Response>() {
-              @Override
-              public void onCompleted() {
-              }
-
-              @Override
-              public void onError(Throwable e) {
-              }
-
-              @Override
-              public void onNext(Response response) {
-              }
-            }
-    ));
   }
 
   /**

@@ -85,9 +85,6 @@ public class SurveyQuestionsActivity extends BaseActivity {
         (NotificationManager) getApplicationContext()
             .getSystemService(Context.NOTIFICATION_SERVICE);
     notificationManager.cancel((int) id);
-    if (!TextUtils.isEmpty(key)) {
-      postNotificationRead();
-    }
   }
 
   @Override
@@ -250,29 +247,6 @@ public class SurveyQuestionsActivity extends BaseActivity {
             progressDialog.dismiss();
           }
         }));
-  }
-
-  /**
-   * method call to notify API that notification is read
-   */
-  private void postNotificationRead() {
-    subscription.add(Shared.apiClient.getSurveyId(
-            key,
-            "answer",
-            new Subscriber<Response>() {
-              @Override
-              public void onCompleted() {
-              }
-
-              @Override
-              public void onError(Throwable e) {
-              }
-
-              @Override
-              public void onNext(Response response) {
-              }
-            }
-    ));
   }
 
   private View.OnClickListener onClickListener = new View.OnClickListener() {
