@@ -24,6 +24,11 @@ public class CreateDevelopmentPlanAdapter extends
   private List<Goal>                    data;
   private CreateDevelopmentPlanActivity activity;
 
+  /**
+   * Adapter for creating a development plan.
+   * @param data the list of goals to be added
+   * @param activity the activity context
+   */
   public CreateDevelopmentPlanAdapter(List<Goal> data,
       CreateDevelopmentPlanActivity activity) {
     super();

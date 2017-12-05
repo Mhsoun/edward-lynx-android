@@ -20,7 +20,10 @@ public class InviteUserAdapter extends RecyclerView.Adapter<InviteUserAdapter.Vi
 
   private List<UserParam> data;
 
-
+  /**
+   * Adapter for displaying users that can be invited for answering surveys or instant feedback.
+   * @param data the list of users
+   */
   public InviteUserAdapter(List<UserParam> data) {
     super();
     this.data = data;

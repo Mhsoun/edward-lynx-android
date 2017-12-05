@@ -32,6 +32,11 @@ public class AllSurveysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
   public  List<AllSurveys>                         data;
   private FeedbackAdapter.OnSelectFeedbackListener listener;
 
+  /**
+   * Adapter for displaying all surveys.
+   * @param data the list of all surveys
+   * @param listener the listener for selecting a survey
+   */
   public AllSurveysAdapter(List<AllSurveys> data,
       FeedbackAdapter.OnSelectFeedbackListener listener) {
     super();

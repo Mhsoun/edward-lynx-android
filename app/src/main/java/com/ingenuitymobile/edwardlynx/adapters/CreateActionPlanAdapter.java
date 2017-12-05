@@ -22,6 +22,11 @@ public class CreateActionPlanAdapter extends
   private List<Action>     data;
   private OnDeleteListener listener;
 
+  /**
+   * Adapter for creating an action plan.
+   * @param data the list of actions
+   * @param listener the listener for deleting an action plan
+   */
   public CreateActionPlanAdapter(List<Action> data, OnDeleteListener listener) {
     super();
     this.data = data;

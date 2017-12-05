@@ -27,6 +27,10 @@ public class IndividualProgressAdapter extends
 
   private List<IndividualProgress> data;
 
+  /**
+   * Adapter for displaying individual progress.
+   * @param data the list of individual progress
+   */
   public IndividualProgressAdapter(List<IndividualProgress> data) {
     super();
     this.data = data;

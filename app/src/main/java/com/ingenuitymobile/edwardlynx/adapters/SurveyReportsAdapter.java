@@ -24,6 +24,11 @@ public class SurveyReportsAdapter extends RecyclerView.Adapter<SurveyReportsAdap
   private List<Survey>             data;
   private OnSelectFeedbackListener listener;
 
+  /**
+   * Adapter for displaying survey reports.
+   * @param data the list of surveys
+   * @param listener the listener for selecting an item
+   */
   public SurveyReportsAdapter(List<Survey> data, OnSelectFeedbackListener listener) {
     super();
     this.data = data;

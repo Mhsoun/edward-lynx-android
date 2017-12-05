@@ -21,6 +21,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
   private List<Comment> data;
 
+  /**
+   * Adapter for the comments to be loaded into the view.
+   * @param data the list of comments
+   */
   public CommentAdapter(List<Comment> data) {
     super();
     this.data = data;

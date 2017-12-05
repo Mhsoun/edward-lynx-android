@@ -28,6 +28,10 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
 
   private List<Survey> data;
 
+  /**
+   * Adapter for displaying surveys.
+   * @param data the list of surveys
+   */
   public SurveyAdapter(List<Survey> data) {
     super();
     this.data = data;

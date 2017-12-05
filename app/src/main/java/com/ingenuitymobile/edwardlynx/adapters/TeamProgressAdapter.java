@@ -24,6 +24,10 @@ public class TeamProgressAdapter extends
 
   private List<TeamDevPlan> data;
 
+  /**
+   * Adapter for displaying team progress.
+   * @param data the list of team development plan
+   */
   public TeamProgressAdapter(List<TeamDevPlan> data) {
     super();
     this.data = data;

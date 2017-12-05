@@ -44,6 +44,11 @@ public class SurveyQuestionsAdapter extends
   private boolean              isEnabled;
   private OnAnswerItemListener listener;
 
+  /**
+   * Adapter for the displaying the survey questions.
+   * @param data the list of survey questions
+   * @param listener the listener for answering a survey
+   */
   public SurveyQuestionsAdapter(List<Question> data, OnAnswerItemListener listener) {
     super();
     this.data = data;

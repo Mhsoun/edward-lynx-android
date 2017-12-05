@@ -30,6 +30,10 @@ public class YesNoAdapter extends RecyclerView.Adapter<YesNoAdapter.ViewHolder> 
 
   private List<YesNo> data;
 
+  /**
+   * Adapter for displaying yes or no questions.
+   * @param data the list of yes or no questions
+   */
   public YesNoAdapter(List<YesNo> data) {
     super();
     this.data = data;

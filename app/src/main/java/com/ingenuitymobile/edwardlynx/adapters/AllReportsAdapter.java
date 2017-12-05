@@ -30,6 +30,10 @@ public class AllReportsAdapter extends RecyclerView.Adapter<AllReportsAdapter.Vi
 
   private List<AllSurveys> data;
 
+  /**
+   * Adapter for displaying all reports.
+   * @param data the list of all surveys
+   */
   public AllReportsAdapter(List<AllSurveys> data) {
     super();
     this.data = data;

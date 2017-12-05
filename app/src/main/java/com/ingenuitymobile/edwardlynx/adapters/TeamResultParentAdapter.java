@@ -25,6 +25,10 @@ public class TeamResultParentAdapter extends
 
   List<TeamReportItem> items;
 
+  /**
+   * Adapter for displaying team results.
+   * @param items the list of team reports
+   */
   public TeamResultParentAdapter(List<TeamReportItem> items) {
     this.items = items;
   }

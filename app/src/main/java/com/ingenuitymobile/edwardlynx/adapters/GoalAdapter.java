@@ -36,6 +36,12 @@ public class GoalAdapter extends
   private OnSelectActionListener listener;
   private boolean                isFromTeam;
 
+  /**
+   * Adapter for the displaying the goals
+   * @param data the list of parent list items and child goals
+   * @param listener the listener for selecting an item
+   * @param isFromTeam indicator if the goal is from team
+   */
   public GoalAdapter(List<ParentListItem> data, OnSelectActionListener listener,
       boolean isFromTeam) {
     super(data);

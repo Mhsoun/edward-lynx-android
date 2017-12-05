@@ -39,6 +39,10 @@ public class DetailedSummaryAdapter extends
 
   private List<DetailedSummary> data;
 
+  /**
+   * Adapter for the displaying the detailed summary.
+   * @param data the list of detailed summaries
+   */
   public DetailedSummaryAdapter(List<DetailedSummary> data) {
     super();
     this.data = data;

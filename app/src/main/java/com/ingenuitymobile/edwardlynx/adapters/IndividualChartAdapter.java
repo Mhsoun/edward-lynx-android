@@ -26,6 +26,10 @@ public class IndividualChartAdapter extends
 
   private List<DevelopmentPlan> data;
 
+  /**
+   * Adapter for displaying the charts for each person.
+   * @param data the list of development plans
+   */
   public IndividualChartAdapter(List<DevelopmentPlan> data) {
     super();
     this.data = data;

@@ -32,6 +32,11 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
   private List<Reminder>                        data;
   private MainActivity.OnChangeFragmentListener listener;
 
+  /**
+   * Adapter for displaying reminders.
+   * @param data the list of reminders
+   * @param listener the listener for changing the fragment
+   */
   public ReminderAdapter(List<Reminder> data, MainActivity.OnChangeFragmentListener listener) {
     super();
     this.data = data;

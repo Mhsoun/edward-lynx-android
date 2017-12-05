@@ -27,6 +27,10 @@ import java.util.List;
 public class TeamResultsAdapter extends
     ExpandableRecyclerAdapter<TeamResultsAdapter.ParentView, TeamResultsAdapter.ChildView> {
 
+  /**
+   * Adapter for displaying team results.
+   * @param data the list of parent list items
+   */
   public TeamResultsAdapter(List<ParentListItem> data) {
     super(data);
   }
