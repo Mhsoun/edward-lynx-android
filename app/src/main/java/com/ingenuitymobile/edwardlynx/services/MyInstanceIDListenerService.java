@@ -7,6 +7,8 @@ import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 /**
  * Created by mEmEnG-sKi on 06/02/2017.
+ * Service for checking for the Firebase instance id and saving it into the application
+ * data storage.
  */
 
 public class MyInstanceIDListenerService extends FirebaseInstanceIdService {

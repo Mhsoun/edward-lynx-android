@@ -26,6 +26,8 @@ import static android.app.Notification.PRIORITY_MAX;
 
 /**
  * Created by mEmEnG-sKi on 06/02/2017.
+ * Service for handling Google Cloud Messaging, specifically receiving, parsing and
+ * displaying push notifications from Firebase.
  */
 
 public class MyGcmListenerService extends FirebaseMessagingService {
@@ -111,6 +113,15 @@ public class MyGcmListenerService extends FirebaseMessagingService {
     }
   }
 
+  /**
+   * helper method for building notifications
+   * @param isActive indication if the app is in the background or in the foreground
+   * @param pendingIntent the pending intent for the notification
+   * @param title the notification title
+   * @param message the notification message
+   * @param channelId the channel id to be used for Android API >26
+   * @return the created notification builder
+   */
   public NotificationCompat.Builder getNotificationBuilder(boolean isActive,
       PendingIntent pendingIntent, String title, String message, String channelId) {
     final int smallIcon = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?

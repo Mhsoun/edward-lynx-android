@@ -13,6 +13,8 @@ import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 
 /**
  * Created by memengski on 6/15/17.
+ * Service for listening to the  system notifications for updating launcher badges
+ * for unread notifications count.
  */
 
 @SuppressLint("OverrideAbstract")
@@ -54,6 +56,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
     }
   }
 
+  /**
+   * counts the number of notifications for this app that are currently active in
+   * the status bar
+   * @return the number of notifications
+   */
   private int getNotificationCount() {
     StatusBarNotification[] notifications = getActiveNotifications();
 
