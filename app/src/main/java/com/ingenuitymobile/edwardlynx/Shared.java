@@ -18,6 +18,7 @@ import retrofit.RetrofitError;
 
 /**
  * Created by mEmEnG-sKi on 19/12/2016.
+ * Utility class for storing shared strings and static methods and classes.
  */
 
 public class Shared {
@@ -34,6 +35,10 @@ public class Shared {
   public static User           user;
   public static List<Category> categories;
 
+  /**
+   * initializes the application
+   * @param context the context to be used in the method
+   */
   public static void init(final Context context) {
     categories = new ArrayList<>();
     final String consumerKey = context.getResources().getString(R.string.client_id);
@@ -53,7 +58,11 @@ public class Shared {
     user = new User();
   }
 
-  private static class DisplayErrorListener implements ApiClient.OnDisplayErrorListener {
+  /**
+   * class for listening to errors
+   */
+  private static class DisplayErrorListener implements ApiClient.OnDisplayErrorListener
+  {
 
     private Context context;
 
@@ -80,6 +89,9 @@ public class Shared {
     }
   }
 
+  /**
+   * class for listening to refresh token generation
+   */
   private static class RefreshTokenListener implements ApiClient.OnRefreshTokenListener {
 
     private Context context;

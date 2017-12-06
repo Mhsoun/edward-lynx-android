@@ -7,6 +7,8 @@ import com.ingenuitymobile.edwardlynx.api.ApiClient;
 
 /**
  * Created by mEmEnG-sKi on 19/12/2016.
+ * Utility class containing static methods for different saving and retrieving of important
+ * application data.
  */
 
 public class SessionStore {
