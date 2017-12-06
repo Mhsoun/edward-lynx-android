@@ -6,6 +6,7 @@ import me.leolin.shortcutbadger.ShortcutBadger;
 
 /**
  * Created by memengski on 5/23/17.
+ * Utility class for setting launcher unread notification count.
  */
 
 public class BadgeUtils {

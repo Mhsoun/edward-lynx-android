@@ -6,7 +6,9 @@ import android.net.NetworkInfo;
 
 /**
  * Created by mEmEnG-sKi on 15/09/2016.
+ * Utility class for checking network connectivity.
  */
+
 public class NetUtil {
 
   public static boolean hasActiveConnection(Context context) {
