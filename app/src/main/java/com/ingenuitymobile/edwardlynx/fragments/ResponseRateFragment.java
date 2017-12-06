@@ -36,6 +36,9 @@ public class ResponseRateFragment extends BaseFragment {
 
   private BarChart barChart;
 
+  /**
+   * Fragment to display response rate for a survey report.
+   */
   public ResponseRateFragment() {
     responseRates = new ArrayList<>();
   }
@@ -76,6 +79,10 @@ public class ResponseRateFragment extends BaseFragment {
     barChart.setDrawGridBackground(false);
   }
 
+  /**
+   * updates the data to be used in the fragment for displaying
+   * @param responseRates the list of break down items for response rates
+   */
   public void setDataSet(List<BreakdownItem> responseRates) {
     this.responseRates = responseRates;
     if (mainView != null) {
@@ -83,6 +90,9 @@ public class ResponseRateFragment extends BaseFragment {
     }
   }
 
+  /**
+   * updates the data to be displayed in the fragment
+   */
   private void setData() {
     ArrayList<BarEntry> goalBars = new ArrayList<>();
     float highest = 0f;

@@ -46,11 +46,13 @@ public class AveragesFragment extends BaseFragment {
   private HorizontalBarChart barChart;
   private HorizontalBarChart mulitpleBarChart;
 
+  /**
+   * Fragment to display the averages in the survey report.
+   */
   public AveragesFragment() {
     averages = new ArrayList<>();
     ioc = new ArrayList<>();
   }
-
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +75,9 @@ public class AveragesFragment extends BaseFragment {
     return mainView;
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     barChart = (HorizontalBarChart) mainView.findViewById(R.id.bar_chart);
     barChart.setNoDataText(getString(R.string.no_chart_data_available));
@@ -83,6 +88,11 @@ public class AveragesFragment extends BaseFragment {
     mulitpleBarChart.invalidate();
   }
 
+  /**
+   * sets the data set with the provided data
+   * @param averages the list of averages
+   * @param ioc the list of ioc
+   */
   public void setDataSet(List<Average> averages, List<Average> ioc) {
     this.averages = averages;
     this.ioc = ioc;
@@ -91,11 +101,17 @@ public class AveragesFragment extends BaseFragment {
     }
   }
 
+  /**
+   * updates the data to be displayed in the view for both bar and multiple bar charts
+   */
   private void setData() {
     setBarChart();
     setMulitpleBarChart();
   }
 
+  /**
+   * updates the bar chart view
+   */
   private void setBarChart() {
     final int size = averages.size();
     LogUtil.e("AAA " + size);
@@ -143,6 +159,9 @@ public class AveragesFragment extends BaseFragment {
     barChart.invalidate();
   }
 
+  /**
+   * updates the multiple bar chart view
+   */
   private void setMulitpleBarChart() {
     final int size = ioc.size();
     setChart(mulitpleBarChart);
@@ -227,6 +246,10 @@ public class AveragesFragment extends BaseFragment {
     mulitpleBarChart.invalidate();
   }
 
+  /**
+   * updates the bar chart with the given horizontal bar chart
+   * @param horizontalBarChart the horizontal bar chart
+   */
   private void setChart(HorizontalBarChart horizontalBarChart) {
     horizontalBarChart.setMaxVisibleValueCount(15);
     horizontalBarChart.setDrawBarShadow(false);

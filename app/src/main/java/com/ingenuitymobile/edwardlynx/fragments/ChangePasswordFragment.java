@@ -36,6 +36,11 @@ public class ChangePasswordFragment extends BaseFragment {
   private EditText rePasswordEdit;
   private TextView saveText;
 
+  /**
+   * Fragment to display the fields for changing password.
+   * @param ctx the context to be used in this fragment
+   * @return the created fragment
+   */
   public static ChangePasswordFragment newInstance(Context ctx) {
     ChangePasswordFragment fragment = new ChangePasswordFragment();
     Bundle bundle = new Bundle();
@@ -54,6 +59,9 @@ public class ChangePasswordFragment extends BaseFragment {
     return mainView;
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     oldPasswordEdit = (EditText) mainView.findViewById(R.id.edit_current_password);
     newPasswordEdit = (EditText) mainView.findViewById(R.id.edit_new_password);
@@ -65,6 +73,9 @@ public class ChangePasswordFragment extends BaseFragment {
     saveText.setOnClickListener(onClickListener);
   }
 
+  /**
+   * the listener for clicking the change password button
+   */
   private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -146,6 +157,9 @@ public class ChangePasswordFragment extends BaseFragment {
     }
   };
 
+  /**
+   * listener for clicking done on the keyboard, clicks the change password button
+   */
   private TextView.OnEditorActionListener editorActionListener = new TextView
       .OnEditorActionListener() {
     @Override

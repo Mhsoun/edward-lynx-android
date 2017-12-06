@@ -41,10 +41,12 @@ public class SurveysFragment extends BaseFragment {
 
   private int position;
 
+  /**
+   * Fragment to display all surveys grouped according to categories.
+   */
   public SurveysFragment() {
     position = 0;
   }
-
 
   public static SurveysFragment newInstance(Context ctx) {
     SurveysFragment fragment = new SurveysFragment();
@@ -72,6 +74,9 @@ public class SurveysFragment extends BaseFragment {
     searchView.setIconified(true);
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     searchView = (SearchView) mainView.findViewById(R.id.searchview);
     searchView.setQueryHint(getString(R.string.search_survey));
@@ -92,6 +97,10 @@ public class SurveysFragment extends BaseFragment {
     createImage.setVisibility(position == FEEDBACK ? View.VISIBLE : View.GONE);
   }
 
+  /**
+   * sets the position of the view pager
+   * @param position the page of the view pager to be set
+   */
   public void setPosition(final int position) {
     this.position = position;
     if (viewPager != null) {
@@ -106,6 +115,9 @@ public class SurveysFragment extends BaseFragment {
     }
   }
 
+  /**
+   * listener for changing the page of the view pager
+   */
   private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener
       () {
     @Override
@@ -126,6 +138,9 @@ public class SurveysFragment extends BaseFragment {
     }
   };
 
+  /**
+   * sets the selected view based on the selected view pager position
+   */
   private void setSelection() {
     switch (viewPager.getCurrentItem()) {
     case ALL:
@@ -149,6 +164,9 @@ public class SurveysFragment extends BaseFragment {
     }
   }
 
+  /**
+   * listener for changing the query string in the text view and updates the list
+   */
   private SearchView.OnQueryTextListener onQueryTextListener = new SearchView.OnQueryTextListener
       () {
     @Override
@@ -176,7 +194,10 @@ public class SurveysFragment extends BaseFragment {
     }
   };
 
-
+  /**
+   * listener for clicking an item in the list, opens the create
+   * feedback activity
+   */
   private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -188,6 +209,9 @@ public class SurveysFragment extends BaseFragment {
     }
   };
 
+  /**
+   * custom pager adapter
+   */
   private class MyPagerAdapter extends FragmentPagerAdapter {
     private int NUM_ITEMS = 3;
 

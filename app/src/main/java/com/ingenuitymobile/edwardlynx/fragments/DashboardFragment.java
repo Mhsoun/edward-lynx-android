@@ -74,7 +74,12 @@ public class DashboardFragment extends BaseFragment {
 
   private BadgeView badgeView;
 
-
+  /**
+   * Fragment to display the main page dashboard.
+   * @param ctx the context to be used in the fragment
+   * @param listener the listener for changing fragments
+   * @return the created dashboard fragment
+   */
   public static DashboardFragment newInstance(Context ctx, OnChangeFragmentListener listener) {
     DashboardFragment fragment = new DashboardFragment();
     Bundle bundle = new Bundle();
@@ -117,6 +122,9 @@ public class DashboardFragment extends BaseFragment {
     getDasboard();
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     topLayout = (LinearLayout) mainView.findViewById(R.id.layout_top);
     devPlanLayout = (RelativeLayout) mainView.findViewById(R.id.layout_dev_plan);
@@ -166,6 +174,10 @@ public class DashboardFragment extends BaseFragment {
     badgeView = new BadgeView(getActivity(), answerLayout);
   }
 
+  /**
+   * updates the fragment depending on the access availability, displays
+   * team management when the logged in user is administrator or supervisor
+   */
   private void setupViews() {
     teamLayout.setVisibility(View.GONE);
     topLayout.setWeightSum(3);
@@ -178,6 +190,9 @@ public class DashboardFragment extends BaseFragment {
     }
   }
 
+  /**
+   * retrieves dashboard details of the user from the API
+   */
   private void getDasboard() {
     subscription.add(
         Shared.apiClient.getUserDashboard(new Subscriber<DashboardResponse>() {
@@ -221,6 +236,9 @@ public class DashboardFragment extends BaseFragment {
         }));
   }
 
+  /**
+   * listener for clicking a menu item in the dashboard fragment
+   */
   private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
     public void onClick(View view) {

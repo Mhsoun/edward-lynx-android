@@ -27,6 +27,9 @@ public class BaseFragment extends Fragment {
 
   protected ProgressDialog progressDialog;
 
+  /**
+   * Base fragment to be extended by other fragments.
+   */
   public BaseFragment() {
     subscription = new CompositeSubscription();
     queryString = "";
@@ -51,6 +54,9 @@ public class BaseFragment extends Fragment {
     }
   }
 
+  /**
+   * method to hide the onscreen keyboard
+   */
   protected void hideKeyboard() {
     try {
       InputMethodManager inputManager = (InputMethodManager)
@@ -61,6 +67,10 @@ public class BaseFragment extends Fragment {
     }
   }
 
+  /**
+   * method to hide the onscreen keyboard from view
+   * @param v
+   */
   protected void hideKeyboard(View v) {
     try {
       InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(
@@ -69,6 +79,9 @@ public class BaseFragment extends Fragment {
     } catch (Exception e) {}
   }
 
+  /**
+   * method to show the onscreen keyboard
+   */
   protected void showKeyboard() {
     try {
       InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(
@@ -80,6 +93,10 @@ public class BaseFragment extends Fragment {
     }
   }
 
+  /**
+   * listener to detect focus change on the fragment, hides the onscreen keyboard if
+   * the fragment is not focused
+   */
   protected View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
     @Override
     public void onFocusChange(View v, boolean hasFocus) {

@@ -36,6 +36,9 @@ public class FeedbackReportsFragment extends BaseFragment {
   private TextView               emptyText;
   private SwipeRefreshLayout     refreshLayout;
 
+  /**
+   * Fragment to display the feedback reports.
+   */
   public FeedbackReportsFragment() {
     data = new ArrayList<>();
     displayData = new ArrayList<>();
@@ -67,6 +70,9 @@ public class FeedbackReportsFragment extends BaseFragment {
     getData();
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView feedbackList = (RecyclerView) mainView.findViewById(R.id.list_reports);
     emptyText = (TextView) mainView.findViewById(R.id.text_empty_state);
@@ -86,6 +92,9 @@ public class FeedbackReportsFragment extends BaseFragment {
     refreshLayout.setRefreshing(true);
   }
 
+  /**
+   * retrieves the answered feedback for the user from the API
+   */
   private void getData() {
     LogUtil.e("AAA getData instant feedbaks");
     subscription.add(
@@ -111,6 +120,9 @@ public class FeedbackReportsFragment extends BaseFragment {
         }));
   }
 
+  /**
+   * sets the data to be used in the fragment
+   */
   private void setData() {
     displayData.clear();
     for (Feedback feedback : data) {
@@ -126,6 +138,10 @@ public class FeedbackReportsFragment extends BaseFragment {
     emptyText.setVisibility(displayData.isEmpty() ? View.VISIBLE : View.GONE);
   }
 
+  /**
+   * updates the query string and filters the feedback reports list
+   * @param queryString the string for filtering the list
+   */
   public void setQueryString(String queryString) {
     this.queryString = queryString;
     if (adapter != null && emptyText != null) {
@@ -133,6 +149,9 @@ public class FeedbackReportsFragment extends BaseFragment {
     }
   }
 
+  /**
+   * listener for selecting a feedback from the list
+   */
   private FeedbackReportsAdapter.OnSelectFeedbackListener listener = new FeedbackReportsAdapter
       .OnSelectFeedbackListener() {
     @Override
@@ -143,6 +162,9 @@ public class FeedbackReportsFragment extends BaseFragment {
     }
   };
 
+  /**
+   * listener for the pull to refresh functionality
+   */
   private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout
       .OnRefreshListener() {
     @Override

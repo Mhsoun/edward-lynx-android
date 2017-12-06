@@ -27,6 +27,9 @@ public class CommentsFragment extends BaseFragment {
 
   private CommentAdapter adapter;
 
+  /**
+   * Fragment to display the comments in the survey reports.
+   */
   public CommentsFragment() {
     comments = new ArrayList<>();
   }
@@ -52,6 +55,9 @@ public class CommentsFragment extends BaseFragment {
     return mainView;
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.recycler);
 
@@ -62,6 +68,10 @@ public class CommentsFragment extends BaseFragment {
     recyclerView.setAdapter(adapter);
   }
 
+  /**
+   * sets the data to be used in the fragment
+   * @param comments the list of comments to be displayed
+   */
   public void setDataSet(List<Comment> comments) {
     this.comments = comments;
     if (mainView != null) {
@@ -69,6 +79,9 @@ public class CommentsFragment extends BaseFragment {
     }
   }
 
+  /**
+   * updates the data to be displayed in the view
+   */
   private void setData() {
     adapter.notifyDataSetChanged();
     mainView.findViewById(R.id.text_empty).setVisibility(

@@ -36,6 +36,9 @@ public class RadarFragment extends BaseFragment {
 
   private RadarChart radarChart;
 
+  /**
+   * Fragment to display radar chart for survey reports.
+   */
   public RadarFragment() {
     averages = new ArrayList<>();
   }
@@ -61,12 +64,19 @@ public class RadarFragment extends BaseFragment {
     return mainView;
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     radarChart = (RadarChart) mainView.findViewById(R.id.radar_chart);
     radarChart.setNoDataText(getString(R.string.no_chart_data_available));
     radarChart.invalidate();
   }
 
+  /**
+   * updates the data to be used in the fragment for displaying
+   * @param averages the list of averages to be reflected in the radar chart
+   */
   public void setDataSet(List<Average> averages) {
     this.averages = averages;
     if (mainView != null) {
@@ -74,6 +84,9 @@ public class RadarFragment extends BaseFragment {
     }
   }
 
+  /**
+   * updates the data to be displayed in the fragment
+   */
   private void setData() {
     final int size = averages.size();
 

@@ -58,6 +58,13 @@ public class DevelopmenPlansFragment extends BaseFragment {
   private boolean isFromTeam;
   private long    id;
 
+  /**
+   * Fragment to display the development plans.
+   * @param ctx the context to be used in the fragment
+   * @param isFromTeam indicator if the development plans to be displayed is for team
+   * @param id user id
+   * @return the created development plans fragment
+   */
   public static DevelopmenPlansFragment newInstance(Context ctx, boolean isFromTeam, long id) {
     DevelopmenPlansFragment fragment = new DevelopmenPlansFragment();
     Bundle bundle = new Bundle();
@@ -93,6 +100,9 @@ public class DevelopmenPlansFragment extends BaseFragment {
     LogUtil.e("AAA onResume DevelopmenPlansFragment");
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     searchView = (SearchView) mainView.findViewById(R.id.searchview);
     searchView.setQueryHint(getString(R.string.search_development_plans));
@@ -132,6 +142,9 @@ public class DevelopmenPlansFragment extends BaseFragment {
     }
   }
 
+  /**
+   * retrieves the team development plans from the API
+   */
   private void getData() {
     LogUtil.e("AAA getData Development plans");
     if (isFromTeam) {
@@ -160,6 +173,9 @@ public class DevelopmenPlansFragment extends BaseFragment {
     }
   }
 
+  /**
+   * retrieves the user development plans from the API
+   */
   private void getUserDevPlan() {
     subscription.add(Shared.apiClient.getUserDevelopmentPlans(id,
         new Subscriber<DevelopmentPlansResponse>() {
@@ -183,6 +199,10 @@ public class DevelopmenPlansFragment extends BaseFragment {
         }));
   }
 
+  /**
+   * updates the data to be used in the fragment
+   * @param response the retrieved data from the API
+   */
   private void setResponse(DevelopmentPlansResponse response) {
     LogUtil.e("AAA onNext ");
     data.clear();
@@ -212,6 +232,9 @@ public class DevelopmenPlansFragment extends BaseFragment {
     }
   }
 
+  /**
+   * sets the view in the fragment based on the selected item in the viewpager
+   */
   private void setSelection() {
     switch (viewPager.getCurrentItem()) {
     case ALL:
@@ -226,6 +249,10 @@ public class DevelopmenPlansFragment extends BaseFragment {
     }
   }
 
+  /**
+   * updates the position of the view pager and updates the fragment view
+   * @param position the position of the view pager
+   */
   public void setPosition(final int position) {
     this.position = position;
     if (viewPager != null) {
@@ -239,6 +266,9 @@ public class DevelopmenPlansFragment extends BaseFragment {
     }
   }
 
+  /**
+   * listener for changing the query string in the text view and updates the list
+   */
   private SearchView.OnQueryTextListener onQueryTextListener = new SearchView.OnQueryTextListener
       () {
     @Override
@@ -255,6 +285,9 @@ public class DevelopmenPlansFragment extends BaseFragment {
     }
   };
 
+  /**
+   * listener for clicking the create development plan button
+   */
   private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -266,6 +299,9 @@ public class DevelopmenPlansFragment extends BaseFragment {
     }
   };
 
+  /**
+   * listener for changing the page on the view pager
+   */
   private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener
       () {
     @Override
@@ -285,6 +321,9 @@ public class DevelopmenPlansFragment extends BaseFragment {
     }
   };
 
+  /**
+   * listener for the pull to refresh functionality
+   */
   private SwipeRefreshLayout.OnRefreshListener refreshListener =
       new SwipeRefreshLayout.OnRefreshListener() {
         @Override
@@ -293,6 +332,9 @@ public class DevelopmenPlansFragment extends BaseFragment {
         }
       };
 
+  /**
+   * custom pager adapter
+   */
   private class MyPagerAdapter extends FragmentPagerAdapter {
     private int NUM_ITEMS = 3;
 

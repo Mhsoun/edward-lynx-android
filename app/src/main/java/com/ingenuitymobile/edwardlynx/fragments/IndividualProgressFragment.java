@@ -36,6 +36,9 @@ public class IndividualProgressFragment extends BaseFragment {
   private ArrayList<IndividualProgress> data;
   private IndividualProgressAdapter     adapter;
 
+  /**
+   * Fragment for displaying individual progress in team activity.
+   */
   public IndividualProgressFragment() {
     data = new ArrayList<>();
   }
@@ -66,6 +69,9 @@ public class IndividualProgressFragment extends BaseFragment {
     getData();
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(
         R.id.list_individual_progress);
@@ -88,6 +94,9 @@ public class IndividualProgressFragment extends BaseFragment {
     mainView.findViewById(R.id.image_create).setOnClickListener(onClickListener);
   }
 
+  /**
+   * retrieves the individual progress data from the API
+   */
   private void getData() {
     subscription.add(Shared.apiClient.getIndividualProgress(
         new Subscriber<IndividualProgressResponse>() {
@@ -112,11 +121,17 @@ public class IndividualProgressFragment extends BaseFragment {
         }));
   }
 
+  /**
+   * sets the data to be used in the fragment
+   */
   private void setData() {
     adapter.notifyDataSetChanged();
     emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
   }
 
+  /**
+   * listener for clicking adding users
+   */
   private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -124,6 +139,9 @@ public class IndividualProgressFragment extends BaseFragment {
     }
   };
 
+  /**
+   * listener for the pull to refresh functionality
+   */
   private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout
       .OnRefreshListener() {
     @Override
@@ -131,5 +149,4 @@ public class IndividualProgressFragment extends BaseFragment {
       getData();
     }
   };
-
 }

@@ -28,6 +28,9 @@ public class SurveyQuestionsFragment extends BaseFragment {
   private List<AnswerBody>       bodies;
   private boolean                isEnabled;
 
+  /**
+   * Fragment to display the survey questions list.
+   */
   public SurveyQuestionsFragment() {
     data = new ArrayList<>();
     bodies = new ArrayList<>();
@@ -56,6 +59,9 @@ public class SurveyQuestionsFragment extends BaseFragment {
     return mainView;
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView questionsList = (RecyclerView) mainView.findViewById(R.id.list_questions);
 
@@ -66,6 +72,13 @@ public class SurveyQuestionsFragment extends BaseFragment {
     adapter.isEnabled(isEnabled);
   }
 
+  /**
+   * updates the data to be displayed in the fragment
+   * @param data the list of questions to be displayed
+   * @param bodies the list of answer bodies expected
+   * @param listener the listener for answering an item
+   * @param isEnabled indicator if the questions is for answering or viewing only
+   */
   public void setData(List<Question> data,
       List<AnswerBody> bodies,
       SurveyQuestionsAdapter.OnAnswerItemListener listener,

@@ -24,10 +24,12 @@ public class SurveyDetailedFragment extends BaseFragment {
 
   private Survey survey;
 
+  /**
+   * Fragment to display the survey details in the survey questions activity.
+   */
   public SurveyDetailedFragment() {
     survey = new Survey();
   }
-
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,11 +52,18 @@ public class SurveyDetailedFragment extends BaseFragment {
     return mainView;
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     titleText = (TextView) mainView.findViewById(R.id.text_title);
     descriptionText = (TextView) mainView.findViewById(R.id.text_description);
   }
 
+  /**
+   * sets the survey to be displayed in the fragment
+   * @param survey the survey to be set for the fragment
+   */
   public void setSurvey(Survey survey) {
     if (survey != null) {
       this.survey = survey;
@@ -64,6 +73,9 @@ public class SurveyDetailedFragment extends BaseFragment {
     }
   }
 
+  /**
+   * updates the data to be displayed in the fragment
+   */
   private void setData() {
     titleText.setText(survey.getType(getActivity(), false) + ": " + survey.name);
     descriptionText.setText(Html.fromHtml(survey.description));

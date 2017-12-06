@@ -44,6 +44,11 @@ public class ProfileFragment extends BaseFragment {
 
   private String gender;
 
+  /**
+   * Fragment to display the details of the current user
+   * @param ctx the context to be used in the fragment
+   * @return the created profile fragment
+   */
   public static ProfileFragment newInstance(Context ctx) {
     ProfileFragment fragment = new ProfileFragment();
     Bundle bundle = new Bundle();
@@ -51,7 +56,6 @@ public class ProfileFragment extends BaseFragment {
     fragment.setArguments(bundle);
     return fragment;
   }
-
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +74,9 @@ public class ProfileFragment extends BaseFragment {
     getData();
   }
 
+  /**
+   * retrieves the details of the current user from the API
+   */
   private void getData() {
     editText.setText(getString(R.string.loading));
     subscription.add(Shared.apiClient.getMe(new Subscriber<User>() {
@@ -99,6 +106,9 @@ public class ProfileFragment extends BaseFragment {
     }));
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     nameEdit = (EditText) mainView.findViewById(R.id.edit_name);
     infoEdit = (EditText) mainView.findViewById(R.id.edit_info);
@@ -122,6 +132,9 @@ public class ProfileFragment extends BaseFragment {
     });
   }
 
+  /**
+   * updates the details to be displayed in the fields
+   */
   private void setUserData() {
     gender = Shared.user.gender;
 
@@ -143,6 +156,9 @@ public class ProfileFragment extends BaseFragment {
     }
   }
 
+  /**
+   * updates the profile of the user and save it into the API
+   */
   private void updateProfile() {
     final String name = nameEdit.getText().toString();
     final String info = infoEdit.getText().toString();
@@ -213,6 +229,10 @@ public class ProfileFragment extends BaseFragment {
     }));
   }
 
+  /**
+   * updates the editable state of the text fields
+   * @param isEdit indication to set the editable state of the text fields
+   */
   private void setEditable(boolean isEdit) {
     setUserData();
     editText.setText(isEdit ? getString(R.string.save) : getString(R.string.edit));
@@ -235,6 +255,9 @@ public class ProfileFragment extends BaseFragment {
     }
   }
 
+  /**
+   * listener for clicking the done on the keyboard, updates the profile on done action
+   */
   private TextView.OnEditorActionListener editorActionListener = new TextView
       .OnEditorActionListener() {
     @Override
@@ -247,6 +270,9 @@ public class ProfileFragment extends BaseFragment {
     }
   };
 
+  /**
+   * listener for clicking a view
+   */
   private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
     public void onClick(View view) {

@@ -36,6 +36,9 @@ public class FeedbackRequestsFragment extends BaseFragment {
   private TextView            emptyText;
   private SwipeRefreshLayout  refreshLayout;
 
+  /**
+   * Fragment for displaying feedback requests.
+   */
   public FeedbackRequestsFragment() {
     data = new ArrayList<>();
     displayData = new ArrayList<>();
@@ -67,6 +70,9 @@ public class FeedbackRequestsFragment extends BaseFragment {
     getData();
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView feedbackList = (RecyclerView) mainView.findViewById(R.id.list_survey);
     emptyText = (TextView) mainView.findViewById(R.id.text_empty_state);
@@ -85,6 +91,9 @@ public class FeedbackRequestsFragment extends BaseFragment {
     refreshLayout.setRefreshing(true);
   }
 
+  /**
+   * retrieves the instant feedback to be answered by the user
+   */
   private void getData() {
     LogUtil.e("AAA getData FeedbackRequestsFragment");
     subscription.add(
@@ -112,6 +121,9 @@ public class FeedbackRequestsFragment extends BaseFragment {
         }));
   }
 
+  /**
+   * sets the data to be used in the fragment
+   */
   private void setData() {
     displayData.clear();
     for (Feedback feedback : data) {
@@ -127,6 +139,10 @@ public class FeedbackRequestsFragment extends BaseFragment {
     emptyText.setVisibility(displayData.isEmpty() ? View.VISIBLE : View.GONE);
   }
 
+  /**
+   * filters the list using the query string
+   * @param queryString the string for filtering
+   */
   public void setQueryString(String queryString) {
     this.queryString = queryString;
     if (adapter != null && emptyText != null) {
@@ -134,6 +150,9 @@ public class FeedbackRequestsFragment extends BaseFragment {
     }
   }
 
+  /**
+   * listener for selecting a feedback to be answered from the list
+   */
   private FeedbackAdapter.OnSelectFeedbackListener listener = new FeedbackAdapter
       .OnSelectFeedbackListener() {
     @Override
@@ -144,6 +163,9 @@ public class FeedbackRequestsFragment extends BaseFragment {
     }
   };
 
+  /**
+   * listener for the pull to refresh functionality
+   */
   private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout
       .OnRefreshListener() {
     @Override

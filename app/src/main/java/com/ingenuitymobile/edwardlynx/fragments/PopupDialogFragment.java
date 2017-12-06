@@ -23,6 +23,14 @@ public class PopupDialogFragment extends DialogFragment {
   private String title, description, label;
   private boolean isGoal;
 
+  /**
+   * Fragment for displaying a popup dialog fragment
+   * @param isGOal flag to determine if the fragment is for displaying goal
+   * @param title the title of to be displayed in the fragment
+   * @param description the description to be displayed in the fragment
+   * @param label the label to be displayed in the fragment
+   * @return created popup dialog fragment
+   */
   public static PopupDialogFragment newInstance(boolean isGOal, String title, String description,
       String label) {
     PopupDialogFragment fragment = new PopupDialogFragment();
@@ -74,5 +82,4 @@ public class PopupDialogFragment extends DialogFragment {
       activity.finish();
     }
   }
-
 }

@@ -42,7 +42,9 @@ public class SurveysListFragment extends BaseFragment {
   private boolean loading;
   private int     previousTotal;
 
-
+  /**
+   * Fragment to display the surveys list.
+   */
   public SurveysListFragment() {
     data = new ArrayList<>();
     displayData = new ArrayList<>();
@@ -68,6 +70,9 @@ public class SurveysListFragment extends BaseFragment {
     LogUtil.e("AAA onResume SurveysListFragment");
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView surveyList = (RecyclerView) mainView.findViewById(R.id.list_survey);
 
@@ -91,11 +96,18 @@ public class SurveysListFragment extends BaseFragment {
     refreshLayout.setRefreshing(true);
   }
 
+  /**
+   * notifyAdapter notifies the list adapter of data changes
+   */
   private void notifyAdapter() {
     emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
     adapter.notifyDataSetChanged();
   }
 
+  /**
+   * retrieves all surveys from the API
+   * @param isRefresh indication if the function call is for data refresh or appending
+   */
   private void getData(final boolean isRefresh) {
     if (isRefresh) {
       page = 1;
@@ -131,6 +143,9 @@ public class SurveysListFragment extends BaseFragment {
         }));
   }
 
+  /**
+   * updates the data to be displayed in the fragment
+   */
   private void setData() {
     displayData.clear();
     for (Survey survey : data) {
@@ -142,6 +157,10 @@ public class SurveysListFragment extends BaseFragment {
     notifyAdapter();
   }
 
+  /**
+   * updates the query string and filters the development plans list
+   * @param queryString the string for filtering the list
+   */
   public void setQueryString(String queryString) {
     this.queryString = queryString;
     if (adapter != null && emptyText != null) {
@@ -149,6 +168,9 @@ public class SurveysListFragment extends BaseFragment {
     }
   }
 
+  /**
+   * listener for the pull to refresh functionality
+   */
   private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout
       .OnRefreshListener() {
     @Override
@@ -158,6 +180,10 @@ public class SurveysListFragment extends BaseFragment {
     }
   };
 
+  /**
+   * listener for the scrolling of the list, retrieves the next page of data
+   * from the API and appends it to the list
+   */
   private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
 
     @Override
