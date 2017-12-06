@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Created by memengski on 5/31/17.
+ * Custom view for bar data set.
  */
 
 public class CustomBarDataSet extends BarDataSet {
