@@ -138,6 +138,7 @@ public class MyGcmListenerService extends FirebaseMessagingService {
     notificationView.setTextViewText(R.id.text, message);
     if (isActive) {
       return new NotificationCompat.Builder(this, channelId)
+          .setColor(getColor(R.color.colorPrimary))
           .setContent(notificationView)
           .setPriority(PRIORITY_MAX)
           .setVibrate(new long[]{100, 100, 100, 100, 100})
@@ -149,6 +150,7 @@ public class MyGcmListenerService extends FirebaseMessagingService {
           .setContentIntent(pendingIntent);
     } else {
       return new NotificationCompat.Builder(this, channelId)
+          .setColor(getColor(R.color.colorPrimary))
           .setSmallIcon(smallIcon)
           .setContentTitle(title)
           .setContentText(message)
