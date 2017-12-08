@@ -104,6 +104,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
         if (isInvite) {
           Intent intent = new Intent(context, InvitePeopleActivity.class);
           intent.putExtra("id", survey.id);
+          intent.putExtra("key", survey.key);
           intent.putExtra("title", survey.name);
           intent.putExtra("evaluate", survey.personsEvaluatedText);
           context.startActivity(intent);
