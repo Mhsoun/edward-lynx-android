@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.SessionStore;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.InviteUserAdapter;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InviteUserParam;
@@ -174,6 +175,11 @@ public class InvitePeopleActivity extends BaseActivity {
     );
   }
 
+  /**
+   * checks if the email user is already invited
+   * @param email the email string to be checked if it is invited
+   * @return true if the email is allowed to be invited
+   */
   private boolean isInviteAllowed(String email) {
     return !disallowedRecipients.contains(email);
   }
@@ -209,8 +215,13 @@ public class InvitePeopleActivity extends BaseActivity {
       return;
     }
 
+    if (email.equals(SessionStore.restoreUsername(context)) && !isInviteAllowed(SessionStore.restoreUsername(context))) {
+      Toast.makeText(context, getString(R.string.disallowed_invite_self), Toast.LENGTH_SHORT).show();
+      return;
+    }
+
     if (!isInviteAllowed(email)) {
-      Toast.makeText(context, getString(R.string.disallowed_invite), Toast.LENGTH_SHORT).show();
+      Toast.makeText(context, getString(R.string.disallowed_invite_user), Toast.LENGTH_SHORT).show();
       return;
     }
 
