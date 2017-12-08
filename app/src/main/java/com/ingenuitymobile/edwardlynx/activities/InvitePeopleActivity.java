@@ -26,11 +26,14 @@ import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.InviteUserAdapter;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InviteUserParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserParam;
+import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.StringUtil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import retrofit.RetrofitError;
 import rx.Subscriber;
@@ -53,6 +56,7 @@ public class InvitePeopleActivity extends BaseActivity {
   private InviteUserAdapter    adapter;
   private ArrayList<UserParam> userParams;
   private String[]             roles;
+  private Set<String>          disallowedRecipients;
 
   public InvitePeopleActivity() {
     userParams = new ArrayList<>();
@@ -85,6 +89,7 @@ public class InvitePeopleActivity extends BaseActivity {
         getString(R.string.direct_report)
     };
     initViews();
+    getDisallowedRecipients();
     setTitle(getString(R.string.invite_people).toUpperCase());
 
     NotificationManager notificationManager =
@@ -144,6 +149,35 @@ public class InvitePeopleActivity extends BaseActivity {
     spinner.setAdapter(dataAdapter);
   }
 
+  private void getDisallowedRecipients() {
+    subscription.add(
+      Shared.apiClient.getSurvey(
+              id,
+              key,
+              new Subscriber<Survey>() {
+                @Override
+                public void onCompleted() {
+
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                  disallowedRecipients = new HashSet<>();
+                }
+
+                @Override
+                public void onNext(Survey survey) {
+                  disallowedRecipients = new HashSet<>(survey.disallowedRecipients);
+                }
+              }
+      )
+    );
+  }
+
+  private boolean isInviteAllowed(String email) {
+    return !disallowedRecipients.contains(email);
+  }
+
   /**
    * notifyAdapter notifies the list adapter of data changes
    */
@@ -172,6 +206,11 @@ public class InvitePeopleActivity extends BaseActivity {
 
     if (!StringUtil.isValidEmail(email)) {
       Toast.makeText(context, getString(R.string.valid_email_required), Toast.LENGTH_SHORT).show();
+      return;
+    }
+
+    if (!isInviteAllowed(email)) {
+      Toast.makeText(context, getString(R.string.disallowed_invite), Toast.LENGTH_SHORT).show();
       return;
     }
 

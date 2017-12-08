@@ -247,4 +247,5 @@
   <string name="team_progress">团队进度</string>
   <string name="recover_password">恢复密码</string>
     <string name="no_access_invite">您无权邀请用户参加此调查</string>
+    <string name="disallowed_invite">你不能邀请这个用户</string>
 </resources>

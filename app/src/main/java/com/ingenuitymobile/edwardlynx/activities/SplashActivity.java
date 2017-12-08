@@ -183,6 +183,7 @@ public class SplashActivity extends BaseActivity {
                       Bundle surveyBundle = new Bundle();
                       surveyBundle.putString("type", segments.get(0));
                       surveyBundle.putString("id", String.valueOf(response.surveyId));
+                      surveyBundle.putString("key", segments.get(1));
                       getIntent().putExtras(surveyBundle);
                   }
               }));

@@ -245,4 +245,5 @@
   <string name="team_progress">Командный прогресс</string>
   <string name="recover_password">Восстановить пароль</string>
   <string name="no_access_invite">У вас нет права приглашать пользователей на этот опрос</string>
+    <string name="disallowed_invite">Вы не можете приглашать этого пользователя</string>
 </resources>

@@ -257,4 +257,5 @@
   <string name="not_available">N/A</string>
   <string name="recover_password">Återställa lösenord</string>
     <string name="no_access_invite">Du är inte behörig att bjuda in användare till denna undersökning</string>
+    <string name="disallowed_invite">Du får inte bjuda in den här användaren</string>
 </resources>
