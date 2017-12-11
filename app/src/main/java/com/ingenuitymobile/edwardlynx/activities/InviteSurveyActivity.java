@@ -142,7 +142,12 @@ public class InviteSurveyActivity extends BaseActivity {
             if (isRefresh) {
               data.clear();
             }
-            data.addAll(surveys.items);
+
+            for (Survey survey : surveys.items) {
+              if (survey.permissions.canInvite) {
+                data.add(survey);
+              }
+            }
           }
         }));
   }

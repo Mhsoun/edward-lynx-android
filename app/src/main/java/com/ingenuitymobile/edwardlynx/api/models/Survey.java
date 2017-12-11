@@ -55,6 +55,8 @@ public class Survey implements ParentListItem {
   public String key;
   @SerializedName("disallowed_recipients")
   public List<String> disallowedRecipients;
+  @SerializedName("permissions")
+  public Permissions permissions;
 
   public String getType(Context ctx, boolean isUpperCase) {
     String string = "";
