@@ -139,7 +139,7 @@ public class MyGcmListenerService extends FirebaseMessagingService {
           .setContent(notificationView)
           .setPriority(PRIORITY_MAX)
           .setVibrate(new long[]{100, 100, 100, 100, 100})
-          .setSmallIcon(getNotificationIcon())
+          .setSmallIcon(R.mipmap.small_icon)
           .setWhen(System.currentTimeMillis())
           .setAutoCancel(true)
           .setContentTitle(title)
@@ -148,21 +148,12 @@ public class MyGcmListenerService extends FirebaseMessagingService {
     } else {
       return new NotificationCompat.Builder(this, channelId)
           .setColor(getColor(R.color.colorPrimary))
-          .setSmallIcon(getNotificationIcon())
+          .setSmallIcon(R.mipmap.small_icon)
           .setContentTitle(title)
           .setContentText(message)
           .setAutoCancel(false)
           .setContentIntent(pendingIntent);
     }
-  }
-
-  /**
-   * retrieves the notification icon to be displayed
-   * @return the image resource
-   */
-  private int getNotificationIcon() {
-    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
-            R.mipmap.small_icon : R.mipmap.ic_launcher;
   }
 }
 
