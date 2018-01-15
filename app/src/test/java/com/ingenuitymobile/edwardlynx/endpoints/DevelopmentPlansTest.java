@@ -23,7 +23,7 @@ import rx.observers.TestSubscriber;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DevelopmentPlansTest extends BaseTest {
-  private static final int TEST_DEVELOPMENT_PLAN_ID = 62;
+  private static final int TEST_DEVELOPMENT_PLAN_ID = 4;
 
   @Test
   public void test1postDevelopmentPlan() throws Exception {

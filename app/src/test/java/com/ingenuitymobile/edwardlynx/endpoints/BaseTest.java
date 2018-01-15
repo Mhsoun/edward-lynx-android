@@ -16,8 +16,8 @@ import rx.observers.TestSubscriber;
  */
 
 class BaseTest {
-  public static final String username = "jason@ingenuity.ph";
-  public static final String password = "1";
+  public static final String username = "admin@edwardlynx.com";
+  public static final String password = "password123";
   ApiClient client;
 
   ApiClient login() throws Exception {

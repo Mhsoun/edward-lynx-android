@@ -17,7 +17,7 @@ import rx.observers.TestSubscriber;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InstantFeedbacksTest extends BaseTest {
-  private static final int TEST_INSTANT_FEEDBACK_ID = 183;
+  private static final int TEST_INSTANT_FEEDBACK_ID = 1;
 
   @Test
   public void test1GetFeedbackRequests() throws Exception {

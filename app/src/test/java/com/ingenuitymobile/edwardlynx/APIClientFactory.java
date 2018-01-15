@@ -9,10 +9,10 @@ import com.ingenuitymobile.edwardlynx.api.responses.Authentication;
  */
 
 public class APIClientFactory {
-  public static final String CONSUMER_KEY    = "12";
-  public static final String CONSUMER_SECRET = "5fdCA47OE30ZCHTDceENXSumjhZiVzB6cbDKMiXv";
+  public static final String CONSUMER_KEY    = "6";
+  public static final String CONSUMER_SECRET = "C2o9x70fFHjq99M0OvXAfXdZTJTSjbuiRlfbNoEx";
 
-  private static final String BASE_URL = "https://stage.lynxtool.edwardlynx.com";
+  private static final String BASE_URL = "https://lynxtool.edwardlynx.com";
 
   public ApiClient createClient() {
     return createClient(null);

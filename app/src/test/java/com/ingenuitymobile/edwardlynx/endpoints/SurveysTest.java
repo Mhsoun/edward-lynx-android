@@ -18,8 +18,8 @@ import rx.observers.TestSubscriber;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SurveysTest extends BaseTest {
-  private static final Long TEST_SURVEY_ID = 449L;
-  private static final String TEST_SURVEY_KEY = "qlIVeyppMXNsNrS9v4l8ovOfSFW4X2Nq";
+  private static final Long TEST_SURVEY_ID = 404L;
+  private static final String TEST_SURVEY_KEY = "cK5mDXShWIdmsWLq2T6oaKc3CPiIHLDr";
 
   @Test
   public void test1GetSurveys() throws Exception {
