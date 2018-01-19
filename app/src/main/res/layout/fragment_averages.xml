@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/average_values"
+          android:textColor="@color/white"
+          android:textSize="22sp"/>
+
+      <TextView
+          fontPath="fonts/Lato-Italic.ttf"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/shows_averages"
+          android:textColor="@color/survey_line"
+          android:textSize="10sp"
+          android:textStyle="italic"
+          tools:ignore="MissingPrefix"/>
+
+      <com.github.mikephil.charting.charts.HorizontalBarChart
+          android:id="@+id/bar_chart"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+      </com.github.mikephil.charting.charts.HorizontalBarChart>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="12dp"
+          android:text="@string/index_over_competencies"
+          android:textColor="@color/white"
+          android:textSize="22sp"/>
+
+      <TextView
+          fontPath="fonts/Lato-Italic.ttf"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/index_over_competencies_details"
+          android:textColor="@color/survey_line"
+          android:textSize="10sp"
+          android:textStyle="italic"
+          tools:ignore="MissingPrefix"/>
+
+      <com.github.mikephil.charting.charts.HorizontalBarChart
+          android:id="@+id/mulitple_bar_chart"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:minHeight="100dp">
+      </com.github.mikephil.charting.charts.HorizontalBarChart>
+
+    </LinearLayout>
+  </ScrollView>
+</RelativeLayout>

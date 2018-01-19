@@ -1,11 +1,82 @@
 <resources>
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
-    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimary">@color/colorPrimaryDark</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+
+    <item name="android:textViewStyle">@style/TextLatoRegularStyle</item>
+    <item name="android:buttonStyle">@style/ButtonLatoRegularStyle</item>
+    <item name="android:editTextStyle">@style/EditLatoRegularStyle</item>
+
+    <item name="colorControlNormal">@color/white</item>
   </style>
 
+  <style name="TextLatoRegularStyle" parent="android:Widget.TextView">
+    <item name="fontPath">fonts/Lato-Regular.ttf</item>
+  </style>
+
+  <style name="ButtonLatoRegularStyle" parent="android:Widget.Button">
+    <item name="fontPath">fonts/Lato-Regular.ttf</item>
+  </style>
+
+  <style name="EditLatoRegularStyle" parent="android:Widget.EditText">
+    <item name="fontPath">fonts/Lato-Regular.ttf</item>
+  </style>
+
+  <style name="edit_text">
+    <item name="android:textSize">20sp</item>
+    <item name="android:padding">4dp</item>
+    <item name="android:textColor">@color/common_text_color</item>
+    <item name="android:background">@drawable/bg_rounded_input_field</item>
+    <item name="android:layout_height">48dp</item>
+  </style>
+
+  <style name="orange_button">
+    <item name="android:textSize">18sp</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="android:background">@drawable/bg_rounded_login_button</item>
+    <item name="android:layout_height">48dp</item>
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="LoginTheme.Base" parent="Theme.AppCompat.NoActionBar">
+    <item name="android:windowAnimationStyle">@null</item>
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimary</item>
+    <item name="colorAccent">@color/white</item>
+    <item name="android:windowBackground">@color/white</item>
+    <item name="android:colorBackground">@color/white</item>
+  </style>
+
+  <style name="AppTheme.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
+  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+  <style name="mySpinnerItemStyle" parent="Base.Widget.AppCompat.Spinner">
+    <item name="android:textColor">@color/white</item>
+  </style>
+
+  <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+    <item name="tabIndicatorColor">?attr/colorAccent</item>
+    <item name="tabIndicatorHeight">0dp</item>
+    <item name="tabPaddingStart">14dp</item>
+    <item name="tabPaddingEnd">14dp</item>
+    <item name="tabBackground">?attr/selectableItemBackground</item>
+    <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
+    <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+  </style>
+
+  <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+    <item name="android:textSize">15sp</item>
+    <item name="android:textColor">?android:textColorSecondary</item>
+    <item name="textAllCaps">true</item>
+  </style>
 </resources>

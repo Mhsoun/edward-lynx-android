@@ -1,36 +1,402 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
+import android.content.ContentResolver;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.MenuItem;
 
 import com.crashlytics.android.Crashlytics;
+import com.ingenuitymobile.edwardlynx.BuildConfig;
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.SessionStore;
+import com.ingenuitymobile.edwardlynx.Shared;
+import com.ingenuitymobile.edwardlynx.fragments.ChangePasswordFragment;
+import com.ingenuitymobile.edwardlynx.fragments.DashboardFragment;
+import com.ingenuitymobile.edwardlynx.fragments.DevelopmenPlansFragment;
+import com.ingenuitymobile.edwardlynx.fragments.ProfileFragment;
+import com.ingenuitymobile.edwardlynx.fragments.SurveysFragment;
+import com.ingenuitymobile.edwardlynx.services.DeleteTokenService;
+
+import net.hockeyapp.android.CrashManager;
+import net.hockeyapp.android.CrashManagerListener;
+import net.hockeyapp.android.UpdateManager;
 
 import io.fabric.sdk.android.Fabric;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * Created by mEmEnG-sKi on 13/12/2016.
+ * Activity to handle displaying of fragments and also redirection when the app is
+ * opened with a data passed such as opening from an email link or opening from
+ * notification. This activity also serves as the root of the activity stack.
+ */
+
+public class MainActivity extends BaseActivity implements
+    NavigationView.OnNavigationItemSelectedListener {
+
+  public enum ChangeFragment {
+    DASHBOARD,
+    SURVEYS_ALL,
+    SURVEYS_FEEDBACK,
+    SURVEYS_LYNX,
+    DEVPLANS,
+    PROFILE,
+    CHANGE_PASSWORD
+  }
+
+  private NavigationView          navigationView;
+  private Toolbar                 toolbar;
+  private SurveysFragment         surveysFragment;
+  private DevelopmenPlansFragment developmenPlansFragment;
+  private DashboardFragment       dashboardFragment;
+  private ProfileFragment         profileFragment;
+  private ChangePasswordFragment  changePasswordFragment;
+
+  private Fragment fragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    Fabric.with(this, new Crashlytics());
     setContentView(R.layout.activity_main);
+    Fabric.with(this, new Crashlytics());
 
-    // TODO: Move this to where you establish a user session
-    logUser();
+    context = this;
+
+    initViews();
+//    setUserCrashlytics();
+
+    changeToDashboard();
+    checkIntent();
+
+    checkForUpdates();
+    autoUploadCrashes();
+    enableNotificationAccess();
+
+    setTitle(getString(R.string.drawer_dashboard).toUpperCase());
   }
 
-  public void forceCrash(View view) {
-    throw new RuntimeException("This is a crash");
+  @Override
+  public void onResume() {
+    super.onResume();
+    checkForCrashes();
   }
 
-  private void logUser() {
-    // TODO: Use the current user's information
-    // You can call any combination of these three methods
-    Crashlytics.setUserIdentifier("12345");
-    Crashlytics.setUserEmail("user@fabric.io");
-    Crashlytics.setUserName("Test User");
+  @Override
+  public void onPause() {
+    super.onPause();
+    unregisterManagers();
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    unregisterManagers();
+  }
+
+  /**
+   * ask permission to the user for enabling the notification access for the app,
+   * this is important for tracking unread notification count and notification clearing
+   */
+  private void enableNotificationAccess() {
+    ContentResolver contentResolver = context.getContentResolver();
+    String enabledNotificationListeners =
+        Settings.Secure.getString(contentResolver, "enabled_notification_listeners");
+    String packageName = getPackageName();
+
+    // check to see if the enabledNotificationListeners String contains our package name
+    if (enabledNotificationListeners == null ||
+        !enabledNotificationListeners.contains(packageName)) {
+      // in this situation we know that the user has not granted the app the Notification access
+      // permission
+      AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+      alertBuilder.setTitle(getString(R.string.confirmation));
+      alertBuilder.setMessage(getString(R.string.enable_notification));
+      alertBuilder.setPositiveButton(getString(R.string.enable),
+          new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+              intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+              startActivity(intent);
+            }
+          });
+      alertBuilder.setNegativeButton(getString(R.string.later),
+          new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              dialog.dismiss();
+            }
+          });
+      alertBuilder.create().show();
+    }
+  }
+
+  /**
+   * function to register crash uploader to hockey app
+   */
+  public void autoUploadCrashes() {
+    if (!TextUtils.isEmpty(getString(R.string.hockey_app_id))) {
+      CrashManager.register(this, getResources().getString(R.string.hockey_app_id),
+          new CrashManagerListener() {
+            public boolean shouldAutoUploadCrashes() {
+              return true;
+            }
+          });
+    }
+  }
+
+  /**
+   * function to register for crash detection
+   */
+  private void checkForCrashes() {
+    if (!TextUtils.isEmpty(getString(R.string.hockey_app_id))) {
+      CrashManager.register(this);
+    }
+  }
+
+  /**
+   * function to check for updates to hockey app
+   */
+  private void checkForUpdates() {
+    if (BuildConfig.DEBUG && !TextUtils.isEmpty(getString(R.string.hockey_app_id))) {
+      UpdateManager.register(this);
+    }
+  }
+
+  /**
+   * function to remove listeners for the crash detections
+   */
+  private void unregisterManagers() {
+    if (!TextUtils.isEmpty(getString(R.string.hockey_app_id))) {
+      UpdateManager.unregister();
+    }
+  }
+
+  @Override
+  public void onBackPressed() {
+    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    if (drawer.isDrawerOpen(GravityCompat.START)) {
+      drawer.closeDrawer(GravityCompat.START);
+    } else {
+      if (fragment != dashboardFragment) {
+        changeToDashboard();
+      } else {
+        super.onBackPressed();
+      }
+    }
+  }
+
+  @SuppressWarnings("StatementWithEmptyBody")
+  @Override
+  public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    int id = item.getItemId();
+
+    if (id == R.id.dashboard) {
+      changeToDashboard();
+    } else if (id == R.id.profile) {
+      if (profileFragment == null) {
+        profileFragment = ProfileFragment.newInstance(context);
+      }
+      changeFragment(profileFragment);
+    } else if (id == R.id.survey) {
+      changeToSurveys(SurveysFragment.ALL);
+    } else if (id == R.id.development_plans) {
+      changeToDevPlan();
+    } else if (id == R.id.settings) {
+      if (changePasswordFragment == null) {
+        changePasswordFragment = ChangePasswordFragment.newInstance(context);
+      }
+      changeFragment(changePasswordFragment);
+    } else if (id == R.id.logout) {
+      logout();
+    }
+
+    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    drawer.closeDrawer(GravityCompat.START);
+    return true;
+  }
+
+  /**
+   * changes the view to the target fragment
+   * @param fragment the fragment to be replaced for the main content view
+   */
+  private void changeFragment(Fragment fragment) {
+    hideKeyboard();
+    toolbar.setTitle(fragment.getArguments().getString("title"));
+    FragmentManager fragmentManager = getSupportFragmentManager();
+
+    fragmentManager
+        .beginTransaction()
+        .replace(R.id.content_main, fragment)
+        .commit();
+
+    this.fragment = fragment;
+  }
+
+  /**
+   * initViews initializes views used in the activity
+   */
+  private void initViews() {
+    toolbar = (Toolbar) findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+
+    final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    drawer.setDrawerListener(toggle);
+    toggle.syncState();
+
+    navigationView = (NavigationView) findViewById(R.id.nav_view);
+    navigationView.setNavigationItemSelectedListener(this);
+  }
+
+  /**
+   * action invoked when the logout menu is clicked in the side navigation drawer
+   */
+  private void logout() {
+    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+    alertBuilder.setTitle(getString(R.string.confirmation));
+    alertBuilder.setMessage(getString(R.string.logout_confirmation_message));
+    alertBuilder.setPositiveButton(getString(R.string.logout),
+        new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            SessionStore.saveAccessToken(null, context);
+            SessionStore.saveRefreshToken(null, context);
+            Intent intentService = new Intent(context, DeleteTokenService.class);
+            startService(intentService);
+            Intent intent = new Intent(context, SplashActivity.class);
+            startActivity(intent);
+            finish();
+          }
+        });
+    alertBuilder.setNegativeButton(getString(R.string.cancel),
+        new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.dismiss();
+          }
+        });
+    alertBuilder.create().show();
+  }
+
+  /**
+   * function to set crashlytics parameters
+   */
+  private void setUserCrashlytics() {
+    Crashlytics.setUserIdentifier(String.valueOf(Shared.user.id));
+    Crashlytics.setUserEmail(Shared.user.email);
+    Crashlytics.setUserName(Shared.user.name);
+  }
+
+  /**
+   * checks for the intents when opening this activity,
+   * acts as a redirecting filter depending on the type passed with the intent,
+   * opens the target page depending on the type passed with the intent
+   */
+  private void checkIntent() {
+    if (getIntent().getExtras() != null) {
+      final Bundle bundle = getIntent().getExtras();
+      final String type = bundle.getString("type");
+      Intent intent = null;
+      if (type != null) {
+        if (type.equals(Shared.DEV_PLAN)) {
+          intent = new Intent(context, DevelopmentPlanDetailedActivity.class);
+        } else if (type.equals(Shared.INSTANT_FEEDBACK_REQUEST)) {
+          intent = new Intent(context, AnswerFeedbackActivity.class);
+        } else if (type.equals(Shared.SURVEY_ANSWER + "-answer") || type.equals(Shared.SURVEY_ANSWER)) {
+          intent = new Intent(context, SurveyQuestionsActivity.class);
+        } else if (type.equals(Shared.SURVEY_INVITE)) {
+          intent = new Intent(context, InvitePeopleActivity.class);
+        }
+        if (intent != null) {
+          intent.putExtra("id", Long.parseLong(String.valueOf(bundle.get("id"))));
+          intent.putExtra("key", String.valueOf(bundle.get("key")));
+          startActivity(intent);
+        }
+      }
+    }
+  }
+
+  /**
+   *  function to change the view to dashboard fragment
+   */
+  private void changeToDashboard() {
+    navigationView.setCheckedItem(R.id.dashboard);
+    if (dashboardFragment == null) {
+      dashboardFragment = DashboardFragment.newInstance(context, listener);
+    }
+    changeFragment(dashboardFragment);
+  }
+
+  /**
+   * function to change the view to surveys fragment
+   * @param position the tab position to be displayed when the surveys fragment is opened
+   */
+  private void changeToSurveys(int position) {
+    navigationView.setCheckedItem(R.id.survey);
+    if (surveysFragment == null) {
+      surveysFragment = SurveysFragment.newInstance(context);
+    }
+    surveysFragment.setPosition(position);
+    changeFragment(surveysFragment);
+  }
+
+  /**
+   * function to change the view to development plan
+   */
+  private void changeToDevPlan() {
+    navigationView.setCheckedItem(R.id.development_plans);
+    if (developmenPlansFragment == null) {
+      developmenPlansFragment = DevelopmenPlansFragment.newInstance(context, false, 0L);
+    }
+
+    developmenPlansFragment.setPosition(0);
+    changeFragment(developmenPlansFragment);
+  }
+
+  /**
+   * listener interface for changing the fragment
+   */
+  private OnChangeFragmentListener listener = new OnChangeFragmentListener() {
+    @Override
+    public void onChange(ChangeFragment changeFragment) {
+      switch (changeFragment) {
+      case DASHBOARD:
+        changeToDashboard();
+        break;
+      case SURVEYS_ALL:
+        changeToSurveys(SurveysFragment.ALL);
+        break;
+      case SURVEYS_FEEDBACK:
+        changeToSurveys(SurveysFragment.FEEDBACK);
+        break;
+      case SURVEYS_LYNX:
+        changeToSurveys(SurveysFragment.LYNX);
+        break;
+      case DEVPLANS:
+        changeToDevPlan();
+        break;
+      case PROFILE:
+        break;
+      case CHANGE_PASSWORD:
+        break;
+      }
+    }
+  };
+
+  /**
+   * interface to connect to other classes to change the fragment
+   */
+  public interface OnChangeFragmentListener {
+    void onChange(ChangeFragment changeFragment);
   }
 }
 
