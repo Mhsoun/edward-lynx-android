@@ -37,6 +37,7 @@ import rx.Subscriber;
 
 /**
  * Created by memengski on 7/9/17.
+ * Activity to add development plan.
  */
 
 public class AddTeamDevPlanActivity extends BaseActivity {
@@ -51,6 +52,9 @@ public class AddTeamDevPlanActivity extends BaseActivity {
 
   private AddTeamPlanAdapter adapter;
 
+  /**
+   * AddTeamDevPlanActivity constructor
+   */
   public AddTeamDevPlanActivity() {
     data = new ArrayList<>();
   }
@@ -80,6 +84,9 @@ public class AddTeamDevPlanActivity extends BaseActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     nameEdit = (EditText) findViewById(R.id.edit_name);
     radioGroup = (RadioGroup) findViewById(R.id.radiogroup_type);
@@ -101,6 +108,9 @@ public class AddTeamDevPlanActivity extends BaseActivity {
     setDefaultState();
   }
 
+  /**
+   * getData retrieves team categories from API
+   */
   private void getData() {
     subscription.add(Shared.apiClient.getTeamCategories(new Subscriber<TeamDevPlansResponse>() {
       @Override
@@ -122,6 +132,10 @@ public class AddTeamDevPlanActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * deleteTeamPlan deletes selected team plan
+   * @param position list index of the team plan to be deleted
+   */
   private void deleteTeamPlan(final int position) {
     final TeamDevPlan teamDevPlan = data.get(position);
 
@@ -149,16 +163,27 @@ public class AddTeamDevPlanActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * notifyAdapter notifies the list adapter of data changes
+   */
   private void notifyAdapter() {
     adapter.notifyDataSetChanged();
     emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
   }
 
+  /**
+   * setDefaultState sets the starting state of the activity
+   */
   private void setDefaultState() {
     nameEdit.setText("");
     ((RadioButton) radioGroup.getChildAt(0)).setChecked(true);
   }
 
+  /**
+   * addTeamPlan adds new team plan,
+   * used in AddTeamDevPlanActivity
+   * @param v
+   */
   public void addTeamPlan(View v) {
     final String name = nameEdit.getText().toString();
     String language = "";
@@ -228,6 +253,11 @@ public class AddTeamDevPlanActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * update updates the selected team plan,
+   * used in AddTeamDevPlanActivity
+   * @param v
+   */
   public void update(View v) {
     TeamDevPlanBodies bodies = new TeamDevPlanBodies();
     bodies.items = new ArrayList<>();
@@ -265,6 +295,9 @@ public class AddTeamDevPlanActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * Recycler view on start dragging listener
+   */
   private OnStartDragListener listener = new OnStartDragListener() {
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
@@ -278,6 +311,9 @@ public class AddTeamDevPlanActivity extends BaseActivity {
     }
   };
 
+  /**
+   * Recycler view item dragging helper
+   */
   private ItemTouchHelperAdapter itemTouchHelperAdapter = new ItemTouchHelperAdapter() {
     @Override
     public void onItemDismiss(int position) {

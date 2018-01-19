@@ -34,6 +34,10 @@ import java.util.List;
 public class QuestionRateAdapter extends RecyclerView.Adapter<QuestionRateAdapter.ViewHolder> {
   private List<QuestionRate> data;
 
+  /**
+   * Adapter for displaying questions with rating.
+   * @param data the list of question rates
+   */
   public QuestionRateAdapter(List<QuestionRate> data) {
     super();
     this.data = data;

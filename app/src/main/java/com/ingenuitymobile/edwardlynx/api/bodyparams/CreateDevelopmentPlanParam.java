@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by mEmEnG-sKi on 01/02/2017.
+ * API model for creating development plans.
  */
 
 public class CreateDevelopmentPlanParam {

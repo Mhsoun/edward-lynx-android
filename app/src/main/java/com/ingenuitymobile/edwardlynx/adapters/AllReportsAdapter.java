@@ -30,6 +30,10 @@ public class AllReportsAdapter extends RecyclerView.Adapter<AllReportsAdapter.Vi
 
   private List<AllSurveys> data;
 
+  /**
+   * Adapter for displaying all reports.
+   * @param data the list of all surveys
+   */
   public AllReportsAdapter(List<AllSurveys> data) {
     super();
     this.data = data;
@@ -82,6 +86,7 @@ public class AllReportsAdapter extends RecyclerView.Adapter<AllReportsAdapter.Vi
         public void onClick(View view) {
           Intent intent = new Intent(context, SurveyReportActivity.class);
           intent.putExtra("id", survey.id);
+          intent.putExtra("key", survey.key);
           context.startActivity(intent);
         }
       });

@@ -31,6 +31,9 @@ public class TeamReportsFragment extends BaseFragment {
   private List<TeamReportItem>    items;
   private TeamResultParentAdapter adapter;
 
+  /**
+   * Fragment to display team reports.
+   */
   public TeamReportsFragment() {
     items = new ArrayList<>();
   }
@@ -61,6 +64,9 @@ public class TeamReportsFragment extends BaseFragment {
     getReports();
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.list_reports);
 
@@ -69,6 +75,9 @@ public class TeamReportsFragment extends BaseFragment {
     recyclerView.setAdapter(adapter);
   }
 
+  /**
+   * retrieves all survey reports from the API
+   */
   public void getReports() {
     subscription.add(Shared.apiClient.getSurveyReports()
         .observeOn(AndroidSchedulers.mainThread())
@@ -86,10 +95,10 @@ public class TeamReportsFragment extends BaseFragment {
 
           @Override
           public void onNext(TeamReportResponse teamReportResponse) {
+            items.clear();
             items.addAll(teamReportResponse.items);
             adapter.notifyDataSetChanged();
           }
         }));
   }
-
 }

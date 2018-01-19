@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by mEmEnG-sKi on 21/12/2016.
+ * API model for validation errors.
  */
 
 public class ValidationErrors {

@@ -7,6 +7,7 @@ import com.ingenuitymobile.edwardlynx.R;
 
 /**
  * Created by memengski on 3/31/17.
+ * API model for reminders.
  */
 
 public class Reminder extends Model {
@@ -34,6 +35,8 @@ public class Reminder extends Model {
   public String description;
   @SerializedName("due")
   public String due;
+  @SerializedName("key")
+  public String key;
 
   public String getType(Context ctx) {
     if (type.equals(Type.GOAL.toString())) {

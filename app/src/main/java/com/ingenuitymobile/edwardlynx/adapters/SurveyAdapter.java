@@ -28,6 +28,10 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
 
   private List<Survey> data;
 
+  /**
+   * Adapter for displaying surveys.
+   * @param data the list of surveys
+   */
   public SurveyAdapter(List<Survey> data) {
     super();
     this.data = data;
@@ -100,12 +104,14 @@ public class SurveyAdapter extends RecyclerView.Adapter<SurveyAdapter.ViewHolder
         if (isInvite) {
           Intent intent = new Intent(context, InvitePeopleActivity.class);
           intent.putExtra("id", survey.id);
+          intent.putExtra("key", survey.key);
           intent.putExtra("title", survey.name);
           intent.putExtra("evaluate", survey.personsEvaluatedText);
           context.startActivity(intent);
         } else {
           Intent intent = new Intent(context, SurveyQuestionsActivity.class);
           intent.putExtra("id", survey.id);
+          intent.putExtra("key", survey.key);
           context.startActivity(intent);
         }
       }

@@ -29,6 +29,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 16/01/2017.
+ * Activity to answer instant feedback.
  */
 
 public class AnswerFeedbackActivity extends BaseActivity {
@@ -74,6 +75,9 @@ public class AnswerFeedbackActivity extends BaseActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     final RecyclerView questionsList = (RecyclerView) findViewById(R.id.list_questions);
 
@@ -88,6 +92,9 @@ public class AnswerFeedbackActivity extends BaseActivity {
     questionsList.setAdapter(adapter);
   }
 
+  /**
+   * getData retrieves instant feedback from API and load questions
+   */
   private void getData() {
     LogUtil.e("AAA getData questions");
     subscription.add(Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
@@ -113,6 +120,11 @@ public class AnswerFeedbackActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * submit submits the answer to the instant feedback,
+   * used in AnswerFeedbackActivity
+   * @param v
+   */
   public void submit(View v) {
     if (TextUtils.isEmpty(key)) {
       Toast.makeText(context, getString(R.string.no_access), Toast.LENGTH_SHORT).show();
@@ -154,6 +166,9 @@ public class AnswerFeedbackActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * listener used in adapter for answering instant feedback
+   */
   private FeedbackQuestionsAdapter.OnAnswerItemListener listener = new FeedbackQuestionsAdapter
       .OnAnswerItemListener() {
     @Override

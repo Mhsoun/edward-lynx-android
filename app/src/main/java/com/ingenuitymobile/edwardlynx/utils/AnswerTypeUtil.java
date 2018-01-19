@@ -7,6 +7,7 @@ import com.ingenuitymobile.edwardlynx.api.models.Answer;
 
 /**
  * Created by memengski on 3/22/17.
+ * Utility class for retrieving answer types.
  */
 
 public class AnswerTypeUtil {

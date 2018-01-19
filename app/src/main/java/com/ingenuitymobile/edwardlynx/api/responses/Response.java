@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by mEmEnG-sKi on 01/09/2016.
+ * Base response model.
  */
 public class Response {
 

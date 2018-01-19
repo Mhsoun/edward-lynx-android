@@ -30,6 +30,9 @@ public class QuestionRateFragment extends BaseFragment {
 
   private String title;
 
+  /**
+   * Fragment for displaying question rates.
+   */
   public QuestionRateFragment() {
     questionRates = new ArrayList<>();
     title = "";

@@ -44,6 +44,9 @@ public class SurveyReportsFragment extends BaseFragment {
   private boolean loading;
   private int     previousTotal;
 
+  /**
+   * Fragment for displaying survey reports.
+   */
   public SurveyReportsFragment() {
     data = new ArrayList<>();
     displayData = new ArrayList<>();
@@ -69,6 +72,9 @@ public class SurveyReportsFragment extends BaseFragment {
     LogUtil.e("AAA onResume SurveysListFragment");
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView surveyList = (RecyclerView) mainView.findViewById(R.id.list_survey);
 
@@ -93,11 +99,18 @@ public class SurveyReportsFragment extends BaseFragment {
     refreshLayout.setRefreshing(true);
   }
 
+  /**
+   * notifyAdapter notifies the list adapter of data changes
+   */
   private void notifyAdapter() {
     emptyText.setVisibility(displayData.isEmpty() ? View.VISIBLE : View.GONE);
     adapter.notifyDataSetChanged();
   }
 
+  /**
+   * retrieves all surveys from the API
+   * @param isRefresh indication if the function call is for data refresh or appending
+   */
   private void getData(final boolean isRefresh) {
     LogUtil.e("AAA getData survey");
     if (isRefresh) {
@@ -132,6 +145,9 @@ public class SurveyReportsFragment extends BaseFragment {
     }));
   }
 
+  /**
+   * updates the data to be displayed in the fragment
+   */
   private void setData() {
     displayData.clear();
     for (Survey survey : data) {
@@ -143,6 +159,10 @@ public class SurveyReportsFragment extends BaseFragment {
     notifyAdapter();
   }
 
+  /**
+   * filters the list using the query string
+   * @param queryString the string for filtering
+   */
   public void setQueryString(String queryString) {
     this.queryString = queryString;
     if (adapter != null && emptyText != null) {
@@ -150,17 +170,24 @@ public class SurveyReportsFragment extends BaseFragment {
     }
   }
 
-
+  /**
+   * listener for selecting a feedback from the list, opens the
+   * survey report activity
+   */
   private SurveyReportsAdapter.OnSelectFeedbackListener listener =
       new SurveyReportsAdapter.OnSelectFeedbackListener() {
         @Override
         public void onSelect(long id, String key) {
           Intent intent = new Intent(getActivity(), SurveyReportActivity.class);
           intent.putExtra("id", id);
+          intent.putExtra("key", key);
           startActivity(intent);
         }
       };
 
+  /**
+   * listener for the pull to refresh functionality
+   */
   private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout
       .OnRefreshListener() {
     @Override
@@ -170,6 +197,10 @@ public class SurveyReportsFragment extends BaseFragment {
     }
   };
 
+  /**
+   * listener for the scrolling of the list, retrieves the next page of data
+   * from the API and appends it to the list
+   */
   private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
 
     @Override

@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by memengski on 5/31/17.
+ * API model for breakdown item.
  */
 
 public class BreakdownItem {

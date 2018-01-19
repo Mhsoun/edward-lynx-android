@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by mEmEnG-sKi on 03/02/2017.
+ * API model for action.
  */
 
 public class Action extends Model {

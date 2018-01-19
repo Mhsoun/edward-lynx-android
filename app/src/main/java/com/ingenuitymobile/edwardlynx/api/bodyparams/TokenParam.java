@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by mEmEnG-sKi on 06/02/2017.
+ * API model for token param.
  */
 
 public class TokenParam {

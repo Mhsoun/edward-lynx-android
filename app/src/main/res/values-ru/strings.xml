@@ -244,4 +244,7 @@
   <string name="forgot_password_message">Успешно отправлено запрос на восстановление пароля</string>
   <string name="team_progress">Командный прогресс</string>
   <string name="recover_password">Восстановить пароль</string>
+  <string name="no_access_invite">У вас нет права приглашать пользователей на этот опрос</string>
+    <string name="disallowed_invite_user">Пользователь уже приглашен</string>
+  <string name="disallowed_invite_self">Невозможно пригласить кандидата</string>
 </resources>

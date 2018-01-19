@@ -20,6 +20,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by mEmEnG-sKi on 14/12/2016.
+ * Base activity to be used for all other activities with reusable functions and components.
  */
 
 public class BaseActivity extends AppCompatActivity {
@@ -69,6 +70,9 @@ public class BaseActivity extends AppCompatActivity {
     super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
   }
 
+  /**
+   * hideKeyboard hides the onscreen keyboard if it is shown
+   */
   protected void hideKeyboard() {
     try {
       InputMethodManager inputManager = (InputMethodManager) getSystemService(
@@ -77,6 +81,9 @@ public class BaseActivity extends AppCompatActivity {
     } catch (Exception e) {}
   }
 
+  /**
+   * hideKeyboard hides the onscreen keyboard if it is shown
+   */
   protected void hideKeyboard(View v) {
     try {
       InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(
@@ -85,12 +92,18 @@ public class BaseActivity extends AppCompatActivity {
     } catch (Exception e) {}
   }
 
+  /**
+   * broadcast receiver for receiving notification
+   */
   private BroadcastReceiver notiffMain = new BroadcastReceiver() {
     @Override
     public void onReceive(Context context, Intent intent) {
     }
   };
 
+  /**
+   * listener to check if a view has focus and hides keyboard from view
+   */
   protected View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
     @Override
     public void onFocusChange(View v, boolean hasFocus) {

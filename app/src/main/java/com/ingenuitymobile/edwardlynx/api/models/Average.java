@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by memengski on 4/12/17.
+ * API model for average.
  */
 
 public class Average {

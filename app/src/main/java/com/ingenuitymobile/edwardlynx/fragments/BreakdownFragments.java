@@ -27,6 +27,9 @@ public class BreakdownFragments extends BaseFragment {
 
   private BreakdownAdapter adapter;
 
+  /**
+   * Fragment to display the breakdown in the survey reports.
+   */
   public BreakdownFragments() {
     breakdown = new ArrayList<>();
   }
@@ -52,6 +55,9 @@ public class BreakdownFragments extends BaseFragment {
     return mainView;
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.recycler);
 
@@ -62,6 +68,10 @@ public class BreakdownFragments extends BaseFragment {
     recyclerView.setAdapter(adapter);
   }
 
+  /**
+   * sets the data to be used in the fragment
+   * @param breakdown the list of breakdowns
+   */
   public void setDataSet(List<Breakdown> breakdown) {
     this.breakdown = breakdown;
     if (mainView != null) {
@@ -69,6 +79,9 @@ public class BreakdownFragments extends BaseFragment {
     }
   }
 
+  /**
+   * updates the data to be displayed in the view
+   */
   private void setData() {
     adapter.notifyDataSetChanged();
     mainView.findViewById(R.id.text_empty).setVisibility(

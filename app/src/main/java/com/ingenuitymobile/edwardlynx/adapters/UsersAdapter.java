@@ -24,6 +24,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
   private OnSelectUserListener listener;
 
+  /**
+   * Adapter for displaying list of users
+   * @param data the list of users to be displayed
+   * @param ids the list of ids linked to the users
+   * @param listener the listener for selecting a user
+   */
   public UsersAdapter(List<User> data, List<String> ids, OnSelectUserListener listener) {
     super();
     this.data = data;

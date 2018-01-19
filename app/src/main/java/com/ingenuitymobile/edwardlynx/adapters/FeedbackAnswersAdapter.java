@@ -26,6 +26,10 @@ public class FeedbackAnswersAdapter extends
   private int                     totalAnswers;
   private int                     type;
 
+  /**
+   * Adapter for displaying the feedback answers.
+   * @param data the list of feedback frequencies
+   */
   public FeedbackAnswersAdapter(List<FeedbackFrequency> data) {
     super();
     this.data = data;

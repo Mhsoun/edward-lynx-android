@@ -45,6 +45,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 02/02/2017.
+ * Activity to view details of the selected development plan.
  */
 
 public class DevelopmentPlanDetailedActivity extends BaseActivity {
@@ -125,6 +126,9 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     }
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   protected void initViews() {
     recyclerView = (RecyclerView) findViewById(R.id.list_development_plan);
     percentageText = (TextView) findViewById(R.id.text_percentage);
@@ -147,6 +151,11 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     findViewById(R.id.image_add).setVisibility(isFromTeam ? View.GONE : View.VISIBLE);
   }
 
+  /**
+   * generates a list of categories based on the goals
+   * @param goals the goals which includes the categories
+   * @return
+   */
   private List<ParentListItem> generateCategories(List<Goal> goals) {
     List<ParentListItem> parentListItems = new ArrayList<>();
     for (Goal goal : goals) {
@@ -169,6 +178,9 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     return parentListItems;
   }
 
+  /**
+   * retrieves the development plan from the API based on the given id
+   */
   private void getData() {
     subscription.add(Shared.apiClient.getDevelopmentPlan(id, new Subscriber<DevelopmentPlan>() {
       @Override
@@ -214,6 +226,10 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * sets the data for the given development plan
+   * @param plan the development plan to be displayed
+   */
   private void setData(DevelopmentPlan plan) {
     final int size = plan.goals.size();
     int count = 0;
@@ -253,6 +269,11 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         shareToManagerCheckbox.getVisibility() == View.VISIBLE ? onCheckedChangeListener : null);
   }
 
+  /**
+   * adds an action to the development plan
+   * @param goalId the id of the goal to be added
+   * @param param the action details to be added
+   */
   private void addAction(long goalId, Action param) {
     dialog = ProgressDialog.show(context, "", getString(R.string.loading));
 
@@ -282,6 +303,13 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * updates the action of the goal of the development plan
+   * @param goalId the id of the goal to be updated
+   * @param actionId the id of the action to be updated
+   * @param param the action details to be updated
+   * @param isComplete the state of completion of the goal
+   */
   private void patchAction(long goalId, long actionId, Action param, final boolean isComplete) {
     this.goalId = isComplete ? goalId : 0L;
 
@@ -315,6 +343,10 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * deletes the goal from the development plan
+   * @param goalId the id of the goal to be deleted
+   */
   private void deleteGoal(long goalId) {
     progressDialog.show();
     subscription.add(Shared.apiClient.deleteDevelopmentPlanGoal(id, goalId,
@@ -342,6 +374,11 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * deletes the action from the goal
+   * @param goalId the id of the goal in which the action is to be deleted from
+   * @param actionId the id of the action to be deleted from the goal
+   */
   private void deleteAction(long goalId, long actionId) {
     progressDialog.show();
     subscription.add(Shared.apiClient.deleteActionPlan(id, goalId, actionId,
@@ -369,6 +406,11 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * retrieves the id of the goal based on the given action
+   * @param action the action in which the goal id is to be extracted
+   * @return
+   */
   private long getGoalId(Action action) {
     for (final Goal goal : data) {
       for (Action acn : goal.actions) {
@@ -380,6 +422,10 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     return 0L;
   }
 
+  /**
+   * opens the CreateDetailedDevelopmentPlanActivity to edit a goal
+   * @param goal the goal to be edited
+   */
   private void editGoal(Goal goal) {
     Intent intent = new Intent(context, CreateDetailedDevelopmentPlanActivity.class);
     intent.putExtra("goal_param_body", goal.toString());
@@ -387,6 +433,10 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     startActivity(intent);
   }
 
+  /**
+   * deletes the goal
+   * @param goal the goal to be deleted
+   */
   private void deleteGoal(final Goal goal) {
     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
     alertBuilder.setTitle(getString(R.string.confirmation));
@@ -406,6 +456,10 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     alertBuilder.create().show();
   }
 
+  /**
+   * updates the action
+   * @param action the action to be updated
+   */
   public void updateAction(final Action action) {
     LinearLayout layout = new LinearLayout(context);
     layout.setOrientation(LinearLayout.VERTICAL);
@@ -456,6 +510,10 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     alertDialog.show();
   }
 
+  /**
+   * deletes the action
+   * @param action the action to be deleted
+   */
   public void deleteAction(final Action action) {
     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
     alertBuilder.setTitle(getString(R.string.confirmation));
@@ -475,6 +533,10 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     alertBuilder.create().show();
   }
 
+  /**
+   * opens the CreateDetailedDevelopmentPlanActivity to create a goal
+   * @param v
+   */
   public void addGoal(View v) {
     Intent intent = new Intent(context, CreateDetailedDevelopmentPlanActivity.class);
     intent.putExtra("planId", id);
@@ -482,6 +544,9 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
     startActivity(intent);
   }
 
+  /**
+   * listener for the sharing of the development plan to manager
+   */
   private CompoundButton.OnCheckedChangeListener onCheckedChangeListener =
       new CompoundButton.OnCheckedChangeListener() {
         @Override
@@ -521,6 +586,9 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         }
       };
 
+  /**
+   * listener for the expandable recycler when an item is collapsed
+   */
   private ExpandableRecyclerAdapter.ExpandCollapseListener collapseListener =
       new ExpandableRecyclerAdapter.ExpandCollapseListener() {
         @Override
@@ -535,6 +603,9 @@ public class DevelopmentPlanDetailedActivity extends BaseActivity {
         }
       };
 
+  /**
+   * listener for the selection action of the goals list
+   */
   private GoalAdapter.OnSelectActionListener listener =
       new GoalAdapter.OnSelectActionListener() {
 

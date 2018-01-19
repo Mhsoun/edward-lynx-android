@@ -37,10 +37,12 @@ import rx.Subscriber;
 
 /**
  * Created by memengski on 4/7/17.
+ * Activity to display the answered survey.
  */
 
 public class SurveyReportActivity extends BaseActivity {
   private long   id;
+  private String key;
   private Survey survey;
 
   private PagerAdapter        adapter;
@@ -75,6 +77,7 @@ public class SurveyReportActivity extends BaseActivity {
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     id = getIntent().getLongExtra("id", 0L);
+    key = getIntent().getStringExtra("key");
     initViews();
   }
 
@@ -92,6 +95,9 @@ public class SurveyReportActivity extends BaseActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     dateText = (TextView) findViewById(R.id.text_date);
     detailsText = (TextView) findViewById(R.id.text_date_details);
@@ -110,9 +116,13 @@ public class SurveyReportActivity extends BaseActivity {
     detailsText.setText(getString(R.string.details_circle_chart, 0, 0));
   }
 
+  /**
+   * retrieves the answered survey from the API
+   */
   private void getData() {
     LogUtil.e("AAA getData Survey details " + id);
-    subscription.add(Shared.apiClient.getSurvey(id, new Subscriber<Survey>() {
+    LogUtil.e("AAA getData Survey details " + key);
+    subscription.add(Shared.apiClient.getSurvey(id, key, new Subscriber<Survey>() {
       @Override
       public void onCompleted() {
         LogUtil.e("AAA Survey details onCompleted ");
@@ -148,6 +158,9 @@ public class SurveyReportActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * retrieves the answered survey questions from the API
+   */
   private void getSurveyQuestions() {
     LogUtil.e("AAA getData questions " + id);
     subscription.add(Shared.apiClient.getSurveyResults(id, new Subscriber<SurveyResultsResponse>() {
@@ -173,6 +186,11 @@ public class SurveyReportActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * updates the screen for displaying the answered survey questions,
+   * displays or hides navigators depending on the current index
+   * @param index current page of the view pager
+   */
   private void setNavigation(int index) {
     findViewById(R.id.layout_navigation).setVisibility(View.VISIBLE);
 
@@ -180,6 +198,10 @@ public class SurveyReportActivity extends BaseActivity {
     nextImage.setVisibility(index == fragments.size() - 1 ? View.INVISIBLE : View.VISIBLE);
   }
 
+  /**
+   * sets the data of the survey results fragment based on the survey results response
+   * @param response
+   */
   private void setData(SurveyResultsResponse response) {
     if (response == null) {
       return;
@@ -309,6 +331,9 @@ public class SurveyReportActivity extends BaseActivity {
     }
   }
 
+  /**
+   * listener for the view pager that updates the navigation based on the new page selected
+   */
   private ViewPager.OnPageChangeListener pageChangeListener =
       new ViewPager.OnPageChangeListener() {
         @Override
@@ -324,6 +349,9 @@ public class SurveyReportActivity extends BaseActivity {
         public void onPageScrollStateChanged(int state) {}
       };
 
+  /**
+   * listener for clicking the navigation helpers
+   */
   private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -348,6 +376,9 @@ public class SurveyReportActivity extends BaseActivity {
     }
   };
 
+  /**
+   * custom pager adapter to update the fragment details
+   */
   private class MyPagerAdapter extends FragmentPagerAdapter {
 
     MyPagerAdapter(FragmentManager fragmentManager) {

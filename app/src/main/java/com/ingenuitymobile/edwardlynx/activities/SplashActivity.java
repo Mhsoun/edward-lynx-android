@@ -26,6 +26,11 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 13/12/2016.
+ * Activity to be displayed on application startup to check current user access and API
+ * connectivity, once connection is established, data will be retrieved for loading.
+ * If no user is logged in, login page will be displayed, else, user details will be
+ * retrieved and intent data will be checked and redirect to the page depending on the
+ * type of intent and data passed.
  */
 
 public class SplashActivity extends BaseActivity {
@@ -52,6 +57,9 @@ public class SplashActivity extends BaseActivity {
     }
   }
 
+  /**
+   * retrieves the user details from the API and stores it locally
+   */
   private void getUser() {
     subscription.add(Shared.apiClient.getMe(new Subscriber<User>() {
       @Override
@@ -71,6 +79,9 @@ public class SplashActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * retrieves the categories from the API
+   */
   private void getCategories() {
     subscription.add(Shared.apiClient.getCategories(new Subscriber<CategoriesResponse>() {
       @Override
@@ -91,6 +102,9 @@ public class SplashActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * posts the Firebase token to the API for GCM async
+   */
   private void postTokenDevice() {
     if (!TextUtils.isEmpty(SessionStore.restoreFirebaseToken(SplashActivity.this))) {
       subscription.add(Shared.apiClient.postTokenDevice(
@@ -116,13 +130,19 @@ public class SplashActivity extends BaseActivity {
     }
   }
 
+  /**
+   * checks if the application is launched via an Intent and retrieves all intent details,
+   * details will be used to determine which screen will be opened if a type exists
+   */
   private void checkIntent() {
     Uri data = getIntent().getData();
     if (data != null) {
       final List<String> segments = data.getPathSegments();
       LogUtil.e("AAA " + segments.get(0));
-      if (segments.get(0).equals(Shared.SURVEY)) {
-        subscription.add(Shared.apiClient.getSurveyId(segments.get(2),
+      if (segments.get(0).equals(Shared.SURVEY_ANSWER)) {
+        subscription.add(Shared.apiClient.getSurveyId(
+            segments.get(2),
+            "answer",
             new Subscriber<Response>() {
               @Override
               public void onCompleted() {
@@ -131,7 +151,7 @@ public class SplashActivity extends BaseActivity {
 
               @Override
               public void onError(Throwable e) {
-                displayNotAuthorize(e, false);
+                displayNotAuthorize(e, getString(R.string.no_access));
               }
 
               @Override
@@ -139,10 +159,35 @@ public class SplashActivity extends BaseActivity {
                 Bundle surveyBundle = new Bundle();
                 surveyBundle.putString("type", segments.get(0));
                 surveyBundle.putString("id", String.valueOf(response.surveyId));
+                surveyBundle.putString("key", segments.get(2));
                 getIntent().putExtras(surveyBundle);
               }
             }));
-      } if (segments.get(0).equals(Shared.EMAIL_FEEDBACK_REQUEST)) {
+      } else if(segments.get(0).equals(Shared.SURVEY_INVITE)) {
+          subscription.add(Shared.apiClient.getSurveyId(
+              segments.get(1),
+              "invite",
+              new Subscriber<Response>() {
+                  @Override
+                  public void onCompleted() {
+                      openMainPage();
+                  }
+
+                  @Override
+                  public void onError(Throwable e) {
+                      displayNotAuthorize(e, getString(R.string.no_access_invite));
+                  }
+
+                  @Override
+                  public void onNext(Response response) {
+                      Bundle surveyBundle = new Bundle();
+                      surveyBundle.putString("type", segments.get(0));
+                      surveyBundle.putString("id", String.valueOf(response.surveyId));
+                      surveyBundle.putString("key", segments.get(1));
+                      getIntent().putExtras(surveyBundle);
+                  }
+              }));
+      } else if (segments.get(0).equals(Shared.EMAIL_FEEDBACK_REQUEST)) {
         subscription.add(Shared.apiClient.getFeedbackId(segments.get(2),
             new Subscriber<Response>() {
               @Override
@@ -152,7 +197,7 @@ public class SplashActivity extends BaseActivity {
 
               @Override
               public void onError(Throwable e) {
-                displayNotAuthorize(e, true);
+                displayNotAuthorize(e, getString(R.string.no_access_feedback));
               }
 
               @Override
@@ -175,6 +220,9 @@ public class SplashActivity extends BaseActivity {
     }
   }
 
+  /**
+   * opens the main screen of the app passing data to be processed
+   */
   private void openMainPage() {
     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
     if (getIntent().getExtras() != null) {
@@ -184,6 +232,10 @@ public class SplashActivity extends BaseActivity {
     SplashActivity.this.finish();
   }
 
+  /**
+   * displays an error message to the user
+   * @param e the error thrown by the caller method
+   */
   private void showError(Throwable e) {
     LogUtil.e("AAA " + e);
     if (e != null) {
@@ -203,14 +255,19 @@ public class SplashActivity extends BaseActivity {
         });
   }
 
-  private void displayNotAuthorize(Throwable e, boolean isFeedback) {
+  /**
+   * displays a message telling the user that an action is unauthorized
+   * @param e the error thrown by the caller method
+   * @param errorMessage the user readable error message thrown by the caller method
+   */
+  private void displayNotAuthorize(Throwable e, String errorMessage) {
     if (e != null) {
       final retrofit.client.Response error = ((RetrofitError) e).getResponse();
       if (error != null && error.getStatus() == 404) {
         ViewUtil.showAlert(
             SplashActivity.this,
             "",
-            getString(isFeedback ? R.string.no_access_feedback : R.string.no_access),
+            errorMessage,
             new DialogInterface.OnClickListener() {
               @Override
               public void onClick(DialogInterface dialogInterface, int i) {

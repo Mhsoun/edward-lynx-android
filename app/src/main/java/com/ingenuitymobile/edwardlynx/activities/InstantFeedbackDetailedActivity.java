@@ -29,6 +29,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 22/02/2017.
+ * Activity to create instant feedback and invite people to answer.
  */
 
 public class InstantFeedbackDetailedActivity extends BaseActivity {
@@ -80,6 +81,9 @@ public class InstantFeedbackDetailedActivity extends BaseActivity {
     getData();
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     questionText = (EditText) findViewById(R.id.edit_question);
     isAnonymousCheckbox = (CheckBox) findViewById(R.id.checkbox_is_anonymous);
@@ -96,6 +100,9 @@ public class InstantFeedbackDetailedActivity extends BaseActivity {
     optionList.setAdapter(adapter);
   }
 
+  /**
+   * retrieves the instant feedback details from the API
+   */
   private void getData() {
     subscription.add(Shared.apiClient.getInstantFeedback(id, new Subscriber<Feedback>() {
       @Override
@@ -138,6 +145,10 @@ public class InstantFeedbackDetailedActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * action to be invoked when the add participants button is clicked
+   * @param v
+   */
   public void add(View v) {
     Intent intent = new Intent(context, AddMoreParticipantsActivity.class);
     intent.putExtra("id", id);

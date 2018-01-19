@@ -2,6 +2,7 @@ package com.ingenuitymobile.edwardlynx.api.models;
 
 /**
  * Created by memengski on 4/3/17.
+ * API model for all surveys.
  */
 
 public class AllSurveys {

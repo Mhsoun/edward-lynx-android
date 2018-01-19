@@ -22,6 +22,7 @@ import rx.Subscriber;
 
 /**
  * Created by memengski on 7/9/17.
+ * Activity to display the details of the team development plan.
  */
 
 public class TeamDevPlanDetailedActivity extends BaseActivity {
@@ -70,6 +71,9 @@ public class TeamDevPlanDetailedActivity extends BaseActivity {
     getData();
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
     recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -81,6 +85,9 @@ public class TeamDevPlanDetailedActivity extends BaseActivity {
     recyclerView.setAdapter(adapter);
   }
 
+  /**
+   * retrieves the team development plan data from the API
+   */
   private void getData() {
     subscription.add(Shared.apiClient.getTeamCategory(id, new Subscriber<TeamDevPlan>() {
       @Override

@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by memengski on 7/5/17.
+ * API model for team development plans.
  */
 
 public class TeamDevPlan extends Model {

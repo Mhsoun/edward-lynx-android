@@ -37,6 +37,9 @@ public class TeamProgressFragment extends BaseFragment {
   private TextView           emptyText;
   private SwipeRefreshLayout refreshLayout;
 
+  /**
+   * Fragment for displaying team progress.
+   */
   public TeamProgressFragment() {
     data = new ArrayList<>();
   }
@@ -72,6 +75,9 @@ public class TeamProgressFragment extends BaseFragment {
     getData();
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final ImageView createImage = (ImageView) mainView.findViewById(R.id.image_create);
     final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.list_team_progress);
@@ -90,6 +96,9 @@ public class TeamProgressFragment extends BaseFragment {
     refreshLayout.setRefreshing(true);
   }
 
+  /**
+   * listener for clicking crate development plan
+   */
   private View.OnClickListener listener = new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -98,6 +107,9 @@ public class TeamProgressFragment extends BaseFragment {
     }
   };
 
+  /**
+   * retrieves all team categories from the API
+   */
   private void getData() {
     subscription.add(Shared.apiClient.getTeamCategories(new Subscriber<TeamDevPlansResponse>() {
       @Override
@@ -126,6 +138,9 @@ public class TeamProgressFragment extends BaseFragment {
     }));
   }
 
+  /**
+   * listener for the pull to refresh functionality
+   */
   private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout
       .OnRefreshListener() {
     @Override

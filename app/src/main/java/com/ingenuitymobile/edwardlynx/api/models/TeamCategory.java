@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by memengski on 7/9/17.
+ * API model for team categories.
  */
 
 public class TeamCategory extends Model {

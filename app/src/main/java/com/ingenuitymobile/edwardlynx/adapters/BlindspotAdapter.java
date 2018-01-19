@@ -35,6 +35,10 @@ public class BlindspotAdapter extends RecyclerView.Adapter<BlindspotAdapter.View
 
   private List<BlindSpotItem> data;
 
+  /**
+   * Adapter for displaying the blindspots
+   * @param data the list of blindspots to be loaded
+   */
   public BlindspotAdapter(List<BlindSpotItem> data) {
     super();
     this.data = data;

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 /**
  * Created by memengski on 5/30/17.
+ * Activity to be called when triggering a deep link action.
  */
 
 public class DeeplinkingActivity extends BaseActivity {

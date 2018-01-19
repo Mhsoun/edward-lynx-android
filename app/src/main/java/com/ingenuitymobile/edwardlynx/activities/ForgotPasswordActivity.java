@@ -23,6 +23,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 15/12/2016.
+ * Activity for the user password retrieval.
  */
 
 public class ForgotPasswordActivity extends BaseActivity {
@@ -40,6 +41,9 @@ public class ForgotPasswordActivity extends BaseActivity {
     initViews();
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     final EditText emailEdit = (EditText) findViewById(R.id.edit_email);
     final ImageView emailImage = (ImageView) findViewById(R.id.image_profile);
@@ -52,6 +56,10 @@ public class ForgotPasswordActivity extends BaseActivity {
     emailEdit.setOnEditorActionListener(editorActionListener);
   }
 
+  /**
+   * action to be invoked when the recover button is clicked from the ForgotPasswordActivity
+   * @param v
+   */
   public void recover(View v) {
     emailGroup.removeError();
 
@@ -97,10 +105,17 @@ public class ForgotPasswordActivity extends BaseActivity {
         }));
   }
 
+  /**
+   * action to be invoked when the login button is clicked from the ForgotPasswordActivity
+   * @param v
+   */
   public void login(View v) {
     finish();
   }
 
+  /**
+   * listener for the email textview that hides the keyboard when the done action is pressed
+   */
   private TextView.OnEditorActionListener editorActionListener = new TextView
       .OnEditorActionListener() {
     @Override

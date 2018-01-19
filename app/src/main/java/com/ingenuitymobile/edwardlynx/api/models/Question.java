@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by mEmEnG-sKi on 09/01/2017.
+ * API model for question.
  */
 
 public class Question {

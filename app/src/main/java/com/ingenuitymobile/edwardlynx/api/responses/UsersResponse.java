@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by mEmEnG-sKi on 11/01/2017.
+ * API model for users response.
  */
 
 public class UsersResponse extends Response {

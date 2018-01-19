@@ -55,6 +55,8 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by mEmEnG-sKi on 19/12/2016.
+ * class for API call handling, also includes storage and retrieval of access token,
+ * setting up of authentication and parameters for different API calls.
  */
 
 public class ApiClient {
@@ -237,35 +239,35 @@ public class ApiClient {
   }
 
 
-  public Subscription getSurvey(final long id, final Subscriber<Survey> subscriber) {
-    return service.getSurvey(id)
+  public Subscription getSurvey(final long id, final String key, final Subscriber<Survey> subscriber) {
+    return service.getSurvey(id, key)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
           public void onPostAgain() {
-            getSurvey(id, subscriber);
+            getSurvey(id, key, subscriber);
           }
         }));
   }
 
-  public Subscription getSurveyId(final String key, final Subscriber<Response> subscriber) {
-    return service.getSurveyId(key)
+  public Subscription getSurveyId(final String key, final String action, final Subscriber<Response> subscriber) {
+    return service.getSurveyId(key, action)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
           public void onPostAgain() {
-            getSurveyId(key, subscriber);
+            getSurveyId(key, action, subscriber);
           }
         }));
   }
 
-  public Subscription getSurveyQuestions(final long id, final Subscriber<Questions> subscriber) {
-    return service.getSurveyQuestions(id)
+  public Subscription getSurveyQuestions(final long id, final String key, final Subscriber<Questions> subscriber) {
+    return service.getSurveyQuestions(id, key)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new CustomSubscriber<>(subscriber, new OnPostAgainListener() {
           @Override
           public void onPostAgain() {
-            getSurveyQuestions(id, subscriber);
+            getSurveyQuestions(id, key, subscriber);
           }
         }));
   }
@@ -755,9 +757,11 @@ public class ApiClient {
               });
         } else {
           Throwable throwable;
-          if (((RetrofitError) e).getResponse().getStatus() == 422 ||
-              ((RetrofitError) e).getResponse().getStatus() == 404) {
-            throwable = e;
+          if (((RetrofitError) e).getResponse().getStatus() == 400 ||
+              ((RetrofitError) e).getResponse().getStatus() == 403 ||
+              ((RetrofitError) e).getResponse().getStatus() == 404 ||
+              ((RetrofitError) e).getResponse().getStatus() == 422) {
+              throwable = e;
           } else {
             LogUtil.e("AAA " + e);
             displayErrorListener.onDisplayError(e);

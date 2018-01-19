@@ -3,10 +3,12 @@
     tools:ignore="MissingTranslation">
 
   <string name="app_name">Edward Lynx</string>
-  <string name="live_url">https://stage.lynxtool.edwardlynx.com</string>
-  <string name="staging_url">https://stage.lynxtool.edwardlynx.com</string>
-  <string name="client_id">12</string>
-  <string name="client_secret">5fdCA47OE30ZCHTDceENXSumjhZiVzB6cbDKMiXv</string>
+  <string name="deep_link_live_url">lynxtool.edwardlynx.com</string>
+  <string name="deep_link_staging_url">stage.lynxtool.edwardlynx.com</string>
+  <string name="live_url">https://lynxtool.edwardlynx.com</string> // https://stage.lynxtool.edwardlynx.com
+  <string name="staging_url">https://lynxtool.edwardlynx.com</string>
+  <string name="client_id">6</string> // 12
+  <string name="client_secret">C2o9x70fFHjq99M0OvXAfXdZTJTSjbuiRlfbNoEx</string> // 5fdCA47OE30ZCHTDceENXSumjhZiVzB6cbDKMiXv
   <string name="hockey_app_id">1b9084aaa22c4395a83bedd31b305831</string>
 
   <string name="self">Candidates</string>
@@ -121,6 +123,8 @@
   <string name="no_users">No Users</string>
   <string name="send_invites">Send Invites</string>
   <string name="successfully_invite_people_to_rate_you">Successfully invited others to rate you</string>
+  <string name="survey_sending_failed">Survey has reached its end date and answers are not accepted anymore.</string>
+  <string name="survey_action_unauthorized">This action is unauthorized.</string>
   // endregion
 
   // region Dashboard: Create
@@ -307,6 +311,9 @@
   <string name="cant_connect">Can\'t connect to server. Try again later</string>
   <string name="no_access">You are not authorize to answer this survey</string>
   <string name="no_access_feedback">You are not authorize to answer this instant feedback</string>
+  <string name="no_access_invite">You are not authorized to invite users to this survey</string>
+  <string name="disallowed_invite_user">User has already been invited</string>
+  <string name="disallowed_invite_self">Cannot invite candidate</string>
 
   <string name="numeric_1_to_5">Numeric 1&#8211;5 scale</string>
   <string name="agreement_scale">Agreement scale</string>

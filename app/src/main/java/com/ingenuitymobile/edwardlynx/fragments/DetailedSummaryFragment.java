@@ -27,6 +27,9 @@ public class DetailedSummaryFragment extends BaseFragment {
 
   private DetailedSummaryAdapter adapter;
 
+  /**
+   * Fragment to display detailed summary in the survey report.
+   */
   public DetailedSummaryFragment() {
     detailedSummaries = new ArrayList<>();
   }
@@ -52,6 +55,9 @@ public class DetailedSummaryFragment extends BaseFragment {
     return mainView;
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.recycler);
 
@@ -62,6 +68,10 @@ public class DetailedSummaryFragment extends BaseFragment {
     recyclerView.setAdapter(adapter);
   }
 
+  /**
+   * sets the data to be used in the fragment
+   * @param detailedSummaries the list of detailed summary for a survey report
+   */
   public void setDataSet(List<DetailedSummary> detailedSummaries) {
     this.detailedSummaries = detailedSummaries;
     if (mainView != null) {
@@ -69,6 +79,9 @@ public class DetailedSummaryFragment extends BaseFragment {
     }
   }
 
+  /**
+   * updates the data to be displayed in the view
+   */
   private void setData() {
     adapter.notifyDataSetChanged();
     mainView.findViewById(R.id.text_empty).setVisibility(

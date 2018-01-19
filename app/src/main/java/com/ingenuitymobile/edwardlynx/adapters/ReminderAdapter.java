@@ -32,6 +32,11 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
   private List<Reminder>                        data;
   private MainActivity.OnChangeFragmentListener listener;
 
+  /**
+   * Adapter for displaying reminders.
+   * @param data the list of reminders
+   * @param listener the listener for changing the fragment
+   */
   public ReminderAdapter(List<Reminder> data, MainActivity.OnChangeFragmentListener listener) {
     super();
     this.data = data;
@@ -124,6 +129,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         } else if (reminder.type.equals(Reminder.Type.SURVEY.toString())) {
           Intent intent = new Intent(context, SurveyQuestionsActivity.class);
           intent.putExtra("id", reminder.id);
+          intent.putExtra("key", reminder.key);
           context.startActivity(intent);
         } else {
           Intent intent = new Intent(context, DevelopmentPlanDetailedActivity.class);

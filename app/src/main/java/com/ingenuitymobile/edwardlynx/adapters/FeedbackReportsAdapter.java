@@ -27,6 +27,11 @@ public class FeedbackReportsAdapter extends
   private List<Feedback>           data;
   private OnSelectFeedbackListener listener;
 
+  /**
+   * Adapter for the feedback reports.
+   * @param data the list of feedback
+   * @param listener the listener for selecting a feedback
+   */
   public FeedbackReportsAdapter(List<Feedback> data, OnSelectFeedbackListener listener) {
     super();
     this.data = data;

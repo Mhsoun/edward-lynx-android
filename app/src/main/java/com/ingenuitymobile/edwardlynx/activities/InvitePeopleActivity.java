@@ -1,5 +1,7 @@
 package com.ingenuitymobile.edwardlynx.activities;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -20,20 +22,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
+import com.ingenuitymobile.edwardlynx.SessionStore;
 import com.ingenuitymobile.edwardlynx.Shared;
 import com.ingenuitymobile.edwardlynx.adapters.InviteUserAdapter;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.InviteUserParam;
 import com.ingenuitymobile.edwardlynx.api.bodyparams.UserParam;
+import com.ingenuitymobile.edwardlynx.api.models.Survey;
 import com.ingenuitymobile.edwardlynx.api.responses.Response;
 import com.ingenuitymobile.edwardlynx.utils.LogUtil;
 import com.ingenuitymobile.edwardlynx.utils.StringUtil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
+import retrofit.RetrofitError;
 import rx.Subscriber;
 
 /**
  * Created by memengski on 5/24/17.
+ * Activity to add people and invite them to answer a survey.
  */
 
 public class InvitePeopleActivity extends BaseActivity {
@@ -44,15 +52,16 @@ public class InvitePeopleActivity extends BaseActivity {
   private EditText emailEdit;
   private Spinner  spinner;
   private TextView emptyText;
+  private String   key;
 
   private InviteUserAdapter    adapter;
   private ArrayList<UserParam> userParams;
   private String[]             roles;
+  private Set<String>          disallowedRecipients;
 
   public InvitePeopleActivity() {
     userParams = new ArrayList<>();
   }
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +72,7 @@ public class InvitePeopleActivity extends BaseActivity {
 
     final String title = getIntent().getStringExtra("title");
     id = getIntent().getLongExtra("id", 0L);
+    key = getIntent().getStringExtra("key");
     evaluate = getIntent().getStringExtra("evaluate");
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -80,7 +90,13 @@ public class InvitePeopleActivity extends BaseActivity {
         getString(R.string.direct_report)
     };
     initViews();
+    getDisallowedRecipients();
     setTitle(getString(R.string.invite_people).toUpperCase());
+
+    NotificationManager notificationManager =
+        (NotificationManager) getApplicationContext()
+            .getSystemService(Context.NOTIFICATION_SERVICE);
+    notificationManager.cancel((int) id * -1);
   }
 
   @Override
@@ -91,6 +107,9 @@ public class InvitePeopleActivity extends BaseActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     final TextView evaluatedText = (TextView) findViewById(R.id.text_evaluated);
     evaluatedText.setText(evaluate);
@@ -131,11 +150,52 @@ public class InvitePeopleActivity extends BaseActivity {
     spinner.setAdapter(dataAdapter);
   }
 
+  private void getDisallowedRecipients() {
+    subscription.add(
+      Shared.apiClient.getSurvey(
+              id,
+              key,
+              new Subscriber<Survey>() {
+                @Override
+                public void onCompleted() {
+
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                  disallowedRecipients = new HashSet<>();
+                }
+
+                @Override
+                public void onNext(Survey survey) {
+                  disallowedRecipients = new HashSet<>(survey.disallowedRecipients);
+                }
+              }
+      )
+    );
+  }
+
+  /**
+   * checks if the email user is already invited
+   * @param email the email string to be checked if it is invited
+   * @return true if the email is allowed to be invited
+   */
+  private boolean isInviteAllowed(String email) {
+    return !disallowedRecipients.contains(email);
+  }
+
+  /**
+   * notifyAdapter notifies the list adapter of data changes
+   */
   private void notifyAdapter() {
     emptyText.setVisibility(userParams.isEmpty() ? View.VISIBLE : View.GONE);
     adapter.notifyDataSetChanged();
   }
 
+  /**
+   * action invoked when the add user is pressed
+   * @param v
+   */
   public void addUser(View v) {
     final String name = nameEdit.getText().toString();
     final String email = emailEdit.getText().toString();
@@ -155,6 +215,16 @@ public class InvitePeopleActivity extends BaseActivity {
       return;
     }
 
+    if (email.equals(SessionStore.restoreUsername(context)) && !isInviteAllowed(SessionStore.restoreUsername(context))) {
+      Toast.makeText(context, getString(R.string.disallowed_invite_self), Toast.LENGTH_SHORT).show();
+      return;
+    }
+
+    if (!isInviteAllowed(email)) {
+      Toast.makeText(context, getString(R.string.disallowed_invite_user), Toast.LENGTH_SHORT).show();
+      return;
+    }
+
     UserParam userParam = new UserParam();
     userParam.name = name;
     userParam.email = email;
@@ -171,6 +241,10 @@ public class InvitePeopleActivity extends BaseActivity {
     emailEdit.clearFocus();
   }
 
+  /**
+   * action invoked when the send invite is pressed
+   * @param v
+   */
   public void sendInvites(View v) {
     if (userParams.isEmpty()) {
       Toast.makeText(context, getString(R.string.select_atleast_one), Toast.LENGTH_SHORT).show();
@@ -185,6 +259,7 @@ public class InvitePeopleActivity extends BaseActivity {
             @Override
             public void onCompleted() {
               LogUtil.e("AAA onCompleted");
+              progressDialog.dismiss();
               finish();
             }
 
@@ -192,6 +267,17 @@ public class InvitePeopleActivity extends BaseActivity {
             public void onError(Throwable e) {
               progressDialog.dismiss();
               LogUtil.e("AAA onError " + e);
+              if (e != null && ((RetrofitError) e).getResponse().getStatus() == 403) {
+                Toast.makeText(context,
+                        getString(R.string.survey_action_unauthorized),
+                        Toast.LENGTH_SHORT
+                ).show();
+              } else {
+                Toast.makeText(context,
+                        getString(R.string.survey_sending_failed),
+                        Toast.LENGTH_SHORT
+                ).show();
+              }
             }
 
             @Override
@@ -207,6 +293,9 @@ public class InvitePeopleActivity extends BaseActivity {
     }
   }
 
+  /**
+   * listener for swiping an item from the list of people to be invited
+   */
   ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
       ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 

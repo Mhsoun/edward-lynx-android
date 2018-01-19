@@ -7,7 +7,9 @@ import com.ingenuitymobile.edwardlynx.BuildConfig;
 
 /**
  * Created by mEmEnG-sKi on 30/08/2016.
+ * Utility class for logging.
  */
+
 public class LogUtil {
   private static boolean ENABLE_LOG = BuildConfig.DEBUG;
 

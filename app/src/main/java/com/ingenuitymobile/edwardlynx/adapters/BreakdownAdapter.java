@@ -35,6 +35,10 @@ public class BreakdownAdapter extends RecyclerView.Adapter<BreakdownAdapter.View
 
   private List<Breakdown> data;
 
+  /**
+   * Adapter for displaying the breakdown
+   * @param data the list of breakdowns to be loaded into the view
+   */
   public BreakdownAdapter(List<Breakdown> data) {
     super();
     this.data = data;

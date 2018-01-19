@@ -31,6 +31,9 @@ public class BlindspotFragment extends BaseFragment {
   private String title;
   private String details;
 
+  /**
+   * Fragment to display blindspots.
+   */
   public BlindspotFragment() {
     blindSpotItems = new ArrayList<>();
     title = "";
@@ -58,6 +61,9 @@ public class BlindspotFragment extends BaseFragment {
     return mainView;
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.recycler);
 
@@ -68,6 +74,12 @@ public class BlindspotFragment extends BaseFragment {
     recyclerView.setAdapter(adapter);
   }
 
+  /**
+   * sets the data to be used in the fragment
+   * @param blindSpotItems the list of blindspots
+   * @param title the title to be displayed
+   * @param details the details to be displayed
+   */
   public void setDataSet(List<BlindSpotItem> blindSpotItems, String title, String details) {
     this.blindSpotItems = blindSpotItems;
     this.title = title;
@@ -77,7 +89,9 @@ public class BlindspotFragment extends BaseFragment {
     }
   }
 
-
+  /**
+   * updates the data to be displayed in the view
+   */
   private void setData() {
     ((TextView) mainView.findViewById(R.id.text_title)).setText(title);
     ((TextView) mainView.findViewById(R.id.text_details)).setText(details);

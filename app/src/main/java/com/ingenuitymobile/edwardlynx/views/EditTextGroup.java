@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 /**
  * Created by mEmEnG-sKi on 15/12/2016.
+ * Custom view for group edit text.
  */
 
 public class EditTextGroup {

@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by mEmEnG-sKi on 09/01/2017.
+ * API model for surveys.
  */
 
 public class Survey implements ParentListItem {
@@ -50,10 +51,12 @@ public class Survey implements ParentListItem {
   public String personsEvaluatedText;
   @SerializedName("stats")
   public Stats  stats;
-
-
   @SerializedName("key")
   public String key;
+  @SerializedName("disallowed_recipients")
+  public List<String> disallowedRecipients;
+  @SerializedName("permissions")
+  public Permissions permissions;
 
   public String getType(Context ctx, boolean isUpperCase) {
     String string = "";

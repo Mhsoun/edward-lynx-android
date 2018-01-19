@@ -23,28 +23,14 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:host="edwardlynx.ingenuity.ph"
-                    android:pathPrefix="/survey/answer"
-                    android:scheme="https"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:host="edwardlynx.ingenuity.ph"
-                    android:pathPrefix="/instant-feedbacks/answer"
-                    android:scheme="https"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:host="edwardlynx.ingenuity.ph"
-                    android:pathPrefix="/dev-plan/"
-                    android:scheme="https"/>
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:host="@string/deep_link_live_url" />
+                <data android:host="@string/deep_link_staging_url" />
+                <data android:pathPrefix="/instant-feedbacks/answer/" />
+                <data android:pathPrefix="/survey-invite/" />
+                <data android:pathPrefix="/survey/answer/" />
+                <data android:pathPrefix="/dev-plan/" />
             </intent-filter>
         </activity>
         <activity
@@ -196,9 +182,19 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="7c67a5365060930052205dfdf95102678ef19047"/>
-        //your activity declarations and other stuff
         <meta-data
             android:name="net.hockeyapp.android.appIdentifier"
             android:value="@string/hockey_app_id"/>
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+             See README(https://goo.gl/l4GJaQ) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/small_icon" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary" />
+
     </application>
 </manifest>

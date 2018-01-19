@@ -7,6 +7,7 @@ import com.ingenuitymobile.edwardlynx.R;
 
 /**
  * Created by memengski on 5/24/17.
+ * API model for user param.
  */
 
 public class UserParam {

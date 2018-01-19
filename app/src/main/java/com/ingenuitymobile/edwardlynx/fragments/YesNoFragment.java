@@ -27,6 +27,9 @@ public class YesNoFragment extends BaseFragment {
 
   private YesNoAdapter adapter;
 
+  /**
+   * Fragment for displaying yes or no questions
+   */
   public YesNoFragment() {
     yesNos = new ArrayList<>();
   }
@@ -52,6 +55,9 @@ public class YesNoFragment extends BaseFragment {
     return mainView;
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.recycler);
 
@@ -62,6 +68,10 @@ public class YesNoFragment extends BaseFragment {
     recyclerView.setAdapter(adapter);
   }
 
+  /**
+   * updates the data to be used in the fragment
+   * @param yesNos the list of yes or no questions to be displayed
+   */
   public void setDataSet(List<YesNo> yesNos) {
     this.yesNos = yesNos;
     if (mainView != null) {
@@ -69,6 +79,9 @@ public class YesNoFragment extends BaseFragment {
     }
   }
 
+  /**
+   * updates the views based on the data set
+   */
   private void setData() {
     adapter.notifyDataSetChanged();
     mainView.findViewById(R.id.text_empty).setVisibility(

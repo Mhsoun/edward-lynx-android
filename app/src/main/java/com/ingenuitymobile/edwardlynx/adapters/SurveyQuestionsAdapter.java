@@ -44,6 +44,11 @@ public class SurveyQuestionsAdapter extends
   private boolean              isEnabled;
   private OnAnswerItemListener listener;
 
+  /**
+   * Adapter for the displaying the survey questions.
+   * @param data the list of survey questions
+   * @param listener the listener for answering a survey
+   */
   public SurveyQuestionsAdapter(List<Question> data, OnAnswerItemListener listener) {
     super();
     this.data = data;
@@ -173,6 +178,7 @@ public class SurveyQuestionsAdapter extends
         if (question.value != null &&
             question.answer.type == NUMERIC_1_10_WITH_EXPLANATION) {
           holder.explanationEdit.setVisibility(View.VISIBLE);
+          holder.explanationEdit.setEnabled(isEnabled);
 
           holder.explanationEdit.setText(question.explanation);
           listener.onExplanation(question.id, question.explanation);

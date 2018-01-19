@@ -40,6 +40,11 @@ public class FeedbackQuestionsAdapter extends
   private OnAnswerItemListener listener;
   private Feedback             feedback;
 
+  /**
+   * Adapter for displaying the feedback questions.
+   * @param data the list of questions
+   * @param listener the listener for answering the feedback questions
+   */
   public FeedbackQuestionsAdapter(List<Question> data, OnAnswerItemListener listener) {
     super();
     this.data = data;

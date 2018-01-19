@@ -31,11 +31,13 @@ public class DevelopmentPlanListFragment extends BaseFragment {
 
   public boolean isFromTeam;
 
+  /**
+   * Fragment to display the list of development plans
+   */
   public DevelopmentPlanListFragment() {
     data = new ArrayList<>();
     displayData = new ArrayList<>();
   }
-
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +59,9 @@ public class DevelopmentPlanListFragment extends BaseFragment {
     return mainView;
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView surveyList = (RecyclerView) mainView.findViewById(R.id.list_survey);
     emptyText = (TextView) mainView.findViewById(R.id.text_empty_state);
@@ -71,6 +76,10 @@ public class DevelopmentPlanListFragment extends BaseFragment {
     surveyList.setAdapter(adapter);
   }
 
+  /**
+   * sets the data to be used in the fragment
+   * @param data the list of development plans to be displayed
+   */
   public void setData(List<DevelopmentPlan> data) {
     if (data != null) {
       this.data = data;
@@ -80,6 +89,9 @@ public class DevelopmentPlanListFragment extends BaseFragment {
     }
   }
 
+  /**
+   * updates the view to be displayed
+   */
   private void setDisplayData() {
     displayData.clear();
     for (DevelopmentPlan plan : data) {
@@ -96,6 +108,10 @@ public class DevelopmentPlanListFragment extends BaseFragment {
     }
   }
 
+  /**
+   * updates the query string and filters the development plans list
+   * @param queryString the string for filtering the list
+   */
   public void setQueryString(String queryString) {
     this.queryString = queryString;
     if (adapter != null && emptyText != null) {

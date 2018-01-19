@@ -40,6 +40,11 @@ public class DevelopmentPlanAdapter extends
   private List<DevelopmentPlan> data;
   private boolean               isFromTeam;
 
+  /**
+   * Adapter for displaying the development plan.
+   * @param data the list of development plans
+   * @param isFromTeam indicator if the development plan is from team
+   */
   public DevelopmentPlanAdapter(List<DevelopmentPlan> data, boolean isFromTeam) {
     super();
     this.data = data;

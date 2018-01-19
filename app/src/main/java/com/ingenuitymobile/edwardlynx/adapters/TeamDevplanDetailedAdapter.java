@@ -28,6 +28,10 @@ public class TeamDevplanDetailedAdapter extends
 
   private List<TeamCategory> data;
 
+  /**
+   * Adapter for displaying detailed team development plan
+   * @param data the list of team categories
+   */
   public TeamDevplanDetailedAdapter(List<TeamCategory> data) {
     super();
     this.data = data;

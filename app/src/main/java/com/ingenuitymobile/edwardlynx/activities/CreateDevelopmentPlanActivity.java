@@ -34,6 +34,7 @@ import rx.Subscriber;
 
 /**
  * Created by mEmEnG-sKi on 31/01/2017.
+ * Activity to create a development plan.
  */
 
 public class CreateDevelopmentPlanActivity extends BaseActivity {
@@ -90,11 +91,17 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
     }
   }
 
+  /**
+   * notifyAdapter notifies the list adapter of data changes
+   */
   private void notifyAdapter() {
     emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
     adapter.notifyDataSetChanged();
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     emptyText = (TextView) findViewById(R.id.text_empty_state);
     doneText = (TextView) findViewById(R.id.text_done);
@@ -117,11 +124,19 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
     findViewById(R.id.edit_text).setOnFocusChangeListener(onFocusChangeListener);
   }
 
+  /**
+   * addGoal opens CreateDetailedDevelopmentPlanActivity to add items
+   * @param v
+   */
   public void addGoal(View v) {
     startActivityForResult(new Intent(context, CreateDetailedDevelopmentPlanActivity.class),
         REQUEST_CODE);
   }
 
+  /**
+   * done adds new development plan to API
+   * @param v
+   */
   public void done(View v) {
     final String name = ((EditText) findViewById(R.id.edit_text)).getText().toString();
 
@@ -168,6 +183,9 @@ public class CreateDevelopmentPlanActivity extends BaseActivity {
     }));
   }
 
+  /**
+   * RecyclerView movement callback for the create development plan adapter
+   */
   ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
       ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 

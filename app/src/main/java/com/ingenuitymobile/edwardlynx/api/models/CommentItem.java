@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by memengski on 5/29/17.
+ * API model for comment item.
  */
 
 public class CommentItem {

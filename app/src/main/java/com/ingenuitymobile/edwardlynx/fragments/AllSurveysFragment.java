@@ -42,6 +42,9 @@ public class AllSurveysFragment extends BaseFragment {
   private TextView              emptyText;
   private SwipeRefreshLayout    refreshLayout;
 
+  /**
+   * Fragment for displaying all surveys.
+   */
   public AllSurveysFragment() {
     data = new ArrayList<>();
     displayData = new ArrayList<>();
@@ -73,6 +76,9 @@ public class AllSurveysFragment extends BaseFragment {
     getSurveys();
   }
 
+  /**
+   * initViews initializes views used in the fragment
+   */
   private void initViews() {
     final RecyclerView feedbackList = (RecyclerView) mainView.findViewById(R.id.list_survey);
     emptyText = (TextView) mainView.findViewById(R.id.text_empty_state);
@@ -91,6 +97,9 @@ public class AllSurveysFragment extends BaseFragment {
     refreshLayout.setRefreshing(true);
   }
 
+  /**
+   * retrieves the first page of surveys from the API
+   */
   private void getSurveys() {
     subscription.add(Shared.apiClient.getSurveys(1, NUM, "answerable", new Subscriber<Surveys>() {
       @Override
@@ -114,6 +123,9 @@ public class AllSurveysFragment extends BaseFragment {
     }));
   }
 
+  /**
+   * retrieve all instant feedback to be answered by the user from the API
+   */
   private void getInstantFeedbacks() {
     LogUtil.e("AAA getData FeedbackRequestsFragment");
     subscription.add(
@@ -138,6 +150,9 @@ public class AllSurveysFragment extends BaseFragment {
         }));
   }
 
+  /**
+   * updates the data to be displayed in the list
+   */
   private void setData() {
     displayData.clear();
     for (AllSurveys allSurveys : data) {
@@ -159,6 +174,10 @@ public class AllSurveysFragment extends BaseFragment {
     emptyText.setVisibility(displayData.isEmpty() ? View.VISIBLE : View.GONE);
   }
 
+  /**
+   * filters the list using the query string
+   * @param queryString the string for filtering
+   */
   public void setQueryString(String queryString) {
     this.queryString = queryString;
     if (adapter != null && emptyText != null) {
@@ -166,6 +185,9 @@ public class AllSurveysFragment extends BaseFragment {
     }
   }
 
+  /**
+   * listener for selecting a feedback, launches the AnswerFeedbackActivity to answer
+   */
   private FeedbackAdapter.OnSelectFeedbackListener listener = new FeedbackAdapter
       .OnSelectFeedbackListener() {
     @Override

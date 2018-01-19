@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by mEmEnG-sKi on 16/01/2017.
+ * API model for feedback response.
  */
 
 public class FeedbacksResponse extends Response {

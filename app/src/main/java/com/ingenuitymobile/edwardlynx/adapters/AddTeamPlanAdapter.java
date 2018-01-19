@@ -29,6 +29,11 @@ public class AddTeamPlanAdapter extends
   private List<TeamDevPlan>   data;
   private OnStartDragListener onStartDragListener;
 
+  /**
+   * Adapter for creating the team development plan.
+   * @param data the list of team development plan
+   * @param onStartDragListener the listener for the dragging an item
+   */
   public AddTeamPlanAdapter(List<TeamDevPlan> data, OnStartDragListener onStartDragListener) {
     super();
     this.data = data;

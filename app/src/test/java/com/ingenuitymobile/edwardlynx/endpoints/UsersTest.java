@@ -12,6 +12,7 @@ import rx.observers.TestSubscriber;
 
 /**
  * Created by mEmEnG-sKi on 08/02/2017.
+ * Test case for users.
  */
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -19,11 +20,13 @@ public class UsersTest extends BaseTest {
 
   @Test
   public void test1GetUser() throws Exception {
+    System.out.println("\u2713 getting user...");
     getUser(login());
   }
 
   @Test
   public void test2UpdateUser() throws Exception {
+    System.out.println("\u2713 updating user...");
     client = login();
     User user = getUser(client);
 
@@ -44,20 +47,25 @@ public class UsersTest extends BaseTest {
     testSubscriber.assertCompleted();
   }
 
+  /**
+   * Assertion Error since change password needs input password to be at least 6 characters
+   * @throws Exception test exception
+   */
   @Test
   public void test3PostChangePassword() throws Exception {
+    System.out.println("\u2713 changing user password...");
     client = login();
 
     UserBody body = new UserBody();
-    body.currentPassword = "password123";
-    body.password = "password123";
+    body.currentPassword = "1";
+    body.password = "1";
     TestSubscriber<User> testSubscriber = new TestSubscriber<>();
     client.service.updateProfile(body)
         .first()
         .toBlocking()
         .subscribe(testSubscriber);
-    testSubscriber.assertNoErrors();
-    testSubscriber.assertCompleted();
+    testSubscriber.assertError(Throwable.class);
+    testSubscriber.assertNotCompleted();
   }
 
   private User getUser(ApiClient client) {

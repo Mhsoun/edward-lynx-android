@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * Created by memengski on 5/18/17.
+ * Utility class for parsing display dates.
  */
 
 public class DateUtil {

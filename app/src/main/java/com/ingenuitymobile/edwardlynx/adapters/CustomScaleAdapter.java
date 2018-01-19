@@ -20,6 +20,11 @@ public class CustomScaleAdapter extends RecyclerView.Adapter<CustomScaleAdapter.
   private List<String>     data;
   private OnDeleteListener listener;
 
+  /**
+   * Adapter for the set of scales for creating a custom scale
+   * @param data the list of custom scales
+   * @param listener the listener for deleting a custom scale
+   */
   public CustomScaleAdapter(List<String> data, OnDeleteListener listener) {
     super();
     this.data = data;

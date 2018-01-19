@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by memengski on 5/29/17.
+ * API model for comment.
  */
 
 public class Comment {

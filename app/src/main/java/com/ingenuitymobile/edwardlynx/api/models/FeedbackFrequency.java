@@ -2,6 +2,7 @@ package com.ingenuitymobile.edwardlynx.api.models;
 
 /**
  * Created by mEmEnG-sKi on 17/01/2017.
+ * API model for feedback frequency.
  */
 
 public class FeedbackFrequency {

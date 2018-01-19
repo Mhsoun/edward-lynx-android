@@ -25,6 +25,11 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
   private List<Feedback>           data;
   private OnSelectFeedbackListener listener;
 
+  /**
+   * Adapter for displaying the feedback.
+   * @param data the list of feedback
+   * @param listener the listener for selecting a feedback
+   */
   public FeedbackAdapter(List<Feedback> data, OnSelectFeedbackListener listener) {
     super();
     this.data = data;

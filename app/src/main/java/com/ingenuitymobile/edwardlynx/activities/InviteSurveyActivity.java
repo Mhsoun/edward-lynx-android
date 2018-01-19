@@ -21,6 +21,11 @@ import java.util.ArrayList;
 
 import rx.Subscriber;
 
+/**
+ * Created by memengski.
+ * Activity for inviting people to answer the survey.
+ */
+
 public class InviteSurveyActivity extends BaseActivity {
 
   private final static int NUM = 10;
@@ -73,6 +78,9 @@ public class InviteSurveyActivity extends BaseActivity {
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * initViews initializes views used in the activity
+   */
   private void initViews() {
     final RecyclerView surveyList = (RecyclerView) findViewById(R.id.list_survey);
 
@@ -100,6 +108,10 @@ public class InviteSurveyActivity extends BaseActivity {
     refreshLayout.setRefreshing(true);
   }
 
+  /**
+   * retrieves the surveys from the API and displays them in a list
+   * @param isRefresh
+   */
   private void getData(final boolean isRefresh) {
     if (isRefresh) {
       page = 1;
@@ -130,16 +142,27 @@ public class InviteSurveyActivity extends BaseActivity {
             if (isRefresh) {
               data.clear();
             }
-            data.addAll(surveys.items);
+
+            for (Survey survey : surveys.items) {
+              if (survey.permissions.canInvite) {
+                data.add(survey);
+              }
+            }
           }
         }));
   }
 
+  /**
+   * notifyAdapter notifies the list adapter of data changes
+   */
   private void notifyAdapter() {
     emptyText.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
     adapter.notifyDataSetChanged();
   }
 
+  /**
+   * listener for the swipe to refresh functionality, reloads the list data on action
+   */
   private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout
       .OnRefreshListener() {
     @Override
@@ -149,6 +172,9 @@ public class InviteSurveyActivity extends BaseActivity {
     }
   };
 
+  /**
+   * listener for the recycler view when the user scrolls the list
+   */
   private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
 
     @Override
