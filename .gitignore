@@ -36,3 +36,4 @@ release/
 fastlane/report.xml
 #NDK
 obj/
+.idea/*
