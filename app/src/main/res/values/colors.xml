@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#3F51B5</color>
-  <color name="colorPrimaryDark">#303F9F</color>
-  <color name="colorAccent">#FF4081</color>
+  <color name="colorPrimary">#663593</color>
+  <color name="colorPrimaryDark">#331548</color>
+  <color name="colorAccent">#f79646</color>
+
+  <color name="black_overlay">#222222</color>
+  <color name="black">#000000</color>
+  <color name="semi_transparent_black">#88000000</color>
+  <color name="white">#ffffff</color>
+  <color name="red">#ff0000</color>
+  <color name="nav_item_color">#54307d</color>
+  <color name="nav_bg_color">#2a173f</color>
+
+  <color name="common_text_color">#2b133d</color>
+  <color name="steps_text_color">#b0b0b0</color>
+  <color name="inactive_color">#b0b0b0</color>
+  <color name="bg_color">#f3f3f3</color>
+  <color name="survey_selected">#e09444</color>
+  <color name="text_number_color">#663593</color>
+
+  <color name="dev_plan_color">#18b3c9</color>
+  <color name="instant_feedback_color">#009688</color>
+  <color name="lynx_color">#c845dc</color>
+  <color name="lynx_red_color">#F44336</color>
+
+  <color name="dashboard_container">#462063</color>
+  <color name="text_input_field">#72508a</color>
+  <color name="orange_button">#f79646</color>
+  <color name="save_drafts">#a0a0a0</color>
+  <color name="dashboard_green">#38b386</color>
+  <color name="dashboard_blue">#3bb0c1</color>
+  <color name="dashboard_pink">#c845dc</color>
+  <color name="done_color">#00c853</color>
+  <color name="deadline_color">#dd0024</color>
+  <color name="calendar_color">#6a5088</color>
+
+  <color name="unfinished_status">#636363</color>
+  <color name="survey_line">#7d648f</color>
+  <color name="team_color">#dfb65d</color>
+
 </resources>

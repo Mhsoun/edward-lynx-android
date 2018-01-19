@@ -42,6 +42,22 @@ platform :android do
 
   # You can define as many lanes as you want
 
+  desc "Build and Deploy a new version to the HockeyApp"
+    lane :buildAnduploadToHockeyApp do
+      gradle(task: "assembleDebug")
+      hockeyApp(api_token: "9f7e287e8b5c4b0883650898eed44645")
+  end
+
+  desc "Deploy a new version to the HockeyApp"
+    lane :hockeyApp do |options|
+      hockey(
+        api_token: options[:api_token],
+        apk: "./app/build/outputs/apk/app-debug.apk",
+        status: "2",
+        notify: "1",
+      )
+  end
+
   after_all do |lane|
     # This block is called, only if the executed lane was successful
 

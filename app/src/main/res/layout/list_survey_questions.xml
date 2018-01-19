@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="4dp"
+              android:layout_marginLeft="36dp"
+              android:layout_marginRight="24dp"
+              android:clickable="true"
+              android:focusableInTouchMode="true"
+              android:orientation="vertical">
+
+  <TextView
+      android:id="@+id/text_question"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="12dp"
+      android:layout_marginTop="12dp"
+      android:textColor="@color/white"
+      android:textSize="16sp"/>
+
+  <info.hoang8f.android.segmented.SegmentedGroup
+      android:id="@+id/segmented_group"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:orientation="horizontal"
+      segmentedgroup:sc_checked_text_color="@color/colorPrimaryDark"
+      segmentedgroup:sc_tint_color="@color/white">
+  </info.hoang8f.android.segmented.SegmentedGroup>
+
+  <RadioGroup
+      android:id="@+id/group_button"
+      style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+  </RadioGroup>
+
+  <EditText
+      android:id="@+id/edit_text_explanation"
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:layout_marginTop="8dp"
+      android:background="@color/text_input_field"
+      android:gravity="top"
+      android:inputType="textMultiLine"
+      android:padding="8dp"
+      android:textColor="@color/white"
+      android:textSize="14sp"
+      android:visibility="gone"/>
+
+  <EditText
+      android:id="@+id/edit_text"
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:background="@color/text_input_field"
+      android:gravity="top"
+      android:inputType="textMultiLine"
+      android:padding="8dp"
+      android:textColor="@color/white"
+      android:textSize="14sp"/>
+</LinearLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:context="com.ingenuitymobile.edwardlynx.activities.SurveyReportActivity"
+                tools:showIn="@layout/activity_survey_report">
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="centerCrop"
+      android:src="@drawable/bg"/>
+
+  <LinearLayout
+      android:id="@+id/layout_bottom"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_marginLeft="12dp"
+      android:layout_marginRight="12dp"
+      android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="January, 3, 2015"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/text_date_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/details_circle_chart"
+        android:textColor="@color/white"/>
+
+    <RelativeLayout
+        android:id="@+id/layout_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:visibility="invisible">
+
+      <ImageView
+          android:id="@+id/image_previous"
+          android:layout_width="48dp"
+          android:layout_height="match_parent"
+          android:layout_alignParentLeft="true"
+          android:layout_centerVertical="true"
+          android:src="@drawable/ic_previous"
+          android:tint="@color/colorAccent"/>
+
+      <ImageView
+          android:id="@+id/image_next"
+          android:layout_width="48dp"
+          android:layout_height="match_parent"
+          android:layout_alignParentRight="true"
+          android:layout_centerVertical="true"
+          android:src="@drawable/ic_next"
+          android:tint="@color/colorAccent"/>
+
+      <com.viewpagerindicator.CirclePageIndicator
+          android:id="@+id/indicator"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:layout_toLeftOf="@id/image_next"
+          android:layout_toRightOf="@id/image_previous"
+          android:padding="4dip"
+          app:fillColor="@color/colorAccent"
+          app:pageColor="@color/white"
+          app:radius="5dp"
+          app:strokeWidth="0dp"/>
+
+    </RelativeLayout>
+  </LinearLayout>
+
+  <android.support.v4.view.ViewPager
+      android:id="@+id/viewpager"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@id/layout_bottom"/>
+
+  <TextView
+      android:id="@+id/text_empty"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:text="@string/no_chart_data_available"
+      android:textColor="@color/colorAccent"
+      android:visibility="gone"/>
+</RelativeLayout>

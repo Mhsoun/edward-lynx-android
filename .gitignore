@@ -26,11 +26,13 @@ Thumbs.db
 .project
 
 # Android Studio
-*.iml
+# User-specific configurations
 .idea/
+*.iml
 #.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
 .gradle
 build/
+release/
 fastlane/report.xml
 #NDK
 obj/
