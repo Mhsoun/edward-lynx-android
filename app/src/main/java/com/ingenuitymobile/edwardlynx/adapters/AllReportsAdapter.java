@@ -86,7 +86,10 @@ public class AllReportsAdapter extends RecyclerView.Adapter<AllReportsAdapter.Vi
         public void onClick(View view) {
           Intent intent = new Intent(context, SurveyReportActivity.class);
           intent.putExtra("id", survey.id);
-          intent.putExtra("key", survey.key);
+          intent.putExtra("surveyName", survey.name);
+          intent.putExtra("surveyEndDate", survey.endDate);
+          intent.putExtra("surveyInvited", survey.stats.invited);
+          intent.putExtra("surveyAnswered", survey.stats.answered);
           context.startActivity(intent);
         }
       });
