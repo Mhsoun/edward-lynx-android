@@ -42,8 +42,8 @@ import rx.Subscriber;
 
 public class SurveyReportActivity extends BaseActivity {
   private long   id;
-  private String key;
-  private Survey survey;
+  private int surveyInvited, surveyAnswered;
+  private String surveyName, surveyEndDate;
 
   private PagerAdapter        adapter;
   private CirclePageIndicator circleIndicator;
@@ -77,7 +77,10 @@ public class SurveyReportActivity extends BaseActivity {
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     id = getIntent().getLongExtra("id", 0L);
-    key = getIntent().getStringExtra("key");
+    surveyInvited = getIntent().getIntExtra("surveyInvited", 0);
+    surveyAnswered = getIntent().getIntExtra("surveyAnswered", 0);
+    surveyName = getIntent().getStringExtra("surveyName");
+    surveyEndDate = getIntent().getStringExtra("surveyEndDate");
     initViews();
   }
 
@@ -120,42 +123,22 @@ public class SurveyReportActivity extends BaseActivity {
    * retrieves the answered survey from the API
    */
   private void getData() {
-    LogUtil.e("AAA getData Survey details " + id);
-    LogUtil.e("AAA getData Survey details " + key);
-    subscription.add(Shared.apiClient.getSurvey(id, key, new Subscriber<Survey>() {
-      @Override
-      public void onCompleted() {
-        LogUtil.e("AAA Survey details onCompleted ");
+    setTitle(surveyName);
+    try {
+      Date date = DateUtil.getAPIFormat().parse(surveyEndDate);
+      dateText.setText(DateUtil.getDisplayFormat().format(date));
+    } catch (Exception e) {
+      dateText.setText("");
+    }
 
-        detailsText.setText(getString(R.string.details_circle_chart, survey.stats.invited,
-            survey.stats.answered));
+    detailsText.setText(getString(R.string.details_circle_chart, surveyInvited,
+            surveyAnswered));
 
-        if (survey.stats.answered > 0) {
-          getSurveyQuestions();
-        } else {
-          findViewById(R.id.text_empty).setVisibility(View.VISIBLE);
-        }
-      }
-
-      @Override
-      public void onError(Throwable e) {
-        LogUtil.e("AAA Survey details onError " + e);
-      }
-
-      @Override
-      public void onNext(Survey surveyResponse) {
-
-        survey = surveyResponse;
-        setTitle(surveyResponse.name);
-
-        try {
-          Date date = DateUtil.getAPIFormat().parse(survey.endDate);
-          dateText.setText(DateUtil.getDisplayFormat().format(date));
-        } catch (Exception e) {
-          dateText.setText("");
-        }
-      }
-    }));
+    if (surveyAnswered > 0) {
+      getSurveyQuestions();
+    } else {
+      findViewById(R.id.text_empty).setVisibility(View.VISIBLE);
+    }
   }
 
   /**
