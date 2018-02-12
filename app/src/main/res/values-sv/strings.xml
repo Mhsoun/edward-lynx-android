@@ -260,4 +260,6 @@
     <string name="disallowed_invite_user">Användaren har redan blivit inbjuden</string>
   <string name="disallowed_invite_self">Kan inte bjuda in kandidat</string>
   <string name="send_anonymous_feedback">Skicka feedback som anonym</string>
+    <string name="respondents_text">respondenterna</string>
+  <string name="request_for_feedback">Den här personen ber om din feedback: %s</string>
 </resources>
