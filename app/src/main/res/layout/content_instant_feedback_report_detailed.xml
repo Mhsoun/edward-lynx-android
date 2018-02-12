@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ingenuitymobile.edwardlynx.activities.InstantFeedbackReportDetailedActivity"
+    tools:showIn="@layout/activity_instant_feedback_report_detailed">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/send_anonymous_feedback_option"
+        android:layout_below="@id/request_for_feedback_text" />
+</RelativeLayout>
