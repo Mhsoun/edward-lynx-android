@@ -369,4 +369,13 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     intent.putExtra("id", id);
     startActivity(intent);
   }
+
+  /**
+   * opens the detailed reports page displaying the feedback results and the non-
+   * anonymous respondents
+   */
+  public void openDetailedReports(View view) {
+    // TODO open detailed feedback reports page
+    startActivity(new Intent(InstantFeedbackReportActivity.this, InstantFeedbackReportDetailedActivity.class));
+  }
 }
