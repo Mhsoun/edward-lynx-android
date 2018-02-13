@@ -150,6 +150,7 @@ public class AnswerFeedbackActivity extends BaseActivity {
     AnswerParam param = new AnswerParam();
     param.answers = bodies;
     param.key = key;
+    param.anonymous = sendAsAnonymous;
 
     LogUtil.e("AAA " + param.toString());
     LogUtil.e("AAA id + " + id);

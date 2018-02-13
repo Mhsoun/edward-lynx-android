@@ -18,6 +18,8 @@ public class AnswerParam {
   public boolean          isFinal;
   @SerializedName("answers")
   public List<AnswerBody> answers;
+  @SerializedName("anonymous")
+  public boolean anonymous;
 
 
   @Override
