@@ -62,6 +62,9 @@ public class InstantFeedbackReportActivity extends BaseActivity {
   private TextView           dateText;
   private TextView           detailsText;
   private TextView           anonymousText;
+  private TextView           respondentsText;
+
+  private Intent             showRespondentsIntent;
 
   public InstantFeedbackReportActivity() {
     data = new ArrayList<>();
@@ -121,6 +124,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
     dateText = (TextView) findViewById(R.id.text_date);
     detailsText = (TextView) findViewById(R.id.text_date_details);
     anonymousText = (TextView) findViewById(R.id.text_anonymous);
+    respondentsText = findViewById(R.id.text_respondents);
     horizontalBarChart = (HorizontalBarChart) findViewById(R.id.horizontal_bar_chart);
     horizontalBarChart.setNoDataText(getString(R.string.no_chart_data_available));
 
@@ -160,6 +164,7 @@ public class InstantFeedbackReportActivity extends BaseActivity {
 
       @Override
       public void onError(Throwable e) {
+        respondentsText.setVisibility(View.VISIBLE);
         LogUtil.e("AAA onError " + e);
       }
 
@@ -182,10 +187,12 @@ public class InstantFeedbackReportActivity extends BaseActivity {
             LogUtil.e("AAA onCompleted ");
             adapter.notifyDataSetChanged();
             setData();
+            setRespondentsData();
           }
 
           @Override
           public void onError(Throwable e) {
+            respondentsText.setVisibility(View.VISIBLE);
             LogUtil.e("AAA onError " + e);
           }
 
@@ -375,7 +382,18 @@ public class InstantFeedbackReportActivity extends BaseActivity {
    * anonymous respondents
    */
   public void openDetailedReports(View view) {
-    // TODO open detailed feedback reports page
-    startActivity(new Intent(InstantFeedbackReportActivity.this, InstantFeedbackReportDetailedActivity.class));
+    startActivity(showRespondentsIntent);
+  }
+
+  /**
+   * this sets the data to be used in the list of respondents page
+   */
+  private void setRespondentsData() {
+    showRespondentsIntent = new Intent(InstantFeedbackReportActivity.this,
+            InstantFeedbackReportDetailedActivity.class);
+
+    showRespondentsIntent.putExtra("feedbackType", feedback.questions.get(0).answer.type);
+    showRespondentsIntent.putExtra("id", id);
+    respondentsText.setVisibility(View.VISIBLE);
   }
 }
