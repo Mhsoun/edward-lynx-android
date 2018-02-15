@@ -21,15 +21,15 @@ repositories {
 }
 
 android {
-  compileSdkVersion 26
+  compileSdkVersion 27
   buildToolsVersion "27.0.3"
   defaultConfig {
     vectorDrawables.useSupportLibrary = true
     applicationId "com.ingenuitymobile.edwardlynx"
     minSdkVersion 16
-    targetSdkVersion 26
-    versionCode 6
-    versionName "1.2.0"
+    targetSdkVersion 27
+    versionCode 7
+    versionName "1.2.2"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
   buildTypes {
