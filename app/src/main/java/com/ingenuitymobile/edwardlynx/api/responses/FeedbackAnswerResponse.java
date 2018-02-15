@@ -19,4 +19,6 @@ public class FeedbackAnswerResponse extends Response {
   public List<FeedbackFrequency> frequencies;
   @SerializedName("totalAnswers")
   public int                     totalAnswers;
+  @SerializedName("totalAnonymousAnswers")
+  public int                     totalAnonymousAnswers;
 }
