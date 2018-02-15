@@ -251,5 +251,5 @@
   <string name="disallowed_invite_self">不能邀请候选人</string>
   <string name="send_anonymous_feedback">以匿名发送反馈</string>
     <string name="respondents_text">受访者</string>
-  <string name="request_for_feedback">此人请求您的反馈: %s</string>
+  <string name="request_for_feedback"><![CDATA[此人请求您的反馈: <b>%s</b>]]></string>
 </resources>

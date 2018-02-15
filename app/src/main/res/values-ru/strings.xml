@@ -249,5 +249,5 @@
   <string name="disallowed_invite_self">Невозможно пригласить кандидата</string>
   <string name="send_anonymous_feedback">Отправить отзыв как анонимный</string>
     <string name="respondents_text">Респонденты</string>
-  <string name="request_for_feedback">Этот человек запрашивает ваши отзывы: %s</string>
+  <string name="request_for_feedback"><![CDATA[Этот человек запрашивает ваши отзывы: <b>%s</b>]]></string>
 </resources>
