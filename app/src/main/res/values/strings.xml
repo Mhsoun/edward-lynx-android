@@ -345,7 +345,8 @@
 
   <string name="recover_password">Recover Password</string>
   <string name="send_anonymous_feedback">Send feedback as anonymous</string>
-  <string name="request_for_feedback">This person requests for your feedback: %s</string>
+  <string name="request_for_feedback"><![CDATA[This person requests for your feedback: <b>%s</b>]]></string>
   <string name="free_text_feedback"><![CDATA[<i>%s</i>]]></string>
   <string name="respondents_text">Respondents</string>
+  <string name="anonymous">Anonymous</string>
 </resources>
