@@ -177,10 +177,13 @@ public class SurveyReportsFragment extends BaseFragment {
   private SurveyReportsAdapter.OnSelectFeedbackListener listener =
       new SurveyReportsAdapter.OnSelectFeedbackListener() {
         @Override
-        public void onSelect(long id, String key) {
+        public void onSelect(long id, String surveyName, String surveyEndDate, int surveyInvited, int surveyAnswered) {
           Intent intent = new Intent(getActivity(), SurveyReportActivity.class);
           intent.putExtra("id", id);
-          intent.putExtra("key", key);
+          intent.putExtra("surveyName", surveyName);
+          intent.putExtra("surveyEndDate", surveyEndDate);
+          intent.putExtra("surveyInvited", surveyInvited);
+          intent.putExtra("surveyAnswered", surveyAnswered);
           startActivity(intent);
         }
       };

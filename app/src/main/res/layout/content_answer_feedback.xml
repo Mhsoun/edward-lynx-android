@@ -1,34 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                tools:context="com.ingenuitymobile.edwardlynx.activities.AnswerFeedbackActivity"
-                tools:showIn="@layout/activity_answer_feedback">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ingenuitymobile.edwardlynx.activities.AnswerFeedbackActivity"
+    tools:showIn="@layout/activity_answer_feedback">
 
-  <ImageView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:scaleType="centerCrop"
-      android:src="@drawable/bg"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg" />
 
+    <TextView
+        android:id="@+id/request_for_feedback_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:padding="12dp"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
-  <TextView
-      android:id="@+id/text_submit"
-      style="@style/orange_button"
-      android:layout_width="match_parent"
-      android:layout_alignParentBottom="true"
-      android:layout_margin="12dp"
-      android:gravity="center"
-      android:onClick="submit"
-      android:text="@string/submit"/>
+    <TextView
+        android:id="@+id/text_submit"
+        style="@style/orange_button"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="12dp"
+        android:gravity="center"
+        android:onClick="submit"
+        android:text="@string/submit" />
 
-  <android.support.v7.widget.RecyclerView
-      android:id="@+id/list_questions"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_above="@id/text_submit">
-  </android.support.v7.widget.RecyclerView>
+    <RelativeLayout
+        android:id="@+id/send_anonymous_feedback_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/text_submit"
+        android:layout_margin="12dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/send_anonymous_feedback_switch"
+            android:layout_toStartOf="@id/send_anonymous_feedback_switch"
+            android:text="@string/send_anonymous_feedback"
+            android:textColor="@color/white" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/send_anonymous_feedback_switch"
+            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_questions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/send_anonymous_feedback_option"
+        android:layout_below="@id/request_for_feedback_text" />
 </RelativeLayout>

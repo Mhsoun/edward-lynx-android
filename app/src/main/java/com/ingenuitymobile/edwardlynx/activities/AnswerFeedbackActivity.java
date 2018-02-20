@@ -3,13 +3,17 @@ package com.ingenuitymobile.edwardlynx.activities;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ingenuitymobile.edwardlynx.R;
@@ -39,6 +43,10 @@ public class AnswerFeedbackActivity extends BaseActivity {
   private FeedbackQuestionsAdapter adapter;
   private ArrayList<Question>      data;
   private ArrayList<AnswerBody>    bodies;
+  private boolean                  sendAsAnonymous = false;
+
+  private TextView                 requestFeedbackText;
+  private AppCompatCheckBox        sendAsAnonymousCheckBox;
 
 
   public AnswerFeedbackActivity() {
@@ -81,6 +89,9 @@ public class AnswerFeedbackActivity extends BaseActivity {
   private void initViews() {
     final RecyclerView questionsList = (RecyclerView) findViewById(R.id.list_questions);
 
+    requestFeedbackText = findViewById(R.id.request_for_feedback_text);
+    sendAsAnonymousCheckBox = findViewById(R.id.send_anonymous_feedback_switch);
+    sendAsAnonymousCheckBox.setOnCheckedChangeListener(sendAsAnonymousChangedListener);
 
     final DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
         LinearLayoutManager.VERTICAL);
@@ -116,6 +127,11 @@ public class AnswerFeedbackActivity extends BaseActivity {
         data.addAll(feedback.questions);
         adapter.setFeedback(feedback);
         key = feedback.key;
+        requestFeedbackText.setText(
+                Html.fromHtml(
+                        String.format(getString(R.string.request_for_feedback), feedback.author.name)
+                )
+        );
       }
     }));
   }
@@ -134,6 +150,7 @@ public class AnswerFeedbackActivity extends BaseActivity {
     AnswerParam param = new AnswerParam();
     param.answers = bodies;
     param.key = key;
+    param.anonymous = sendAsAnonymous;
 
     LogUtil.e("AAA " + param.toString());
     LogUtil.e("AAA id + " + id);
@@ -185,6 +202,14 @@ public class AnswerFeedbackActivity extends BaseActivity {
       body.question = id;
       body.answer = value;
       bodies.add(body);
+    }
+  };
+
+  private AppCompatCheckBox.OnCheckedChangeListener sendAsAnonymousChangedListener
+          = new CompoundButton.OnCheckedChangeListener() {
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+      sendAsAnonymous = isChecked;
     }
   };
 }

@@ -1,100 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                tools:context="com.ingenuitymobile.edwardlynx.activities.InstantFeedbackReportActivity"
-                tools:showIn="@layout/activity_feedback_report">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ingenuitymobile.edwardlynx.activities.InstantFeedbackReportActivity"
+    tools:showIn="@layout/activity_feedback_report">
 
-  <ImageView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:scaleType="centerCrop"
-      android:src="@drawable/bg"/>
-
-  <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:scrollbars="none">
-
-    <LinearLayout
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical">
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg" />
 
-      <LinearLayout
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentLeft="true"
-          android:layout_toLeftOf="@id/layout_right"
-          android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/text_respondents"
+        android:scrollbars="none">
 
-        <TextView
-            android:id="@+id/text_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="22sp"/>
-
-        <TextView
-            android:id="@+id/text_anonymous"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/anonymous_feedback"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:visibility="gone"/>
-      </LinearLayout>
-
-      <RelativeLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/text_empty_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/no_data_found"
-            android:textColor="@color/white"
-            android:visibility="gone"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/list_answers"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
 
-        <com.github.mikephil.charting.charts.HorizontalBarChart
-            android:id="@+id/horizontal_bar_chart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </com.github.mikephil.charting.charts.HorizontalBarChart>
-      </RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/layout_right"
+                android:orientation="vertical">
 
-      <TextView
-          android:id="@+id/text_date"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center_horizontal"
-          android:layout_marginTop="8dp"
-          android:text="January, 3, 2015"
-          android:textColor="@color/white"
-          android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/text_question"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
 
-      <TextView
-          android:id="@+id/text_date_details"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center_horizontal"
-          android:text="@string/details_circle_chart"
-          android:textColor="@color/white"/>
-    </LinearLayout>
-  </ScrollView>
+                <TextView
+                    android:id="@+id/text_anonymous"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/anonymous_feedback"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/text_empty_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/no_data_found"
+                    android:textColor="@color/white"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list_answers"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+                <com.github.mikephil.charting.charts.HorizontalBarChart
+                    android:id="@+id/horizontal_bar_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.github.mikephil.charting.charts.HorizontalBarChart>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="January, 3, 2015"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/text_date_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/details_circle_chart"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/text_respondents"
+        style="@style/orange_button"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="12dp"
+        android:gravity="center"
+        android:onClick="openDetailedReports"
+        android:text="@string/respondents_text"
+        android:visibility="gone" />
 </RelativeLayout>

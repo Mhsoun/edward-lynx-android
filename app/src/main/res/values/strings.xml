@@ -237,7 +237,7 @@
   <string name="type_here">Type here. . .</string>
   <string name="saved_to_drafts">Successfully saved answers to drafts</string>
   <string name="survey_completed">Survey Completed!</string>
-  <string name="shared_to_other_people">Succesfully shared result</string>
+  <string name="shared_to_other_people">Successfully shared result</string>
   // endregion
 
   // region Development Plans
@@ -344,4 +344,9 @@
   <string name="forgot_password_message">Successfully sent password recovery request</string>
 
   <string name="recover_password">Recover Password</string>
+  <string name="send_anonymous_feedback">Send feedback as anonymous</string>
+  <string name="request_for_feedback"><![CDATA[This person requests for your feedback: <b>%s</b>]]></string>
+  <string name="free_text_feedback"><![CDATA[<i>%s</i>]]></string>
+  <string name="respondents_text">Respondents</string>
+  <string name="anonymous">Anonymous</string>
 </resources>

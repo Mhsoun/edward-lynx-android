@@ -168,7 +168,11 @@ public class InvitePeopleActivity extends BaseActivity {
 
                 @Override
                 public void onNext(Survey survey) {
-                  disallowedRecipients = new HashSet<>(survey.disallowedRecipients);
+                  if (survey.disallowedRecipients != null) {
+                    disallowedRecipients = new HashSet<>(survey.disallowedRecipients);
+                  } else {
+                    disallowedRecipients = new HashSet<>();
+                  }
                 }
               }
       )

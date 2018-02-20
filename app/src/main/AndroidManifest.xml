@@ -90,6 +90,11 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity
+            android:name=".activities.InstantFeedbackReportDetailedActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
             android:name=".activities.ShareReportActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">

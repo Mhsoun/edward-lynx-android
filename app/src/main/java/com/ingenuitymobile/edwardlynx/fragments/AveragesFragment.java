@@ -94,8 +94,14 @@ public class AveragesFragment extends BaseFragment {
    * @param ioc the list of ioc
    */
   public void setDataSet(List<Average> averages, List<Average> ioc) {
-    this.averages = averages;
-    this.ioc = ioc;
+    if (averages != null) {
+      this.averages = averages;
+    }
+
+    if (ioc != null) {
+      this.ioc = ioc;
+    }
+
     if (mainView != null) {
       setData();
     }

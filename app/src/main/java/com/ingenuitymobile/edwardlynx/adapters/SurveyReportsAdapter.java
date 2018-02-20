@@ -80,7 +80,7 @@ public class SurveyReportsAdapter extends RecyclerView.Adapter<SurveyReportsAdap
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        listener.onSelect(survey.id, survey.key);
+        listener.onSelect(survey.id, survey.name, survey.endDate, survey.stats.invited, survey.stats.answered);
       }
     });
   }
@@ -91,6 +91,6 @@ public class SurveyReportsAdapter extends RecyclerView.Adapter<SurveyReportsAdap
   }
 
   public interface OnSelectFeedbackListener {
-    void onSelect(long id, String key);
+    void onSelect(long id, String surveyName, String surveyEndDate, int surveyInvited, int surveyAnswered);
   }
 }
