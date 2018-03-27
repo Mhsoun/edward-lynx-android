@@ -251,11 +251,10 @@ public class SurveyQuestionsActivity extends BaseActivity {
           @Override
           public void onError(Throwable e) {
             progressDialog.dismiss();
-            if (e != null && ((RetrofitError) e).getResponse().getStatus() == 422) {
-              Toast.makeText(SurveyQuestionsActivity.this, getString(R.string.required_fields),
-                  Toast.LENGTH_SHORT).show();
-            } else if (e != null && ((RetrofitError) e).getResponse().getStatus() == 400) {
-              Toast.makeText(SurveyQuestionsActivity.this,getString(R.string.survey_sending_failed),
+            final RetrofitError retrofitError = (RetrofitError) e;
+            final Response response = (Response) retrofitError.getBodyAs(Response.class);
+            if (!TextUtils.isEmpty(response.message)) {
+              Toast.makeText(SurveyQuestionsActivity.this, response.message,
                       Toast.LENGTH_SHORT).show();
             }
             textView.setText(
